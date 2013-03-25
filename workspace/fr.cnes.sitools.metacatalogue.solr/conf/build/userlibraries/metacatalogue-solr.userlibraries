@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="WINDOWS-1252" standalone="no"?>
+<eclipse-userlibraries version="2">
+    <library name="geo_tools" systemlibrary="false">
+        <archive path="D:/CNES-ULISSE-METACATALOGUE/cots/geotools-2.6.2/gt-api-2.6.2.jar"/>
+        <archive path="D:/CNES-ULISSE-METACATALOGUE/cots/geotools-2.6.2/gt-coverage-2.6.2.jar"/>
+        <archive path="D:/CNES-ULISSE-METACATALOGUE/cots/geotools-2.6.2/gt-cql-2.6.2.jar"/>
+        <archive path="D:/CNES-ULISSE-METACATALOGUE/cots/geotools-2.6.2/gt-data-2.6.2.jar"/>
+        <archive path="D:/CNES-ULISSE-METACATALOGUE/cots/geotools-2.6.2/gt-epsg-extension-2.6.2.jar"/>
+        <archive path="D:/CNES-ULISSE-METACATALOGUE/cots/geotools-2.6.2/gt-epsg-hsql-2.6.2.jar"/>
+        <archive path="D:/CNES-ULISSE-METACATALOGUE/cots/geotools-2.6.2/gt-graph-2.6.2.jar"/>
+        <archive path="D:/CNES-ULISSE-METACATALOGUE/cots/geotools-2.6.2/gt-jdbc-2.6.2.jar"/>
+        <archive path="D:/CNES-ULISSE-METACATALOGUE/cots/geotools-2.6.2/gt-main-2.6.2.jar"/>
+        <archive path="D:/CNES-ULISSE-METACATALOGUE/cots/geotools-2.6.2/gt-metadata-2.6.2.jar"/>
+        <archive path="D:/CNES-ULISSE-METACATALOGUE/cots/geotools-2.6.2/gt-postgis-2.6.2.jar"/>
+        <archive path="D:/CNES-ULISSE-METACATALOGUE/cots/geotools-2.6.2/gt-referencing-2.6.2.jar"/>
+        <archive path="D:/CNES-ULISSE-METACATALOGUE/cots/geotools-2.6.2/gt-shapefile-2.6.2.jar"/>
+        <archive path="D:/CNES-ULISSE-METACATALOGUE/cots/geotools-2.6.2/gt-xsd-core-2.6.2.jar"/>
+        <archive path="D:/CNES-ULISSE-METACATALOGUE/cots/geotools-2.6.2/gt-xsd-filter-2.6.2.jar"/>
+        <archive path="D:/CNES-ULISSE-METACATALOGUE/cots/geotools-2.6.2/gt-xsd-gml2-2.6.2.jar"/>
+        <archive path="D:/CNES-ULISSE-METACATALOGUE/cots/geotools-2.6.2/gt-xsd-gml3-2.6.2.jar"/>
+    </library>
+    <library name="geoAPI" systemlibrary="false">
+        <archive path="D:/CNES-ULISSE-METACATALOGUE/cots/geoAPI-2.3-M1/geoapi-2.3-M1.jar"/>
+        <archive path="D:/CNES-ULISSE-METACATALOGUE/cots/geoAPI-2.3-M1/geoapi-pending-2.3-M1.jar"/>
+    </library>
+    <library name="misc" systemlibrary="false">
+        <archive path="D:/CNES-ULISSE-METACATALOGUE/workspace/fr.cnes.sitools.metacatalogue.libraries/jdom-1.0.jar"/>
+        <archive path="D:/CNES-ULISSE-METACATALOGUE/workspace/fr.cnes.sitools.metacatalogue.libraries/jts-1.10.jar"/>
+        <archive path="D:/CNES-ULISSE-METACATALOGUE/workspace/fr.cnes.sitools.metacatalogue.libraries/saxon-9.1.0.8b-patch.jar"/>
+        <archive path="D:/CNES-ULISSE-METACATALOGUE/workspace/fr.cnes.sitools.metacatalogue.libraries/slf4j-api-1.7.1.jar"/>
+    </library>
+    <library name="solr_lucene" systemlibrary="false">
+        <archive path="D:/CNES-ULISSE-METACATALOGUE/cots/apache-solr-3.6.1/contrib/lucene/lucene-core-3.6.1.jar"/>
+        <archive path="D:/CNES-ULISSE-METACATALOGUE/cots/apache-solr-3.6.1/dist/apache-solr-core-3.6.1.jar"/>
+        <archive path="D:/CNES-ULISSE-METACATALOGUE/cots/apache-solr-3.6.1/dist/apache-solr-solrj-3.6.1.jar"/>
+    </library>
+</eclipse-userlibraries>

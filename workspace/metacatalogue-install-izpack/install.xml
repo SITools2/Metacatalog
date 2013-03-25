@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes"?>
+<!-- ===================================
+==  Copyright 2011, 2012 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
+==  
+==  This file is part of SITools2.
+==  
+==  SITools2 is free software: you can redistribute it and/or modify
+==  it under the terms of the GNU General Public License as published by
+==  the Free Software Foundation, either version 3 of the License, or
+==  (at your option) any later version.
+==  
+==  SITools2 is distributed in the hope that it will be useful,
+==  but WITHOUT ANY WARRANTY; without even the implied warranty of
+==  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+==  GNU General Public License for more details.
+==  
+==  You should have received a copy of the GNU General Public License
+==  along with SITools2.  If not, see <http://www.gnu.org/licenses/>.
+==================================== -->
+<installation version="1.0">
+	<jar src="lib/postgresql-8.3-603.jdbc3.jar" />
+	<jar src="dist/MetacatalogServer-izpack.jar" stage="install"/>
+	<info>
+		<appname>Metacatalogue</appname>
+		<appversion>0.1</appversion>
+		<authors>
+			<author email="" name="CNES" />
+			<author email="" name="Akka Technologies" />
+		</authors>
+		<uninstaller name="Uninstaller.jar" write="yes" />
+		<javaversion>1.6</javaversion>
+		<requiresjdk>no</requiresjdk>
+		<writeinstallationinformation>yes</writeinstallationinformation>
+		<summarylogfilepath>$INSTALL_PATH/installLog</summarylogfilepath>
+	</info>
+	
+	<listeners>
+		<listener installer="ConfigSolrJarAction" jar ="dist/MetacatalogServer-izpack.jar"/>
+		<listener installer="CheckMetacatalogueModuleAction" jar ="dist/MetacatalogServer-izpack.jar"/>
+		<listener installer="InstallDatabaseAction" jar ="dist/MetacatalogServer-izpack.jar"/>
+	</listeners>
+	
+	<guiprefs width="900" height="700" resizable="yes">
+		<modifier key="useHeadingPanel" value="yes" />
+		<modifier key="headingImageOnLeft" value="yes" />
+		<modifier key="headingLineCount" value="1" />
+		<modifier key="headingFontSize" value="1.5" />
+		<modifier key="headingBackgroundColor" value="0x00ffffff" />
+		<modifier key="headingPanelCounter" value="text" />
+		<modifier key="headingPanelCounterPos" value="inHeading" />
+		<modifier key="langDisplayType" value="native" />
+	</guiprefs>
+	
+	<locale>
+		<langpack iso3="eng" />
+		<langpack iso3="fra" />
+	</locale>
+	
+	<resources>
+		<res id="LicencePanel.licence_eng" parse="yes"
+			src="../fr.cnes.sitools.metacatalogue.core/conf/licences/gpl-3.0.txt" />
+		<res id="LicencePanel.licence_fra" parse="yes"
+			src="../fr.cnes.sitools.metacatalogue.core/conf/licences/gpl-3.0.txt" />
+		<!--<res id="Heading.image" src="res/img/datacenter.png" />-->
+		<res id="Heading.image" src="res/img/sitools_metacatalog.png" />
+		<res id="installer.langsel.img" src="res/img/sitools_metacatalog.png" />
+		<res id="userInputSpec.xml" src="install_res/install_userInputSpec.xml" />
+		<res id="userInputLang.xml_fra" src="install_res/userInputLang.xml_fra" />
+		<res id="userInputLang.xml_eng" src="install_res/userInputLang.xml_eng" />
+	</resources>
+	
+	<conditions>	
+		<condition type="packselection" id="needClientSelected">
+			<packid>Client</packid>
+		</condition>
+		
+		<condition type="packselection" id="needSolrSelected">
+			<packid>Solr</packid>
+		</condition>
+		
+		<condition type="or" id="needClientAndSolrSelected">
+			<condition type="ref" refid="needClientSelected" />
+			<condition type="ref" refid="needSolrSelected" />
+		</condition>
+	</conditions>
+	
+	<dynamicvariables>
+		<variable name="jdbc_url"
+			value="jdbc:postgresql://${input.database.hostname}:${input.database.port}/${input.database.name}" />
+	</dynamicvariables>
+	
+	<variables>
+		<variable name="workspacePath" value="workspace" />
+		<variable name="fr.cnes.sitools.metacatalogue.corePath" value="workspace/fr.cnes.sitools.metacatalogue.core" />
+		<variable name="fr.cnes.sitools.metacatalogue.solrPath" value="workspace/fr.cnes.sitools.metacatalogue.solr" />
+		<variable name="resSolrPath" value="workspace/fr.cnes.sitools.metacatalogue.solr/res" />
+		<variable name="fr.cnes.sitools.metacatalogue.libraries" value="workspace/fr.cnes.sitools.metacatalogue.libraries" />
+		<variable name="resPath" value="res" />
+		<variable name="scriptPath" value="res/script" />
+		<variable name="propertiesPath" value="res/properties" />
+		<variable name="imgPath" value="res/img" />
+		<variable name="databasePath" value="res/database" />
+		<variable name="update-classpathPath" value="workspace/fr.cnes.sitools.metacatalogue.core/sitools-update-classpath" />
+		<variable name="metacatalogModuleName" value="int@13.xml" />
+	</variables>
+	
+	<panels>
+		<panel classname="CheckedHelloPanel" />
+		<panel classname="LicencePanel" />
+		<panel classname="TreePacksPanel" />
+		<panel classname="TargetPanel" />
+		<panel classname="UserInputPanel" id="UserInputPanel.0" />
+		<panel classname="UserInputPanel" id="UserInputPanel2.0" condition="needClientAndSolrSelected">
+			<validator classname="fr.cnes.sitools.metacatalogue.izpack.validator.JDBCConnectionValidator" />
+		</panel>
+		<panel classname="SummaryPanel" />
+		<panel classname="InstallPanel" />
+		<panel classname="FinishPanel" />
+	</panels>
+	
+	<packs>
+		<!-- SERVER PACKS -->
+		<pack name="Server" preselected="yes" required="yes">
+			<description>Server files (Core, Cots, Data)</description>
+		</pack>
+		
+		<!-- SITOOLS, contains the sitools Jar -->
+		<pack name="Metacatalog Core" preselected="yes" required="yes" parent="Server">
+			<description>This package contains the core of the metacatalog server
+			</description>
+			<file override="update"
+				src="../fr.cnes.sitools.metacatalogue.core/dist/fr.cnes.sitools.metacatalogue.core.jar"
+				targetdir="$INSTALL_PATH/$fr.cnes.sitools.metacatalogue.corePath" />
+				
+			<fileset override="update" dir="../fr.cnes.sitools.metacatalogue.libraries" 
+				targetdir="$INSTALL_PATH/workspace/fr.cnes.sitools.metacatalogue.libraries"
+				includes="**/*.jar" />
+		
+			<fileset override="update" dir="../fr.cnes.sitools.metacatalogue.core/resources" 
+				targetdir="$INSTALL_PATH/workspace/fr.cnes.sitools.metacatalogue.core/resources"
+				includes="**/*" />
+
+			
+							
+		</pack>
+		
+		<!-- COTS -->
+		<pack name="Server-Cots" preselected="yes" required="yes" parent="Server">
+			<description>Solr, geoApi, geoTools, Restlet, Saxon</description>
+			<fileset override="update" dir="../../cots/apache-solr-3.6.1" targetdir="$INSTALL_PATH/cots/apache-solr-3.6.1"
+				excludes="**/*.zip" />
+			<fileset override="update" dir="../../cots/geoAPI-2.3-M1" targetdir="$INSTALL_PATH/cots/geoAPI-2.3-M1"
+				excludes="**/*.zip" />
+			<fileset override="update" dir="../../cots/geotools-2.6.2" targetdir="$INSTALL_PATH/cots/geotools-2.6.2"
+				excludes="**/*.zip" />
+			<fileset override="update" dir="../../cots/json-path-0.8.1" targetdir="$INSTALL_PATH/cots/json-path-0.8.1"
+				excludes="**/*.zip" />
+			<fileset override="update" dir="../../cots/restlet-jse-2.1.0" targetdir="$INSTALL_PATH/cots/restlet-jse-2.1.0"
+				excludes="**/*.zip" />
+			<fileset override="update" dir="../../cots/saxon" targetdir="$INSTALL_PATH/cots/saxon"
+				excludes="**/*.zip" />
+		</pack>
+		
+		<!-- SCRIPTS, contains the starting scripts -->
+		<pack name="scripts" preselected="yes" required="yes" parent="Server">
+			<description>Scripts mandatory to run MetacatalogServer</description>
+			<!-- UNIX SCRIPT -->
+			<file override="true" src="$scriptPath/metacatalogue"
+				targetdir="$INSTALL_PATH/$fr.cnes.sitools.metacatalogue.corePath" />
+			<file override="true" src="$scriptPath/startMetacatalogue.sh"
+				targetdir="$INSTALL_PATH/$fr.cnes.sitools.metacatalogue.corePath" />
+			<!-- WINDOWS SCRIPT -->
+			<file override="true" src="$scriptPath/startMetacatalogue.bat"
+				targetdir="$INSTALL_PATH/$fr.cnes.sitools.metacatalogue.corePath" />
+			<!-- JAR UTILITIES -->
+			<file override="true" src="../../$update-classpathPath/sitools-update-classpath.jar"
+				targetdir="$INSTALL_PATH/$update-classpathPath" />
+			<fileset override="true" dir="res/ext"
+				targetdir="$INSTALL_PATH/$fr.cnes.sitools.metacatalogue.corePath/ext" />
+			<!-- Makes those scripts parsable -->
+			<parsable encoding="UTF-8"
+				targetfile="$INSTALL_PATH/$fr.cnes.sitools.metacatalogue.corePath/startMetacatalogue.sh"
+				type="shell" />
+			<parsable encoding="UTF-8"
+				targetfile="$INSTALL_PATH/$fr.cnes.sitools.metacatalogue.corePath/metacatalogue" type="shell" />
+			
+			<parsable encoding="UTF-8"
+				targetfile="$INSTALL_PATH/$fr.cnes.sitools.metacatalogue.corePath/startMetacatalogue.bat"
+				type="shell" />
+			<!-- Makes those scripts executable -->
+			<executable targetfile="$INSTALL_PATH/$fr.cnes.sitools.metacatalogue.corePath/startMetacatalogue.sh"
+				stage="never" />
+			<executable targetfile="$INSTALL_PATH/$fr.cnes.sitools.metacatalogue.corePath/metacatalogue"
+				stage="never" />			
+		</pack>
+		
+		<!-- CONFIG, contains the config files -->
+		<pack name="config" preselected="yes" required="yes" parent="Server">
+			<description>Config files (properties, resources...)</description>
+			<file override="true" src="$propertiesPath/metacatalogue.properties"
+				targetdir="$INSTALL_PATH/$fr.cnes.sitools.metacatalogue.corePath" />
+			<fileset override="true" dir="../fr.cnes.sitools.metacatalogue.core/conf/licences"
+				targetdir="$INSTALL_PATH/licences" />
+			<parsable encoding="UTF-8"
+				targetfile="$INSTALL_PATH/$fr.cnes.sitools.metacatalogue.corePath/metacatalogue.properties"
+				type="javaprop" />
+		</pack>
+		
+		<!-- DATA -->
+		<pack name="data" preselected="yes" required="yes" parent="Server">
+			<description>Harvesters Models</description>
+			<fileset override="update" dir="../../data"
+				targetdir="$INSTALL_PATH/data">
+				<exclude name=".*" />
+				<exclude name=".settings/" />
+				<depends packname="Server" />
+			</fileset>
+		</pack>
+		
+		<!-- SERVER EXTENSIONS -->
+		<pack name="ServerExtensions" preselected="yes" required="no">
+			<description>Server extensions</description>
+		</pack>
+		<pack name="extensions" preselected="yes" required="no"
+			parent="ServerExtensions">
+			<description>Extensions for running metacatalog with SITools2</description>
+			<file override="update"
+				src="@{ROOT_DIRECTORY_SITOOLS}/workspace/fr.cnes.sitools.ext.metacatalogue/dist/fr.cnes.sitools.ext.metacatalogue.jar"
+				targetdir="$sitoolsPath/workspace/fr.cnes.sitools.core/ext" />
+				
+			<file override="update"
+				src="../fr.cnes.sitools.metacatalogue.core/dist/fr.cnes.sitools.metacatalogue.core.jar"
+				targetdir="$sitoolsPath/workspace/fr.cnes.sitools.core/ext" />
+			
+		</pack>
+		
+		<pack name="Client" preselected="yes" required="no">
+			<description>Client files (client-metacatalogue)</description>
+		</pack>
+		
+		<!-- CLIENT USER -->
+		<pack name="client-metacatalogue" preselected="yes" required="no" parent="Client">
+			<description>Client-metacatalogue + data project module</description>
+			<fileset override="update" dir="../client-metacatalogue/client-user/js/modules/metacatalog" 
+				targetdir="$sitoolsPath/workspace/client-user/js/modules/metacatalog"
+				excludes="**/*.zip" />
+			<singlefile override="true" src="../client-metacatalogue/data/projects_modules/int@13.xml"
+				target="$sitoolsPath/data/projects_modules/$metacatalogModuleName">
+			</singlefile>
+		</pack>
+		
+		<!-- SOLR -->
+		<pack name="Solr" preselected="yes" required="no">
+			<description>Server Solr</description>
+			<file override="update"
+				src="$propertiesPath/metacatalogue-solr.properties"
+				targetdir="$INSTALL_PATH/Solr" />
+				
+			<fileset override="true" dir="res/database" targetdir="$INSTALL_PATH/database"/>
+			
+			<file override="update"
+				src="../fr.cnes.sitools.metacatalogue.solr/dist/fr.cnes.sitools.metacatalogue.solr.jar"
+				targetdir="$INSTALL_PATH/Solr/solr/core_libs" />
+			
+			
+			<!--<file override="update"
+				src="$databasePath/create-postgis-spatialindex.sql"
+				targetdir="$INSTALL_PATH/database" />-->
+			
+			<fileset override="update" dir="../../Solr" 
+				targetdir="$INSTALL_PATH/Solr"
+				excludes="**/*.zip" />
+			
+			<parsable encoding="UTF-8"
+				targetfile="$INSTALL_PATH/Solr/metacatalogue-solr.properties"
+				type="javaprop" />
+				
+				
+			<executable targetfile="$INSTALL_PATH/Solr/solr.sh"	stage="never" />
+			<executable targetfile="$INSTALL_PATH/Solr/start_solr.bat"	stage="never" />
+			<executable targetfile="$INSTALL_PATH/Solr/stop_solr.bat"	stage="never" />
+		</pack>
+		
+	</packs>
+	
+</installation>

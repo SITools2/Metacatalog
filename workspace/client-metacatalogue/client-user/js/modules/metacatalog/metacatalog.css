@@ -1,0 +1,135 @@
+.metacatalogModule {
+	background-image:url(/sitools/client-user/js/modules/metacatalog/images/catalog-icon.png ) !important;
+    background-size: 18px 18px;
+	background-position: left !important;
+	background-repeat: no-repeat;
+}
+
+.formatIconsAction {
+/* 	margin-left: 10px; */
+	padding-left : 4px;
+	padding-right: 4px;
+	height : 20px;
+	width : 20px;
+}
+
+/* START DATAVIEW PRINCIPAL */
+
+.metaView-panel-background {
+	background: #ffb76b; /* Old browsers */
+	background: -moz-linear-gradient(45deg,  #ffb76b 0%, #fca905 16%, #ffa44f 35%, #ffb76b 45%, #ffa73d 47%, #ffb76b 47%, #ffb805 85%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#ffb76b), color-stop(16%,#fca905), color-stop(35%,#ffa44f), color-stop(45%,#ffb76b), color-stop(47%,#ffa73d), color-stop(47%,#ffb76b), color-stop(85%,#ffb805)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(45deg,  #ffb76b 0%,#fca905 16%,#ffa44f 35%,#ffb76b 45%,#ffa73d 47%,#ffb76b 47%,#ffb805 85%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(45deg,  #ffb76b 0%,#fca905 16%,#ffa44f 35%,#ffb76b 45%,#ffa73d 47%,#ffb76b 47%,#ffb805 85%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(45deg,  #ffb76b 0%,#fca905 16%,#ffa44f 35%,#ffb76b 45%,#ffa73d 47%,#ffb76b 47%,#ffb805 85%); /* IE10+ */
+	background: linear-gradient(45deg,  #ffb76b 0%,#fca905 16%,#ffa44f 35%,#ffb76b 45%,#ffa73d 47%,#ffb76b 47%,#ffb805 85%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffb76b', endColorstr='#ffb805',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+	
+}
+.statusDetailsView-panel-background {
+	background: #ffb76b; /* Old browsers */
+	background: -moz-linear-gradient(left,  #ffb76b 0%, #fca905 16%, #ffa44f 35%, #ffb76b 45%, #ffa73d 47%, #ffb76b 47%, #ffb805 85%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#ffb76b), color-stop(16%,#fca905), color-stop(35%,#ffa44f), color-stop(45%,#ffb76b), color-stop(47%,#ffa73d), color-stop(47%,#ffb76b), color-stop(85%,#ffb805)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(left,  #ffb76b 0%,#fca905 16%,#ffa44f 35%,#ffb76b 45%,#ffa73d 47%,#ffb76b 47%,#ffb805 85%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(left,  #ffb76b 0%,#fca905 16%,#ffa44f 35%,#ffb76b 45%,#ffa73d 47%,#ffb76b 47%,#ffb805 85%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(left,  #ffb76b 0%,#fca905 16%,#ffa44f 35%,#ffb76b 45%,#ffa73d 47%,#ffb76b 47%,#ffb805 85%); /* IE10+ */
+	background: linear-gradient(to right,  #ffb76b 0%,#fca905 16%,#ffa44f 35%,#ffb76b 45%,#ffa73d 47%,#ffb76b 47%,#ffb805 85%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffb76b', endColorstr='#ffb805',GradientType=1 ); /* IE6-9 */
+}
+
+.catalog-core {
+	background : url(/sitools/client-user/js/modules/metacatalog/images/solr.png) rgba(255, 255, 255, 0.28);
+	background-repeat: no-repeat;
+	padding : 80px 60px 100px 60px;
+	background-size: 300px 125px;
+	background-position: bottom right;
+	margin-top: 105px;
+	color: rgb(54, 54, 54);
+	text-shadow: 1px 1px 2px rgb(202, 202, 202);
+	
+	-moz-box-shadow: 1px -12px 5px -3px rgba(101, 101, 101, 0.46);
+	-webkit-box-shadow: 1px -12px 5px -3px rgba(101, 101, 101, 0.46);
+	-o-box-shadow: 1px -12px 5px -3px rgba(101, 101, 101, 0.46);
+	box-shadow: 1px -12px 5px -3px rgba(101, 101, 101, 0.46);
+}
+
+.icon-catalog img{
+	float: left;
+	padding : 5px;
+	height : 96px;
+	width : 96px;
+}
+
+.details-catalog {
+	font-size: 14px;
+}
+
+.details-catalog p{
+	padding : 3px;
+}
+
+/* END DATAVIEW PRINCIPAL */
+
+.progressBarMeta {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+
+/* START STATUS HARVEST DETAILS */
+.statusHarvestDetail {
+	padding : 10px;
+	margin-top: 20px;
+	background : rgba(255, 255, 255, 0.28);
+	text-shadow: 1px 1px 2px rgb(202, 202, 202);
+	color: rgb(54, 54, 54);
+	
+	-webkit-box-shadow: 4px 1px 6px rgba(101, 101, 101, 0.46);
+	-moz-box-shadow:    4px 1px 6px rgba(101, 101, 101, 0.46);
+	box-shadow:         4px 1px 6px rgba(101, 101, 101, 0.46);
+	
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	
+}
+#currentHarvest {
+	float: left;
+	margin-left: 70px;
+}
+#lastHarvest {
+	float: right;
+	margin-right: 90px;
+}
+
+.harvestTitle{
+	text-decoration: underline;
+	font-weight: bold;
+	padding-bottom: 1px;
+}
+
+.errorCause {
+	color : red;
+	font-style: italic;
+}
+
+.result-SUCCESS b{
+	color: green;
+}
+
+.result-ERROR b{
+	color: red;
+}
+
+.result-STOPPED_USER b{
+	color: yellow;
+}
+
+.statusCatalogTitle {
+	float : left;
+	text-decoration : underline;
+	margin: 5px 0px 0px 5px;
+	font-size: 14px;
+}
+
+/* END STATUS HARVEST DETAILS */

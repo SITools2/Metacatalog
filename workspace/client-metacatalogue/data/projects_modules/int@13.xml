@@ -1,0 +1,40 @@
+<projectModule>
+  <id>0b753709-bd93-4bff-b662-a8fdefd4347d</id>
+  <name>MetaCatalogModule</name>
+  <description>Manage metacatalog</description>
+  <label>label.metacatalog</label>
+  <author>AKKA</author>
+  <version>1.0</version>
+  <title>title.metacatalogModule</title>
+  <defaultWidth>800</defaultWidth>
+  <defaultHeight>600</defaultHeight>
+  <x>0</x>
+  <y>0</y>
+  <icon>metacatalogModule</icon>
+  <xtype>sitools.user.modules.mainMetacatalogModule</xtype>
+  <dependencies>
+    <js>
+      <url>
+        <url>/sitools/client-user/js/modules/metacatalog/metacatalogStatusHarvest.js</url>
+      </url>
+      <url>
+        <url>/sitools/client-user/js/modules/metacatalog/metacatalogDataview.js</url>
+      </url>
+      <url>
+        <url>/sitools/client-user/js/modules/metacatalog/metacatalogCrud.js</url>
+      </url>
+      <url>
+        <url>/sitools/client-user/js/modules/metacatalog/metacatalogProp.js</url>
+      </url>
+      <url>
+        <url>/sitools/client-user/js/modules/metacatalog/mainMetacatalogModule.js</url>
+      </url>
+    </js>
+    <css>
+      <url>
+        <url>/sitools/client-user/js/modules/metacatalog/metacatalog.css</url>
+      </url>
+    </css>
+  </dependencies>
+  <priority>0</priority>
+</projectModule>

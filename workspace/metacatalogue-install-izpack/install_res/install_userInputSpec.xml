@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<userInput>
+	<panel order="0">
+		<field size="2" txt="Metacatalog properties" type="title" id="input.title" />
+		
+		<!-- HOST PROPERTIES -->
+		<field txt="Host properties" type="staticText" id="input.host.title" />
+		<field type="text" variable="host_domain">
+			<spec size="20" txt="Host domain" set="localhost" id="input.host_domain" />
+			<validator class="com.izforge.izpack.util.NotEmptyValidator"
+				id="input.host.name.validator" txt="Host domain is a required field" />
+		</field>
+		<field type="text" variable="public_host_domain">
+			<spec size="20" txt="Public host domain" set="http://localhost:8184"
+				id="input.public_host_domain" />
+		</field>
+		<field type="text" variable="host_port">
+			<spec size="20" txt="Host port" set="8184" id="input.host_port" />
+			<validator class="com.izforge.izpack.util.RegularExpressionValidator"
+				txt="Host port must be a number" id="input.host.port.validator">
+				<param name="pattern" value="\d+" />
+			</validator>
+		</field>
+		<!-- END OF HOST PROPERTIES -->
+		
+		<field type="space" />
+		<field type="divider" />
+		<field type="space" />
+		
+		<!-- INDEXER PROPERTIES -->
+		<field txt="Indexer properties" type="staticText" id="input.title.indexer" />
+		<field type="text" variable="metacatalog_indexer_url">
+			<spec size="20" txt="Indexer URL" set="http://localhost:8983/solr" id="input.metacatalog_indexer_url" />
+			<validator class="com.izforge.izpack.util.NotEmptyValidator"
+				id="input.indexer.url.validator" txt="Indexer URL is a required field" />
+		</field>
+		<field type="text" variable="metacatalog_indexer_core_name">
+			<spec size="20" txt="Indexer core name" set="metacatalogue"
+				id="input.metacatalog_indexer_name" />
+		</field>
+		<!-- END OF INDEXER PROPERTIES -->
+		
+		<field type="space" />
+		<field type="divider" />
+		<field type="space" />
+		
+		<!-- PROXY PROPERTIES -->
+		<field txt="Proxy Properties" type="staticText" id="input.proxy.title" />
+		<field type="text" variable="proxy_host">
+			<spec size="20" txt="Proxy host" id="input.proxy_host" />
+		</field>
+		<field type="text" variable="proxy_port">
+			<spec size="20" txt="Proxy port" id="input.proxy_port" />
+			<validator class="com.izforge.izpack.util.RegularExpressionValidator"
+				txt="Host proxy must be a number" id="input.proxy.port.validator">
+				<param name="pattern" value="\d*" />
+			</validator>
+		</field>
+		<field type="text" variable="proxy_user">
+			<spec size="20" txt="Proxy user" id="input.proxy_user" />
+		</field>
+		<field type="text" variable="non_proxy_hosts">
+			<spec size="20" txt="Non proxy hosts" id="input.non_proxy_hosts"
+				set="localhost|127.0.0.1" />
+		</field>
+		<field type="password" align="left" variable="proxy_password">
+			<spec>
+				<pwd txt="Password:" size="20" set="" id="input.proxy_password.label" />
+				<pwd txt="Retype Password:" size="20" set=""
+					id="input.proxy_password_retype.label" />
+			</spec>
+			<validator class="com.izforge.izpack.util.PasswordEqualityValidator"
+				txt="Both keystore passwords must match." id="catalog.proxy.password.validator" />
+		</field>
+		<field type="combo" variable="with_proxy">
+			<spec id="input.enable_proxy" txt="Enable proxy">
+				<choice txt="true" id="input.enable_proxy.true" value="true" />
+				<choice txt="false" id="input.enable_proxy.false" value="false"
+					set="true" />
+			</spec>
+		</field>
+		<!-- END OF PROXY PROPERTIES -->
+	</panel>
+		
+	<panel order="1">
+		<field size="2" txt="Sitools2 Properties" type="title" id="input.title.sitools" conditionid="needClientSelected" />
+		<!-- START SITOOLS2 PROPERTIES -->
+		<field txt="SITools properties (required only if Client package is selected)" conditionid="needClientSelected" type="staticText" id="input.sitools.label" />
+		<field type="dir" variable="sitoolsPath" conditionid="needClientSelected">
+			<spec size="20" txt="SITools Path" set=" " allowEmptyValue="false"  mustExist="true" id="input.sitoolsPath" />
+		</field>
+		<!-- END SITOOLS2 PROPERTIES -->
+		
+		<field type="space" conditionid="needClientSelected"/>
+		<field type="divider" conditionid="needClientSelected"/>
+		<field type="space" conditionid="needClientSelected"/>
+		
+		
+		<!-- START SOLR PROPERTIES -->
+		<field size="2" txt="Solr properties" type="title" id="input.title.solr" conditionid="needSolrSelected"/>
+		
+		<field type="text" variable="input.database.hostname" conditionid="needSolrSelected">
+			<spec txt="Database host name: " set="localhost"
+				id="input.database.hostname.label" size="15" />
+			<validator class="com.izforge.izpack.util.NotEmptyValidator"
+				id="catalog.database.name.validator" txt="hostname is a required field" />
+		</field>
+
+		<field type="text" variable="input.database.port" conditionid="needSolrSelected">
+			<spec txt="Database port: " id="input.database.port.label" size="15"
+				set="5432" />
+			<validator class="com.izforge.izpack.util.RegularExpressionValidator"
+				txt="Database port must be a number" id="input.database.port.validator">
+				<param name="pattern" value="\d+" />
+			</validator>
+		</field>
+		<field type="text" variable="input.database.name" conditionid="needSolrSelected">
+			<spec txt="Database name: " id="input.database.name.label" size="15" />
+			<validator class="com.izforge.izpack.util.NotEmptyValidator"
+				id="input.database.name.validator" txt="Database name is a required field" />
+		</field>
+		
+		<field type="text" variable="jdbc_user" conditionid="needSolrSelected">
+			<spec size="15" txt="Database User" id="input.jdbc_user" />
+		</field>
+		
+		<field type="password" align="left" variable="jdbc_password" conditionid="needSolrSelected">
+			<spec>
+				<pwd txt="Database Password :" size="15" set="" id="input.jdbc_password" />
+				<pwd txt="Retype Password:" size="15" set="" />
+			</spec>
+			<validator class="com.izforge.izpack.util.PasswordEqualityValidator"
+				txt="Both keystore passwords must match." id="catalog.database.password.validator" />
+		</field>
+		<!-- END SOLR PROPERTIES -->
+		
+		<field type="space" conditionid="needSolrSelected"/>
+		<field type="divider" conditionid="needSolrSelected"/>
+		<field type="space" conditionid="needSolrSelected"/>
+		
+		<field type="radio" variable="dbInstallSelected" conditionid="needSolrSelected">
+			<description align="left" txt="Do you want to install the Metacatalog Database ?"
+				id="input.db_installed"/>
+			<spec>
+				<choice txt="Yes" id="input.db_installed.yes" value="true" />
+				<choice txt="No" id="input.db_installed.no" value="false" set="true" />
+			</spec>
+		</field>
+	</panel>
+
+</userInput>

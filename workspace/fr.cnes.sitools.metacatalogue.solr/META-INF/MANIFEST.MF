@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Solr
+Bundle-SymbolicName: fr.cnes.sitools.metacatalogue.solr
+Bundle-Version: 1.0.0.qualifier
+Export-Package: fr.cnes.sitools.metacatalogue.search.solr.config,
+ fr.cnes.sitools.metacatalogue.search.solr.spatial,
+ fr.cnes.sitools.metacatalogue.search.solr.spatial.parser,
+ fr.cnes.sitools.metacatalogue.search.solr.update,
+ org.fao.geonet.kernel.search.spatial

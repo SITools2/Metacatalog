@@ -1,0 +1,96 @@
+<!-- ===================================
+==  Copyright 2011, 2012 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
+==  
+==  This file is part of SITools2.
+==  
+==  SITools2 is free software: you can redistribute it and/or modify
+==  it under the terms of the GNU General Public License as published by
+==  the Free Software Foundation, either version 3 of the License, or
+==  (at your option) any later version.
+==  
+==  SITools2 is distributed in the hope that it will be useful,
+==  but WITHOUT ANY WARRANTY; without even the implied warranty of
+==  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+==  GNU General Public License for more details.
+==  
+==  You should have received a copy of the GNU General Public License
+==  along with SITools2.  If not, see <http://www.gnu.org/licenses/>.
+==================================== -->
+<!DOCTYPE project [
+   <!ENTITY struct  SYSTEM "build/struct.xml">
+<!ENTITY taskdef SYSTEM "build/taskdef.xml">
+<!ENTITY targets SYSTEM "build/targets.xml"> 
+]>
+<project name="fr.cnes.metacatalogue.metacatalogue.solr" default="build" basedir=".">
+
+	<property file="build.properties" />
+
+	<property file="conf/build/properties/build-${HOST}.properties" />
+
+	<property file="build-default.properties" />
+
+	<import file="conf/userlibraries/metacatalogue-solr.userlibraries.ant.xml" optional="true" />
+
+	<property name="cots.dir" value="${ROOT_DIRECTORY}/cots" />
+
+	<!-- ===============================================================================
+	         Parametres du projet
+	     =============================================================================== -->
+
+	
+
+
+	<property name="conf.dir" value="conf" />
+	<property name="conf.properties.dir" value="${conf.dir}/properties" />
+	<property name="conf.build.dir" value="${conf.dir}/build" />
+
+	<property name="conf.build.properties.dir" value="${conf.build.dir}/properties" />
+	<property name="conf.build.userlib.dir" value="${conf.build.dir}/userlibraries" />
+	<property name="conf.reference.dir" value="${conf.dir}/reference" />
+
+	<property file="${conf.reference.dir}/metacatalogue-reference.properties" prefix="properties" />
+
+	<target name="build" depends="refresh-userlibraries, build-project" />
+
+	
+	<!-- TARGET build-project -->
+	<target name="build-project" description="invoke deploy-jar-projet">
+		<subant target="deploy-jar-projet">
+			<fileset dir="${conf.build.dir}" includes="build.xml" />
+		</subant>
+	</target>
+	
+	<!-- TARGET javadoc -->
+	<target name="javadoc" description="Generate project javadoc">
+		<subant target="javadoc-projet">
+			<fileset dir="${conf.build.dir}" includes="build.xml" />
+		</subant>	
+	</target>
+	
+	<!-- TARGET refresh-userlibraries -->
+	<target name="refresh-userlibraries" description="Mise à jour des userlibraries pour eclipse et pour Ant">
+		<echo message="COTS dir : ${cots.dir}" />
+		<xslt in="${conf.build.userlib.dir}/metacatalogue-solr.userlibraries" out="${conf.build.userlib.dir}/metacatalogue-solr.userlibraries.eclipse.xml" style="${conf.build.userlib.dir}/metacatalogue-solr.userlibraries.xsl" force="true" processor="SaxonLiaison">
+			<param name="output" expression="eclipse" />
+			<param name="ROOT_DIRECTORY" expression="${ROOT_DIRECTORY}" />
+			<outputproperty name="method" value="xml" />
+			<outputproperty name="standalone" value="no" />
+			<outputproperty name="encoding" value="UTF-8" />
+			<outputproperty name="indent" value="yes" />
+			<classpath location="${cots.dir}/saxon/saxon9he.jar" />
+			<classpath location="${cots.dir}/saxon/SaxonLiaison.jar" />
+		</xslt>
+		<xslt in="${conf.build.userlib.dir}/metacatalogue-solr.userlibraries" out="${conf.build.userlib.dir}/metacatalogue-solr.userlibraries.ant.xml" style="${conf.build.userlib.dir}/metacatalogue-solr.userlibraries.xsl" force="true" processor="SaxonLiaison">
+			<param name="output" expression="ant" />
+			<param name="ROOT_DIRECTORY" expression="${ROOT_DIRECTORY}" />
+			<outputproperty name="method" value="xml" />
+			<outputproperty name="standalone" value="yes" />
+			<outputproperty name="encoding" value="UTF-8" />
+			<outputproperty name="indent" value="yes" />
+			<classpath location="${cots.dir}/saxon/saxon9he.jar" />
+			<classpath location="${cots.dir}/saxon/SaxonLiaison.jar" />
+		</xslt>
+	</target>
+	
+</project>
+

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<solr persistent="true">
+  <cores adminPath="/admin/cores">
+    <core name="spirit" instanceDir="spirit/"/>
+    <core name="metacatalogue" instanceDir="metacatalogue/"/>
+    <core name="supersites" instanceDir="supersites/"/>
+    <core name="kalideos" instanceDir="kalideos/"/>
+    <core name="geosud" instanceDir="geosud/"/>
+  </cores>
+</solr>

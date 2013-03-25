@@ -1,0 +1,11 @@
+[
+	{
+		"harvesterClassName" : "fr.cnes.sitools.metacatalogue.opensearch.OpensearchHarvester"
+	},
+	{
+		"harvesterClassName" : "fr.cnes.sitools.metacatalogue.csw.CswGetHarvester"
+	},	
+	{
+		"harvesterClassName" : "fr.cnes.sitools.metacatalogue.csw.CswPostHarvester"
+	}	
+]

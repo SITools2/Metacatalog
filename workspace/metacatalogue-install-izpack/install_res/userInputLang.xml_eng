@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<langpack>
+	<str id="input.title" txt="Metacatalog Server Properties"/>  
+	<str id="input.host.title" txt="Host properties"/> 
+	<str id="input.host_domain" txt="Host domain :*"/>  
+	<str id="input.public_host_domain" txt="Public host domain :"/>  
+	<str id="input.host_port" txt="Host port :*"/>  
+
+	<str id="input.title.indexer" txt="Indexer properties"/>   
+	<str id="input.metacatalog_indexer_url" txt="Indexer URL :*"/>  
+	<str id="input.metacatalog_indexer_core_name" txt="Indexer core name :*"/>  
+
+	<str id="input.proxy.title" txt="Proxy properties"/>
+	<str id="input.proxy_host" txt="Proxy host:"/>
+	<str id="input.proxy_port" txt="Proxy port:"/>
+	<str id="input.proxy_user" txt="Proxy user:"/>
+	<str id="input.proxy_pwd.label" txt="Proxy password:"/>
+	<str id="input.proxy_pwd_retype.label" txt="Retype password:"/>
+	<str id="input.non_proxy_hosts" txt="Non proxy hosts:"/>
+	<str id="input.enable_proxy.true" txt="True"/>
+	<str id="input.enable_proxy.false" txt="False"/>
+	<str id="input.enable_proxy" txt="Enable proxy"/>
+	
+	<!-- VALIDATORS -->
+	<str id="input.host.port.validator" txt="Host port must be a number"/>
+	<str id="input.host.name.validator" txt="Host domain is a required field"/>
+	
+	<str id="input.indexer.url.validator" txt="Indexer URL is a required field"/>
+	<str id="input.indexer.name.validator" txt="Indexer core name is a required field"/>
+	
+	<str id="input.proxy.port.validator" txt="Proxy port must be a number"/>
+	<str id="catalog.proxy.password.validator" txt="Both proxy passwords must match."/>
+	
+	<!-- SITOOLS & SOLR DB LABEL -->
+	<str id="input.title.sitools" txt="Sitools2 Properties"/>
+	<str id="input.sitools.label" txt="SITools properties (required only if Client package is selected)"/>
+	
+	<str id="input.title.metaDbProp" txt="Metacatalog Database Properties"/>
+	<str id="input.database.hostname.label" txt="Database Hostname*"/>
+	<str id="input.database.port.label" txt="Database Port*"/>
+	<str id="input.database.name.label" txt="Database name*"/>  
+	<str id="input.title.solr" txt="Solr Properties"/>
+	<str id="input.jdbc_url" txt="Database Metacatalog URL"/>
+	<str id="input.jdbc_user" txt="Database User"/>
+	<str id="input.jdbc_password" txt="Database Password"/>
+	
+	<str id="input.db_installed" txt="Do you want to install the tables on the Metacatalog Database ?"/>
+	<str id="input.db_installed.yes" txt="Yes"/>
+	<str id="input.db_installed.no" txt="No"/>
+	
+	<!-- VALIDATORS -->
+	<str id="catalog.database.name.validator" txt="hostname is a required field"/>
+	<str id="input.database.port.validator" txt="Database port must be a number"/>
+	<str id="input.database.name.validator" txt="Database name is a required field"/>
+	<str id="catalog.database.password.validator" txt="Both database passwords must match."/>
+	<str id="input.host.port.validator" txt="Host port must be a number"/>
+	<str id="input.host.name.validator" txt="Host domain is a required field"/>
+	
+</langpack>

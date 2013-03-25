@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: gregw
+Build-Jdk: 1.6.0_22
+Main-Class: org.mortbay.start.Main
+implementation-version: 6.1.26
+mode: development
+package: org.mortbay
+url: http://www.eclipse.org/jetty/jetty-parent/project/modules/start
+

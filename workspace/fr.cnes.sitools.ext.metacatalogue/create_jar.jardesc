@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jardesc>
+    <jar path="fr.cnes.sitools.ext.metacatalogue/dist/fr.cnes.sitools.ext.metacatalogue.jar"/>
+    <options buildIfNeeded="true" compress="false" descriptionLocation="/fr.cnes.sitools.ext.metacatalogue/create_jar.jardesc" exportErrors="false" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="false" manifestLocation="/fr.cnes.sitools.ext.metacatalogue/META-INF/MANIFEST.MF" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+        <javaElement handleIdentifier="=fr.cnes.sitools.ext.metacatalogue/lib"/>
+        <file path="/fr.cnes.sitools.ext.metacatalogue/.project"/>
+        <file path="/fr.cnes.sitools.ext.metacatalogue/.classpath"/>
+        <file path="/fr.cnes.sitools.ext.metacatalogue/build.properties"/>
+        <file path="/fr.cnes.sitools.ext.metacatalogue/.checkstyle"/>
+        <folder path="/fr.cnes.sitools.ext.metacatalogue/META-INF"/>
+        <javaElement handleIdentifier="=fr.cnes.sitools.ext.metacatalogue/src"/>
+    </selectedElements>
+</jardesc>

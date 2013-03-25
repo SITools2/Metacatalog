@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<langpack>
+	<str id="input.title" txt="Proprietes du Metacatalogue Serveur"/>  
+	<str id="input.host.title" txt="Proprietes du domaine"/> 
+	<str id="input.host_domain" txt="Domaine :*"/>  
+	<str id="input.public_host_domain" txt="Domaine publique :"/>  
+	<str id="input.host_port" txt="Port :*"/>  
+
+	<str id="input.title.indexer" txt="Proprietes de l'indexeur"/>   
+	<str id="input.metacatalog_indexer_url" txt="URL indexeur :*"/>  
+	<str id="input.metacatalog_indexer_core_name" txt="Nom du coeur de l'indexeur :*"/>  
+
+	<str id="input.proxy.title" txt="Propriétés du proxy"/>
+	<str id="input.proxy_host" txt="Proxy HTTP :"/>
+	<str id="input.proxy_port" txt="Port :"/>
+	<str id="input.proxy_user" txt="Utilisateur :"/>
+	<str id="input.proxy_password.label" txt="Mot de passe :"/>
+	<str id="input.proxy_password_retype.label" txt="Mot de passe :"/>
+	<str id="input.nonproxy_hosts" txt="Pas de proxy pour :"/>
+	<str id="input.enable_proxy.true" txt="Oui"/>
+	<str id="input.enable_proxy.false" txt="Non"/>
+	<str id="input.enable_proxy" txt="Activer proxy"/>
+	
+	<!-- VALIDATORS -->
+	<str id="input.host.port.validator" txt="Le port du domaine doit être un nombre"/>
+	<str id="input.host.name.validator" txt="Le nom de domaine est obligatoire"/>
+	
+	<str id="input.indexer.url.validator" txt="L'url de l'indexeur est obligatoire"/>
+	<str id="input.indexer.name.validator" txt="Le nom du coeur de l'indexeur est obligatoire"/>
+	
+	<str id="input.proxy.port.validator" txt="Le port du serveur proxy doit être un nombre"/>
+	<str id="catalog.proxy.password.validator" txt="Les mots de passe du serveur proxy ne correspondent pas."/>
+	
+	<!-- SITOOLS & SOLR LABEL -->
+	<str id="input.title.sitools" txt="Sitools2 Propriétés"/>
+	<str id="input.sitools.label" txt="Répertoire SITools2 (requis seulement si le package Client est sélectionné) :"/>
+	
+	<str id="input.title.metaDbProp" txt="Proprietes de la base de donnees Metacatalogue"/> 
+	<str id="input.database.hostname.label" txt="Domaine du SGBD*"/>
+	<str id="input.database.port.label" txt="Port du server SGBD*"/>
+	<str id="input.database.name.label" txt="Nom de la base de donnees*"/>
+	<str id="input.title.solr" txt="Solr Propriétés"/>
+	<str id="input.jdbc_url" txt="URL base de données Metacatalogue"/>
+	<str id="input.jdbc_user" txt="Utilisateur basse de données"/>
+	<str id="input.jdbc_password" txt="Mot de passe base de données"/>
+	
+	<str id="database.user.create.successfully" txt="Base de données créée avec succès"/>
+	<str id="input.db_installed" txt="Voulez vous installer les tables de la base de données Metacatalogue ?"/>
+	<str id="input.db_installed.yes" txt="Oui"/>
+	<str id="input.db_installed.no" txt="Non"/>
+	
+	
+	<!-- VALIDATORS -->
+	<str id="catalog.database.name.validator" txt="Le nom de domaine est obligatoire"/>
+	<str id="input.database.port.validator" txt="Le port du serveur du SGBD doit être un nombre"/>
+	<str id="input.database.name.validator" txt="Le nom de la base de donnees est obligatoire"/>
+	<str id="catalog.database.password.validator" txt="Les mots de passe du SGBD ne correspondent pas."/>
+	
+	<str id="input.host.port.validator" txt="Le port du domaine doit être un nombre"/>
+	<str id="input.host.name.validator" txt="Le nom de domaine est obligatoire"/>
+	
+	<str id="UserInputPanel.dir.nodirectory.caption"   txt="No Directory Selected"/>
+	
+</langpack>

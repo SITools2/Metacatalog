@@ -1,0 +1,11 @@
+[
+	{ 
+		"catalogType" : "opensearch"
+	},
+	{
+		"catalogType" : "csw-iso19139"
+	},
+	{
+		"catalogType" : "csw-iso19139-2-Geosud"
+	}
+]

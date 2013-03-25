@@ -1,0 +1,31 @@
+<GetRecords
+	xmlns="http://www.opengis.net/cat/csw/2.0.2" 
+	xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" 
+	xmlns:ogc="http://www.opengis.net/ogc"
+	xmlns:ows="http://www.opengis" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:dc="http://purl.org/dc/elements/1.1/" 
+	xmlns:dct="http://purl.org/dc/terms/" 
+	xmlns:gml="http://www.opengis.net/gml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	service="CSW"
+	version="2.0.2" 
+	resultType="results"
+	outputFormat="application/xml"
+	outputSchema="http://www.isotc211.org/2005/gmd" 
+	startPosition="${startPosition}"
+	maxRecords="${maxRecords}">
+
+	<csw:Query typeNames="Record">
+		<#if lastIndexTime??>
+		<csw:Constraint version="1.1.0">
+			<ogc:Filter xmlns="http://www.opengis.net/ogc" xmlns:gml="http://www.opengis.net/gml">
+				<ogc:PropertyIsGreaterThan>
+					<ogc:PropertyName>Modified</ogc:PropertyName>
+					<ogc:Literal>${lastIndexTime?string("yyyy-MM-dd HH:mm:ss")}</ogc:Literal>					
+				</ogc:PropertyIsGreaterThan>
+			</ogc:Filter>
+		</csw:Constraint>
+		</#if>
+	</csw:Query>
+</GetRecords>

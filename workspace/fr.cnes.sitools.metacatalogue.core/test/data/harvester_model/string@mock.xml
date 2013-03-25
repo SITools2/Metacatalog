@@ -1,0 +1,10 @@
+<HarvesterModel>
+  <id>mock</id>
+  <catalogType>opensearch</catalogType>
+  <description>Test configuration</description>
+  <harvesterClassName>fr.cnes.sitools.metacatalogue.mockHarvest.MockHavester</harvesterClassName>
+  <attributes/>
+  <automaticMerge>false</automaticMerge>
+  <publicServices>false</publicServices>
+  <status>INACTIVE</status>
+</HarvesterModel>

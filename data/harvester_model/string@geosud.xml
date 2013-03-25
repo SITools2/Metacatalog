@@ -1,0 +1,25 @@
+<HarvesterModel>
+  <id>geosud</id>
+  <catalogType>csw-iso19139-2-Geosud</catalogType>
+  <source>
+    <url>http://geosud-sw.teledetection.fr/constellation-adminjsf/WS/csw/geosud_csw</url>
+  </source>
+  <description>geosud</description>
+  <harvesterClassName>fr.cnes.sitools.metacatalogue.csw.CswGetHarvester</harvesterClassName>
+  <indexerConf>
+    <url>http://localhost:8983/solr/geosud</url>
+  </indexerConf>
+  <attributes>
+    <AttributeCustom>
+      <name>project</name>
+      <value>Geosud</value>
+    </AttributeCustom>
+    <AttributeCustom>
+      <name>product</name>
+      <value>IMAGE</value>
+    </AttributeCustom>
+  </attributes>
+  <automaticMerge>false</automaticMerge>
+  <publicServices>true</publicServices>
+  <status>INACTIVE</status>
+</HarvesterModel>

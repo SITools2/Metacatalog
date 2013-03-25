@@ -1,0 +1,16 @@
+<HarvesterModel>
+  <id>spirit</id>
+  <catalogType>opensearch</catalogType>
+  <source>
+    <url>http://spirit.cnes.fr/spirit/ws/search.php?q={searchTerms}&amp;bbox={geo:box?}&amp;format=json&amp;startDate={time:start?}&amp;completionDate={time:stop?}&amp;modified={time:start?}&amp;location={spirit:location?}</url>
+  </source>
+  <description>Harvesting of spirit</description>
+  <harvesterClassName>fr.cnes.sitools.metacatalogue.opensearch.OpensearchHarvester</harvesterClassName>
+  <indexerConf>
+    <url>http://localhost:8983/solr/spirit</url>
+  </indexerConf>
+  <attributes/>
+  <automaticMerge>false</automaticMerge>
+  <publicServices>false</publicServices>
+  <status>INACTIVE</status>
+</HarvesterModel>

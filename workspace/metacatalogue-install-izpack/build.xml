@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ===================================
+==  Copyright 2011, 2012 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
+==  
+==  This file is part of SITools2.
+==  
+==  SITools2 is free software: you can redistribute it and/or modify
+==  it under the terms of the GNU General Public License as published by
+==  the Free Software Foundation, either version 3 of the License, or
+==  (at your option) any later version.
+==  
+==  SITools2 is distributed in the hope that it will be useful,
+==  but WITHOUT ANY WARRANTY; without even the implied warranty of
+==  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+==  GNU General Public License for more details.
+==  
+==  You should have received a copy of the GNU General Public License
+==  along with SITools2.  If not, see <http://www.gnu.org/licenses/>.
+==================================== -->
+<project name="fr.cnes.sitools.metacatalogue.install" default="build" basedir=".">
+
+	<!-- ============================================================================== 
+		=== Build file to allow ant (http://jakarta.apache.org/ant/) to be used === 
+		to build the Sitools project. === === Author : AKKA Technologies === === 
+		name : nom du projet === default : tache ant executee par defaut === basedir 
+		: repertoire courant lors de l'execution des taches ant === ============================================================================== -->
+	<!-- Chargement du build.properties pour mettre en place les variables -->
+	<property file="build.properties" />
+
+	<import file="sitools.userlibraries.ant.xml" optional="true" />
+
+	<property name="fr.cnes.sitools.metacatalogue.core.dir" value="${ROOT_DIRECTORY_LOCAL}/workspace/fr.cnes.sitools.metacatalogue.core" />
+	<property name="conf.dir" value="${fr.cnes.sitools.metacatalogue.core.dir}/conf" />
+	<property name="conf.bin.dir" value="${conf.dir}/bin" />
+	<property name="conf.jar.dir" value="${conf.dir}/jar" />
+	<property name="conf.properties.dir" value="${conf.dir}/properties" />
+	<property name="conf.reference.dir" value="${conf.dir}/reference" />
+	<property name="conf.build.userlib.dir" value="${conf.dir}/build/userlibraries" />
+	<property name="cots.dir" value="${ROOT_DIRECTORY_LOCAL}/cots" />
+
+	<!-- Information pour la copie du fichier de configuration SOLR -->
+	<property name="fr.cnes.sitools.metacatalogue.solr.dir" value="${ROOT_DIRECTORY_LOCAL}/workspace/fr.cnes.sitools.metacatalogue.solr" />
+	<property name="solr.conf.properties" value="${fr.cnes.sitools.metacatalogue.solr.dir}/conf/properties" />
+	<property name="solr.sql.dir" value="${fr.cnes.sitools.metacatalogue.solr.dir}/resources/sql" />
+
+	<!-- Informations pour la construction de l'installeur -->
+	<property name="install.dir" value="${basedir}" />
+	<property name="install.res.dir" value="${install.dir}/res" />
+	<property name="install.res.script.dir" value="${install.res.dir}/script" />
+	<property name="install.res.database.dir" value="${install.res.dir}/database" />
+	<property name="install.res.properties.dir" value="${install.res.dir}/properties" />
+	<property name="install.lib.dir" value="${install.dir}/lib" />
+	<property name="install.conf.dir" value="${install.dir}/conf" />
+	<property name="install.build.dir" value="${install.conf.dir}/build" />
+
+	<property name="product.short.name" value="MetacatalogServer" />
+	<property name="product.version" value="0.1" />
+	<property name="temp.dir" value="${install.dir}/tmp" />
+
+
+
+	<!-- Allows us to use the IzPack Ant task -->
+	<taskdef name="izpack" classpath="${install.lib.dir}/standalone-compiler.jar" classname="com.izforge.izpack.ant.IzPackTask" />
+
+
+	<target name="build-jars" description="creates the Jars for IzPack custom behavior">
+		<subant target="build-jars">
+			<fileset dir="${install.build.dir}" includes="build.xml" />
+		</subant>
+	</target>
+
+	<target name="build" depends="build-jars, refresh-properties-for-install, refresh-solr-properties-for-install, build-shell-for-install, build-izpack-installer" />
+
+	<!-- TARGET refresh-properties-for-install -->
+	<target name="refresh-properties-for-install" description="Mise à jour du fichier de propriétés metacatalogue.properties pour install">
+		<copy outputencoding="UTF-8" tofile="${install.res.properties.dir}/metacatalogue.properties" file="${conf.reference.dir}/metacatalogue-reference.properties" overwrite="true" />
+
+		<propertyfile file="${install.res.properties.dir}/metacatalogue.properties" comment="Update solr property">
+
+			<!-- Metacatalogue server parameters -->
+			<entry key="ROOT_DIRECTORY" value="$INSTALL_PATH" />
+			<entry key="HOST_DOMAIN" value="$host_domain" />
+			<entry key="HOST_PORT" value="$host_port" />
+			<entry key="PUBLIC_HOST_DOMAIN" value="$public_host_domain" />
+
+			<!-- Application properties parameters -->
+			<entry key="METACATALOG_INDEXER_URL" value="$metacatalog_indexer_url" />
+			<entry key="METACATALOG_INDEXER_CORE_NAME" value="$metacatalog_indexer_core_name" />
+
+
+			<!-- Proxy parameters -->
+			<entry key="WITH_PROXY" value="$with_proxy" />
+			<entry key="PROXY_HOST" value="$proxy_host" />
+			<entry key="PROXY_PORT" value="$proxy_port" />
+			<entry key="PROXY_USER" value="$proxy_user" />
+			<entry key="PROXY_PASSWORD" value="$proxy_password" />
+			<entry key="NONPROXY_HOSTS" value="$non_proxy_hosts" />
+
+			<!-- SOLR properties parameters-->
+			<entry key="jdbc.url" value="$jdbc_url" />
+			<entry key="jdbc.user" value="$jdbc_user" />
+			<entry key="jdbc.password" value="$jdbc_password" />
+
+		</propertyfile>
+	</target>
+
+	<!-- TARGET refresh-solr-properties-for-install -->
+	<target name="refresh-solr-properties-for-install" description="Mise à jour du fichier de propriétés metacatalogue-solr.properties pour install solr">
+
+		<copy outputencoding="UTF-8" tofile="${install.res.properties.dir}/metacatalogue-solr.properties" file="${solr.conf.properties}/metacatalogue-solr.properties" overwrite="true" />
+
+		<copy outputencoding="UTF-8" tofile="${install.res.database.dir}/create-postgis-spatialindex.sql" file="${solr.sql.dir}/create-postgis-spatialindex.sql" overwrite="true" />
+
+		<propertyfile file="${install.res.properties.dir}/metacatalogue-solr.properties" comment="Update solr property">
+
+			<!-- SOLR properties parameters-->
+			<entry key="jdbc.url" value="$jdbc_url" />
+			<entry key="jdbc.user" value="$jdbc_user" />
+			<entry key="jdbc.password" value="$jdbc_password" />
+
+		</propertyfile>
+	</target>
+
+	<!-- TARGET xslt-build-shell-for-install -->
+	<target name="build-shell-for-install" description="Mise à jour du shell de lancement pour l'installeur">
+		<!-- build script sitools -->
+		<copy file="${conf.reference.dir}/metacatalogue-reference" tofile="${install.res.script.dir}/metacatalogue" outputencoding="UTF-8" overwrite="true">
+			<filterchain>
+				<replacetokens>
+					<token key="ROOT_DIRECTORY" value="%{INSTALL_PATH}" />
+					<token key="VERSION" value="%{APP_VER}" />
+					<token key="PORT" value="%{host_port}" />
+				</replacetokens>
+			</filterchain>
+		</copy>
+
+
+		<xslt in="${conf.build.userlib.dir}/metacatalogue-core.userlibraries" out="${install.res.script.dir}/startMetacatalogue.sh" style="${conf.build.userlib.dir}/metacatalogue-core.userlibraries.xsl" force="true" processor="SaxonLiaison">
+			<param name="output" expression="shell" />
+			<param name="ROOT_DIRECTORY" expression="%INSTALL_PATH" />
+			<param name="LOG_DIRECTORY" expression="%INSTALL_PATH" />
+			<param name="PORT" expression="%{host_port}" />
+			<outputproperty name="method" value="text" />
+			<outputproperty name="standalone" value="no" />
+			<outputproperty name="encoding" value="UTF-8" />
+			<outputproperty name="indent" value="yes" />
+			<classpath location="${cots.dir}/saxon/saxon9he.jar" />
+			<classpath location="${cots.dir}/saxon/SaxonLiaison.jar" />
+		</xslt>
+		<xslt in="${conf.build.userlib.dir}/metacatalogue-core.userlibraries" out="${install.res.script.dir}/startMetacatalogue.bat" style="${conf.build.userlib.dir}/metacatalogue-core.userlibraries.xsl" force="true" processor="SaxonLiaison">
+			<param name="output" expression="bat" />
+			<param name="ROOT_DIRECTORY" expression="%INSTALL_PATH" />
+			<param name="LOG_DIRECTORY" expression="%INSTALL_PATH" />
+			<outputproperty name="method" value="text" />
+			<outputproperty name="standalone" value="no" />
+			<outputproperty name="encoding" value="UTF-8" />
+			<outputproperty name="indent" value="yes" />
+			<classpath location="${cots.dir}/saxon/saxon9he.jar" />
+			<classpath location="${cots.dir}/saxon/SaxonLiaison.jar" />
+		</xslt>
+	</target>
+
+
+
+
+	<!-- TARGET build-izpack-installer creates the izpack installer file -->
+
+	<target name="build-izpack-installer" description="generation de l'installeur IzPack">
+		<echo message="Build installer from file : ${install.dir}/install.xml with base dir = ${install.dir}">
+		</echo>
+		<echo message="path properties file : ${install.res.properties.dir}/metacatalogue.properties">
+		</echo>
+		<property file="${install.res.properties.dir}/metacatalogue.properties" prefix="properties" />
+		<!-- Run installer build -->
+		<izpack input="${install.dir}/install.xml" output="${install.dir}/${properties.appName}-${properties.VERSION}-install.jar" installerType="standard" inheritAll="true" basedir="${install.dir}" compression="deflate" compressionlevel="9" />
+	</target>
+
+
+
+</project>

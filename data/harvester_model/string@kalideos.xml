@@ -1,0 +1,16 @@
+<HarvesterModel>
+  <id>kalideos</id>
+  <catalogType>opensearch</catalogType>
+  <source>
+    <url>http://ids-psc.kalimsat.eu/OpenSearch3/openSearchServer.php?query={searchTerms?}&amp;numRecordsPerPage={count?}&amp;startDate={time:start?}&amp;completionDate={time:stop?}&amp;nextRecord={startPage?}&amp;bbox={geo:box?}&amp;base={ptsc:base?}&amp;platform={ptsc:platform?}&amp;modeAcq={ptsc:modeAcq?}&amp;instrument={ptsc:instrument?}&amp;product={ptsc:product?}&amp;version={ptsc:version?}&quot;/&gt; &lt;Url type=&quot;application/json&quot; rel=&quot;mspdesc&quot; template=&quot;http://ids-psc.kalimsat.eu/OpenSearch3/describe.php</url>
+  </source>
+  <description>Moissonnage du catalogue kalideos</description>
+  <harvesterClassName>fr.cnes.sitools.metacatalogue.opensearch.OpensearchHarvester</harvesterClassName>
+  <indexerConf>
+    <url>http://localhost:8983/solr/kalideos</url>
+  </indexerConf>
+  <attributes/>
+  <automaticMerge>false</automaticMerge>
+  <publicServices>false</publicServices>
+  <status>INACTIVE</status>
+</HarvesterModel>
