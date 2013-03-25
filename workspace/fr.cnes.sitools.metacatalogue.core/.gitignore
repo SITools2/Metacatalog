@@ -1,0 +1,11 @@
+conf/build/userlibraries/metacatalogue-core.userlibraries.ant.xml
+conf/build/userlibraries/metacatalogue-core.userlibraries.eclipse.xml
+conf/properties/metacatalogue.properties
+metacatalogue.properties
+jar/
+dist/fr.cnes.sitools.metacatalogue.core.jar
+metacatalogue
+sitools.properties
+startMetacatalogue.bat
+startMetacatalogue.sh
+logs/
