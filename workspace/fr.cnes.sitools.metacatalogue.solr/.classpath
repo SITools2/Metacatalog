@@ -5,14 +5,9 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/geo_tools"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/geo_tools_extensions"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/geoAPI"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jsonpath"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/libraries"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/misc"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/restlet_2_1_0"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/solr_lucene"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/solrj"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/tests"/>
+	<classpathentry kind="lib" path="E:/SITOOLS-2.0-GIT-METACATALOGUE/workspace/fr.cnes.sitools.metacatalogue.solr/lib/fr.cnes.sitools.ext.astronomy.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
