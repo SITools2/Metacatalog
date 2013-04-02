@@ -8,6 +8,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/geoAPI"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/misc"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/solr_lucene"/>
-	<classpathentry kind="lib" path="E:/SITOOLS-2.0-GIT-METACATALOGUE/workspace/fr.cnes.sitools.metacatalogue.solr/lib/fr.cnes.sitools.ext.astronomy.jar"/>
+	<classpathentry kind="lib" path="lib/fr.cnes.sitools.ext.astronomy.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

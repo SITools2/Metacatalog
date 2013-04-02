@@ -42,14 +42,13 @@ import fr.cnes.sitools.metacatalogue.common.Metadata;
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
 import fr.cnes.sitools.metacatalogue.model.HarvestStatus;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
-import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
 import fr.cnes.sitools.model.HarvesterModel;
 import fr.cnes.sitools.model.HarvesterSource;
 import fr.cnes.sitools.util.ClientResourceProxy;
 
 public class OpensearchReader extends HarvesterStep {
 
-  private static final String START_INDEX_PARAM_NAME = "{startPage?}";
+  private static final String START_INDEX_PARAM_NAME = "{startIndex?}";
 
   private static final String COUNT_PARAM_NAME = "{count?}";
 
@@ -186,11 +185,23 @@ public class OpensearchReader extends HarvesterStep {
         String dateFormated = DateUtils.format(lastHarvest, DateUtils.FORMAT_RFC_3339);
         parameter.setValue(dateFormated);
       }
-      else {
+      else if (isTemplate(parameter)) {
         iterator.remove();
       }
     }
     reference.setQuery(form.getQueryString());
+  }
+
+  /**
+   * check that the given parameter is a template
+   * 
+   * @param param
+   *          the param
+   * @return true if the given parameter is a template, false otherwise
+   */
+  private boolean isTemplate(Parameter param) {
+    String paramValue = param.getValue();
+    return paramValue.startsWith("{") && paramValue.endsWith("}");
   }
 
 }
