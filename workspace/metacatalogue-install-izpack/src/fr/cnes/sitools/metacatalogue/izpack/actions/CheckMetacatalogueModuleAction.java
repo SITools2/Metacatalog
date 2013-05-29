@@ -1,6 +1,7 @@
 package fr.cnes.sitools.metacatalogue.izpack.actions;
 
 import java.io.File;
+import java.io.FilenameFilter;
 
 import com.izforge.izpack.Pack;
 import com.izforge.izpack.event.SimpleInstallerListener;
@@ -35,8 +36,8 @@ public class CheckMetacatalogueModuleAction extends SimpleInstallerListener {
 				findClient = true;
 			}
 		}
-		
-		if (!findClient){
+
+		if (!findClient) {
 			return;
 		}
 
@@ -55,7 +56,13 @@ public class CheckMetacatalogueModuleAction extends SimpleInstallerListener {
 		File moduleDir = new File(sitoolsProjectModulesPath);
 
 		if (moduleDir.exists() && moduleDir.isDirectory()) {
-			int nbModules = moduleDir.listFiles().length - 1;
+			int nbModules = moduleDir.listFiles(new FilenameFilter() {
+
+				@Override
+				public boolean accept(File file, String name) {
+					return name.startsWith("int@");
+				}
+			}).length - 1;
 			String lastModuleName = "int@" + nbModules + ".xml";
 
 			if (lastModuleName.compareTo(moduleName) > 0
