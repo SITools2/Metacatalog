@@ -62,16 +62,10 @@ public class CheckMetacatalogueModuleAction extends SimpleInstallerListener {
 				public boolean accept(File file, String name) {
 					return name.startsWith("int@");
 				}
-			}).length - 1;
+			}).length;
 			String lastModuleName = "int@" + nbModules + ".xml";
 
-			if (lastModuleName.compareTo(moduleName) > 0
-					|| lastModuleName.compareTo(moduleName) == 0) {
-				nbModules++;
-				moduleName = "int@" + nbModules + ".xml";
-				getInstalldata().setVariable("metacatalogModuleName",
-						moduleName);
-			}
+			getInstalldata().setVariable("metacatalogModuleName", lastModuleName);
 		}
 
 	}
