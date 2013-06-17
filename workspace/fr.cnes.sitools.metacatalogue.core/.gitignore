@@ -9,3 +9,4 @@ sitools.properties
 startMetacatalogue.bat
 startMetacatalogue.sh
 logs/
+/bin

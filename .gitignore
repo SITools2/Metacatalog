@@ -1,3 +1,14 @@
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
 out/
 bin/
 .metadata/
@@ -9,3 +20,4 @@ data/TESTS_mapshup/
 data/TESTS_jeobrowser/
 extensions/
 build.num
+data/logs/
