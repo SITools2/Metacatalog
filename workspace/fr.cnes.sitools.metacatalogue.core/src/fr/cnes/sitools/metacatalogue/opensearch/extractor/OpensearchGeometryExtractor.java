@@ -26,6 +26,7 @@ import org.geotools.geojson.geom.GeometryJSON;
 import org.restlet.Context;
 
 import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.Point;
 import com.vividsolutions.jts.io.WKTWriter;
 
 import fr.cnes.sitools.metacatalogue.model.Fields;
@@ -52,10 +53,14 @@ public class OpensearchGeometryExtractor {
   public Fields extractGeometry(String geometryJson, Fields fields, Context context) throws Exception {
 
     Geometry geometry = extractGeometry(geometryJson, context);
+    
     if (geometry != null) {
       WKTWriter wktWriter = new WKTWriter();
-      String geo = wktWriter.write(geometry);
+      String geo = wktWriter.writeFormatted(geometry);
       fields.add(MetacatalogField._GEOMETRY.getField(), geo);
+      Point point = geometry.getInteriorPoint();
+      String geographie = wktWriter.write(point);
+      fields.add("_interiorPoint", geographie);
     }
 
     return fields;

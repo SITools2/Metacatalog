@@ -19,7 +19,7 @@
  *     Makoto YUI - ported from jakarta commons io
  */
 /*******************************************************************************
- * Copyright 2011, 2012 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
+ * Copyright 2010-2013 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
  * 
  * This file is part of SITools2.
  * 
