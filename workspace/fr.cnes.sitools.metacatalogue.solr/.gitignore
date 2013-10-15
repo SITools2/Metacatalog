@@ -1,6 +1,0 @@
-conf/build/userlibraries/metacatalogue-solr.userlibraries.ant.xml
-conf/build/userlibraries/metacatalogue-solr.userlibraries.eclipse.xml
-metacatalogue.properties
-jar/
-dist/fr.cnes.sitools.metacatalogue.solr.jar
-/bin
