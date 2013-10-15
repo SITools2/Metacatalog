@@ -3,7 +3,7 @@
 
 start() {
 	[ ! -d work ] && mkdir -p work	
-	nohup java -jar -DSTOP.PORT=8079 -DSTOP.KEY=metacatalogue-solr start.jar 2>&1 >> ${LOG} &
+	nohup java -jar -DSTOP.PORT=8079 -DSTOP.KEY=metacatalogue-solr -Dsolr.solr.home=solr start.jar 2>&1 >> ${LOG} &
 }
 
 
@@ -17,7 +17,7 @@ usage() {
     echo " "
 }
 
-LOG_DIR="./LOG"
+LOG_DIR="./logs"
 [ ! -d ${LOG_DIR} ] && mkdir -p ${LOG_DIR}
 
 LOG="${LOG_DIR}/solr.log"

@@ -1,2 +1,1 @@
-mkdir work
-java -jar -DSTOP.PORT=8079 -DSTOP.KEY=metacatalogue-solr start.jar
+java -jar -DSTOP.PORT=8079 -DSTOP.KEY=metacatalogue-solr -Dsolr.solr.home=solr start.jar
