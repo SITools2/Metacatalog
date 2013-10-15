@@ -2,15 +2,26 @@
   <id>kalideos</id>
   <catalogType>opensearch</catalogType>
   <source>
-    <url>http://ids-psc.kalimsat.eu/OpenSearch3/openSearchServer.php?query={searchTerms?}&amp;numRecordsPerPage={count?}&amp;startDate={time:start?}&amp;completionDate={time:stop?}&amp;nextRecord={startPage?}&amp;bbox={geo:box?}&amp;base={ptsc:base?}&amp;platform={ptsc:platform?}&amp;modeAcq={ptsc:modeAcq?}&amp;instrument={ptsc:instrument?}&amp;product={ptsc:product?}&amp;version={ptsc:version?}&quot;/&gt; &lt;Url type=&quot;application/json&quot; rel=&quot;mspdesc&quot; template=&quot;http://ids-psc.kalimsat.eu/OpenSearch3/describe.php</url>
+    <url>http://ids-psc.kalimsat.eu/OpenSearch3/openSearchServer.php?query={searchTerms?}&amp;numRecordsPerPage={count?}&amp;startDate={time:start?}&amp;completionDate={time:end?}&amp;nextRecord={startIndex?}&amp;bbox={geo:box?}&amp;base={ptsc:base?}&amp;platform={ptsc:platform?}&amp;modeAcq={ptsc:modeAcq?}&amp;instrument={ptsc:instrument?}&amp;product={ptsc:product?}&amp;version={ptsc:version?}&amp;modified={time:start?}</url>
   </source>
   <description>Moissonnage du catalogue kalideos</description>
   <harvesterClassName>fr.cnes.sitools.metacatalogue.opensearch.OpensearchHarvester</harvesterClassName>
   <indexerConf>
     <url>http://localhost:8983/solr/kalideos</url>
   </indexerConf>
+  <lastHarvest>2013-10-14 09:16:20.192 UTC</lastHarvest>
   <attributes/>
   <automaticMerge>false</automaticMerge>
   <publicServices>false</publicServices>
   <status>INACTIVE</status>
+  <lastRunResult>
+    <nbDocumentsRetrieved>1890</nbDocumentsRetrieved>
+    <nbDocumentsIndexed>1890</nbDocumentsIndexed>
+    <nbDocumentsInvalid>0</nbDocumentsInvalid>
+    <result>SUCCESS</result>
+    <url>http://localhost:8184/harvesters/admin/kalideos/harvest/status</url>
+    <status>INACTIVE</status>
+    <startDate>2013-10-14 09:15:24.251 UTC</startDate>
+    <endDate>2013-10-14 09:16:20.197 UTC</endDate>
+  </lastRunResult>
 </HarvesterModel>

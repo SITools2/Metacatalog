@@ -9,8 +9,19 @@
   <indexerConf>
     <url>http://localhost:8983/solr/spirit</url>
   </indexerConf>
+  <lastHarvest>2013-10-15 10:02:28.400 UTC</lastHarvest>
   <attributes/>
   <automaticMerge>false</automaticMerge>
   <publicServices>false</publicServices>
   <status>INACTIVE</status>
+  <lastRunResult>
+    <nbDocumentsRetrieved>117</nbDocumentsRetrieved>
+    <nbDocumentsIndexed>117</nbDocumentsIndexed>
+    <nbDocumentsInvalid>0</nbDocumentsInvalid>
+    <result>SUCCESS</result>
+    <url>http://localhost:8184/harvesters/admin/spirit/harvest/status</url>
+    <status>INACTIVE</status>
+    <startDate>2013-10-15 10:01:24.832 UTC</startDate>
+    <endDate>2013-10-15 10:02:28.406 UTC</endDate>
+  </lastRunResult>
 </HarvesterModel>

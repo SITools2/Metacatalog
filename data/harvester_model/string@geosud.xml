@@ -9,6 +9,7 @@
   <indexerConf>
     <url>http://localhost:8983/solr/geosud</url>
   </indexerConf>
+  <lastHarvest>2013-10-15 13:02:29.345 UTC</lastHarvest>
   <attributes>
     <AttributeCustom>
       <name>project</name>
@@ -22,4 +23,14 @@
   <automaticMerge>false</automaticMerge>
   <publicServices>true</publicServices>
   <status>INACTIVE</status>
+  <lastRunResult>
+    <nbDocumentsRetrieved>499</nbDocumentsRetrieved>
+    <nbDocumentsIndexed>489</nbDocumentsIndexed>
+    <nbDocumentsInvalid>0</nbDocumentsInvalid>
+    <result>SUCCESS</result>
+    <url>http://localhost:8184/harvesters/admin/geosud/harvest/status</url>
+    <status>INACTIVE</status>
+    <startDate>2013-10-15 12:59:24.352 UTC</startDate>
+    <endDate>2013-10-15 13:02:29.349 UTC</endDate>
+  </lastRunResult>
 </HarvesterModel>
