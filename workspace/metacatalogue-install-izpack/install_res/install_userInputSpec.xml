@@ -90,62 +90,6 @@
 			<spec size="20" txt="SITools Path" set=" " allowEmptyValue="false"  mustExist="true" id="input.sitoolsPath" />
 		</field>
 		<!-- END SITOOLS2 PROPERTIES -->
-		
-		<field type="space" conditionid="needClientSelected"/>
-		<field type="divider" conditionid="needClientSelected"/>
-		<field type="space" conditionid="needClientSelected"/>
-		
-		
-		<!-- START SOLR PROPERTIES -->
-		<field size="2" txt="Solr properties" type="title" id="input.title.solr" conditionid="needSolrSelected"/>
-		
-		<field type="text" variable="input.database.hostname" conditionid="needSolrSelected">
-			<spec txt="Database host name: " set="localhost"
-				id="input.database.hostname.label" size="15" />
-			<validator class="com.izforge.izpack.util.NotEmptyValidator"
-				id="catalog.database.name.validator" txt="hostname is a required field" />
-		</field>
-
-		<field type="text" variable="input.database.port" conditionid="needSolrSelected">
-			<spec txt="Database port: " id="input.database.port.label" size="15"
-				set="5432" />
-			<validator class="com.izforge.izpack.util.RegularExpressionValidator"
-				txt="Database port must be a number" id="input.database.port.validator">
-				<param name="pattern" value="\d+" />
-			</validator>
-		</field>
-		<field type="text" variable="input.database.name" conditionid="needSolrSelected">
-			<spec txt="Database name: " id="input.database.name.label" size="15" />
-			<validator class="com.izforge.izpack.util.NotEmptyValidator"
-				id="input.database.name.validator" txt="Database name is a required field" />
-		</field>
-		
-		<field type="text" variable="jdbc_user" conditionid="needSolrSelected">
-			<spec size="15" txt="Database User" id="input.jdbc_user" />
-		</field>
-		
-		<field type="password" align="left" variable="jdbc_password" conditionid="needSolrSelected">
-			<spec>
-				<pwd txt="Database Password :" size="15" set="" id="input.jdbc_password" />
-				<pwd txt="Retype Password:" size="15" set="" />
-			</spec>
-			<validator class="com.izforge.izpack.util.PasswordEqualityValidator"
-				txt="Both keystore passwords must match." id="catalog.database.password.validator" />
-		</field>
-		<!-- END SOLR PROPERTIES -->
-		
-		<field type="space" conditionid="needSolrSelected"/>
-		<field type="divider" conditionid="needSolrSelected"/>
-		<field type="space" conditionid="needSolrSelected"/>
-		
-		<field type="radio" variable="dbInstallSelected" conditionid="needSolrSelected">
-			<description align="left" txt="Do you want to install the Metacatalog Database ?"
-				id="input.db_installed"/>
-			<spec>
-				<choice txt="Yes" id="input.db_installed.yes" value="true" />
-				<choice txt="No" id="input.db_installed.no" value="false" set="true" />
-			</spec>
-		</field>
 	</panel>
 
 </userInput>

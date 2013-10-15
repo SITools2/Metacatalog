@@ -18,7 +18,6 @@
 ==  along with SITools2.  If not, see <http://www.gnu.org/licenses/>.
 ==================================== -->
 <installation version="1.0">
-	<jar src="lib/postgresql-8.3-603.jdbc3.jar" />
 	<jar src="dist/MetacatalogServer-izpack.jar" stage="install"/>
 	<info>
 		<appname>Metacatalogue</appname>
@@ -35,9 +34,7 @@
 	</info>
 	
 	<listeners>
-		<listener installer="ConfigSolrJarAction" jar ="dist/MetacatalogServer-izpack.jar"/>
 		<listener installer="CheckMetacatalogueModuleAction" jar ="dist/MetacatalogServer-izpack.jar"/>
-		<listener installer="InstallDatabaseAction" jar ="dist/MetacatalogServer-izpack.jar"/>
 	</listeners>
 	
 	<guiprefs width="900" height="700" resizable="yes">
@@ -84,22 +81,14 @@
 		</condition>
 	</conditions>
 	
-	<dynamicvariables>
-		<variable name="jdbc_url"
-			value="jdbc:postgresql://${input.database.hostname}:${input.database.port}/${input.database.name}" />
-	</dynamicvariables>
-	
 	<variables>
 		<variable name="workspacePath" value="workspace" />
 		<variable name="fr.cnes.sitools.metacatalogue.corePath" value="workspace/fr.cnes.sitools.metacatalogue.core" />
-		<variable name="fr.cnes.sitools.metacatalogue.solrPath" value="workspace/fr.cnes.sitools.metacatalogue.solr" />
-		<variable name="resSolrPath" value="workspace/fr.cnes.sitools.metacatalogue.solr/res" />
 		<variable name="fr.cnes.sitools.metacatalogue.libraries" value="workspace/fr.cnes.sitools.metacatalogue.libraries" />
 		<variable name="resPath" value="res" />
 		<variable name="scriptPath" value="res/script" />
 		<variable name="propertiesPath" value="res/properties" />
 		<variable name="imgPath" value="res/img" />
-		<variable name="databasePath" value="res/database" />
 		<variable name="update-classpathPath" value="workspace/fr.cnes.sitools.metacatalogue.core/sitools-update-classpath" />
 		<variable name="metacatalogModuleName" value="int@13.xml" />
 	</variables>
@@ -111,7 +100,6 @@
 		<panel classname="TargetPanel" />
 		<panel classname="UserInputPanel" id="UserInputPanel.0" />
 		<panel classname="UserInputPanel" id="UserInputPanel2.0" condition="needClientAndSolrSelected">
-			<validator classname="fr.cnes.sitools.metacatalogue.izpack.validator.JDBCConnectionValidator" />
 		</panel>
 		<panel classname="SummaryPanel" />
 		<panel classname="InstallPanel" />
@@ -147,13 +135,13 @@
 		<!-- COTS -->
 		<pack name="Server-Cots" preselected="yes" required="yes" parent="Server">
 			<description>Solr, geoApi, geoTools, Restlet, Saxon</description>
-			<fileset override="update" dir="../../cots/apache-solr-3.6.1" targetdir="$INSTALL_PATH/cots/apache-solr-3.6.1"
+			<fileset override="update" dir="../../cots/apache-solr-4.5" targetdir="$INSTALL_PATH/cots/apache-solr-4.5"
 				excludes="**/*.zip" />
 			<fileset override="update" dir="../../cots/geoAPI-2.3-M1" targetdir="$INSTALL_PATH/cots/geoAPI-2.3-M1"
 				excludes="**/*.zip" />
 			<fileset override="update" dir="../../cots/geotools-2.6.2" targetdir="$INSTALL_PATH/cots/geotools-2.6.2"
 				excludes="**/*.zip" />
-			<fileset override="update" dir="../../cots/json-path-0.8.1" targetdir="$INSTALL_PATH/cots/json-path-0.8.1"
+			<fileset override="update" dir="../../cots/json-path-0.9.0" targetdir="$INSTALL_PATH/cots/json-path-0.9.0"
 				excludes="**/*.zip" />
 			<fileset override="update" dir="../../cots/restlet-jse-2.1.0" targetdir="$INSTALL_PATH/cots/restlet-jse-2.1.0"
 				excludes="**/*.zip" />
@@ -225,7 +213,7 @@
 			parent="ServerExtensions">
 			<description>Extensions for running metacatalog with SITools2</description>
 			<file override="update"
-				src="@{ROOT_DIRECTORY_SITOOLS}/workspace/fr.cnes.sitools.ext.metacatalogue/dist/fr.cnes.sitools.ext.metacatalogue.jar"
+				src="../fr.cnes.sitools.ext.metacatalogue/dist/fr.cnes.sitools.ext.metacatalogue.jar"
 				targetdir="$sitoolsPath/workspace/fr.cnes.sitools.core/ext" />
 				
 			<file override="update"
@@ -252,30 +240,11 @@
 		<!-- SOLR -->
 		<pack name="Solr" preselected="yes" required="no">
 			<description>Server Solr</description>
-			<file override="update"
-				src="$propertiesPath/metacatalogue-solr.properties"
-				targetdir="$INSTALL_PATH/Solr" />
 				
-			<fileset override="true" dir="res/database" targetdir="$INSTALL_PATH/database"/>
-			
-			<file override="update"
-				src="../fr.cnes.sitools.metacatalogue.solr/dist/fr.cnes.sitools.metacatalogue.solr.jar"
-				targetdir="$INSTALL_PATH/Solr/solr/core_libs" />
-			
-			
-			<!--<file override="update"
-				src="$databasePath/create-postgis-spatialindex.sql"
-				targetdir="$INSTALL_PATH/database" />-->
-			
 			<fileset override="update" dir="../../Solr" 
 				targetdir="$INSTALL_PATH/Solr"
 				excludes="**/*.zip" />
 			
-			<parsable encoding="UTF-8"
-				targetfile="$INSTALL_PATH/Solr/metacatalogue-solr.properties"
-				type="javaprop" />
-				
-				
 			<executable targetfile="$INSTALL_PATH/Solr/solr.sh"	stage="never" />
 			<executable targetfile="$INSTALL_PATH/Solr/start_solr.bat"	stage="never" />
 			<executable targetfile="$INSTALL_PATH/Solr/stop_solr.bat"	stage="never" />

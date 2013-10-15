@@ -39,7 +39,6 @@
 	<property name="cots.dir" value="${ROOT_DIRECTORY_LOCAL}/cots" />
 
 	<!-- Information pour la copie du fichier de configuration SOLR -->
-	<property name="fr.cnes.sitools.metacatalogue.solr.dir" value="${ROOT_DIRECTORY_LOCAL}/workspace/fr.cnes.sitools.metacatalogue.solr" />
 	<property name="solr.conf.properties" value="${fr.cnes.sitools.metacatalogue.solr.dir}/conf/properties" />
 	<property name="solr.sql.dir" value="${fr.cnes.sitools.metacatalogue.solr.dir}/resources/sql" />
 
@@ -69,7 +68,7 @@
 		</subant>
 	</target>
 
-	<target name="build" depends="build-jars, refresh-properties-for-install, refresh-solr-properties-for-install, build-shell-for-install, build-izpack-installer" />
+	<target name="build" depends="build-jars, refresh-properties-for-install, build-shell-for-install, build-izpack-installer" />
 
 	<!-- TARGET refresh-properties-for-install -->
 	<target name="refresh-properties-for-install" description="Mise à jour du fichier de propriétés metacatalogue.properties pour install">
@@ -95,23 +94,6 @@
 			<entry key="PROXY_USER" value="$proxy_user" />
 			<entry key="PROXY_PASSWORD" value="$proxy_password" />
 			<entry key="NONPROXY_HOSTS" value="$non_proxy_hosts" />
-
-			<!-- SOLR properties parameters-->
-			<entry key="jdbc.url" value="$jdbc_url" />
-			<entry key="jdbc.user" value="$jdbc_user" />
-			<entry key="jdbc.password" value="$jdbc_password" />
-
-		</propertyfile>
-	</target>
-
-	<!-- TARGET refresh-solr-properties-for-install -->
-	<target name="refresh-solr-properties-for-install" description="Mise à jour du fichier de propriétés metacatalogue-solr.properties pour install solr">
-
-		<copy outputencoding="UTF-8" tofile="${install.res.properties.dir}/metacatalogue-solr.properties" file="${solr.conf.properties}/metacatalogue-solr.properties" overwrite="true" />
-
-		<copy outputencoding="UTF-8" tofile="${install.res.database.dir}/create-postgis-spatialindex.sql" file="${solr.sql.dir}/create-postgis-spatialindex.sql" overwrite="true" />
-
-		<propertyfile file="${install.res.properties.dir}/metacatalogue-solr.properties" comment="Update solr property">
 
 			<!-- SOLR properties parameters-->
 			<entry key="jdbc.url" value="$jdbc_url" />
