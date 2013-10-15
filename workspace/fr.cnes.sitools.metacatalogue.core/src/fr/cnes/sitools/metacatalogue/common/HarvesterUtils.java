@@ -26,8 +26,6 @@ import java.util.logging.Logger;
 import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.request.CoreAdminRequest;
-import org.restlet.data.Status;
-import org.restlet.resource.ResourceException;
 
 import fr.cnes.sitools.metacatalogue.index.solr.SolRUtils;
 import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;

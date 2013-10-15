@@ -20,6 +20,7 @@ package fr.cnes.sitools.metacatalogue.csw;
 
 import java.util.logging.Level;
 
+import org.apache.solr.client.solrj.SolrServer;
 import org.restlet.Context;
 
 import fr.cnes.sitools.metacatalogue.common.Harvester;
@@ -29,11 +30,14 @@ import fr.cnes.sitools.metacatalogue.csw.indexer.CswMetadataIndexer;
 import fr.cnes.sitools.metacatalogue.csw.reader.CswGetReader;
 import fr.cnes.sitools.metacatalogue.csw.validator.CswMetadataValidator;
 import fr.cnes.sitools.metacatalogue.exceptions.CheckProcessException;
-import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
+import fr.cnes.sitools.metacatalogue.index.MetadataIndexer;
+import fr.cnes.sitools.metacatalogue.index.solr.SolRUtils;
+import fr.cnes.sitools.metacatalogue.index.solr.SolrMetadataIndexer;
 import fr.cnes.sitools.metacatalogue.model.HarvestStatus;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
 import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
 import fr.cnes.sitools.model.HarvesterModel;
+import fr.cnes.sitools.server.ContextAttributes;
 
 public class CswGetHarvester extends Harvester {
 
@@ -44,12 +48,17 @@ public class CswGetHarvester extends Harvester {
   @Override
   public void initHarvester(HarvesterModel harvestConf, Context context) throws CheckProcessException {
     super.initHarvester(harvestConf, context);
+
+    SolrServer solrServer = SolRUtils.getSolRServer(harvestConf.getIndexerConf().getUrl());
+    context.getAttributes().put(ContextAttributes.INDEXER_SERVER, solrServer);
+    MetadataIndexer indexer = new SolrMetadataIndexer(context);
+
     HarvesterStep step2, step3, step4;
     step1 = new CswGetReader(harvestConf, context);
     step2 = new CswMetadataExtractor(harvestConf, context);
     // step3 = new PrintFieldsStep(harvestConf, context);
     step3 = new CswMetadataValidator(harvestConf, context);
-    step4 = new CswMetadataIndexer(harvestConf, context);
+    step4 = new CswMetadataIndexer(harvestConf, context, indexer);
 
     step1.setNext(step2);
     step2.setNext(step3);
@@ -64,7 +73,7 @@ public class CswGetHarvester extends Harvester {
 
   @Override
   public void harvest() throws Exception {
-    HarvestStatus status = (HarvestStatus) context.getAttributes().get("STATUS");
+    HarvestStatus status = (HarvestStatus) context.getAttributes().get(ContextAttributes.STATUS);
     try {
       step1.execute(null);
       status.setResult(HarvestStatus.RESULT_SUCCESS);

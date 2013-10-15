@@ -45,6 +45,7 @@ import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
 import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
 import fr.cnes.sitools.model.HarvesterModel;
 import fr.cnes.sitools.model.HarvesterSource;
+import fr.cnes.sitools.server.ContextAttributes;
 import fr.cnes.sitools.util.ClientResourceProxy;
 
 /**
@@ -142,7 +143,7 @@ public class CswPostReader extends HarvesterStep {
         if (nbRecords == null) {
           nbRecords = Integer.parseInt(searchResults.getAttributeValue("numberOfRecordsMatched"));
           logger.info("Number of records found = " + nbRecords);
-          HarvestStatus status = (HarvestStatus) context.getAttributes().get("STATUS");
+          HarvestStatus status = (HarvestStatus) context.getAttributes().get(ContextAttributes.STATUS);
           status.setNbDocumentsRetrieved(status.getNbDocumentsIndexed() + nbRecords);
         }
 

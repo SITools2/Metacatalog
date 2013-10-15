@@ -20,13 +20,14 @@ package fr.cnes.sitools.metacatalogue.mockHarvest;
 
 import fr.cnes.sitools.metacatalogue.common.Harvester;
 import fr.cnes.sitools.metacatalogue.model.HarvestStatus;
+import fr.cnes.sitools.server.ContextAttributes;
 
 public class MockHavester extends Harvester {
 
   @Override
   public void harvest() throws Exception {
     System.out.println("CALL");
-    HarvestStatus status = (HarvestStatus) context.getAttributes().get("STATUS");
+    HarvestStatus status = (HarvestStatus) context.getAttributes().get(ContextAttributes.STATUS);
     System.out.println("START WAITING");
     Thread.sleep(3000);
 

@@ -133,7 +133,7 @@ public final class Starter {
     component.getClients().add(Protocol.HTTP);
 
     Context appContext = component.getContext().createChildContext();
-
+    appContext.getAttributes().put(HarvesterSettingsAttributes.SETTINGS, settings);
     HarvestersApplication harvesterAdministration = new HarvestersApplication(appContext, storeHarvesterModel);
 
     String url = settings.getString("HARVESTERS_APP_URL");

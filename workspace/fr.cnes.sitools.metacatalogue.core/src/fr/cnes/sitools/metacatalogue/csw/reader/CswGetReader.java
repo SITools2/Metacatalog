@@ -48,6 +48,7 @@ import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
 import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
 import fr.cnes.sitools.model.HarvesterModel;
 import fr.cnes.sitools.model.HarvesterSource;
+import fr.cnes.sitools.server.ContextAttributes;
 import fr.cnes.sitools.util.ClientResourceProxy;
 
 /**
@@ -115,7 +116,8 @@ public class CswGetReader extends HarvesterStep {
       logger.log(Level.INFO, "Query CSW service : " + clientResource.getRequest().getResourceRef().toString());
 
       Representation repr = clientResource.get(MediaType.APPLICATION_XML);
-
+      
+      
       try {
         InputStream in = repr.getStream();
         Element root = Xml.loadStream(in);
@@ -137,7 +139,7 @@ public class CswGetReader extends HarvesterStep {
         }
         
         int numberOfRecordsReturned = Integer.parseInt(searchResults.getAttributeValue("numberOfRecordsReturned"));
-        HarvestStatus status = (HarvestStatus) context.getAttributes().get("STATUS");
+        HarvestStatus status = (HarvestStatus) context.getAttributes().get(ContextAttributes.STATUS);
         status.setNbDocumentsRetrieved(status.getNbDocumentsRetrieved() + numberOfRecordsReturned);
 
         nextRecord = Integer.parseInt(searchResults.getAttributeValue("nextRecord"));

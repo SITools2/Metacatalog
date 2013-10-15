@@ -44,6 +44,7 @@ import fr.cnes.sitools.metacatalogue.model.HarvestStatus;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
 import fr.cnes.sitools.model.HarvesterModel;
 import fr.cnes.sitools.model.HarvesterSource;
+import fr.cnes.sitools.server.ContextAttributes;
 import fr.cnes.sitools.util.ClientResourceProxy;
 
 public class OpensearchReader extends HarvesterStep {
@@ -118,14 +119,14 @@ public class OpensearchReader extends HarvesterStep {
         // if (nbRecords == null) {
         // nbRecords = Integer.parseInt(searchResults.getAttributeValue("numberOfRecordsMatched"));
         // logger.info("Number of records found = " + nbRecords);
-        // HarvesterResult result = (HarvesterResult) context.getAttributes().get("RESULT");
+        // HarvesterResult result = (HarvesterResult) context.getAttributes().get(ContextAttributes.RESULT);
         // result.setNbDocumentsRetrieved(result.getNbDocumentsIndexed() + nbRecords);
         // }
         //
         // nextRecord = Integer.parseInt(searchResults.getAttributeValue("nextRecord"));
         //
         // data.setXmlData(searchResults);
-        HarvestStatus status = (HarvestStatus) context.getAttributes().get("STATUS");
+        HarvestStatus status = (HarvestStatus) context.getAttributes().get(ContextAttributes.STATUS);
         status.setNbDocumentsRetrieved(status.getNbDocumentsRetrieved() + features.size());
 
         if (next != null) {

@@ -114,8 +114,8 @@ public class OpensearchMetadataExtractor extends HarvesterStep {
       addField(fields, "$.properties.services.download.mimeType", jsonString,
           MetacatalogField.DISTRIBUTION_ACCESS_FORMAT.getField());
 
-      addField(fields, "$.properties.services.metadata.url", jsonString,
-          MetacatalogField.SERVICES_METADATA_URL.getField());
+//      addField(fields, "$.properties.services.metadata.url", jsonString,
+//          MetacatalogField.SERVICES_METADATA_URL.getField());
 
       addField(fields, "$.properties.quicklook", jsonString, MetacatalogField.QUICKLOOK.getField());
       addField(fields, "$.properties.thumbnail", jsonString, MetacatalogField.THUMBNAIL.getField());

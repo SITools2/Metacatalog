@@ -18,11 +18,9 @@
  ******************************************************************************/
 package fr.cnes.sitools.metacatalogue;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 
 import org.junit.Test;
@@ -31,23 +29,22 @@ import org.restlet.Context;
 import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
 import fr.cnes.sitools.metacatalogue.common.Metadata;
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
-import fr.cnes.sitools.metacatalogue.model.HarvestStatus;
 import fr.cnes.sitools.metacatalogue.opensearch.extractor.OpensearchMetadataExtractor;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
-import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
 import fr.cnes.sitools.model.HarvesterModel;
 
-public class OpenSearchMetadataExtractorTestCase {
+public class OpenSearchMetadataExtractorTestCase extends AbstractHarvesterTestCase {
 
-  private int nbFieldsExpected = 102;
+  private int nbFieldsExpected = 10;
 
   @Test
   public void testOpenSearchMetadataExtractor() throws ProcessException, IOException {
-    Context context = new Context();
-    HarvestStatus result = new HarvestStatus();
-    context.getAttributes().put("RESULT", result);
-    Metadata data = getJsonDataFromFile();
-    HarvesterModel model = createHarvesterModelForTest("spirit_for_test");
+    Context context = initContext();
+    String filePath = settings.getRootDirectory() + "/" + settings.getString("Tests.RESOURCES_DIRECTORY")
+        + "/opensearch/kalideos.json";
+    Metadata data = getJsonDataFromFile(filePath);
+
+    HarvesterModel model = createHarvesterModelForTest("kalideos");
     HarvesterStep reader = new OpensearchMetadataExtractor(model, context);
     reader.setNext(new assertDataClass());
     reader.execute(data);
@@ -59,26 +56,6 @@ public class OpenSearchMetadataExtractorTestCase {
     model.setId(id);
     model.setCatalogType("opensearch");
     return model;
-  }
-
-  private Metadata getJsonDataFromFile() throws IOException {
-    HarvesterSettings settings = HarvesterSettings.getInstance();
-    String filePath = settings.getRootDirectory() + "/" + settings.getString("TEST_RESOURCES_DIRECTORY")
-        + "/opensearch/spirit.json";
-    BufferedReader reader = new BufferedReader(new FileReader(filePath));
-    StringBuffer fileData = new StringBuffer(1000);
-    char[] buf = new char[1024];
-    int numRead = 0;
-    while ((numRead = reader.read(buf)) != -1) {
-      String readData = String.valueOf(buf, 0, numRead);
-      fileData.append(readData);
-      buf = new char[1024];
-    }
-    reader.close();
-    Metadata data = new Metadata();
-    data.setJsonData(fileData.toString());
-    return data;
-
   }
 
   private class assertDataClass extends HarvesterStep {

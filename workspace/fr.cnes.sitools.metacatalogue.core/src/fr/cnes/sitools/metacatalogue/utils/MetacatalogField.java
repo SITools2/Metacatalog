@@ -44,25 +44,7 @@ public enum MetacatalogField {
   /** The Constant ANY. */
   _ANY("_any"),
 
-  /** The Healpix orders. */
-  _HEALPIX_ORDER_1("healpix-order-1"),
-
-  /** The Healpix orders. */
-  _HEALPIX_ORDER_2("healpix-order-2"),
-
-  /** The Healpix orders. */
-  _HEALPIX_ORDER_3("healpix-order-3"),
-
-  /** The Healpix orders. */
-  _HEALPIX_ORDER_4("healpix-order-4"),
-
-  /** The Healpix orders. */
-  _HEALPIX_ORDER_5("healpix-order-5"),
-
-  /** The Healpix orders. */
-  _HEALPIX_ORDER_6("healpix-order-6"),
-
-  /**
+    /**
    * ##################### Modèle de données du métacatalogue #########################
    */
 

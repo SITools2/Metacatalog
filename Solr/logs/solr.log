@@ -12495,3 +12495,388 @@ INFO  - 2013-10-15 15:52:23.543; org.apache.solr.core.CachingDirectoryFactory; C
 INFO  - 2013-10-15 15:52:23.544; org.apache.solr.core.CachingDirectoryFactory; looking to close D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\spirit\data [CachedDir<<refCount=0;path=D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\spirit\data;done=false>>]
 INFO  - 2013-10-15 15:52:23.544; org.apache.solr.core.CachingDirectoryFactory; Closing directory: D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\spirit\data
 INFO  - 2013-10-15 15:52:23.593; org.eclipse.jetty.server.handler.ContextHandler; stopped o.e.j.w.WebAppContext{/solr,file:/D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/Solr/solr-webapp/webapp/},D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr/webapps/solr.war
+INFO  - 2013-10-15 15:58:26.251; org.eclipse.jetty.server.Server; jetty-8.1.10.v20130312
+INFO  - 2013-10-15 15:58:26.305; org.eclipse.jetty.deploy.providers.ScanningAppProvider; Deployment monitor D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\contexts at interval 0
+INFO  - 2013-10-15 15:58:26.314; org.eclipse.jetty.deploy.DeploymentManager; Deployable added: D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\contexts\solr-jetty-context.xml
+INFO  - 2013-10-15 15:58:28.194; org.eclipse.jetty.webapp.StandardDescriptorProcessor; NO JSP Support for /solr, did not find org.apache.jasper.servlet.JspServlet
+INFO  - 2013-10-15 15:58:28.266; org.apache.solr.servlet.SolrDispatchFilter; SolrDispatchFilter.init()
+INFO  - 2013-10-15 15:58:28.352; org.apache.solr.core.SolrResourceLoader; JNDI not configured for solr (NoInitialContextEx)
+INFO  - 2013-10-15 15:58:28.353; org.apache.solr.core.SolrResourceLoader; using system property solr.solr.home: solr
+INFO  - 2013-10-15 15:58:28.365; org.apache.solr.core.SolrResourceLoader; new SolrResourceLoader for directory: 'solr\'
+INFO  - 2013-10-15 15:58:28.510; org.apache.solr.core.ConfigSolr; Loading container configuration from D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\solr.xml
+INFO  - 2013-10-15 15:58:28.941; org.apache.solr.core.ConfigSolrXml; Config-defined core root directory: 
+INFO  - 2013-10-15 15:58:28.953; org.apache.solr.core.CoreContainer; New CoreContainer 18958867
+INFO  - 2013-10-15 15:58:28.954; org.apache.solr.core.CoreContainer; Loading cores into CoreContainer [instanceDir=solr\]
+INFO  - 2013-10-15 15:58:28.978; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting socketTimeout to: 0
+INFO  - 2013-10-15 15:58:28.979; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting urlScheme to: http://
+INFO  - 2013-10-15 15:58:28.979; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting connTimeout to: 0
+INFO  - 2013-10-15 15:58:28.980; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting maxConnectionsPerHost to: 20
+INFO  - 2013-10-15 15:58:28.981; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting corePoolSize to: 0
+INFO  - 2013-10-15 15:58:28.981; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting maximumPoolSize to: 2147483647
+INFO  - 2013-10-15 15:58:28.982; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting maxThreadIdleTime to: 5
+INFO  - 2013-10-15 15:58:28.993; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting sizeOfQueue to: -1
+INFO  - 2013-10-15 15:58:28.994; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting fairnessPolicy to: false
+INFO  - 2013-10-15 15:58:29.010; org.apache.solr.client.solrj.impl.HttpClientUtil; Creating new http client, config:maxConnectionsPerHost=20&maxConnections=10000&socketTimeout=0&connTimeout=0&retry=false
+INFO  - 2013-10-15 15:58:29.604; org.apache.solr.logging.LogWatcher; SLF4J impl is org.slf4j.impl.Log4jLoggerFactory
+INFO  - 2013-10-15 15:58:29.606; org.apache.solr.logging.LogWatcher; Registering Log Listener [Log4j (org.slf4j.impl.Log4jLoggerFactory)]
+INFO  - 2013-10-15 15:58:29.665; org.apache.solr.core.CorePropertiesLocator; Looking for core definitions underneath D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr
+INFO  - 2013-10-15 15:58:29.687; org.apache.solr.core.CorePropertiesLocator; Found core geosud in D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\geosud\
+INFO  - 2013-10-15 15:58:29.688; org.apache.solr.core.CorePropertiesLocator; Found core kalideos in D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\kalideos\
+INFO  - 2013-10-15 15:58:29.690; org.apache.solr.core.CorePropertiesLocator; Found core metacatalogue in D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\metacatalogue\
+INFO  - 2013-10-15 15:58:29.691; org.apache.solr.core.CorePropertiesLocator; Found core spirit in D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\spirit\
+INFO  - 2013-10-15 15:58:29.691; org.apache.solr.core.CorePropertiesLocator; Found 4 core definitions
+INFO  - 2013-10-15 15:58:29.695; org.apache.solr.core.CoreContainer; Creating SolrCore 'geosud' using instanceDir: D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\geosud
+INFO  - 2013-10-15 15:58:29.695; org.apache.solr.core.CoreContainer; Creating SolrCore 'metacatalogue' using instanceDir: D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\metacatalogue
+INFO  - 2013-10-15 15:58:29.696; org.apache.solr.core.SolrResourceLoader; new SolrResourceLoader for directory: 'D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\metacatalogue\'
+INFO  - 2013-10-15 15:58:29.695; org.apache.solr.core.CoreContainer; Creating SolrCore 'kalideos' using instanceDir: D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\kalideos
+INFO  - 2013-10-15 15:58:29.695; org.apache.solr.core.SolrResourceLoader; new SolrResourceLoader for directory: 'D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\geosud\'
+INFO  - 2013-10-15 15:58:29.697; org.apache.solr.core.SolrResourceLoader; new SolrResourceLoader for directory: 'D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\kalideos\'
+INFO  - 2013-10-15 15:58:29.903; org.apache.solr.update.SolrIndexConfig; IndexWriter infoStream solr logging is enabled
+INFO  - 2013-10-15 15:58:29.912; org.apache.solr.update.SolrIndexConfig; IndexWriter infoStream solr logging is enabled
+INFO  - 2013-10-15 15:58:29.918; org.apache.solr.core.SolrConfig; Using Lucene MatchVersion: LUCENE_45
+INFO  - 2013-10-15 15:58:29.921; org.apache.solr.core.SolrConfig; Using Lucene MatchVersion: LUCENE_45
+INFO  - 2013-10-15 15:58:29.941; org.apache.solr.update.SolrIndexConfig; IndexWriter infoStream solr logging is enabled
+INFO  - 2013-10-15 15:58:29.960; org.apache.solr.core.SolrConfig; Using Lucene MatchVersion: LUCENE_45
+INFO  - 2013-10-15 15:58:30.157; org.apache.solr.core.SolrConfig; Loaded SolrConfig: solrconfig.xml
+INFO  - 2013-10-15 15:58:30.158; org.apache.solr.core.SolrConfig; Loaded SolrConfig: solrconfig.xml
+INFO  - 2013-10-15 15:58:30.161; org.apache.solr.core.SolrConfig; Loaded SolrConfig: solrconfig.xml
+INFO  - 2013-10-15 15:58:30.166; org.apache.solr.schema.IndexSchema; Reading Solr Schema from schema.xml
+INFO  - 2013-10-15 15:58:30.166; org.apache.solr.schema.IndexSchema; Reading Solr Schema from schema.xml
+INFO  - 2013-10-15 15:58:30.166; org.apache.solr.schema.IndexSchema; Reading Solr Schema from schema.xml
+INFO  - 2013-10-15 15:58:30.214; org.apache.solr.schema.IndexSchema; [metacatalogue] Schema name=example
+INFO  - 2013-10-15 15:58:30.214; org.apache.solr.schema.IndexSchema; [kalideos] Schema name=example
+INFO  - 2013-10-15 15:58:30.214; org.apache.solr.schema.IndexSchema; [geosud] Schema name=example
+INFO  - 2013-10-15 15:58:31.152; org.apache.solr.schema.IndexSchema; unique key field: _uuid
+INFO  - 2013-10-15 15:58:31.161; org.apache.solr.schema.IndexSchema; unique key field: _uuid
+INFO  - 2013-10-15 15:58:31.162; org.apache.solr.schema.IndexSchema; unique key field: _uuid
+INFO  - 2013-10-15 15:58:31.336; org.apache.solr.schema.FileExchangeRateProvider; Reloading exchange rates from file currency.xml
+INFO  - 2013-10-15 15:58:31.341; org.apache.solr.schema.FileExchangeRateProvider; Reloading exchange rates from file currency.xml
+INFO  - 2013-10-15 15:58:31.369; org.apache.solr.schema.FileExchangeRateProvider; Reloading exchange rates from file currency.xml
+INFO  - 2013-10-15 15:58:31.357; org.apache.solr.schema.FileExchangeRateProvider; Reloading exchange rates from file currency.xml
+INFO  - 2013-10-15 15:58:31.378; org.apache.solr.schema.FileExchangeRateProvider; Reloading exchange rates from file currency.xml
+INFO  - 2013-10-15 15:58:31.384; org.apache.solr.schema.FileExchangeRateProvider; Reloading exchange rates from file currency.xml
+INFO  - 2013-10-15 15:58:31.389; org.apache.solr.core.SolrCore; solr.NRTCachingDirectoryFactory
+INFO  - 2013-10-15 15:58:31.396; org.apache.solr.core.SolrCore; solr.NRTCachingDirectoryFactory
+INFO  - 2013-10-15 15:58:31.410; org.apache.solr.core.SolrCore; solr.NRTCachingDirectoryFactory
+INFO  - 2013-10-15 15:58:31.411; org.apache.solr.core.SolrCore; [geosud] Opening new SolrCore at D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\geosud\, dataDir=D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\geosud\data\
+INFO  - 2013-10-15 15:58:31.411; org.apache.solr.core.SolrCore; [kalideos] Opening new SolrCore at D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\kalideos\, dataDir=D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\kalideos\data\
+INFO  - 2013-10-15 15:58:31.413; org.apache.solr.core.SolrCore; [metacatalogue] Opening new SolrCore at D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\metacatalogue\, dataDir=D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\metacatalogue\data\
+INFO  - 2013-10-15 15:58:31.417; org.apache.solr.core.JmxMonitoredMap; No JMX servers found, not exposing Solr information with JMX.
+INFO  - 2013-10-15 15:58:31.417; org.apache.solr.core.JmxMonitoredMap; No JMX servers found, not exposing Solr information with JMX.
+INFO  - 2013-10-15 15:58:31.420; org.apache.solr.core.JmxMonitoredMap; No JMX servers found, not exposing Solr information with JMX.
+INFO  - 2013-10-15 15:58:31.435; org.apache.solr.core.SolrCore; [metacatalogue] Added SolrEventListener for newSearcher: org.apache.solr.core.QuerySenderListener{queries=[]}
+INFO  - 2013-10-15 15:58:31.435; org.apache.solr.core.SolrCore; [geosud] Added SolrEventListener for newSearcher: org.apache.solr.core.QuerySenderListener{queries=[]}
+INFO  - 2013-10-15 15:58:31.435; org.apache.solr.core.SolrCore; [kalideos] Added SolrEventListener for newSearcher: org.apache.solr.core.QuerySenderListener{queries=[]}
+INFO  - 2013-10-15 15:58:31.436; org.apache.solr.core.SolrCore; [geosud] Added SolrEventListener for firstSearcher: org.apache.solr.core.QuerySenderListener{queries=[{q=static firstSearcher warming in solrconfig.xml}]}
+INFO  - 2013-10-15 15:58:31.436; org.apache.solr.core.SolrCore; [metacatalogue] Added SolrEventListener for firstSearcher: org.apache.solr.core.QuerySenderListener{queries=[{q=static firstSearcher warming in solrconfig.xml}]}
+INFO  - 2013-10-15 15:58:31.436; org.apache.solr.core.SolrCore; [kalideos] Added SolrEventListener for firstSearcher: org.apache.solr.core.QuerySenderListener{queries=[{q=static firstSearcher warming in solrconfig.xml}]}
+INFO  - 2013-10-15 15:58:31.457; org.apache.solr.core.CachingDirectoryFactory; return new directory for D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\metacatalogue\data
+INFO  - 2013-10-15 15:58:31.457; org.apache.solr.core.CachingDirectoryFactory; return new directory for D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\kalideos\data
+INFO  - 2013-10-15 15:58:31.457; org.apache.solr.core.CachingDirectoryFactory; return new directory for D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\geosud\data
+INFO  - 2013-10-15 15:58:31.458; org.apache.solr.core.SolrCore; New index directory detected: old=null new=D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\kalideos\data\index/
+INFO  - 2013-10-15 15:58:31.457; org.apache.solr.core.SolrCore; New index directory detected: old=null new=D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\metacatalogue\data\index/
+INFO  - 2013-10-15 15:58:31.458; org.apache.solr.core.SolrCore; New index directory detected: old=null new=D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\geosud\data\index/
+WARN  - 2013-10-15 15:58:31.461; org.apache.solr.core.SolrCore; [kalideos] Solr index directory 'D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\kalideos\data\index' doesn't exist. Creating new index...
+WARN  - 2013-10-15 15:58:31.462; org.apache.solr.core.SolrCore; [metacatalogue] Solr index directory 'D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\metacatalogue\data\index' doesn't exist. Creating new index...
+WARN  - 2013-10-15 15:58:31.461; org.apache.solr.core.SolrCore; [geosud] Solr index directory 'D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\geosud\data\index' doesn't exist. Creating new index...
+INFO  - 2013-10-15 15:58:31.470; org.apache.solr.core.CachingDirectoryFactory; return new directory for D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\metacatalogue\data\index
+INFO  - 2013-10-15 15:58:31.470; org.apache.solr.core.CachingDirectoryFactory; return new directory for D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\geosud\data\index
+INFO  - 2013-10-15 15:58:31.470; org.apache.solr.core.CachingDirectoryFactory; return new directory for D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\kalideos\data\index
+INFO  - 2013-10-15 15:58:31.584; org.apache.solr.core.SolrDeletionPolicy; SolrDeletionPolicy.onCommit: commits: num=1
+	commit{dir=NRTCachingDirectory(org.apache.lucene.store.SimpleFSDirectory@D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\kalideos\data\index lockFactory=org.apache.lucene.store.NativeFSLockFactory@463e88; maxCacheMB=48.0 maxMergeSizeMB=4.0),segFN=segments_1,generation=1}
+INFO  - 2013-10-15 15:58:31.586; org.apache.solr.core.SolrDeletionPolicy; newest commit generation = 1
+INFO  - 2013-10-15 15:58:31.594; org.apache.solr.core.SolrDeletionPolicy; SolrDeletionPolicy.onCommit: commits: num=1
+	commit{dir=NRTCachingDirectory(org.apache.lucene.store.SimpleFSDirectory@D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\metacatalogue\data\index lockFactory=org.apache.lucene.store.NativeFSLockFactory@1b36031; maxCacheMB=48.0 maxMergeSizeMB=4.0),segFN=segments_1,generation=1}
+INFO  - 2013-10-15 15:58:31.595; org.apache.solr.core.SolrCore; created json: solr.JSONResponseWriter
+INFO  - 2013-10-15 15:58:31.595; org.apache.solr.core.SolrDeletionPolicy; SolrDeletionPolicy.onCommit: commits: num=1
+	commit{dir=NRTCachingDirectory(org.apache.lucene.store.SimpleFSDirectory@D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\geosud\data\index lockFactory=org.apache.lucene.store.NativeFSLockFactory@1706f62; maxCacheMB=48.0 maxMergeSizeMB=4.0),segFN=segments_1,generation=1}
+INFO  - 2013-10-15 15:58:31.596; org.apache.solr.core.SolrCore; adding lazy queryResponseWriter: solr.VelocityResponseWriter
+INFO  - 2013-10-15 15:58:31.596; org.apache.solr.core.SolrDeletionPolicy; newest commit generation = 1
+INFO  - 2013-10-15 15:58:31.598; org.apache.solr.core.SolrCore; created velocity: solr.VelocityResponseWriter
+INFO  - 2013-10-15 15:58:31.600; org.apache.solr.core.SolrCore; created json: solr.JSONResponseWriter
+INFO  - 2013-10-15 15:58:31.600; org.apache.solr.core.SolrCore; adding lazy queryResponseWriter: solr.VelocityResponseWriter
+INFO  - 2013-10-15 15:58:31.601; org.apache.solr.core.SolrCore; created velocity: solr.VelocityResponseWriter
+INFO  - 2013-10-15 15:58:31.597; org.apache.solr.core.SolrDeletionPolicy; newest commit generation = 1
+INFO  - 2013-10-15 15:58:31.604; org.apache.solr.core.SolrCore; created json: solr.JSONResponseWriter
+INFO  - 2013-10-15 15:58:31.605; org.apache.solr.core.SolrCore; adding lazy queryResponseWriter: solr.VelocityResponseWriter
+INFO  - 2013-10-15 15:58:31.605; org.apache.solr.core.SolrCore; created velocity: solr.VelocityResponseWriter
+INFO  - 2013-10-15 15:58:31.622; org.apache.solr.core.SolrCore; created xslt: solr.XSLTResponseWriter
+INFO  - 2013-10-15 15:58:31.622; org.apache.solr.core.SolrCore; created xslt: solr.XSLTResponseWriter
+INFO  - 2013-10-15 15:58:31.622; org.apache.solr.response.XSLTResponseWriter; xsltCacheLifetimeSeconds=5
+INFO  - 2013-10-15 15:58:31.623; org.apache.solr.response.XSLTResponseWriter; xsltCacheLifetimeSeconds=5
+INFO  - 2013-10-15 15:58:31.627; org.apache.solr.core.SolrCore; created xslt: solr.XSLTResponseWriter
+INFO  - 2013-10-15 15:58:31.627; org.apache.solr.response.XSLTResponseWriter; xsltCacheLifetimeSeconds=5
+INFO  - 2013-10-15 15:58:31.741; org.apache.solr.core.SolrCore; no updateRequestProcessorChain defined as default, creating implicit default
+INFO  - 2013-10-15 15:58:31.741; org.apache.solr.core.SolrCore; no updateRequestProcessorChain defined as default, creating implicit default
+INFO  - 2013-10-15 15:58:31.743; org.apache.solr.core.SolrCore; no updateRequestProcessorChain defined as default, creating implicit default
+INFO  - 2013-10-15 15:58:31.754; org.apache.solr.core.RequestHandlers; created /select: solr.SearchHandler
+INFO  - 2013-10-15 15:58:31.755; org.apache.solr.core.RequestHandlers; created /query: solr.SearchHandler
+INFO  - 2013-10-15 15:58:31.755; org.apache.solr.core.RequestHandlers; created /select: solr.SearchHandler
+INFO  - 2013-10-15 15:58:31.756; org.apache.solr.core.RequestHandlers; created /query: solr.SearchHandler
+INFO  - 2013-10-15 15:58:31.757; org.apache.solr.core.RequestHandlers; created /select: solr.SearchHandler
+INFO  - 2013-10-15 15:58:31.757; org.apache.solr.core.RequestHandlers; created /query: solr.SearchHandler
+INFO  - 2013-10-15 15:58:31.760; org.apache.solr.core.RequestHandlers; created /get: solr.RealTimeGetHandler
+INFO  - 2013-10-15 15:58:31.761; org.apache.solr.core.RequestHandlers; created /browse: solr.SearchHandler
+INFO  - 2013-10-15 15:58:31.760; org.apache.solr.core.RequestHandlers; created /get: solr.RealTimeGetHandler
+INFO  - 2013-10-15 15:58:31.761; org.apache.solr.core.RequestHandlers; created /browse: solr.SearchHandler
+INFO  - 2013-10-15 15:58:31.761; org.apache.solr.core.RequestHandlers; created /get: solr.RealTimeGetHandler
+INFO  - 2013-10-15 15:58:31.762; org.apache.solr.core.RequestHandlers; created /browse: solr.SearchHandler
+INFO  - 2013-10-15 15:58:31.766; org.apache.solr.core.RequestHandlers; created /update: solr.UpdateRequestHandler
+INFO  - 2013-10-15 15:58:31.766; org.apache.solr.core.RequestHandlers; created /update: solr.UpdateRequestHandler
+INFO  - 2013-10-15 15:58:31.766; org.apache.solr.core.RequestHandlers; created /update: solr.UpdateRequestHandler
+INFO  - 2013-10-15 15:58:31.769; org.apache.solr.core.RequestHandlers; created /update/json: solr.JsonUpdateRequestHandler
+INFO  - 2013-10-15 15:58:31.771; org.apache.solr.core.RequestHandlers; created /update/json: solr.JsonUpdateRequestHandler
+INFO  - 2013-10-15 15:58:31.775; org.apache.solr.core.RequestHandlers; created /update/csv: solr.CSVRequestHandler
+INFO  - 2013-10-15 15:58:31.775; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.extraction.ExtractingRequestHandler
+INFO  - 2013-10-15 15:58:31.775; org.apache.solr.core.RequestHandlers; created /update/csv: solr.CSVRequestHandler
+INFO  - 2013-10-15 15:58:31.777; org.apache.solr.core.RequestHandlers; created /update/extract: solr.extraction.ExtractingRequestHandler
+INFO  - 2013-10-15 15:58:31.775; org.apache.solr.core.RequestHandlers; created /update/json: solr.JsonUpdateRequestHandler
+INFO  - 2013-10-15 15:58:31.778; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.FieldAnalysisRequestHandler
+INFO  - 2013-10-15 15:58:31.777; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.extraction.ExtractingRequestHandler
+INFO  - 2013-10-15 15:58:31.779; org.apache.solr.core.RequestHandlers; created /update/extract: solr.extraction.ExtractingRequestHandler
+INFO  - 2013-10-15 15:58:31.778; org.apache.solr.core.RequestHandlers; created /analysis/field: solr.FieldAnalysisRequestHandler
+INFO  - 2013-10-15 15:58:31.778; org.apache.solr.core.RequestHandlers; created /update/csv: solr.CSVRequestHandler
+INFO  - 2013-10-15 15:58:31.780; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.DocumentAnalysisRequestHandler
+INFO  - 2013-10-15 15:58:31.779; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.FieldAnalysisRequestHandler
+INFO  - 2013-10-15 15:58:31.786; org.apache.solr.core.RequestHandlers; created /analysis/document: solr.DocumentAnalysisRequestHandler
+INFO  - 2013-10-15 15:58:31.780; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.extraction.ExtractingRequestHandler
+INFO  - 2013-10-15 15:58:31.789; org.apache.solr.core.RequestHandlers; created /admin/: solr.admin.AdminHandlers
+INFO  - 2013-10-15 15:58:31.786; org.apache.solr.core.RequestHandlers; created /analysis/field: solr.FieldAnalysisRequestHandler
+INFO  - 2013-10-15 15:58:31.796; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.DocumentAnalysisRequestHandler
+INFO  - 2013-10-15 15:58:31.797; org.apache.solr.core.RequestHandlers; created /analysis/document: solr.DocumentAnalysisRequestHandler
+INFO  - 2013-10-15 15:58:31.796; org.apache.solr.core.RequestHandlers; created /update/extract: solr.extraction.ExtractingRequestHandler
+INFO  - 2013-10-15 15:58:31.814; org.apache.solr.core.RequestHandlers; created /admin/: solr.admin.AdminHandlers
+INFO  - 2013-10-15 15:58:31.798; org.apache.solr.core.RequestHandlers; created /admin/ping: solr.PingRequestHandler
+INFO  - 2013-10-15 15:58:31.815; org.apache.solr.core.RequestHandlers; created /admin/ping: solr.PingRequestHandler
+INFO  - 2013-10-15 15:58:31.814; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.FieldAnalysisRequestHandler
+INFO  - 2013-10-15 15:58:31.817; org.apache.solr.core.RequestHandlers; created /analysis/field: solr.FieldAnalysisRequestHandler
+INFO  - 2013-10-15 15:58:31.818; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.DocumentAnalysisRequestHandler
+INFO  - 2013-10-15 15:58:31.817; org.apache.solr.core.RequestHandlers; created /debug/dump: solr.DumpRequestHandler
+INFO  - 2013-10-15 15:58:31.824; org.apache.solr.core.RequestHandlers; created /analysis/document: solr.DocumentAnalysisRequestHandler
+INFO  - 2013-10-15 15:58:31.819; org.apache.solr.core.RequestHandlers; created /debug/dump: solr.DumpRequestHandler
+INFO  - 2013-10-15 15:58:31.834; org.apache.solr.core.RequestHandlers; created /replication: solr.ReplicationHandler
+INFO  - 2013-10-15 15:58:31.840; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.SearchHandler
+INFO  - 2013-10-15 15:58:31.825; org.apache.solr.core.RequestHandlers; created /admin/: solr.admin.AdminHandlers
+INFO  - 2013-10-15 15:58:31.841; org.apache.solr.core.RequestHandlers; created /spell: solr.SearchHandler
+INFO  - 2013-10-15 15:58:31.840; org.apache.solr.core.RequestHandlers; created /replication: solr.ReplicationHandler
+INFO  - 2013-10-15 15:58:31.849; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.SearchHandler
+INFO  - 2013-10-15 15:58:31.841; org.apache.solr.core.RequestHandlers; created /admin/ping: solr.PingRequestHandler
+INFO  - 2013-10-15 15:58:31.850; org.apache.solr.core.RequestHandlers; created /tvrh: solr.SearchHandler
+INFO  - 2013-10-15 15:58:31.850; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.SearchHandler
+INFO  - 2013-10-15 15:58:31.859; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: org.apache.solr.handler.js.JavaScriptRequestHandler
+INFO  - 2013-10-15 15:58:31.851; org.apache.solr.core.RequestHandlers; created /debug/dump: solr.DumpRequestHandler
+INFO  - 2013-10-15 15:58:31.860; org.apache.solr.core.RequestHandlers; created /js: org.apache.solr.handler.js.JavaScriptRequestHandler
+INFO  - 2013-10-15 15:58:31.860; org.apache.solr.core.RequestHandlers; created /spell: solr.SearchHandler
+INFO  - 2013-10-15 15:58:31.875; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.SearchHandler
+INFO  - 2013-10-15 15:58:31.876; org.apache.solr.core.RequestHandlers; created /tvrh: solr.SearchHandler
+INFO  - 2013-10-15 15:58:31.876; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: org.apache.solr.handler.js.JavaScriptRequestHandler
+INFO  - 2013-10-15 15:58:31.875; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.SearchHandler
+INFO  - 2013-10-15 15:58:31.861; org.apache.solr.core.RequestHandlers; created /replication: solr.ReplicationHandler
+INFO  - 2013-10-15 15:58:31.885; org.apache.solr.core.RequestHandlers; created /terms: solr.SearchHandler
+INFO  - 2013-10-15 15:58:31.885; org.apache.solr.core.RequestHandlers; created /js: org.apache.solr.handler.js.JavaScriptRequestHandler
+INFO  - 2013-10-15 15:58:31.886; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.SearchHandler
+INFO  - 2013-10-15 15:58:31.885; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.SearchHandler
+INFO  - 2013-10-15 15:58:31.909; org.apache.solr.core.RequestHandlers; created /spell: solr.SearchHandler
+INFO  - 2013-10-15 15:58:31.910; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.SearchHandler
+INFO  - 2013-10-15 15:58:31.895; org.apache.solr.core.RequestHandlers; created /elevate: solr.SearchHandler
+INFO  - 2013-10-15 15:58:31.894; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.SearchHandler
+INFO  - 2013-10-15 15:58:31.911; org.apache.solr.core.RequestHandlers; created /terms: solr.SearchHandler
+INFO  - 2013-10-15 15:58:31.911; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.SearchHandler
+INFO  - 2013-10-15 15:58:31.912; org.apache.solr.core.RequestHandlers; created /elevate: solr.SearchHandler
+INFO  - 2013-10-15 15:58:31.910; org.apache.solr.core.RequestHandlers; created /tvrh: solr.SearchHandler
+INFO  - 2013-10-15 15:58:31.920; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: org.apache.solr.handler.js.JavaScriptRequestHandler
+INFO  - 2013-10-15 15:58:31.921; org.apache.solr.core.RequestHandlers; created /js: org.apache.solr.handler.js.JavaScriptRequestHandler
+INFO  - 2013-10-15 15:58:31.921; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.SearchHandler
+INFO  - 2013-10-15 15:58:31.936; org.apache.solr.core.RequestHandlers; created /terms: solr.SearchHandler
+INFO  - 2013-10-15 15:58:31.936; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.SearchHandler
+INFO  - 2013-10-15 15:58:31.936; org.apache.solr.core.RequestHandlers; created /elevate: solr.SearchHandler
+INFO  - 2013-10-15 15:58:31.939; org.apache.solr.handler.loader.XMLLoader; xsltCacheLifetimeSeconds=60
+INFO  - 2013-10-15 15:58:31.939; org.apache.solr.handler.loader.XMLLoader; xsltCacheLifetimeSeconds=60
+INFO  - 2013-10-15 15:58:31.940; org.apache.solr.handler.loader.XMLLoader; xsltCacheLifetimeSeconds=60
+INFO  - 2013-10-15 15:58:31.944; org.apache.solr.handler.loader.XMLLoader; xsltCacheLifetimeSeconds=60
+INFO  - 2013-10-15 15:58:31.946; org.apache.solr.handler.loader.XMLLoader; xsltCacheLifetimeSeconds=60
+INFO  - 2013-10-15 15:58:31.946; org.apache.solr.handler.loader.XMLLoader; xsltCacheLifetimeSeconds=60
+INFO  - 2013-10-15 15:58:31.948; org.apache.solr.handler.loader.XMLLoader; xsltCacheLifetimeSeconds=60
+INFO  - 2013-10-15 15:58:31.943; org.apache.solr.handler.loader.XMLLoader; xsltCacheLifetimeSeconds=60
+INFO  - 2013-10-15 15:58:31.964; org.apache.solr.handler.loader.XMLLoader; xsltCacheLifetimeSeconds=60
+INFO  - 2013-10-15 15:58:31.981; org.apache.solr.update.CommitTracker; Hard AutoCommit: if uncommited for 15000ms; 
+INFO  - 2013-10-15 15:58:31.981; org.apache.solr.update.CommitTracker; Hard AutoCommit: if uncommited for 15000ms; 
+INFO  - 2013-10-15 15:58:31.981; org.apache.solr.update.CommitTracker; Hard AutoCommit: if uncommited for 15000ms; 
+INFO  - 2013-10-15 15:58:31.982; org.apache.solr.update.CommitTracker; Soft AutoCommit: disabled
+INFO  - 2013-10-15 15:58:31.982; org.apache.solr.update.CommitTracker; Soft AutoCommit: disabled
+INFO  - 2013-10-15 15:58:31.982; org.apache.solr.update.CommitTracker; Soft AutoCommit: disabled
+INFO  - 2013-10-15 15:58:31.987; org.apache.solr.core.SolrDeletionPolicy; SolrDeletionPolicy.onInit: commits: num=1
+	commit{dir=NRTCachingDirectory(org.apache.lucene.store.SimpleFSDirectory@D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\geosud\data\index lockFactory=org.apache.lucene.store.NativeFSLockFactory@1706f62; maxCacheMB=48.0 maxMergeSizeMB=4.0),segFN=segments_1,generation=1}
+INFO  - 2013-10-15 15:58:31.988; org.apache.solr.core.SolrDeletionPolicy; newest commit generation = 1
+INFO  - 2013-10-15 15:58:31.989; org.apache.solr.core.SolrDeletionPolicy; SolrDeletionPolicy.onInit: commits: num=1
+	commit{dir=NRTCachingDirectory(org.apache.lucene.store.SimpleFSDirectory@D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\metacatalogue\data\index lockFactory=org.apache.lucene.store.NativeFSLockFactory@1b36031; maxCacheMB=48.0 maxMergeSizeMB=4.0),segFN=segments_1,generation=1}
+INFO  - 2013-10-15 15:58:31.991; org.apache.solr.core.SolrDeletionPolicy; newest commit generation = 1
+INFO  - 2013-10-15 15:58:31.991; org.apache.solr.core.SolrDeletionPolicy; SolrDeletionPolicy.onInit: commits: num=1
+	commit{dir=NRTCachingDirectory(org.apache.lucene.store.SimpleFSDirectory@D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\kalideos\data\index lockFactory=org.apache.lucene.store.NativeFSLockFactory@463e88; maxCacheMB=48.0 maxMergeSizeMB=4.0),segFN=segments_1,generation=1}
+INFO  - 2013-10-15 15:58:31.994; org.apache.solr.core.SolrDeletionPolicy; newest commit generation = 1
+INFO  - 2013-10-15 15:58:31.997; org.apache.solr.search.SolrIndexSearcher; Opening Searcher@104bceb main
+INFO  - 2013-10-15 15:58:31.997; org.apache.solr.search.SolrIndexSearcher; Opening Searcher@1f8fa7b main
+INFO  - 2013-10-15 15:58:32.014; org.apache.solr.handler.component.SpellCheckComponent; Initializing spell checkers
+INFO  - 2013-10-15 15:58:32.006; org.apache.solr.search.SolrIndexSearcher; Opening Searcher@4f04e1 main
+INFO  - 2013-10-15 15:58:32.018; org.apache.solr.handler.component.SpellCheckComponent; Initializing spell checkers
+INFO  - 2013-10-15 15:58:32.015; org.apache.solr.handler.component.SpellCheckComponent; Initializing spell checkers
+INFO  - 2013-10-15 15:58:32.026; org.apache.solr.spelling.DirectSolrSpellChecker; init: {name=default,field=text,classname=solr.DirectSolrSpellChecker,distanceMeasure=internal,accuracy=0.5,maxEdits=2,minPrefix=1,maxInspections=5,minQueryLength=4,maxQueryFrequency=0.01}
+INFO  - 2013-10-15 15:58:32.028; org.apache.solr.spelling.DirectSolrSpellChecker; init: {name=default,field=text,classname=solr.DirectSolrSpellChecker,distanceMeasure=internal,accuracy=0.5,maxEdits=2,minPrefix=1,maxInspections=5,minQueryLength=4,maxQueryFrequency=0.01}
+INFO  - 2013-10-15 15:58:32.029; org.apache.solr.spelling.DirectSolrSpellChecker; init: {name=default,field=text,classname=solr.DirectSolrSpellChecker,distanceMeasure=internal,accuracy=0.5,maxEdits=2,minPrefix=1,maxInspections=5,minQueryLength=4,maxQueryFrequency=0.01}
+INFO  - 2013-10-15 15:58:32.039; org.apache.solr.handler.component.SpellCheckComponent; No queryConverter defined, using default converter
+INFO  - 2013-10-15 15:58:32.039; org.apache.solr.handler.component.SpellCheckComponent; No queryConverter defined, using default converter
+INFO  - 2013-10-15 15:58:32.039; org.apache.solr.handler.component.SpellCheckComponent; No queryConverter defined, using default converter
+INFO  - 2013-10-15 15:58:32.043; org.apache.solr.handler.component.QueryElevationComponent; Loading QueryElevation from: D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\geosud\conf\elevate.xml
+INFO  - 2013-10-15 15:58:32.043; org.apache.solr.handler.component.QueryElevationComponent; Loading QueryElevation from: D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\kalideos\conf\elevate.xml
+INFO  - 2013-10-15 15:58:32.043; org.apache.solr.handler.component.QueryElevationComponent; Loading QueryElevation from: D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\metacatalogue\conf\elevate.xml
+INFO  - 2013-10-15 15:58:32.101; org.apache.solr.handler.ReplicationHandler; Commits will be reserved for  10000
+INFO  - 2013-10-15 15:58:32.101; org.apache.solr.handler.ReplicationHandler; Commits will be reserved for  10000
+INFO  - 2013-10-15 15:58:32.102; org.apache.solr.core.CoreContainer; registering core: kalideos
+INFO  - 2013-10-15 15:58:32.103; org.apache.solr.core.CoreContainer; Creating SolrCore 'spirit' using instanceDir: D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\spirit
+INFO  - 2013-10-15 15:58:32.101; org.apache.solr.handler.ReplicationHandler; Commits will be reserved for  10000
+INFO  - 2013-10-15 15:58:32.103; org.apache.solr.core.SolrResourceLoader; new SolrResourceLoader for directory: 'D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\spirit\'
+INFO  - 2013-10-15 15:58:32.103; org.apache.solr.core.CoreContainer; registering core: geosud
+INFO  - 2013-10-15 15:58:32.102; org.apache.solr.core.QuerySenderListener; QuerySenderListener sending requests to Searcher@104bceb main{StandardDirectoryReader(segments_1:1:nrt)}
+INFO  - 2013-10-15 15:58:32.102; org.apache.solr.core.QuerySenderListener; QuerySenderListener sending requests to Searcher@4f04e1 main{StandardDirectoryReader(segments_1:1:nrt)}
+INFO  - 2013-10-15 15:58:32.104; org.apache.solr.core.CoreContainer; registering core: metacatalogue
+INFO  - 2013-10-15 15:58:32.104; org.apache.solr.core.QuerySenderListener; QuerySenderListener sending requests to Searcher@1f8fa7b main{StandardDirectoryReader(segments_1:1:nrt)}
+INFO  - 2013-10-15 15:58:32.160; org.apache.solr.core.SolrCore; [metacatalogue] webapp=null path=null params={event=firstSearcher&q=static+firstSearcher+warming+in+solrconfig.xml&distrib=false} hits=0 status=0 QTime=40 
+INFO  - 2013-10-15 15:58:32.161; org.apache.solr.core.SolrCore; [kalideos] webapp=null path=null params={event=firstSearcher&q=static+firstSearcher+warming+in+solrconfig.xml&distrib=false} hits=0 status=0 QTime=46 
+INFO  - 2013-10-15 15:58:32.162; org.apache.solr.core.QuerySenderListener; QuerySenderListener done.
+INFO  - 2013-10-15 15:58:32.162; org.apache.solr.handler.component.SpellCheckComponent$SpellCheckerListener; Loading spell index for spellchecker: default
+INFO  - 2013-10-15 15:58:32.163; org.apache.solr.handler.component.SpellCheckComponent$SpellCheckerListener; Loading spell index for spellchecker: wordbreak
+INFO  - 2013-10-15 15:58:32.163; org.apache.solr.core.SolrCore; [kalideos] Registered new searcher Searcher@4f04e1 main{StandardDirectoryReader(segments_1:1:nrt)}
+INFO  - 2013-10-15 15:58:32.160; org.apache.solr.core.SolrCore; [geosud] webapp=null path=null params={event=firstSearcher&q=static+firstSearcher+warming+in+solrconfig.xml&distrib=false} hits=0 status=0 QTime=53 
+INFO  - 2013-10-15 15:58:32.164; org.apache.solr.core.QuerySenderListener; QuerySenderListener done.
+INFO  - 2013-10-15 15:58:32.165; org.apache.solr.handler.component.SpellCheckComponent$SpellCheckerListener; Loading spell index for spellchecker: default
+INFO  - 2013-10-15 15:58:32.165; org.apache.solr.handler.component.SpellCheckComponent$SpellCheckerListener; Loading spell index for spellchecker: wordbreak
+INFO  - 2013-10-15 15:58:32.165; org.apache.solr.core.SolrCore; [geosud] Registered new searcher Searcher@104bceb main{StandardDirectoryReader(segments_1:1:nrt)}
+INFO  - 2013-10-15 15:58:32.162; org.apache.solr.core.QuerySenderListener; QuerySenderListener done.
+INFO  - 2013-10-15 15:58:32.166; org.apache.solr.handler.component.SpellCheckComponent$SpellCheckerListener; Loading spell index for spellchecker: default
+INFO  - 2013-10-15 15:58:32.167; org.apache.solr.handler.component.SpellCheckComponent$SpellCheckerListener; Loading spell index for spellchecker: wordbreak
+INFO  - 2013-10-15 15:58:32.167; org.apache.solr.core.SolrCore; [metacatalogue] Registered new searcher Searcher@1f8fa7b main{StandardDirectoryReader(segments_1:1:nrt)}
+INFO  - 2013-10-15 15:58:32.196; org.apache.solr.update.SolrIndexConfig; IndexWriter infoStream solr logging is enabled
+INFO  - 2013-10-15 15:58:32.200; org.apache.solr.core.SolrConfig; Using Lucene MatchVersion: LUCENE_45
+INFO  - 2013-10-15 15:58:32.279; org.apache.solr.core.SolrConfig; Loaded SolrConfig: solrconfig.xml
+INFO  - 2013-10-15 15:58:32.280; org.apache.solr.schema.IndexSchema; Reading Solr Schema from schema.xml
+INFO  - 2013-10-15 15:58:32.288; org.apache.solr.schema.IndexSchema; [spirit] Schema name=example
+INFO  - 2013-10-15 15:58:32.567; org.apache.solr.schema.IndexSchema; unique key field: _uuid
+INFO  - 2013-10-15 15:58:32.584; org.apache.solr.schema.FileExchangeRateProvider; Reloading exchange rates from file currency.xml
+INFO  - 2013-10-15 15:58:32.588; org.apache.solr.schema.FileExchangeRateProvider; Reloading exchange rates from file currency.xml
+INFO  - 2013-10-15 15:58:32.597; org.apache.solr.core.SolrCore; solr.NRTCachingDirectoryFactory
+INFO  - 2013-10-15 15:58:32.598; org.apache.solr.core.SolrCore; [spirit] Opening new SolrCore at D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\spirit\, dataDir=D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\spirit\data\
+INFO  - 2013-10-15 15:58:32.599; org.apache.solr.core.JmxMonitoredMap; No JMX servers found, not exposing Solr information with JMX.
+INFO  - 2013-10-15 15:58:32.600; org.apache.solr.core.SolrCore; [spirit] Added SolrEventListener for newSearcher: org.apache.solr.core.QuerySenderListener{queries=[]}
+INFO  - 2013-10-15 15:58:32.601; org.apache.solr.core.SolrCore; [spirit] Added SolrEventListener for firstSearcher: org.apache.solr.core.QuerySenderListener{queries=[{q=static firstSearcher warming in solrconfig.xml}]}
+INFO  - 2013-10-15 15:58:32.602; org.apache.solr.core.CachingDirectoryFactory; return new directory for D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\spirit\data
+INFO  - 2013-10-15 15:58:32.603; org.apache.solr.core.SolrCore; New index directory detected: old=null new=D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\spirit\data\index/
+WARN  - 2013-10-15 15:58:32.603; org.apache.solr.core.SolrCore; [spirit] Solr index directory 'D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\spirit\data\index' doesn't exist. Creating new index...
+INFO  - 2013-10-15 15:58:32.604; org.apache.solr.core.CachingDirectoryFactory; return new directory for D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\spirit\data\index
+INFO  - 2013-10-15 15:58:32.667; org.apache.solr.core.SolrDeletionPolicy; SolrDeletionPolicy.onCommit: commits: num=1
+	commit{dir=NRTCachingDirectory(org.apache.lucene.store.SimpleFSDirectory@D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\spirit\data\index lockFactory=org.apache.lucene.store.NativeFSLockFactory@1972a5b; maxCacheMB=48.0 maxMergeSizeMB=4.0),segFN=segments_1,generation=1}
+INFO  - 2013-10-15 15:58:32.668; org.apache.solr.core.SolrDeletionPolicy; newest commit generation = 1
+INFO  - 2013-10-15 15:58:32.670; org.apache.solr.core.SolrCore; created json: solr.JSONResponseWriter
+INFO  - 2013-10-15 15:58:32.671; org.apache.solr.core.SolrCore; adding lazy queryResponseWriter: solr.VelocityResponseWriter
+INFO  - 2013-10-15 15:58:32.671; org.apache.solr.core.SolrCore; created velocity: solr.VelocityResponseWriter
+INFO  - 2013-10-15 15:58:32.671; org.apache.solr.core.SolrCore; created xslt: solr.XSLTResponseWriter
+INFO  - 2013-10-15 15:58:32.672; org.apache.solr.response.XSLTResponseWriter; xsltCacheLifetimeSeconds=5
+INFO  - 2013-10-15 15:58:32.673; org.apache.solr.core.SolrCore; no updateRequestProcessorChain defined as default, creating implicit default
+INFO  - 2013-10-15 15:58:32.673; org.apache.solr.core.RequestHandlers; created /select: solr.SearchHandler
+INFO  - 2013-10-15 15:58:32.674; org.apache.solr.core.RequestHandlers; created /query: solr.SearchHandler
+INFO  - 2013-10-15 15:58:32.674; org.apache.solr.core.RequestHandlers; created /get: solr.RealTimeGetHandler
+INFO  - 2013-10-15 15:58:32.674; org.apache.solr.core.RequestHandlers; created /browse: solr.SearchHandler
+INFO  - 2013-10-15 15:58:32.675; org.apache.solr.core.RequestHandlers; created /update: solr.UpdateRequestHandler
+INFO  - 2013-10-15 15:58:32.676; org.apache.solr.core.RequestHandlers; created /update/json: solr.JsonUpdateRequestHandler
+INFO  - 2013-10-15 15:58:32.676; org.apache.solr.core.RequestHandlers; created /update/csv: solr.CSVRequestHandler
+INFO  - 2013-10-15 15:58:32.677; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.extraction.ExtractingRequestHandler
+INFO  - 2013-10-15 15:58:32.677; org.apache.solr.core.RequestHandlers; created /update/extract: solr.extraction.ExtractingRequestHandler
+INFO  - 2013-10-15 15:58:32.677; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.FieldAnalysisRequestHandler
+INFO  - 2013-10-15 15:58:32.678; org.apache.solr.core.RequestHandlers; created /analysis/field: solr.FieldAnalysisRequestHandler
+INFO  - 2013-10-15 15:58:32.681; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.DocumentAnalysisRequestHandler
+INFO  - 2013-10-15 15:58:32.682; org.apache.solr.core.RequestHandlers; created /analysis/document: solr.DocumentAnalysisRequestHandler
+INFO  - 2013-10-15 15:58:32.682; org.apache.solr.core.RequestHandlers; created /admin/: solr.admin.AdminHandlers
+INFO  - 2013-10-15 15:58:32.683; org.apache.solr.core.RequestHandlers; created /admin/ping: solr.PingRequestHandler
+INFO  - 2013-10-15 15:58:32.692; org.apache.solr.core.RequestHandlers; created /debug/dump: solr.DumpRequestHandler
+INFO  - 2013-10-15 15:58:32.692; org.apache.solr.core.RequestHandlers; created /replication: solr.ReplicationHandler
+INFO  - 2013-10-15 15:58:32.693; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.SearchHandler
+INFO  - 2013-10-15 15:58:32.701; org.apache.solr.core.RequestHandlers; created /spell: solr.SearchHandler
+INFO  - 2013-10-15 15:58:32.702; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.SearchHandler
+INFO  - 2013-10-15 15:58:32.702; org.apache.solr.core.RequestHandlers; created /tvrh: solr.SearchHandler
+INFO  - 2013-10-15 15:58:32.702; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: org.apache.solr.handler.js.JavaScriptRequestHandler
+INFO  - 2013-10-15 15:58:32.703; org.apache.solr.core.RequestHandlers; created /js: org.apache.solr.handler.js.JavaScriptRequestHandler
+INFO  - 2013-10-15 15:58:32.703; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.SearchHandler
+INFO  - 2013-10-15 15:58:32.703; org.apache.solr.core.RequestHandlers; created /terms: solr.SearchHandler
+INFO  - 2013-10-15 15:58:32.703; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.SearchHandler
+INFO  - 2013-10-15 15:58:32.704; org.apache.solr.core.RequestHandlers; created /elevate: solr.SearchHandler
+INFO  - 2013-10-15 15:58:32.713; org.apache.solr.handler.loader.XMLLoader; xsltCacheLifetimeSeconds=60
+INFO  - 2013-10-15 15:58:32.714; org.apache.solr.handler.loader.XMLLoader; xsltCacheLifetimeSeconds=60
+INFO  - 2013-10-15 15:58:32.715; org.apache.solr.handler.loader.XMLLoader; xsltCacheLifetimeSeconds=60
+INFO  - 2013-10-15 15:58:32.719; org.apache.solr.update.CommitTracker; Hard AutoCommit: if uncommited for 15000ms; 
+INFO  - 2013-10-15 15:58:32.720; org.apache.solr.update.CommitTracker; Soft AutoCommit: disabled
+INFO  - 2013-10-15 15:58:32.723; org.apache.solr.core.SolrDeletionPolicy; SolrDeletionPolicy.onInit: commits: num=1
+	commit{dir=NRTCachingDirectory(org.apache.lucene.store.SimpleFSDirectory@D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\spirit\data\index lockFactory=org.apache.lucene.store.NativeFSLockFactory@1972a5b; maxCacheMB=48.0 maxMergeSizeMB=4.0),segFN=segments_1,generation=1}
+INFO  - 2013-10-15 15:58:32.724; org.apache.solr.core.SolrDeletionPolicy; newest commit generation = 1
+INFO  - 2013-10-15 15:58:32.724; org.apache.solr.search.SolrIndexSearcher; Opening Searcher@1b634b1 main
+INFO  - 2013-10-15 15:58:32.725; org.apache.solr.handler.component.SpellCheckComponent; Initializing spell checkers
+INFO  - 2013-10-15 15:58:32.725; org.apache.solr.spelling.DirectSolrSpellChecker; init: {name=default,field=text,classname=solr.DirectSolrSpellChecker,distanceMeasure=internal,accuracy=0.5,maxEdits=2,minPrefix=1,maxInspections=5,minQueryLength=4,maxQueryFrequency=0.01}
+INFO  - 2013-10-15 15:58:32.737; org.apache.solr.handler.component.SpellCheckComponent; No queryConverter defined, using default converter
+INFO  - 2013-10-15 15:58:32.738; org.apache.solr.handler.component.QueryElevationComponent; Loading QueryElevation from: D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\spirit\conf\elevate.xml
+INFO  - 2013-10-15 15:58:32.748; org.apache.solr.handler.ReplicationHandler; Commits will be reserved for  10000
+INFO  - 2013-10-15 15:58:32.749; org.apache.solr.core.QuerySenderListener; QuerySenderListener sending requests to Searcher@1b634b1 main{StandardDirectoryReader(segments_1:1:nrt)}
+INFO  - 2013-10-15 15:58:32.749; org.apache.solr.core.CoreContainer; registering core: spirit
+INFO  - 2013-10-15 15:58:32.751; org.apache.solr.core.SolrCore; [spirit] webapp=null path=null params={event=firstSearcher&q=static+firstSearcher+warming+in+solrconfig.xml&distrib=false} hits=0 status=0 QTime=1 
+INFO  - 2013-10-15 15:58:32.751; org.apache.solr.core.QuerySenderListener; QuerySenderListener done.
+INFO  - 2013-10-15 15:58:32.756; org.apache.solr.handler.component.SpellCheckComponent$SpellCheckerListener; Loading spell index for spellchecker: default
+INFO  - 2013-10-15 15:58:32.752; org.apache.solr.servlet.SolrDispatchFilter; user.dir=D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr
+INFO  - 2013-10-15 15:58:32.757; org.apache.solr.handler.component.SpellCheckComponent$SpellCheckerListener; Loading spell index for spellchecker: wordbreak
+INFO  - 2013-10-15 15:58:32.757; org.apache.solr.servlet.SolrDispatchFilter; SolrDispatchFilter.init() done
+INFO  - 2013-10-15 15:58:32.758; org.apache.solr.core.SolrCore; [spirit] Registered new searcher Searcher@1b634b1 main{StandardDirectoryReader(segments_1:1:nrt)}
+INFO  - 2013-10-15 15:58:32.818; org.eclipse.jetty.server.AbstractConnector; Started SocketConnector@0.0.0.0:8983
+INFO  - 2013-10-15 15:58:35.558; org.eclipse.jetty.server.Server; Graceful shutdown SocketConnector@0.0.0.0:8983
+INFO  - 2013-10-15 15:58:35.560; org.eclipse.jetty.server.Server; Graceful shutdown o.e.j.w.WebAppContext{/solr,file:/D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/Solr/solr-webapp/webapp/},D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr/webapps/solr.war
+INFO  - 2013-10-15 15:58:36.561; org.apache.solr.core.CoreContainer; Shutting down CoreContainer instance=18958867
+INFO  - 2013-10-15 15:58:36.562; org.apache.solr.core.SolrCore; [kalideos]  CLOSING SolrCore org.apache.solr.core.SolrCore@98bb1a
+INFO  - 2013-10-15 15:58:36.563; org.apache.solr.update.DirectUpdateHandler2; closing DirectUpdateHandler2{commits=0,autocommit maxTime=15000ms,autocommits=0,soft autocommits=0,optimizes=0,rollbacks=0,expungeDeletes=0,docsPending=0,adds=0,deletesById=0,deletesByQuery=0,errors=0,cumulative_adds=0,cumulative_deletesById=0,cumulative_deletesByQuery=0,cumulative_errors=0}
+INFO  - 2013-10-15 15:58:36.563; org.apache.solr.update.SolrCoreState; Closing SolrCoreState
+INFO  - 2013-10-15 15:58:36.563; org.apache.solr.update.DefaultSolrCoreState; SolrCoreState ref count has reached 0 - closing IndexWriter
+INFO  - 2013-10-15 15:58:36.564; org.apache.solr.update.DefaultSolrCoreState; closing IndexWriter with IndexWriterCloser
+INFO  - 2013-10-15 15:58:36.566; org.apache.solr.core.SolrCore; [kalideos] Closing main searcher on request.
+INFO  - 2013-10-15 15:58:36.566; org.apache.solr.core.CachingDirectoryFactory; Closing NRTCachingDirectoryFactory - 2 directories currently being tracked
+INFO  - 2013-10-15 15:58:36.567; org.apache.solr.core.CachingDirectoryFactory; looking to close D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\kalideos\data\index [CachedDir<<refCount=0;path=D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\kalideos\data\index;done=false>>]
+INFO  - 2013-10-15 15:58:36.583; org.apache.solr.core.CachingDirectoryFactory; Closing directory: D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\kalideos\data\index
+INFO  - 2013-10-15 15:58:36.583; org.apache.solr.core.CachingDirectoryFactory; looking to close D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\kalideos\data [CachedDir<<refCount=0;path=D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\kalideos\data;done=false>>]
+INFO  - 2013-10-15 15:58:36.584; org.apache.solr.core.CachingDirectoryFactory; Closing directory: D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\kalideos\data
+INFO  - 2013-10-15 15:58:36.584; org.apache.solr.core.SolrCore; [geosud]  CLOSING SolrCore org.apache.solr.core.SolrCore@fa9be4
+INFO  - 2013-10-15 15:58:36.585; org.apache.solr.update.DirectUpdateHandler2; closing DirectUpdateHandler2{commits=0,autocommit maxTime=15000ms,autocommits=0,soft autocommits=0,optimizes=0,rollbacks=0,expungeDeletes=0,docsPending=0,adds=0,deletesById=0,deletesByQuery=0,errors=0,cumulative_adds=0,cumulative_deletesById=0,cumulative_deletesByQuery=0,cumulative_errors=0}
+INFO  - 2013-10-15 15:58:36.586; org.apache.solr.update.SolrCoreState; Closing SolrCoreState
+INFO  - 2013-10-15 15:58:36.586; org.apache.solr.update.DefaultSolrCoreState; SolrCoreState ref count has reached 0 - closing IndexWriter
+INFO  - 2013-10-15 15:58:36.587; org.apache.solr.update.DefaultSolrCoreState; closing IndexWriter with IndexWriterCloser
+INFO  - 2013-10-15 15:58:36.589; org.apache.solr.core.SolrCore; [geosud] Closing main searcher on request.
+INFO  - 2013-10-15 15:58:36.590; org.apache.solr.core.CachingDirectoryFactory; Closing NRTCachingDirectoryFactory - 2 directories currently being tracked
+INFO  - 2013-10-15 15:58:36.590; org.apache.solr.core.CachingDirectoryFactory; looking to close D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\geosud\data\index [CachedDir<<refCount=0;path=D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\geosud\data\index;done=false>>]
+INFO  - 2013-10-15 15:58:36.591; org.apache.solr.core.CachingDirectoryFactory; Closing directory: D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\geosud\data\index
+INFO  - 2013-10-15 15:58:36.592; org.apache.solr.core.CachingDirectoryFactory; looking to close D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\geosud\data [CachedDir<<refCount=0;path=D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\geosud\data;done=false>>]
+INFO  - 2013-10-15 15:58:36.592; org.apache.solr.core.CachingDirectoryFactory; Closing directory: D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\geosud\data
+INFO  - 2013-10-15 15:58:36.593; org.apache.solr.core.SolrCore; [metacatalogue]  CLOSING SolrCore org.apache.solr.core.SolrCore@12a38da
+INFO  - 2013-10-15 15:58:36.593; org.apache.solr.update.DirectUpdateHandler2; closing DirectUpdateHandler2{commits=0,autocommit maxTime=15000ms,autocommits=0,soft autocommits=0,optimizes=0,rollbacks=0,expungeDeletes=0,docsPending=0,adds=0,deletesById=0,deletesByQuery=0,errors=0,cumulative_adds=0,cumulative_deletesById=0,cumulative_deletesByQuery=0,cumulative_errors=0}
+INFO  - 2013-10-15 15:58:36.594; org.apache.solr.update.SolrCoreState; Closing SolrCoreState
+INFO  - 2013-10-15 15:58:36.594; org.apache.solr.update.DefaultSolrCoreState; SolrCoreState ref count has reached 0 - closing IndexWriter
+INFO  - 2013-10-15 15:58:36.594; org.apache.solr.update.DefaultSolrCoreState; closing IndexWriter with IndexWriterCloser
+INFO  - 2013-10-15 15:58:36.597; org.apache.solr.core.SolrCore; [metacatalogue] Closing main searcher on request.
+INFO  - 2013-10-15 15:58:36.597; org.apache.solr.core.CachingDirectoryFactory; Closing NRTCachingDirectoryFactory - 2 directories currently being tracked
+INFO  - 2013-10-15 15:58:36.598; org.apache.solr.core.CachingDirectoryFactory; looking to close D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\metacatalogue\data\index [CachedDir<<refCount=0;path=D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\metacatalogue\data\index;done=false>>]
+INFO  - 2013-10-15 15:58:36.598; org.apache.solr.core.CachingDirectoryFactory; Closing directory: D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\metacatalogue\data\index
+INFO  - 2013-10-15 15:58:36.598; org.apache.solr.core.CachingDirectoryFactory; looking to close D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\metacatalogue\data [CachedDir<<refCount=0;path=D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\metacatalogue\data;done=false>>]
+INFO  - 2013-10-15 15:58:36.605; org.apache.solr.core.CachingDirectoryFactory; Closing directory: D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\metacatalogue\data
+INFO  - 2013-10-15 15:58:36.605; org.apache.solr.core.SolrCore; [spirit]  CLOSING SolrCore org.apache.solr.core.SolrCore@2c5157
+INFO  - 2013-10-15 15:58:36.606; org.apache.solr.update.DirectUpdateHandler2; closing DirectUpdateHandler2{commits=0,autocommit maxTime=15000ms,autocommits=0,soft autocommits=0,optimizes=0,rollbacks=0,expungeDeletes=0,docsPending=0,adds=0,deletesById=0,deletesByQuery=0,errors=0,cumulative_adds=0,cumulative_deletesById=0,cumulative_deletesByQuery=0,cumulative_errors=0}
+INFO  - 2013-10-15 15:58:36.615; org.apache.solr.update.SolrCoreState; Closing SolrCoreState
+INFO  - 2013-10-15 15:58:36.615; org.apache.solr.update.DefaultSolrCoreState; SolrCoreState ref count has reached 0 - closing IndexWriter
+INFO  - 2013-10-15 15:58:36.615; org.apache.solr.update.DefaultSolrCoreState; closing IndexWriter with IndexWriterCloser
+INFO  - 2013-10-15 15:58:36.617; org.apache.solr.core.SolrCore; [spirit] Closing main searcher on request.
+INFO  - 2013-10-15 15:58:36.617; org.apache.solr.core.CachingDirectoryFactory; Closing NRTCachingDirectoryFactory - 2 directories currently being tracked
+INFO  - 2013-10-15 15:58:36.625; org.apache.solr.core.CachingDirectoryFactory; looking to close D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\spirit\data [CachedDir<<refCount=0;path=D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\spirit\data;done=false>>]
+INFO  - 2013-10-15 15:58:36.625; org.apache.solr.core.CachingDirectoryFactory; Closing directory: D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\spirit\data
+INFO  - 2013-10-15 15:58:36.626; org.apache.solr.core.CachingDirectoryFactory; looking to close D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\spirit\data\index [CachedDir<<refCount=0;path=D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\spirit\data\index;done=false>>]
+INFO  - 2013-10-15 15:58:36.640; org.apache.solr.core.CachingDirectoryFactory; Closing directory: D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr\solr\spirit\data\index
+INFO  - 2013-10-15 15:58:36.642; org.eclipse.jetty.server.handler.ContextHandler; stopped o.e.j.w.WebAppContext{/solr,file:/D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/Solr/solr-webapp/webapp/},D:\CNES-ULISSE-2.0-GIT\extensions\metacatalogue\Solr/webapps/solr.war

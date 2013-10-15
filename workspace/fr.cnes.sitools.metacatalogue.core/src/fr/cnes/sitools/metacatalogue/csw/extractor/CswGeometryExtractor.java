@@ -41,6 +41,7 @@ import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.opengis.referencing.operation.MathTransform;
 import org.xml.sax.SAXException;
 
+import com.vividsolutions.jts.algorithm.CGAlgorithms;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.MultiPolygon;
@@ -68,6 +69,11 @@ public class CswGeometryExtractor {
 
     // extract the geometry from the XML
     Geometry geometry = extractGeometry(metadata, sFileGmlXSL);
+
+    if (!isCountryClockWise(geometry)) {
+      geometry = geometry.reverse();
+    }
+
     if (geometry != null) {
       WKTWriter wktWriter = new WKTWriter();
       String geo = wktWriter.write(geometry);
@@ -82,6 +88,17 @@ public class CswGeometryExtractor {
     }
     return fields;
 
+  }
+
+  /**
+   * Check if the geometry is counterClockWise
+   * 
+   * @param geometry
+   *          the Geometry
+   * @return true if the geometry is counterClockWise, false otherwise
+   */
+  private boolean isCountryClockWise(Geometry geometry) {
+    return CGAlgorithms.isCCW(geometry.getCoordinates());
   }
 
   /**

@@ -34,6 +34,7 @@ import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
 import fr.cnes.sitools.metacatalogue.model.HarvestStatus;
 import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
 import fr.cnes.sitools.model.HarvesterModel;
+import fr.cnes.sitools.server.ContextAttributes;
 import fr.cnes.sitools.server.HarvestersApplication;
 
 /**
@@ -70,7 +71,7 @@ public abstract class Harvester implements Runnable {
   public void run() {
     HarvestStatus status = null;
     try {
-      status = (HarvestStatus) context.getAttributes().get("STATUS");
+      status = (HarvestStatus) context.getAttributes().get(ContextAttributes.STATUS);
       status.setStartDate(new Date());
       Logger logger = initNewLogger(harvestConf, status.getStartDate());
       context.setLogger(logger);

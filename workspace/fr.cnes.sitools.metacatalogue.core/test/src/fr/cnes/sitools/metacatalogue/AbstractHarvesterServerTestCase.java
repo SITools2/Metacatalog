@@ -18,22 +18,13 @@
  ******************************************************************************/
 package fr.cnes.sitools.metacatalogue;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Logger;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.restlet.data.MediaType;
 import org.restlet.engine.Engine;
 
-import fr.cnes.sitools.metacatalogue.utils.FileCopyUtils;
-import fr.cnes.sitools.metacatalogue.utils.FileUtils;
-import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
-import fr.cnes.sitools.server.Consts;
 import fr.cnes.sitools.server.Starter;
 
 /**
@@ -44,43 +35,12 @@ import fr.cnes.sitools.server.Starter;
  * @author AKKA Technologies
  * @see org.restlet.test.RestletTestCase
  */
-public abstract class AbstractHarvesterServerTestCase {
-
-  /**
-   * Class logger
-   */
-  public static final Logger LOGGER = Logger.getLogger(AbstractHarvesterServerTestCase.class.getName());
-
-  /**
-   * BASE URL of global Sitools application
-   */
-  public static final String HARVESTERS_URL = HarvesterSettings.getInstance().getString(Consts.HARVESTERS_APP_URL);
-
-  /**
-   * Root path for storing files
-   */
-  public static final String TEST_FILES_REPOSITORY = HarvesterSettings.getInstance().getString("Tests.STORE_DIR");
-
-  /**
-   * Root path for storing files
-   */
-  public static final String TEST_FILES_REFERENCE_REPOSITORY = HarvesterSettings.getInstance().getString(
-      "Tests.REFERENCE_STORE_DIR");
+public abstract class AbstractHarvesterServerTestCase extends AbstractHarvesterTestCase {
 
   /**
    * Default test port for all tests
    */
   public static final int DEFAULT_TEST_PORT = 1340;
-
-  /**
-   * Settings for the test
-   */
-  protected static HarvesterSettings settings = null;
-
-  /**
-   * MEDIA type to be set in concrete subclasses of test case
-   */
-  protected static MediaType mediaTest = MediaType.APPLICATION_XML;
 
   /**
    * system property name for test port
@@ -102,77 +62,6 @@ public abstract class AbstractHarvesterServerTestCase {
       return Integer.parseInt(System.getProperty(PROPERTY_TEST_PORT));
     }
     return DEFAULT_TEST_PORT;
-  }
-
-  /**
-   * Try to remove files from directory
-   * 
-   * @param dir
-   *          directory to be cleaned
-   */
-  public static void cleanDirectory(File dir) {
-    if (dir == null) {
-      LOGGER.warning("Null directory");
-      return;
-    }
-
-    LOGGER.info("Clean XML files in directory " + dir.getAbsolutePath());
-    try {
-      FileUtils.cleanDirectory(dir, new String[] { "xml" }, false);
-    }
-    catch (IOException e) {
-      Logger.getLogger(AbstractHarvesterServerTestCase.class.getName()).warning(
-          "Unable to clean " + dir.getPath() + "\n cause:" + e.getMessage());
-    }
-  }
-
-  /**
-   * Supprime tous les fichiers du repertoire.
-   * 
-   * @param dir
-   *          File directory to clean up
-   */
-  public static void cleanDirectoryAll(File dir) {
-    if (dir == null) {
-      LOGGER.warning("Null directory");
-      return;
-    }
-
-    LOGGER.info("Clean directory " + dir.getAbsolutePath());
-    try {
-      FileUtils.cleanDirectory(dir, new String[] {}, false);
-    }
-    catch (IOException e) {
-      Logger.getLogger(AbstractHarvesterServerTestCase.class.getName()).warning(
-          "Unable to clean " + dir.getPath() + "\n cause:" + e.getMessage());
-    }
-  }
-
-  /**
-   * Copie les fichiers du repertoire source vers le repertoire cible
-   * 
-   * @param source
-   *          String directory path
-   * @param cible
-   *          String directory path
-   */
-  public static void setUpDataDirectory(String source, String cible) {
-    cleanDirectoryAll(new File(cible));
-    LOGGER.info("Copy files from:" + source + " cible:" + cible);
-    File cibleFile = new File(cible);
-    if (!cibleFile.exists()) {
-      cibleFile.mkdirs();
-    }
-    FileCopyUtils.copyAFolderExclude(source, cible, ".svn");
-  }
-
-  /**
-   * Absolute path location for data files
-   * 
-   * @return path
-   */
-  protected String getTestRepository() {
-    return TEST_FILES_REPOSITORY;
   }
 
   /**
@@ -216,28 +105,25 @@ public abstract class AbstractHarvesterServerTestCase {
   }
 
   /**
+   * Trace global parameters for the test.
+   */
+  @Test
+  public void testConfig() {
+    LOGGER.info(this.getClass().getName() + " TEST BASE URL = " + getBaseUrl());
+    LOGGER.info(this.getClass().getName() + " TEST REPOSITORY = " + getTestRepository());
+    LOGGER.info(this.getClass().getName() + " TEST PORT = " + getTestPort());
+  
+    // asert assertTrue("Check data directory presence", (new
+    // File(getTestRepository()).exists()));
+  }
+
+  /**
    * Executed once before all test methods
    */
   @BeforeClass
   public static void before() {
     setup();
     start();
-  }
-
-  /** Setup tests variables before starting server */
-  protected static void setup() {
-    Engine.clearThreadLocalVariables();
-
-    settings = HarvesterSettings.getInstance();
-
-    String source = settings.getRootDirectory() + TEST_FILES_REFERENCE_REPOSITORY;
-    String cible = settings.getRootDirectory() + TEST_FILES_REPOSITORY;
-
-    LOGGER.info("COPY SOURCE:" + source + " CIBLE:" + cible);
-    
-    setUpDataDirectory(source, cible);
-    settings.setStoreDIR(TEST_FILES_REPOSITORY);
-
   }
 
   /** Starts server */
@@ -261,38 +147,6 @@ public abstract class AbstractHarvesterServerTestCase {
     Starter.stop();
     Engine.clearThreadLocalVariables();
 
-  }
-
-  /**
-   * Trace global parameters for the test.
-   */
-  @Test
-  public void testConfig() {
-    LOGGER.info(this.getClass().getName() + " TEST BASE URL = " + getBaseUrl());
-    LOGGER.info(this.getClass().getName() + " TEST REPOSITORY = " + getTestRepository());
-    LOGGER.info(this.getClass().getName() + " TEST PORT = " + getTestPort());
-
-    // asert assertTrue("Check data directory presence", (new
-    // File(getTestRepository()).exists()));
-  }
-
-  /**
-   * Gets the mediaTest value
-   * 
-   * @return the mediaTest
-   */
-  public static MediaType getMediaTest() {
-    return mediaTest;
-  }
-
-  /**
-   * Sets the value of mediaTest
-   * 
-   * @param mediaTest
-   *          the mediaTest to set
-   */
-  public static void setMediaTest(MediaType mediaTest) {
-    AbstractHarvesterServerTestCase.mediaTest = mediaTest;
   }
 
 }

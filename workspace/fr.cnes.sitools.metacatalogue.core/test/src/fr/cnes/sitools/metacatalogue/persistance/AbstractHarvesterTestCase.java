@@ -46,11 +46,13 @@ import com.thoughtworks.xstream.XStream;
 import fr.cnes.sitools.common.Response;
 import fr.cnes.sitools.common.SitoolsXStreamRepresentation;
 import fr.cnes.sitools.common.XStreamFactory;
+import fr.cnes.sitools.metacatalogue.AbstractHarvesterServerTestCase;
 import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
 import fr.cnes.sitools.model.HarvesterModel;
 import fr.cnes.sitools.model.IndexerModel;
 import fr.cnes.sitools.persistence.HarvesterModelStore;
 import fr.cnes.sitools.persistence.HarvesterModelStoreXmlImpl;
+import fr.cnes.sitools.server.Consts;
 import fr.cnes.sitools.server.HarvestersApplication;
 
 /**
@@ -58,29 +60,7 @@ import fr.cnes.sitools.server.HarvestersApplication;
  * 
  * @author AKKA Technologies
  */
-public abstract class AbstractHarvesterTestCase {
-
-  private static String TEST_STORE_DIR = "/data/TESTS";
-
-  private static MediaType mediaTest;
-
-  private int getTestPort() {
-    return 1345;
-  }
-
-  private static MediaType getMediaTest() {
-    return mediaTest;
-  }
-
-  /**
-   * Sets the value of mediaTest
-   * 
-   * @param mediaTest
-   *          the mediaTest to set
-   */
-  public static void setMediaTest(MediaType mediaTest) {
-    AbstractHarvesterTestCase.mediaTest = mediaTest;
-  }
+public abstract class AbstractHarvesterTestCase extends AbstractHarvesterServerTestCase {
 
   /**
    * static xml store instance for the test
@@ -97,26 +77,17 @@ public abstract class AbstractHarvesterTestCase {
    * 
    * @return url
    */
-  protected String getBaseUrl() {
-    return "http://localhost:" + getTestPort() + getAttachUrl();
-  }
-
-  /**
-   * absolute url for dataset management REST API
-   * 
-   * @return url
-   */
   protected String getAttachUrl() {
     return HarvesterSettings.getInstance().getString("HARVESTERS_APP_URL");
   }
 
   /**
-   * Absolute path location for project store files
+   * absolute url for sitools REST API
    * 
-   * @return path
+   * @return url
    */
-  protected String getTestRepository() {
-    return HarvesterSettings.getInstance().getStoreDIR("APP_HARVESTER_MODEL_STORE_DIR");
+  protected String getBaseUrl() {
+    return super.getBaseUrl() + "/admin";
   }
 
   @Before
@@ -126,8 +97,6 @@ public abstract class AbstractHarvesterTestCase {
    * @throws java.lang.Exception
    */
   public void setUp() throws Exception {
-
-    HarvesterSettings.getInstance().setStoreDIR("/data/TESTS");
 
     if (this.component == null) {
       this.component = new Component();
@@ -139,7 +108,7 @@ public abstract class AbstractHarvesterTestCase {
       Context ctx = this.component.getContext().createChildContext();
 
       if (store == null) {
-        File storeDirectory = new File(getTestRepository());
+        File storeDirectory = new File(settings.getStoreDIR(Consts.APP_HARVESTER_MODEL_STORE_DIR));
         store = new HarvesterModelStoreXmlImpl(storeDirectory);
         Collection<HarvesterModel> coll = store.getList();
         for (HarvesterModel harvesterModel : coll) {
@@ -299,67 +268,6 @@ public abstract class AbstractHarvesterTestCase {
 
   }
 
-  // /**
-  // * Start the converter
-  // *
-  // * @param model
-  // * the ConverterModelDTO to start
-  // * @throws IOException
-  // * Exception when copying configuration files from TEST to data/TESTS if release fails
-  // */
-  // private void start(ConverterModelDTO model) throws IOException {
-  //
-  // StringRepresentation rep = new StringRepresentation("");
-  // String url = String.format(getBaseUrl(), datasetId) + "/" + model.getId() + "/start";
-  // if (docAPI.isActive()) {
-  // Map<String, String> parameters = new LinkedHashMap<String, String>();
-  // parameters.put("identifier", "dataset identifier");
-  // parameters.put("converterId", "converter identifier");
-  // putDocAPI(url, "", rep, parameters, String.format(getBaseUrl(), "%identifier%") + "/%filterId%/start");
-  // }
-  // else {
-  // ClientResource cr = new ClientResource(url);
-  // Representation result = cr.put(rep, getMediaTest());
-  // assertNotNull(result);
-  // assertTrue(cr.getStatus().isSuccess());
-  // Response response = getResponse(getMediaTest(), result, ConverterModelDTO.class);
-  // assertTrue(response.getSuccess());
-  // ConverterModelDTO converterModel = (ConverterModelDTO) response.getItem();
-  // assertStatus("ACTIVE", converterModel);
-  // RIAPUtils.exhaust(result);
-  // }
-  // }
-  //
-  // /**
-  // * Stop the converter
-  // *
-  // * @param model
-  // * the ConverterModelDTO to start
-  // * @throws IOException
-  // * Exception when copying configuration files from TEST to data/TESTS if release fails
-  // */
-  // private void stop(ConverterModelDTO model) throws IOException {
-  // StringRepresentation rep = new StringRepresentation("");
-  // String url = String.format(getBaseUrl(), datasetId) + "/" + model.getId() + "/stop";
-  // if (docAPI.isActive()) {
-  // Map<String, String> parameters = new LinkedHashMap<String, String>();
-  // parameters.put("identifier", "dataset identifier");
-  // parameters.put("filterId", "filter identifier");
-  // putDocAPI(url, "", rep, parameters, String.format(getBaseUrl(), "%identifier%") + "/%filterId%/start");
-  // }
-  // else {
-  // ClientResource cr = new ClientResource(url);
-  // Representation result = cr.put(rep, getMediaTest());
-  // assertNotNull(result);
-  // assertTrue(cr.getStatus().isSuccess());
-  // Response response = getResponse(getMediaTest(), result, ConverterModelDTO.class);
-  // assertTrue(response.getSuccess());
-  // ConverterModelDTO converterModel = (ConverterModelDTO) response.getItem();
-  // assertStatus("INACTIVE", converterModel);
-  // RIAPUtils.exhaust(result);
-  // }
-  // }
-
   /**
    * Invokes GET and asserts result response is an empty array.
    * 
@@ -370,6 +278,7 @@ public abstract class AbstractHarvesterTestCase {
     ClientResource cr = new ClientResource(url);
 
     Representation result = cr.get(getMediaTest());
+
     assertNotNull(result);
 
     assertTrue(cr.getStatus().isSuccess());

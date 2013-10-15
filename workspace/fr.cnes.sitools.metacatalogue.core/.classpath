@@ -6,12 +6,18 @@
 	<classpathentry kind="src" path="conf/properties"/>
 	<classpathentry kind="src" path="test/src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/geo_tools"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/geoAPI"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/misc"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/solrj"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/geo_tools_extensions"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/restlet_2_1_0"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/geoAPI"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jsonpath"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/libraries"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/restlet_2_1_0"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/tests"/>
+	<classpathentry kind="lib" path="F:/Downloads/solr-4.5.0/solr-4.5.0/dist/solr-4.5.0/WEB-INF/lib/lucene-analyzers-common-4.5.0.jar"/>
+	<classpathentry kind="lib" path="F:/Downloads/solr-4.5.0/solr-4.5.0/dist/solr-4.5.0/WEB-INF/lib/lucene-codecs-4.5.0.jar"/>
+	<classpathentry kind="lib" path="F:/Downloads/solr-4.5.0/solr-4.5.0/dist/solr-4.5.0/WEB-INF/lib/lucene-core-4.5.0.jar"/>
+	<classpathentry kind="lib" path="F:/Downloads/solr-4.5.0/solr-4.5.0/dist/solr-4.5.0/WEB-INF/lib/guava-14.0.1.jar"/>
+	<classpathentry kind="lib" path="F:/Downloads/solr-4.5.0/solr-4.5.0/dist/solr-4.5.0/WEB-INF/lib/commons-fileupload-1.2.1.jar"/>
+	<classpathentry kind="lib" path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/restlet-jse-2.1.0/lib/javax.servlet_2.5/javax.servlet.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/solrj-4.5"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,0 +1,483 @@
+{
+	"type" : "FeatureCollection",
+	"totalResults" : 10,
+	"features" : [{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Polygon",
+				"coordinates" : [[[0.63474993908497, 43.060580878688], [1.7157488382218, 43.060580878688], [1.7157488382218, 43.759319204217], [0.63474993908497, 43.759319204217], [0.63474993908497, 43.060580878688]]]
+			},
+			"properties" : {
+				"identifier" : "urn:ogc:def:EOP:IGN::Kalideos:1245",
+				"title" : "OSR_MiPy_2012-02-21_SPOT 5_REFLECTANCE_J_HRV\/HRG 1",
+				"description" : null,
+				"project" : "Kalideos",
+				"product" : "REFLECTANCE",
+				"platform" : "SPOT 5",
+				"instrument" : "HRV\/HRG 1",
+				"startDate" : "2012-02-21T00:00:00",
+				"completionDate" : "2012-02-21T00:00:00",
+				"resolution" : 10,
+				"modified" : "2013-04-15T11:58:55",
+				"services" : {
+					"browse" : {
+						"layer" : {
+							"type" : "WMS",
+							"title" : "OSR_MiPy_2012-02-21_SPOT 5_REFLECTANCE_J_HRV\/HRG 1",
+							"url" : "https:\/\/ids-psc.kalimsat.eu\/OpenSearch3\/MapServerWrapper.php?productMetaDataId=1245",
+							"layers" : "OSR_MiPy_2012-02-21_SPOT_5_TC_J_HRV\/HRG_1",
+							"bbox" : {
+								"bounds" : "0.634749939084967,43.0605808786877,1.71574883822179,43.7593192042171",
+								"srs" : "EPSG:4326"
+							},
+							"srs" : "EPSG:3857"
+						}
+					},
+					"download" : {
+						"url" : "https:\/\/ids-psc.kalimsat.eu\/data\/osr-mipy\/data\/satellite\/spot5\/2012-02-21\/j_n3\/1.0\/imag-tc.zip",
+						"mimeType" : "multipart\/x-zip"
+					}
+				},
+				"quicklook" : "http:\/\/kalideos.cnes.fr\/Kalideos2012\/images\/voir.php?image=992815",
+				"thumbnail" : "http:\/\/kalideos.cnes.fr\/Kalideos2012\/images\/mignature.php?image=992815",
+				"base" : "OSR_MiPy",
+				"J" : "42",
+				"K" : "262",
+				"acquisitionMode" : "J",
+				"incidence" : "00.61L",
+				"processingLevel" : "3",
+				"version" : "1.0",
+				"productType" : "TC"
+			}
+		}, {
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Polygon",
+				"coordinates" : [[[0.63474993908497, 43.060580878688], [1.7157488382218, 43.060580878688], [1.7157488382218, 43.759319204217], [0.63474993908497, 43.759319204217], [0.63474993908497, 43.060580878688]]]
+			},
+			"properties" : {
+				"identifier" : "urn:ogc:def:EOP:IGN::Kalideos:1244",
+				"title" : "OSR_MiPy_2012-02-21_SPOT 5_REFLECTANCETOA_J_HRV\/HRG 1",
+				"description" : null,
+				"project" : "Kalideos",
+				"product" : "REFLECTANCETOA",
+				"platform" : "SPOT 5",
+				"instrument" : "HRV\/HRG 1",
+				"startDate" : "2012-02-21T00:00:00",
+				"completionDate" : "2012-02-21T00:00:00",
+				"resolution" : 10,
+				"modified" : "2013-04-15T11:58:55",
+				"services" : {
+					"browse" : {
+						"layer" : {
+							"type" : "WMS",
+							"title" : "OSR_MiPy_2012-02-21_SPOT 5_REFLECTANCETOA_J_HRV\/HRG 1",
+							"url" : "https:\/\/ids-psc.kalimsat.eu\/OpenSearch3\/MapServerWrapper.php?productMetaDataId=1244",
+							"layers" : "OSR_MiPy_2012-02-21_SPOT_5_TA_J_HRV\/HRG_1",
+							"bbox" : {
+								"bounds" : "0.634749939084967,43.0605808786877,1.71574883822179,43.7593192042171",
+								"srs" : "EPSG:4326"
+							},
+							"srs" : "EPSG:3857"
+						}
+					},
+					"download" : {
+						"url" : "https:\/\/ids-psc.kalimsat.eu\/data\/osr-mipy\/data\/satellite\/spot5\/2012-02-21\/j_n3\/1.0\/imag-ta.zip",
+						"mimeType" : "multipart\/x-zip"
+					}
+				},
+				"quicklook" : "http:\/\/kalideos.cnes.fr\/Kalideos2012\/images\/voir.php?image=992815",
+				"thumbnail" : "http:\/\/kalideos.cnes.fr\/Kalideos2012\/images\/mignature.php?image=992815",
+				"base" : "OSR_MiPy",
+				"J" : "42",
+				"K" : "262",
+				"acquisitionMode" : "J",
+				"incidence" : "00.61L",
+				"processingLevel" : "3",
+				"version" : "1.0",
+				"productType" : "TA"
+			}
+		}, {
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Polygon",
+				"coordinates" : [[[0.63474993908497, 43.060580878688], [1.7157488382218, 43.060580878688], [1.7157488382218, 43.759319204217], [0.63474993908497, 43.759319204217], [0.63474993908497, 43.060580878688]]]
+			},
+			"properties" : {
+				"identifier" : "urn:ogc:def:EOP:IGN::Kalideos:1265",
+				"title" : "OSR_MiPy_2012-02-21_SPOT 5_REFLECTANCETOA_J_HRV\/HRG 1",
+				"description" : null,
+				"project" : "Kalideos",
+				"product" : "REFLECTANCETOA",
+				"platform" : "SPOT 5",
+				"instrument" : "HRV\/HRG 1",
+				"startDate" : "2012-02-21T00:00:00",
+				"completionDate" : "2012-02-21T00:00:00",
+				"resolution" : 10,
+				"modified" : "2013-04-15T11:58:55",
+				"services" : {
+					"browse" : {
+						"layer" : {
+							"type" : "WMS",
+							"title" : "OSR_MiPy_2012-02-21_SPOT 5_REFLECTANCETOA_J_HRV\/HRG 1",
+							"url" : "https:\/\/ids-psc.kalimsat.eu\/OpenSearch3\/MapServerWrapper.php?productMetaDataId=1265",
+							"layers" : "OSR_MiPy_2012-02-21_SPOT_5_ORTH_J_HRV\/HRG_1",
+							"bbox" : {
+								"bounds" : "0.634749939084967,43.0605808786877,1.71574883822179,43.7593192042171",
+								"srs" : "EPSG:4326"
+							},
+							"srs" : "EPSG:3857"
+						}
+					},
+					"download" : {
+						"url" : "https:\/\/ids-psc.kalimsat.eu\/data\/osr-mipy\/data\/satellite\/spot5\/2012-02-21\/j_n3\/1.0\/imag-orth.zip",
+						"mimeType" : "multipart\/x-zip"
+					}
+				},
+				"quicklook" : "http:\/\/kalideos.cnes.fr\/Kalideos2012\/images\/voir.php?image=992815",
+				"thumbnail" : "http:\/\/kalideos.cnes.fr\/Kalideos2012\/images\/mignature.php?image=992815",
+				"base" : "OSR_MiPy",
+				"J" : "42",
+				"K" : "262",
+				"acquisitionMode" : "J",
+				"incidence" : "00.61L",
+				"processingLevel" : "3",
+				"version" : "1.0",
+				"productType" : "ORTH"
+			}
+		}, {
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Polygon",
+				"coordinates" : [[[0.69052315503984, 43.081630626643], [1.5958401869615, 43.081630626643], [1.5958401869615, 43.742058907099], [0.69052315503984, 43.742058907099], [0.69052315503984, 43.081630626643]]]
+			},
+			"properties" : {
+				"identifier" : "urn:ogc:def:EOP:IGN::Kalideos:1264",
+				"title" : "OSR_MiPy_2012-02-21_SPOT 5_REFLECTANCETOA_J_HRV\/HRG 1",
+				"description" : null,
+				"project" : "Kalideos",
+				"product" : "REFLECTANCETOA",
+				"platform" : "SPOT 5",
+				"instrument" : "HRV\/HRG 1",
+				"startDate" : "2012-02-21T00:00:00",
+				"completionDate" : "2012-02-21T00:00:00",
+				"resolution" : 10,
+				"modified" : "2013-04-15T11:58:55",
+				"services" : {
+					"browse" : {
+						"layer" : {
+							"type" : "WMS",
+							"title" : "OSR_MiPy_2012-02-21_SPOT 5_REFLECTANCETOA_J_HRV\/HRG 1",
+							"url" : "https:\/\/ids-psc.kalimsat.eu\/OpenSearch3\/MapServerWrapper.php?productMetaDataId=1264",
+							"layers" : "OSR_MiPy_2012-02-21_SPOT_5_1A_J_HRV\/HRG_1",
+							"bbox" : {
+								"bounds" : "0.690523155039843,43.0816306266429,1.59584018696153,43.7420589070993",
+								"srs" : "EPSG:4326"
+							},
+							"srs" : "EPSG:3857"
+						}
+					},
+					"download" : {
+						"url" : "https:\/\/ids-psc.kalimsat.eu\/data\/osr-mipy\/data\/satellite\/spot5\/2012-02-21\/j_1a\/1.0\/imag.zip",
+						"mimeType" : "multipart\/x-zip"
+					}
+				},
+				"quicklook" : "http:\/\/kalideos.cnes.fr\/Kalideos2012\/images\/voir.php?image=992812",
+				"thumbnail" : "http:\/\/kalideos.cnes.fr\/Kalideos2012\/images\/mignature.php?image=992812",
+				"base" : "OSR_MiPy",
+				"J" : "42",
+				"K" : "262",
+				"acquisitionMode" : "J",
+				"incidence" : "0.61L",
+				"processingLevel" : "1A",
+				"version" : "1.0"
+			}
+		}, {
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Polygon",
+				"coordinates" : [[[-1.6209184906809, 44.303887673223], [-0.58153806255024, 44.303887673223], [-0.58153806255024, 44.97045712757], [-1.6209184906809, 44.97045712757], [-1.6209184906809, 44.303887673223]]]
+			},
+			"properties" : {
+				"identifier" : "urn:ogc:def:EOP:IGN::Kalideos:1255",
+				"title" : "Littoral_2012-02-18_SPOT 4_REFLECTANCETOA_XI_HRV\/HRG 2",
+				"description" : null,
+				"project" : "Kalideos",
+				"product" : "REFLECTANCETOA",
+				"platform" : "SPOT 4",
+				"instrument" : "HRV\/HRG 2",
+				"startDate" : "2012-02-18T00:00:00",
+				"completionDate" : "2012-02-18T00:00:00",
+				"resolution" : 20,
+				"modified" : "2013-04-15T11:58:55",
+				"services" : {
+					"browse" : {
+						"layer" : {
+							"type" : "WMS",
+							"title" : "Littoral_2012-02-18_SPOT 4_REFLECTANCETOA_XI_HRV\/HRG 2",
+							"url" : "https:\/\/ids-psc.kalimsat.eu\/OpenSearch3\/MapServerWrapper.php?productMetaDataId=1255",
+							"layers" : "Littoral_2012-02-18_SPOT_4_1A_XI_HRV\/HRG_2",
+							"bbox" : {
+								"bounds" : "-1.62091849068091,44.3038876732227,-0.581538062550243,44.9704571275704",
+								"srs" : "EPSG:4326"
+							},
+							"srs" : "EPSG:3857"
+						}
+					},
+					"download" : {
+						"url" : "https:\/\/ids-psc.kalimsat.eu\/data\/littoral\/data\/satellite\/spot4\/2012-02-18\/xi_1a\/1.0\/imag.zip",
+						"mimeType" : "multipart\/x-zip"
+					}
+				},
+				"quicklook" : "http:\/\/kalideos.cnes.fr\/Kalideos2012\/images\/voir.php?image=992814",
+				"thumbnail" : "http:\/\/kalideos.cnes.fr\/Kalideos2012\/images\/mignature.php?image=992814",
+				"base" : "Littoral",
+				"J" : "36",
+				"K" : "260",
+				"acquisitionMode" : "XI",
+				"incidence" : "19.20L",
+				"processingLevel" : "1A",
+				"version" : "1.0"
+			}
+		}, {
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Polygon",
+				"coordinates" : [[[55.210633871956, -21.39683033396], [55.841674819946, -21.39683033396], [55.841674819946, -20.862875719362], [55.210633871956, -20.862875719362], [55.210633871956, -21.39683033396]]]
+			},
+			"properties" : {
+				"identifier" : "urn:ogc:def:EOP:IGN::Kalideos:1251",
+				"title" : "ISLE_2012-02-08_SPOT 4_REFLECTANCE_PXI_HRV\/HRG 1",
+				"description" : "Produit fusionn\u00e9 4 canaux (PIR,R,V,MIR)",
+				"project" : "Kalideos",
+				"product" : "REFLECTANCE",
+				"platform" : "SPOT 4",
+				"instrument" : "HRV\/HRG 1",
+				"startDate" : "2012-02-08T00:00:00",
+				"completionDate" : "2012-02-08T00:00:00",
+				"resolution" : 10,
+				"modified" : "2013-04-15T11:58:55",
+				"services" : {
+					"browse" : {
+						"layer" : {
+							"type" : "WMS",
+							"title" : "ISLE_2012-02-08_SPOT 4_REFLECTANCE_PXI_HRV\/HRG 1",
+							"url" : "https:\/\/ids-psc.kalimsat.eu\/OpenSearch3\/MapServerWrapper.php?productMetaDataId=1251",
+							"layers" : "ISLE_2012-02-08_SPOT_4_TC_PXI_HRV\/HRG_1",
+							"bbox" : {
+								"bounds" : "55.2106338719559,-21.3968303339599,55.8416748199464,-20.8628757193622",
+								"srs" : "EPSG:4326"
+							},
+							"srs" : "EPSG:3857"
+						}
+					},
+					"download" : {
+						"url" : "https:\/\/ids-psc.kalimsat.eu\/data\/isle\/data\/satellite\/spot4\/2012-02-08\/pxi_n3\/3.0\/imag-tc.zip",
+						"mimeType" : "multipart\/x-zip"
+					}
+				},
+				"quicklook" : "http:\/\/kalideos.cnes.fr\/Kalideos2012\/images\/voir.php?image=992813",
+				"thumbnail" : "http:\/\/kalideos.cnes.fr\/Kalideos2012\/images\/mignature.php?image=992813",
+				"base" : "ISLE",
+				"J" : "186",
+				"K" : "392",
+				"acquisitionMode" : "PXI",
+				"incidence" : "12.40R",
+				"processingLevel" : "3",
+				"version" : "3.0",
+				"productType" : "TC"
+			}
+		}, {
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Polygon",
+				"coordinates" : [[[55.210633871956, -21.39683033396], [55.841674819946, -21.39683033396], [55.841674819946, -20.862875719362], [55.210633871956, -20.862875719362], [55.210633871956, -21.39683033396]]]
+			},
+			"properties" : {
+				"identifier" : "urn:ogc:def:EOP:IGN::Kalideos:1844",
+				"title" : "ISLE_2012-02-08_SPOT 4_REFLECTANCETOA_PXI_HRV\/HRG 1",
+				"description" : "Produit fusionn\u00e9 4 canaux (PIR,R,V,MIR)",
+				"project" : "Kalideos",
+				"product" : "REFLECTANCETOA",
+				"platform" : "SPOT 4",
+				"instrument" : "HRV\/HRG 1",
+				"startDate" : "2012-02-08T00:00:00",
+				"completionDate" : "2012-02-08T00:00:00",
+				"resolution" : 10,
+				"modified" : "2013-04-15T11:58:55",
+				"services" : {
+					"browse" : {
+						"layer" : {
+							"type" : "WMS",
+							"title" : "ISLE_2012-02-08_SPOT 4_REFLECTANCETOA_PXI_HRV\/HRG 1",
+							"url" : "https:\/\/ids-psc.kalimsat.eu\/OpenSearch3\/MapServerWrapper.php?productMetaDataId=1844",
+							"layers" : "ISLE_2012-02-08_SPOT_4_TA_PXI_HRV\/HRG_1",
+							"bbox" : {
+								"bounds" : "55.2106338719559,-21.3968303339599,55.8416748199464,-20.8628757193622",
+								"srs" : "EPSG:4326"
+							},
+							"srs" : "EPSG:3857"
+						}
+					},
+					"download" : {
+						"url" : "https:\/\/ids-psc.kalimsat.eu\/data\/isle\/data\/satellite\/spot4\/2012-02-08\/pxi_n3\/3.0\/imag-ta.zip",
+						"mimeType" : "multipart\/x-zip"
+					}
+				},
+				"quicklook" : "http:\/\/kalideos.cnes.fr\/Kalideos2012\/images\/voir.php?image=992813",
+				"thumbnail" : "http:\/\/kalideos.cnes.fr\/Kalideos2012\/images\/mignature.php?image=992813",
+				"base" : "ISLE",
+				"J" : "186",
+				"K" : "392",
+				"acquisitionMode" : "PXI",
+				"incidence" : "12.40R",
+				"processingLevel" : "3",
+				"version" : "3.0",
+				"productType" : "TA"
+			}
+		}, {
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Polygon",
+				"coordinates" : [[[55.210633871956, -21.39683033396], [55.841674819946, -21.39683033396], [55.841674819946, -20.862875719362], [55.210633871956, -20.862875719362], [55.210633871956, -21.39683033396]]]
+			},
+			"properties" : {
+				"identifier" : "urn:ogc:def:EOP:IGN::Kalideos:1236",
+				"title" : "ISLE_2012-02-08_SPOT 4_REFLECTANCETOA_PXI_HRV\/HRG 1",
+				"description" : "Produit fusionn\u00e9 4 canaux (PIR,R,V,MIR)",
+				"project" : "Kalideos",
+				"product" : "REFLECTANCETOA",
+				"platform" : "SPOT 4",
+				"instrument" : "HRV\/HRG 1",
+				"startDate" : "2012-02-08T00:00:00",
+				"completionDate" : "2012-02-08T00:00:00",
+				"resolution" : 10,
+				"modified" : "2013-04-15T11:58:55",
+				"services" : {
+					"browse" : {
+						"layer" : {
+							"type" : "WMS",
+							"title" : "ISLE_2012-02-08_SPOT 4_REFLECTANCETOA_PXI_HRV\/HRG 1",
+							"url" : "https:\/\/ids-psc.kalimsat.eu\/OpenSearch3\/MapServerWrapper.php?productMetaDataId=1236",
+							"layers" : "ISLE_2012-02-08_SPOT_4_ORTH_PXI_HRV\/HRG_1",
+							"bbox" : {
+								"bounds" : "55.2106338719559,-21.3968303339599,55.8416748199464,-20.8628757193622",
+								"srs" : "EPSG:4326"
+							},
+							"srs" : "EPSG:3857"
+						}
+					},
+					"download" : {
+						"url" : "https:\/\/ids-psc.kalimsat.eu\/data\/isle\/data\/satellite\/spot4\/2012-02-08\/pxi_n3\/3.0\/imag-orth.zip",
+						"mimeType" : "multipart\/x-zip"
+					}
+				},
+				"quicklook" : "http:\/\/kalideos.cnes.fr\/Kalideos2012\/images\/voir.php?image=992813",
+				"thumbnail" : "http:\/\/kalideos.cnes.fr\/Kalideos2012\/images\/mignature.php?image=992813",
+				"base" : "ISLE",
+				"J" : "186",
+				"K" : "392",
+				"acquisitionMode" : "PXI",
+				"incidence" : "12.40R",
+				"processingLevel" : "3",
+				"version" : "3.0",
+				"productType" : "ORTH"
+			}
+		}, {
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Polygon",
+				"coordinates" : [[[55.125425514171, -21.430301303406], [55.856450821779, -21.430301303406], [55.856450821779, -20.806179168111], [55.125425514171, -20.806179168111], [55.125425514171, -21.430301303406]]]
+			},
+			"properties" : {
+				"identifier" : "urn:ogc:def:EOP:IGN::Kalideos:1843",
+				"title" : "ISLE_2012-02-08_SPOT 4_REFLECTANCETOA_PXI_HRV\/HRG 1",
+				"description" : "Produit fusionn\u00e9 4 bandes (PIR,R,V,MIR)",
+				"project" : "Kalideos",
+				"product" : "REFLECTANCETOA",
+				"platform" : "SPOT 4",
+				"instrument" : "HRV\/HRG 1",
+				"startDate" : "2012-02-08T00:00:00",
+				"completionDate" : "2012-02-08T00:00:00",
+				"resolution" : 10,
+				"modified" : "2013-04-15T11:58:55",
+				"services" : {
+					"browse" : {
+						"layer" : {
+							"type" : "WMS",
+							"title" : "ISLE_2012-02-08_SPOT 4_REFLECTANCETOA_PXI_HRV\/HRG 1",
+							"url" : "https:\/\/ids-psc.kalimsat.eu\/OpenSearch3\/MapServerWrapper.php?productMetaDataId=1843",
+							"layers" : "ISLE_2012-02-08_SPOT_4_1A_PXI_HRV\/HRG_1",
+							"bbox" : {
+								"bounds" : "55.1254255141706,-21.4303013034059,55.8564508217793,-20.806179168111",
+								"srs" : "EPSG:4326"
+							},
+							"srs" : "EPSG:3857"
+						}
+					},
+					"download" : {
+						"url" : "https:\/\/ids-psc.kalimsat.eu\/data\/isle\/data\/satellite\/spot4\/2012-02-08\/pxi_1a\/1.0\/imag.zip",
+						"mimeType" : "multipart\/x-zip"
+					}
+				},
+				"quicklook" : "http:\/\/kalideos.cnes.fr\/Kalideos2012\/images\/voir.php?image=992803",
+				"thumbnail" : "http:\/\/kalideos.cnes.fr\/Kalideos2012\/images\/mignature.php?image=992803",
+				"base" : "ISLE",
+				"J" : "186",
+				"K" : "392",
+				"acquisitionMode" : "PXI",
+				"incidence" : "12.40R",
+				"processingLevel" : "1A",
+				"version" : "1.0"
+			}
+		}, {
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Polygon",
+				"coordinates" : [[[55.210633871956, -21.39683033396], [55.841674819946, -21.39683033396], [55.841674819946, -20.862875719362], [55.210633871956, -20.862875719362], [55.210633871956, -21.39683033396]]]
+			},
+			"properties" : {
+				"identifier" : "urn:ogc:def:EOP:IGN::Kalideos:1839",
+				"title" : "ISLE_2011-12-30_SPOT 5_REFLECTANCE_J_HRV\/HRG 1",
+				"description" : null,
+				"project" : "Kalideos",
+				"product" : "REFLECTANCE",
+				"platform" : "SPOT 5",
+				"instrument" : "HRV\/HRG 1",
+				"startDate" : "2011-12-30T00:00:00",
+				"completionDate" : "2011-12-30T00:00:00",
+				"resolution" : 10,
+				"modified" : "2013-04-15T11:58:55",
+				"services" : {
+					"browse" : {
+						"layer" : {
+							"type" : "WMS",
+							"title" : "ISLE_2011-12-30_SPOT 5_REFLECTANCE_J_HRV\/HRG 1",
+							"url" : "https:\/\/ids-psc.kalimsat.eu\/OpenSearch3\/MapServerWrapper.php?productMetaDataId=1839",
+							"layers" : "ISLE_2011-12-30_SPOT_5_TC_J_HRV\/HRG_1",
+							"bbox" : {
+								"bounds" : "55.2106338719559,-21.3968303339599,55.8416748199464,-20.8628757193622",
+								"srs" : "EPSG:4326"
+							},
+							"srs" : "EPSG:3857"
+						}
+					},
+					"download" : {
+						"url" : "https:\/\/ids-psc.kalimsat.eu\/data\/isle\/data\/satellite\/spot5\/2011-12-30\/j_n3\/3.0\/imag-tc.zip",
+						"mimeType" : "multipart\/x-zip"
+					}
+				},
+				"quicklook" : "http:\/\/kalideos.cnes.fr\/Kalideos2012\/images\/voir.php?image=992792",
+				"thumbnail" : "http:\/\/kalideos.cnes.fr\/Kalideos2012\/images\/mignature.php?image=992792",
+				"base" : "ISLE",
+				"J" : "186",
+				"K" : "392",
+				"acquisitionMode" : "J",
+				"incidence" : "04.53R",
+				"processingLevel" : "3",
+				"version" : "3.0",
+				"productType" : "TC"
+			}
+		}
+	]
+}

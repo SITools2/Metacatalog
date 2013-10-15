@@ -35,6 +35,7 @@ import fr.cnes.sitools.metacatalogue.index.MetadataIndexer;
 import fr.cnes.sitools.metacatalogue.model.Field;
 import fr.cnes.sitools.metacatalogue.model.Fields;
 import fr.cnes.sitools.metacatalogue.utils.MetacatalogField;
+import fr.cnes.sitools.server.ContextAttributes;
 
 /**
  * Metadata index on Solr search engine
@@ -43,32 +44,27 @@ import fr.cnes.sitools.metacatalogue.utils.MetacatalogField;
  * 
  */
 public class SolrMetadataIndexer implements MetadataIndexer {
+
   /** The SolrServer */
-  private SolrServer server;
+  protected SolrServer server;
   /** The list of Document to index */
-  private Collection<SolrInputDocument> documentsToIndex;
+  protected Collection<SolrInputDocument> documentsToIndex;
   /** The context */
-  private Context context;
+  protected Context context;
 
   /**
    * Constructor with a server url
    * 
-   * @param urlServer
-   *          the url of the server
+   * 
    * @param context
    * 
    */
-  public SolrMetadataIndexer(String urlServer, Context context) {
+  public SolrMetadataIndexer(Context context) {
     documentsToIndex = new ArrayList<SolrInputDocument>();
-    server = SolRUtils.getSolRServer(urlServer);
+    server = (SolrServer) context.getAttributes().get(ContextAttributes.INDEXER_SERVER);
     this.context = context;
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see fr.cnes.sitools.metacatalogue.index.MetadataIndexer#indexMetadata()
-   */
   @Override
   public void indexMetadata() throws Exception {
     if (!documentsToIndex.isEmpty()) {
@@ -84,23 +80,12 @@ public class SolrMetadataIndexer implements MetadataIndexer {
     server.commit();
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * fr.cnes.sitools.metacatalogue.index.MetadataIndexer#addDocumentToIndex(fr.cnes.sitools.metacatalogue.model.Fields)
-   */
   @Override
   public void addFieldsToIndex(Fields fields) throws Exception {
     SolrInputDocument inputDocument = buildSolrInput(fields);
     documentsToIndex.add(inputDocument);
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see fr.cnes.sitools.metacatalogue.index.MetadataIndexer#addDocumentToIndex(java.util.List)
-   */
   @Override
   public void addListFieldsToIndex(List<Fields> fieldList) throws Exception {
     for (Fields fields : fieldList) {
@@ -122,7 +107,7 @@ public class SolrMetadataIndexer implements MetadataIndexer {
    * @throws Exception
    *           if there is an error
    */
-  private SolrInputDocument buildSolrInput(Fields fields) throws Exception {
+  protected SolrInputDocument buildSolrInput(Fields fields) throws Exception {
     SolrInputDocument document = new SolrInputDocument();
     String text;
     SolrInputField solrField;
@@ -177,6 +162,16 @@ public class SolrMetadataIndexer implements MetadataIndexer {
   @Override
   public int getCurrentNumberOfFieldsToIndex() {
     return documentsToIndex.size();
+  }
+
+  /**
+   * For tests
+   * 
+   * @param server
+   *          the SolrServer
+   */
+  public void setSolrServer(SolrServer server) {
+    this.server = server;
   }
 
 }

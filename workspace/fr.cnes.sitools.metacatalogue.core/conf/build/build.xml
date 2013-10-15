@@ -113,8 +113,7 @@
 	<path id="compile.classpath">
 		<path refid="geo_tools" />
 		<path refid="geoAPI" />
-		<path refid="misc" />
-		<path refid="solrj" />
+		<path refid="solrj-4.5" />
 		<path refid="geo_tools_extensions" />
 		<path refid="restlet_2_1_0" />
 		<path refid="jsonpath" />

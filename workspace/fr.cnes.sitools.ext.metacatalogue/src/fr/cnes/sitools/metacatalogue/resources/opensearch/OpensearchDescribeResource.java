@@ -25,13 +25,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.request.LukeRequest;
+import org.apache.solr.client.solrj.request.QueryRequest;
 import org.apache.solr.client.solrj.response.LukeResponse;
 import org.apache.solr.client.solrj.response.LukeResponse.FieldInfo;
+import org.apache.solr.client.solrj.response.TermsResponse;
+import org.apache.solr.client.solrj.response.TermsResponse.Term;
 import org.apache.solr.common.luke.FieldFlag;
-import org.apache.solr.common.util.NamedList;
 import org.restlet.data.MediaType;
 import org.restlet.data.Status;
 import org.restlet.ext.wadl.MethodInfo;
@@ -91,7 +94,7 @@ public class OpensearchDescribeResource extends AbstractOpenSearchServiceResourc
     }
 
     LukeRequest request = new LukeRequest();
-    request.setNumTerms(maxTopTerms);
+    // request.setNumTerms(maxTopTerms);
 
     try {
       List<Filter> filters = new ArrayList<Filter>();
@@ -99,25 +102,38 @@ public class OpensearchDescribeResource extends AbstractOpenSearchServiceResourc
       int numDocs = response.getNumDocs();
 
       Map<String, LukeResponse.FieldInfo> fields = response.getFieldInfo();
-      
+
       for (Entry<String, LukeResponse.FieldInfo> field : fields.entrySet()) {
         LukeResponse.FieldInfo fieldInfo = field.getValue();
         String fieldName = fieldInfo.getName();
 
         boolean indexed = false;
-        
+
         EnumSet<FieldFlag> flags = FieldInfo.parseFlags(fieldInfo.getSchema());
-        if (flags != null && flags.contains(FieldFlag.INDEXED)) {
-          indexed = true;
-        }
+        indexed = (flags != null && flags.contains(FieldFlag.INDEXED));
+
         if (indexed && addToDescription(fieldName)) {
+
+          // make a terms query to get the top terms
+          SolrQuery query = new SolrQuery();
+          query.setRequestHandler("/terms");
+          query.setTerms(true);
+          query.addTermsField(fieldName);
+          query.setTermsLimit(maxTopTerms);
+          query.setTermsMinCount(1);
+
+          QueryRequest termsRequest = new QueryRequest(query);
+          TermsResponse termsResponse = termsRequest.process(server).getTermsResponse();
+
+          List<Term> terms = termsResponse.getTerms(fieldName);
+
           Filter filter = new Filter();
           filter.setId(fieldName);
           filter.setTitle(fieldName);
-          if (canBeCategorised(fieldInfo)) {
+          if (canBeCategorised(terms)) {
             filter.setType(FilterType.enumeration);
             filter.setPopulation(numDocs);
-            filter.setSon(createSons(fieldInfo));
+            filter.setSon(createSons(terms));
           }
           else {
             filter.setType(getFilterType(fieldInfo.getType()));
@@ -135,24 +151,23 @@ public class OpensearchDescribeResource extends AbstractOpenSearchServiceResourc
       throw new ResourceException(Status.SERVER_ERROR_INTERNAL, e.getMessage(), e);
     }
   }
-  
-  private List<EnumSon> createSons(FieldInfo fieldInfo) {
+
+  private List<EnumSon> createSons(List<Term> terms) {
     List<EnumSon> sons = new ArrayList<EnumSon>();
-    NamedList<Integer> terms = fieldInfo.getTopTerms();
-    for (Entry<String, Integer> term : terms) {
+    for (Term term : terms) {
       EnumSon son = new EnumSon();
-      son.setId(term.getKey());
-      son.setTitle(term.getKey());
-      son.setValue(term.getKey());
-      son.setPopulation(term.getValue());
+      son.setId(term.getTerm());
+      son.setTitle(term.getTerm());
+      son.setValue(term.getTerm());
+      son.setPopulation(term.getFrequency());
       sons.add(son);
     }
 
     return sons;
   }
 
-  private boolean canBeCategorised(FieldInfo fieldInfo) {
-    return (fieldInfo.getTopTerms() != null && fieldInfo.getTopTerms().size() > 0 && fieldInfo.getTopTerms().size() < maxTopTerms);
+  private boolean canBeCategorised(List<Term> terms) {
+    return (terms != null && terms.size() > 0 && terms.size() < maxTopTerms);
   }
 
   private FilterType getFilterType(String type) {

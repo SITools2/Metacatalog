@@ -25,8 +25,8 @@ import java.util.logging.Level;
 import org.geotools.geojson.geom.GeometryJSON;
 import org.restlet.Context;
 
+import com.vividsolutions.jts.algorithm.CGAlgorithms;
 import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.Point;
 import com.vividsolutions.jts.io.WKTWriter;
 
 import fr.cnes.sitools.metacatalogue.model.Fields;
@@ -46,6 +46,8 @@ public class OpensearchGeometryExtractor {
    *          the json geometry element
    * @param fields
    *          the list of fields
+   * @param context
+   *          the Context
    * @return the list of fields with the added geometry
    * @throws Exception
    *           if there is an error while extracting the geometry
@@ -53,18 +55,33 @@ public class OpensearchGeometryExtractor {
   public Fields extractGeometry(String geometryJson, Fields fields, Context context) throws Exception {
 
     Geometry geometry = extractGeometry(geometryJson, context);
-    
+
+    if (!isCountryClockWise(geometry)) {
+      geometry = geometry.reverse();
+    }
+
     if (geometry != null) {
       WKTWriter wktWriter = new WKTWriter();
       String geo = wktWriter.writeFormatted(geometry);
       fields.add(MetacatalogField._GEOMETRY.getField(), geo);
-      Point point = geometry.getInteriorPoint();
-      String geographie = wktWriter.write(point);
-      fields.add("_interiorPoint", geographie);
+      // Point point = geometry.getInteriorPoint();
+      // String geographie = wktWriter.write(point);
+      // fields.add("_interiorPoint", geographie);
     }
 
     return fields;
 
+  }
+
+  /**
+   * Check if the geometry is counterClockWise
+   * 
+   * @param geometry
+   *          the Geometry
+   * @return true if the geometry is counterClockWise, false otherwise
+   */
+  private boolean isCountryClockWise(Geometry geometry) {
+    return CGAlgorithms.isCCW(geometry.getCoordinates());
   }
 
   /**

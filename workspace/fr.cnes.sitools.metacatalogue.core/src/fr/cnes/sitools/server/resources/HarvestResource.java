@@ -34,13 +34,13 @@ import org.restlet.resource.ResourceException;
 
 import fr.cnes.sitools.common.Response;
 import fr.cnes.sitools.metacatalogue.common.Harvester;
-import fr.cnes.sitools.metacatalogue.exceptions.CheckProcessException;
 import fr.cnes.sitools.metacatalogue.index.solr.SolRUtils;
 import fr.cnes.sitools.metacatalogue.model.HarvestStatus;
 import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
 import fr.cnes.sitools.model.HarvesterModel;
 import fr.cnes.sitools.persistence.HarvesterModelStore;
 import fr.cnes.sitools.server.Consts;
+import fr.cnes.sitools.server.ContextAttributes;
 import fr.cnes.sitools.server.HarvestersApplication;
 import fr.cnes.sitools.server.InfoResource;
 import fr.cnes.sitools.server.administration.AbstractHarvesterResource;
@@ -238,7 +238,7 @@ public class HarvestResource extends AbstractHarvesterResource {
   private HarvestStatus harvest(HarvesterModel conf) throws Exception {
 
     HarvestStatus status = new HarvestStatus();
-    getContext().getAttributes().put("STATUS", status);
+    getContext().getAttributes().put(ContextAttributes.STATUS, status);
     getContext().getAttributes().put("APPLICATION", application);
 
     Class<Harvester> harvesterClass = (Class<Harvester>) Class.forName(conf.getHarvesterClassName());

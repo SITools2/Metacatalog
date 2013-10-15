@@ -19,32 +19,29 @@
 package fr.cnes.sitools.metacatalogue.resources.model;
 
 /**
- * L’élément son est un tableau qui contient la liste des énumérations possibles
- * pour un paramètre de type enumeration. Chaque énumération contient les
- * éléments suivants :
+ * L’élément son est un tableau qui contient la liste des énumérations possibles pour un paramètre de type enumeration.
+ * Chaque énumération contient les éléments suivants :
  * 
  * 
  * @author m.gond
  */
 public class EnumSon {
   /**
-   * un identifiant unique pour cette liste d’énumération. Cet élément est
-   * obligatoire
+   * un identifiant unique pour cette liste d’énumération. Cet élément est obligatoire
    */
   private String id;
   /**
-   * le nom de l’énumération tel qu’il doit être affiché à l’utilisateur. Ce nom
-   * doit être rédigé en langue anglaise. Cet élément est obligatoire.
+   * le nom de l’énumération tel qu’il doit être affiché à l’utilisateur. Ce nom doit être rédigé en langue anglaise.
+   * Cet élément est obligatoire.
    */
   private String title;
   /**
-   * le nombre de résultats du jeu de données correspondant à la valeur de cette
-   * énumération pour le paramètre idoine. Cet élément est optionnel
+   * le nombre de résultats du jeu de données correspondant à la valeur de cette énumération pour le paramètre idoine.
+   * Cet élément est optionnel
    */
-  private int population;
+  private long population;
   /**
-   * la valeur envoyée au serveur qui correspond à cette énumération. Ce élément
-   * est obligatoire.
+   * la valeur envoyée au serveur qui correspond à cette énumération. Ce élément est obligatoire.
    */
   private String value;
 
@@ -91,7 +88,7 @@ public class EnumSon {
    * 
    * @return the population
    */
-  public int getPopulation() {
+  public long getPopulation() {
     return population;
   }
 
@@ -101,7 +98,7 @@ public class EnumSon {
    * @param population
    *          the population to set
    */
-  public void setPopulation(int population) {
+  public void setPopulation(long population) {
     this.population = population;
   }
 

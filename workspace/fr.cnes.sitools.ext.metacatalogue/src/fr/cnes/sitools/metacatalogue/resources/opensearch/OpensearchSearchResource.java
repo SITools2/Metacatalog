@@ -118,7 +118,7 @@ public class OpensearchSearchResource extends SitoolsResource {
     solrQuery.setRows(rows);
     solrQuery.add("df", "searchTerms");
 
-    addGeometryCriteria(solrQuery, query);
+//    addGeometryCriteria(solrQuery, query);
     try {
       setQuery(solrQuery, query);
 
@@ -182,6 +182,12 @@ public class OpensearchSearchResource extends SitoolsResource {
         String dateStr = getDateParam(parameter, DATE_QUERY_TYPE.LT);
         if (dateStr != null) {
           pieceOfQuery = MetacatalogField.CHARACTERISATION_AXIS_TEMPORAL_AXIS_MAX.getField() + ":" + dateStr;
+        }
+      }
+      else if (parameter.getName().equals(OpenSearchQuery.GEO_BOX.getParamName())) {
+        String bbox = parameter.getValue();
+        if (bbox != null && !bbox.isEmpty()) {
+          pieceOfQuery = MetacatalogField._GEOMETRY.getField() + ":" + getGeometryCriteria(bbox);
         }
       }
       if (pieceOfQuery != null) {
@@ -282,13 +288,21 @@ public class OpensearchSearchResource extends SitoolsResource {
   // }
   // }
 
-  private void addGeometryCriteria(SolrQuery solrQuery, Form query) {
-    String box = query.getFirstValue(OpenSearchQuery.GEO_BOX.getParamName());
-    if (box != null && !box.isEmpty()) {
-      solrQuery.add("geoRequest.type", geometryQueryType);
-      solrQuery.add("geoRequest", box);
-      solrQuery.add("defType", "GeometrySearch");
-    }
+  private String getGeometryCriteria(String box) {
+    String wkt = parseBbox(box);
+    return String.format("\"Intersects(%s)\"", wkt);
+  }
+
+  private String parseBbox(String box) {
+
+    String[] boxCoord = box.split(",");
+
+    double minX = new Double(boxCoord[0]);
+    double minY = new Double(boxCoord[1]);
+    double maxX = new Double(boxCoord[2]);
+    double maxY = new Double(boxCoord[3]);
+
+    return getGeometryQueryString(minX, minY, maxX, maxY);
   }
 
   private String getGeometryQueryString(double minX, double minY, double maxX, double maxY) {

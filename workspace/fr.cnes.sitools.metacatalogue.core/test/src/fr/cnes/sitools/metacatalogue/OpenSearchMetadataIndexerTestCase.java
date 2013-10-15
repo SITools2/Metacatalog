@@ -38,36 +38,44 @@ import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
 import fr.cnes.sitools.metacatalogue.common.Metadata;
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
 import fr.cnes.sitools.metacatalogue.index.solr.SolRUtils;
-import fr.cnes.sitools.metacatalogue.model.HarvestStatus;
+import fr.cnes.sitools.metacatalogue.index.solr.SolrMetadataIndexer;
 import fr.cnes.sitools.metacatalogue.opensearch.extractor.OpensearchMetadataExtractor;
 import fr.cnes.sitools.metacatalogue.opensearch.indexer.OpensearchMetadataIndexer;
 import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
 import fr.cnes.sitools.model.HarvesterModel;
 import fr.cnes.sitools.model.IndexerModel;
+import fr.cnes.sitools.server.ContextAttributes;
 
-public class OpenSearchMetadataIndexerTestCase {
+public class OpenSearchMetadataIndexerTestCase extends AbstractHarvesterTestCase {
 
-  private int nbFieldsExpected = 102;
-
-  private String indexerUrl = "http://localhost:8983/solr/spirit_for_test";
+  private int nbFieldsExpected = 10;
+  private SolrServer server;
 
   @Before
-  public void setup() throws SolrServerException, IOException {
-    SolrServer server = SolRUtils.getSolRServer(indexerUrl);
+  public void setupTest() throws Exception {
+    HarvesterSettings settings = (HarvesterSettings) HarvesterSettings.getInstance();
+    server = SolRUtils.getEmbeddedSolRServer(settings.getStoreDIR("Tests.SOLR_HOME"), "solr.xml", "kalideos");
     server.deleteByQuery("*:*");
     server.commit();
+
   }
 
   @Test
   public void testOpenSearchMetadataExtractor() throws ProcessException, IOException, SolrServerException {
-    Context context = new Context();
-    HarvestStatus result = new HarvestStatus();
-    context.getAttributes().put("RESULT", result);
-    Metadata data = getJsonDataFromFile();
 
-    HarvesterModel model = createHarvesterModelForTest("spirit_for_test");
+    Context context = initContext();
+    context.getAttributes().put(ContextAttributes.INDEXER_SERVER, server);
+    
+    String filePath = settings.getRootDirectory() + "/" + settings.getString("Tests.RESOURCES_DIRECTORY")
+        + "/opensearch/kalideos.json";
+    Metadata data = getJsonDataFromFile(filePath);
+
+    SolrMetadataIndexer solrIndexer = new SolrMetadataIndexer(context);
+
+    HarvesterModel model = createHarvesterModelForTest("kalideos");
     HarvesterStep extractor = new OpensearchMetadataExtractor(model, context);
-    HarvesterStep indexer = new OpensearchMetadataIndexer(model, context);
+    HarvesterStep indexer = new OpensearchMetadataIndexer(model, context, solrIndexer);
+
     extractor.setNext(indexer);
     // execute the process
     extractor.execute(data);
@@ -79,7 +87,6 @@ public class OpenSearchMetadataIndexerTestCase {
   }
 
   private void assertMetadataInserted() throws SolrServerException {
-    SolrServer server = SolRUtils.getSolRServer(indexerUrl);
     SolrQuery query = new SolrQuery();
     query.setQuery("*:*");
 
@@ -95,29 +102,10 @@ public class OpenSearchMetadataIndexerTestCase {
     model.setId(id);
     model.setCatalogType("opensearch");
     IndexerModel indexer = new IndexerModel();
-    indexer.setUrl(indexerUrl);
+    indexer.setUrl("");
     model.setIndexerConf(indexer);
     return model;
   }
 
-  private Metadata getJsonDataFromFile() throws IOException {
-    HarvesterSettings settings = HarvesterSettings.getInstance();
-    String filePath = settings.getRootDirectory() + "/" + settings.getString("TEST_RESOURCES_DIRECTORY")
-        + "/opensearch/spirit.json";
-    BufferedReader reader = new BufferedReader(new FileReader(filePath));
-    StringBuffer fileData = new StringBuffer(1000);
-    char[] buf = new char[1024];
-    int numRead = 0;
-    while ((numRead = reader.read(buf)) != -1) {
-      String readData = String.valueOf(buf, 0, numRead);
-      fileData.append(readData);
-      buf = new char[1024];
-    }
-    reader.close();
-    Metadata data = new Metadata();
-    data.setJsonData(fileData.toString());
-    return data;
-
-  }
 
 }

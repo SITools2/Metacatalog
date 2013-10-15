@@ -32,6 +32,7 @@ import fr.cnes.sitools.metacatalogue.model.HarvestStatus;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
 import fr.cnes.sitools.metacatalogue.utils.MetacatalogField;
 import fr.cnes.sitools.model.HarvesterModel;
+import fr.cnes.sitools.server.ContextAttributes;
 
 public class CswMetadataValidator extends HarvesterStep {
 
@@ -49,7 +50,7 @@ public class CswMetadataValidator extends HarvesterStep {
     logger = context.getLogger();
     List<Fields> fields = data.getFields();
 
-    HarvestStatus status = (HarvestStatus) context.getAttributes().get("STATUS");
+    HarvestStatus status = (HarvestStatus) context.getAttributes().get(ContextAttributes.STATUS);
 
     int nbDocInvalid = 0;
     for (Iterator<Fields> iterator = fields.iterator(); iterator.hasNext();) {

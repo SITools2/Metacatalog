@@ -28,24 +28,26 @@ import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
 import fr.cnes.sitools.metacatalogue.common.Metadata;
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
 import fr.cnes.sitools.metacatalogue.index.MetadataIndexer;
-import fr.cnes.sitools.metacatalogue.index.solr.SolrMetadataIndexer;
 import fr.cnes.sitools.metacatalogue.model.Fields;
 import fr.cnes.sitools.metacatalogue.model.HarvestStatus;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
 import fr.cnes.sitools.model.HarvesterModel;
+import fr.cnes.sitools.server.ContextAttributes;
 
 public class OpensearchMetadataIndexer extends HarvesterStep {
 
   private int pageSize = 50;
-  private MetadataIndexer solrIndexer;
+  private MetadataIndexer indexer;
   private Logger logger;
   private Context context;
 
   public OpensearchMetadataIndexer(HarvesterModel conf, Context context) {
-
-    solrIndexer = new SolrMetadataIndexer(conf.getIndexerConf().getUrl(), context);
     this.context = context;
+  }
 
+  public OpensearchMetadataIndexer(HarvesterModel conf, Context context, MetadataIndexer indexer) {
+    this.indexer = indexer;
+    this.context = context;
   }
 
   @Override
@@ -54,14 +56,14 @@ public class OpensearchMetadataIndexer extends HarvesterStep {
     List<Fields> fields = data.getFields();
     try {
       logger.info("Add " + fields.size() + " metadata to the solrIndex cache");
-      HarvestStatus status = (HarvestStatus) context.getAttributes().get("STATUS");
+      HarvestStatus status = (HarvestStatus) context.getAttributes().get(ContextAttributes.STATUS);
       status.setNbDocumentsIndexed(status.getNbDocumentsIndexed() + fields.size());
 
       for (Fields doc : fields) {
-        solrIndexer.addFieldsToIndex(doc);
-        if (solrIndexer.getCurrentNumberOfFieldsToIndex() == pageSize) {
+        indexer.addFieldsToIndex(doc);
+        if (indexer.getCurrentNumberOfFieldsToIndex() == pageSize) {
           logger.info("Index the metadata in the solr server ");
-          solrIndexer.indexMetadata();
+          indexer.indexMetadata();
         }
       }
     }
@@ -80,14 +82,14 @@ public class OpensearchMetadataIndexer extends HarvesterStep {
   public void end() {
     try {
       logger.info("Index the metadata in the solr server ");
-      solrIndexer.indexMetadata();
+      indexer.indexMetadata();
     }
     catch (Exception e) {
       logger.log(Level.WARNING, e.getLocalizedMessage(), e);
     }
     finally {
       try {
-        solrIndexer.commit();
+        indexer.commit();
       }
       catch (Exception e) {
         logger.log(Level.WARNING, "Cannot commit data", e);
@@ -104,11 +106,26 @@ public class OpensearchMetadataIndexer extends HarvesterStep {
     if (!info.isOk()) {
       return info;
     }
-    if (!solrIndexer.checkIndexerAvailable()) {
+    if (indexer == null) {
+      info.setOk(false);
+      info.setMessage("No indexer defined");
+    }
+    else if (!indexer.checkIndexerAvailable()) {
       info.setOk(false);
       info.setMessage("Solr server not reachable");
     }
     return info;
 
   }
+
+  /**
+   * Sets the value of solrIndexer, FOR TEST PURPOSE ONLY
+   * 
+   * @param solrIndexer
+   *          the solrIndexer to set
+   */
+  public void setSolrIndexer(MetadataIndexer solrIndexer) {
+    this.indexer = solrIndexer;
+  }
+
 }

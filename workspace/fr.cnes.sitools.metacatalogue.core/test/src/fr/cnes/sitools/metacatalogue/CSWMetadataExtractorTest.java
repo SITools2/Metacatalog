@@ -19,17 +19,12 @@
 package fr.cnes.sitools.metacatalogue;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 
-import org.fao.geonet.csw.common.util.Xml;
-import org.jdom.Element;
 import org.jdom.JDOMException;
-import org.jdom.Namespace;
 import org.junit.Test;
 import org.restlet.Context;
 
@@ -39,32 +34,20 @@ import fr.cnes.sitools.metacatalogue.csw.extractor.CswMetadataExtractor;
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
 import fr.cnes.sitools.metacatalogue.model.Field;
 import fr.cnes.sitools.metacatalogue.model.Fields;
-import fr.cnes.sitools.metacatalogue.model.HarvestStatus;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
 import fr.cnes.sitools.model.HarvesterModel;
 
-public class CSWMetadataExtractorTest {
-
-  private String filePath = "resources/geosud_csw_data.xml";
+public class CSWMetadataExtractorTest extends AbstractHarvesterTestCase {
 
   @Test
   public void test() throws IOException, JDOMException, ProcessException {
+    String filePath = settings.getRootDirectory() + "/" + settings.getString("Tests.RESOURCES_DIRECTORY")
+        + "/csw/geosud.xml";
 
-    File file = new File(filePath);
-    FileInputStream fis = new FileInputStream(file);
+    Metadata data = getXMLDataFromFile(filePath);
 
-    Element root = Xml.loadStream(fis);
-    Metadata data = new Metadata();
+    Context context = initContext();
 
-    // get the search results and the number of records
-    Element searchResults = root.getChild("SearchResults",
-        Namespace.getNamespace("http://www.opengis.net/cat/csw/2.0.2"));
-
-    data.setXmlData(searchResults);
-
-    Context context = new Context();
-    HarvestStatus status = new HarvestStatus();
-    context.getAttributes().put("STATUS", status);
     HarvesterModel conf = createHarvesterModelForTest("geosud_test");
 
     CswMetadataExtractor metadataExtractor = new CswMetadataExtractor(conf, context);

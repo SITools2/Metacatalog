@@ -26,24 +26,29 @@ import org.restlet.Context;
 import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
 import fr.cnes.sitools.metacatalogue.common.Metadata;
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
-import fr.cnes.sitools.metacatalogue.model.HarvestStatus;
 import fr.cnes.sitools.metacatalogue.opensearch.reader.OpensearchReader;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
+import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
 import fr.cnes.sitools.model.HarvesterModel;
 import fr.cnes.sitools.model.HarvesterSource;
 
-public class OpenSearchReaderTestCase {
+public class OpenSearchReaderTestCase extends AbstractHarvesterTestCase {
 
   /** The source url */
-  private String sourceUrl = "http://sitools.akka.eu:8182/sitools/datastorage/user/echange-cnes/spirit/spirit.json";
+  private String sourceUrl;
 
   @Test
   public void testOpenSearchReader() throws ProcessException {
-    Context context = new Context();
-    HarvestStatus result = new HarvestStatus();
-    context.getAttributes().put("RESULT", result);
+    HarvesterSettings settings = HarvesterSettings.getInstance();
+
+    String filePath = settings.getRootDirectory() + "/" + settings.getString("Tests.RESOURCES_DIRECTORY")
+        + "/opensearch/kalideos.json";
+
+    sourceUrl = "file://" + filePath;
+
+    Context context = initContext();
     Metadata data = null;
-    HarvesterModel model = createHarvesterModelForTest("spirit_for_test");
+    HarvesterModel model = createHarvesterModelForTest("kalideos");
     HarvesterStep reader = new OpensearchReader(model, context);
     reader.setNext(new assertDataClass());
     reader.execute(data);

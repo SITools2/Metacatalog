@@ -36,6 +36,7 @@ import fr.cnes.sitools.common.Response;
 import fr.cnes.sitools.common.SitoolsXStreamRepresentation;
 import fr.cnes.sitools.common.XStreamFactory;
 import fr.cnes.sitools.metacatalogue.model.HarvestStatus;
+import fr.cnes.sitools.model.SitoolsDateConverter;
 
 public class AsynchronousHarvestTestCase extends AbstractHarvesterServerTestCase {
 
@@ -199,6 +200,7 @@ public class AsynchronousHarvestTestCase extends AbstractHarvesterServerTestCase
       xstream.autodetectAnnotations(false);
 
       xstream.alias("response", Response.class);
+      xstream.registerConverter(new SitoolsDateConverter());
 
       if (isArray) {
         xstream.alias("item", dataClass);
