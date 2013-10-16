@@ -110,9 +110,8 @@ public final class SolRUtils {
   public static SolrServer getEmbeddedSolRServer(String solrHome, String configFileName, String coreName) {
     SolrServer solrServer;
     File configFile = new File(solrHome + "/" + configFileName);
-
+    
     CoreContainer coreContainer = CoreContainer.createAndLoad(solrHome, configFile);
-    coreContainer.load();
     EmbeddedSolrServer server = new EmbeddedSolrServer(coreContainer, coreName);
     solrServer = server;
     solrServer = checkServer(server);

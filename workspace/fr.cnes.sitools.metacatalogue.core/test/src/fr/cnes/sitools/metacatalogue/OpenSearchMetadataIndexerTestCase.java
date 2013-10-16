@@ -30,6 +30,7 @@ import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocumentList;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.restlet.Context;
@@ -60,12 +61,19 @@ public class OpenSearchMetadataIndexerTestCase extends AbstractHarvesterTestCase
 
   }
 
+  @After
+  public void tearDown() {
+    if (server != null) {
+      server.shutdown();
+    }
+  }
+
   @Test
   public void testOpenSearchMetadataExtractor() throws ProcessException, IOException, SolrServerException {
 
     Context context = initContext();
     context.getAttributes().put(ContextAttributes.INDEXER_SERVER, server);
-    
+
     String filePath = settings.getRootDirectory() + "/" + settings.getString("Tests.RESOURCES_DIRECTORY")
         + "/opensearch/kalideos.json";
     Metadata data = getJsonDataFromFile(filePath);
@@ -106,6 +114,5 @@ public class OpenSearchMetadataIndexerTestCase extends AbstractHarvesterTestCase
     model.setIndexerConf(indexer);
     return model;
   }
-
 
 }

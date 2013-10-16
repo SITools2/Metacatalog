@@ -29,6 +29,7 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocumentList;
 import org.jdom.JDOMException;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.restlet.Context;
@@ -51,11 +52,19 @@ public class CswMetadataIndexerTestCase extends AbstractHarvesterTestCase {
 
   @Before
   public void setupTest() throws Exception {
+
     HarvesterSettings settings = (HarvesterSettings) HarvesterSettings.getInstance();
     server = SolRUtils.getEmbeddedSolRServer(settings.getStoreDIR("Tests.SOLR_HOME"), "solr.xml", "geosud");
     server.deleteByQuery("*:*");
     server.commit();
 
+  }
+
+  @After
+  public void tearDown() {
+    if (server != null) {
+      server.shutdown();
+    }
   }
 
   @Test
