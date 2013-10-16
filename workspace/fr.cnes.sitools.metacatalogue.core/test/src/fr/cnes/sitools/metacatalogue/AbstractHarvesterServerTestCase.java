@@ -38,42 +38,6 @@ import fr.cnes.sitools.server.Starter;
 public abstract class AbstractHarvesterServerTestCase extends AbstractHarvesterTestCase {
 
   /**
-   * Default test port for all tests
-   */
-  public static final int DEFAULT_TEST_PORT = 1340;
-
-  /**
-   * system property name for test port
-   */
-  protected static final String PROPERTY_TEST_PORT = "sitools.test.port";
-
-  /**
-   * server port for the each test instance.
-   */
-  protected final int portTest = getTestPort();
-
-  /**
-   * Port for test defined in this order : 1. System property sitools.test.port 2. default test port (1340)
-   * 
-   * @return test port
-   */
-  protected static int getTestPort() {
-    if (System.getProperties().containsKey(PROPERTY_TEST_PORT)) {
-      return Integer.parseInt(System.getProperty(PROPERTY_TEST_PORT));
-    }
-    return DEFAULT_TEST_PORT;
-  }
-
-  /**
-   * absolute url for sitools REST API
-   * 
-   * @return url
-   */
-  protected String getBaseUrl() {
-    return "http://localhost:" + getTestPort() + HARVESTERS_URL;
-  }
-
-  /**
    * absolute url for sitools REST API
    * 
    * @return url
@@ -112,7 +76,7 @@ public abstract class AbstractHarvesterServerTestCase extends AbstractHarvesterT
     LOGGER.info(this.getClass().getName() + " TEST BASE URL = " + getBaseUrl());
     LOGGER.info(this.getClass().getName() + " TEST REPOSITORY = " + getTestRepository());
     LOGGER.info(this.getClass().getName() + " TEST PORT = " + getTestPort());
-  
+
     // asert assertTrue("Check data directory presence", (new
     // File(getTestRepository()).exists()));
   }

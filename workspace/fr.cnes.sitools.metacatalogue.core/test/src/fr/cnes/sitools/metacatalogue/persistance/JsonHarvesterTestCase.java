@@ -20,7 +20,7 @@ package fr.cnes.sitools.metacatalogue.persistance;
 
 import org.restlet.data.MediaType;
 
-public class JsonHarvesterTestCase extends AbstractHarvesterTestCase {
+public class JsonHarvesterTestCase extends AbstractHarvesterModelTestCase {
 
   static {
     setMediaTest(MediaType.APPLICATION_JSON);

@@ -20,7 +20,7 @@ package fr.cnes.sitools.metacatalogue.persistance;
 
 import org.restlet.data.MediaType;
 
-public class XmlHarvesterTestCase extends AbstractHarvesterTestCase {
+public class XmlHarvesterTestCase extends AbstractHarvesterModelTestCase {
 
   static {
     setMediaTest(MediaType.APPLICATION_XML);
