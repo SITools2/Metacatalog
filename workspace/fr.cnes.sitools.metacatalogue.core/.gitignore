@@ -10,7 +10,6 @@ startMetacatalogue.bat
 startMetacatalogue.sh
 logs/
 /bin
-/bin
-/bin
-/bin
-/bin
+test/reports/
+junit*
+cobertura.ser

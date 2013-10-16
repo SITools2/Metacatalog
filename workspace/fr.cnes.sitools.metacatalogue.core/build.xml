@@ -67,6 +67,20 @@
 		</subant>	
 	</target>
 	
+	<!-- TARGET javadoc -->
+	<target name="coverage" description="Execute tests">
+		<subant target="coverage">
+			<fileset dir="${conf.build.dir}" includes="build.xml" />
+		</subant>	
+	</target>
+
+	<!-- TARGET javadoc -->
+	<target name="audit" description="Code audit">
+		<subant target="audit">
+			<fileset dir="${conf.build.dir}" includes="build.xml" />
+		</subant>	
+	</target>
+	
 	<!-- TARGET refresh-userlibraries -->
 	<target name="refresh-userlibraries" description="Mise à jour des userlibraries pour eclipse et pour Ant">
 		<echo message="COTS dir : ${cots.dir}" />

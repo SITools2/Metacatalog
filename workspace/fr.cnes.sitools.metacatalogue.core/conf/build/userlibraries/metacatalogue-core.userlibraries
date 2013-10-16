@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <eclipse-userlibraries version="2">
+    <library name="audit" systemlibrary="false">
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/audit/checkstyle/checkstyle-all-5.6.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/audit/pmd/asm-3.1.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/audit/pmd/jaxen-1.1.1.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/audit/pmd/pmd-4.2.5.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/audit/pmd/sitools_pmd_rules.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/audit/findbugs/lib/findbugs.jar"/>
+    </library>
     <library name="geo_tools" systemlibrary="false">
         <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/geotools-2.6.2/gt-api-2.6.2.jar"/>
         <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/geotools-2.6.2/gt-coverage-2.6.2.jar"/>
@@ -35,6 +43,7 @@
         <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/workspace/fr.cnes.sitools.metacatalogue.libraries/common-2.2.1.jar"/>
         <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/workspace/fr.cnes.sitools.metacatalogue.libraries/ecore-2.2.2.jar"/>
         <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/workspace/fr.cnes.sitools.metacatalogue.libraries/jaxen-1.1.1.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/workspace/fr.cnes.sitools.metacatalogue.libraries/jdom-1.0.jar"/>
         <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/workspace/fr.cnes.sitools.metacatalogue.libraries/joda-time-1.5.2.jar"/>
         <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/workspace/fr.cnes.sitools.metacatalogue.libraries/jsr-275-1.0-beta-2.jar"/>
         <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/workspace/fr.cnes.sitools.metacatalogue.libraries/jts-1.10.jar"/>
@@ -43,8 +52,8 @@
         <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/workspace/fr.cnes.sitools.metacatalogue.libraries/saxon-9.1.0.8b-patch.jar"/>
         <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/workspace/fr.cnes.sitools.metacatalogue.libraries/xercesImpl-2.7.1.jar"/>
         <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/workspace/fr.cnes.sitools.metacatalogue.libraries/xml-apis-xerces-2.7.1.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/workspace/fr.cnes.sitools.metacatalogue.libraries/xpp3-1.1.4c.jar"/>
         <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/workspace/fr.cnes.sitools.metacatalogue.libraries/xsd-2.2.2.jar"/>
-        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/workspace/fr.cnes.sitools.metacatalogue.libraries/jdom-1.0.jar"/>
     </library>
     <library name="restlet_2_1_0" systemlibrary="false">
         <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/restlet-jse-2.1.0/lib/org.restlet.jar"/>
@@ -62,23 +71,81 @@
         <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/restlet-jse-2.1.0/lib/org.codehaus.jettison_1.3/org.codehaus.jettison.jar"/>
         <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/restlet-jse-2.1.0/lib/org.codehaus.jackson_1.9/org.codehaus.jackson.mapper.jar"/>
     </library>
+    <library name="solr-4.5" systemlibrary="false">
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/commons-cli-1.2.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/commons-codec-1.7.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/commons-configuration-1.6.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/commons-fileupload-1.2.1.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/commons-io-2.1.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/commons-lang-2.6.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/concurrentlinkedhashmap-lru-1.2.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/dom4j-1.6.1.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/guava-14.0.1.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/httpclient-4.2.3.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/httpcore-4.2.2.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/httpmime-4.2.3.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/jcl-over-slf4j-1.6.6.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/joda-time-2.2.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/jul-to-slf4j-1.6.6.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/log4j-1.2.16.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/lucene-analyzers-common-4.5.0.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/lucene-analyzers-kuromoji-4.5.0.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/lucene-analyzers-phonetic-4.5.0.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/lucene-codecs-4.5.0.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/lucene-core-4.5.0.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/lucene-grouping-4.5.0.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/lucene-highlighter-4.5.0.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/lucene-join-4.5.0.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/lucene-memory-4.5.0.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/lucene-misc-4.5.0.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/lucene-queries-4.5.0.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/lucene-queryparser-4.5.0.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/lucene-spatial-4.5.0.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/lucene-suggest-4.5.0.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/noggit-0.5.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/protobuf-java-2.4.0a.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/slf4j-api-1.6.6.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/slf4j-log4j12-1.6.6.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/solr-analysis-extras-4.5.0.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/solr-cell-4.5.0.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/solr-clustering-4.5.0.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/solr-core-4.5.0.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/solr-dataimporthandler-4.5.0.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/solr-dataimporthandler-extras-4.5.0.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/solr-langid-4.5.0.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/solr-solrj-4.5.0.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/solr-test-framework-4.5.0.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/solr-uima-4.5.0.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/solr-velocity-4.5.0.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/spatial4j-0.3.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/wstx-asl-3.2.7.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solr/zookeeper-3.4.5.jar"/>
+    </library>
     <library name="solrj-4.5" systemlibrary="false">
-        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/dist/solrj-lib/commons-io-2.1.jar"/>
-        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/dist/solrj-lib/httpclient-4.2.3.jar"/>
-        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/dist/solrj-lib/httpcore-4.2.2.jar"/>
-        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/dist/solrj-lib/httpmime-4.2.3.jar"/>
-        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/dist/solrj-lib/jcl-over-slf4j-1.6.6.jar"/>
-        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/dist/solrj-lib/jul-to-slf4j-1.6.6.jar"/>
-        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/dist/solrj-lib/log4j-1.2.16.jar"/>
-        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/dist/solrj-lib/noggit-0.5.jar"/>
-        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/dist/solrj-lib/slf4j-api-1.6.6.jar"/>
-        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/dist/solrj-lib/slf4j-log4j12-1.6.6.jar"/>
-        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/dist/solrj-lib/wstx-asl-3.2.7.jar"/>
-        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/dist/solrj-lib/zookeeper-3.4.5.jar"/>
-        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/dist/solr-core-4.5.0.jar"/>
-        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/dist/solr-solrj-4.5.0.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solrj/solrj-lib/commons-io-2.1.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solrj/solrj-lib/httpclient-4.2.3.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solrj/solrj-lib/httpcore-4.2.2.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solrj/solrj-lib/httpmime-4.2.3.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solrj/solrj-lib/jcl-over-slf4j-1.6.6.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solrj/solrj-lib/jul-to-slf4j-1.6.6.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solrj/solrj-lib/log4j-1.2.16.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solrj/solrj-lib/noggit-0.5.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solrj/solrj-lib/slf4j-api-1.6.6.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solrj/solrj-lib/slf4j-log4j12-1.6.6.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solrj/solrj-lib/wstx-asl-3.2.7.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solrj/solrj-lib/zookeeper-3.4.5.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solrj/solr-core-4.5.0.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/apache-solr-4.5/solrj/solr-solrj-4.5.0.jar"/>
     </library>
     <library name="tests" systemlibrary="false">
         <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/restlet-jse-2.1.0/lib/org.junit_4.8/org.junit.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/restlet-jse-2.1.0/lib/javax.servlet_2.5/javax.servlet.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/audit/cobertura/cobertura.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/audit/cobertura/lib/asm-3.0.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/audit/cobertura/lib/asm-tree-3.0.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/audit/cobertura/lib/jakarta-oro-2.0.8.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/audit/cobertura/lib/log4j-1.2.9.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/audit/emma/emma.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/audit/emma/emma_ant.jar"/>
     </library>
 </eclipse-userlibraries>

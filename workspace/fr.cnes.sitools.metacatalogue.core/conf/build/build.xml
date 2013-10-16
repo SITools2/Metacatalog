@@ -51,9 +51,9 @@
 	<target name="deploy-jar-projet" description="Deploiement local de l'application" depends="init, prepare, compile, jar, deploy-jar" />
 	
 	<target name="javadoc-projet" description="Generation du ZIP contenant la javadoc du projet" depends="init, prepare, javadoc" />
-
 		
-		
+	<target name="execute-tests" depends="test-init, test-compile, test" />
+	
 		
 		
 		
@@ -97,7 +97,7 @@
 	<property file="${conf.reference.dir}/metacatalogue-reference.properties" prefix="properties" />
 
 	<!-- Repertoires destination pour la construction de l'application  -->
-	<property name="out.dir" value="." />
+	<property name="out.dir" value="out" />
 	<property name="out.classes.dir" value="${out.dir}/bin" />
 	<property name="out.javadoc.dir" value="${out.dir}/javadoc" />
 	<property name="out.jar.dir" value="../${out.dir}/jar" />
@@ -107,7 +107,49 @@
 	<property name="dist.bin.dir" value="${dist.dir}" />
 	<property name="dist.conf.dir" value="${dist.dir}" />
 	<property name="dist.lib.dir" value="${dist.dir}/lib" />
-		
+	
+	<!-- Arborescence pour la construction des tests -->
+	<property name="test.dir" value="test" />
+	<property name="test.conf.dir" value="${conf.properties.dir}" />
+	<!-- au lieu de test.dir/conf -->
+	<property name="test.lib.dir" value="${test.dir}/lib" />
+	<property name="test.reports.dir" value="${test.dir}/reports" />
+	<property name="test.reports.data.dir" value="${test.reports.dir}/xml" />
+	<property name="test.src.dir" value="${test.dir}/src" />
+
+	<property name="test.data.dir" value="${test.dir}/data" />
+	<property name="out.audit.dir" value="${out.dir}/audit" />
+	<property name="checkstyle.reports.dir" value="${out.audit.dir}/checkstyle" />
+	<property name="pmd.reports.dir" value="${out.audit.dir}/pmd" />
+	<property name="cpd.reports.dir" value="${out.audit.dir}/cpd" />
+	<property name="cobertura.reports.dir" value="${out.audit.dir}/cobertura" />
+	<property name="test.classes.dir" value="${out.dir}/classes" />
+	<property name="checkstyle.xsl" value="checkstyle-noframes-sorted.xsl" />
+	<!-- properties for Cobertura -->
+	<property name="instrumented.dir" value="${out.classes.dir}" />
+
+	
+	<!-- Import la définition des répertoires de l'arborescence projet -->
+	<!-- Arborescence pour la construction de l'application -->
+	<property name="audit.dir" value="audit" />
+	<property name="audit.checkstyle.rules.dir" value="${audit.dir}/checkstyle" />
+	<property name="audit.pmd.rules.dir" value="${audit.dir}/pmd" />
+	<property name="audit.cobertura.rules.dir" value="${audit.dir}/cobertura" />
+	<property name="audit.xsl.dir" value="${audit.dir}/xsl" />
+	
+	<!-- taskdef pour CheckStyle -->
+	<taskdef resource="checkstyletask.properties" classpathref="audit" />
+
+	<!-- taskdef pour Cobertura -->
+	<taskdef resource="tasks.properties" classpathref="tests" />
+
+	<!-- taskdef pour PMD -->
+	<taskdef name="pmd" classname="net.sourceforge.pmd.ant.PMDTask"
+		classpathref="audit" />
+
+	<!-- taskdef pour CPD -->
+	<taskdef name="cpd" classname="net.sourceforge.pmd.cpd.CPDTask"
+		classpathref="audit" />
 		
 		
 	<path id="compile.classpath">
@@ -118,6 +160,16 @@
 		<path refid="restlet_2_1_0" />
 		<path refid="jsonpath" />
 		<path refid="libraries" />
+	</path>
+	
+	<!-- Classpath pour l'execution des tests -->
+	<path id="test.classpath">
+		<path refid="tests" />
+		<path refid="solr-4.5" />
+		<path refid="compile.classpath" />
+		<pathelement location="${out.classes.dir}" />
+		<pathelement location="${test.classes.dir}" />
+		<pathelement location="${test.conf.dir}" />
 	</path>
 
 	<target name="prepare">
@@ -262,10 +314,155 @@
 	
 	
 	
+	<!-- ========================================================================================= 
+		test-init : Creation de l'arborescence pour les tests ========================================================================================= -->
+	<target name="test-init">
+		<echo message="Compile classpath : ${toString:test.classpath}" />
+		<mkdir dir="${test.dir}" />
+		<delete dir="${test.reports.data.dir}" />
+		<delete dir="${test.reports.dir}" />
+		<mkdir dir="${test.reports.dir}" />
+		<mkdir dir="${test.reports.data.dir}" />
+		<mkdir dir="${test.classes.dir}" />
+	</target>
+
+	<!-- ========================================================================================= 
+		test-compile : Compilation des TestCase JUnit et des classes de tests ========================================================================================= -->
+	<target name="test-compile">
+		<!-- Compile tests -->
+		<javac srcdir="${test.src.dir}" destdir="${test.classes.dir}"
+			debug="${debug}" deprecation="${deprecation}" optimize="${optimize}"
+			includeAntRuntime="false">
+
+			<classpath>
+				<path refid="test.classpath" />
+			</classpath>
+		</javac>
+
+		<!-- Copie les ressources des tests dans le repertoire ${test.conf.dir} -->
+		<copy todir="${test.conf.dir}" includeemptydirs="false">
+			<fileset dir="${test.src.dir}" excludes="**/*.java" />
+		</copy>
+	</target>
+
+	<property name="test.last.failed.file" location="${test.dir}/.lasttestsfailed" />
+
+	<!-- ========================================================================================= 
+		test : Execution des Tests JUnit et generation du rapport de test ========================================================================================= -->
+	<target name="test"
+		description="Execution des tests JUnit et generation du rapport de test">
+		<echo level="info" message="" />
+
+		<!-- Execute les tests JUnit -->
+		<junit printsummary="yes" errorProperty="test.failed"
+			failureProperty="test.failed" fork="yes" dir="${basedir}">
+			<sysproperty key="net.sourceforge.cobertura.datafile"
+				file="cobertura.ser" />
+			<classpath refid="instrumented.classpath" />
+			<classpath refid="test.classpath" />
+			<formatter type="brief" usefile="false" />
+			<formatter type="xml" />
+			<test name="${testcase}" if="testcase" />
+			<batchtest todir="${test.reports.data.dir}" unless="testcase">
+				<fileset dir="${test.classes.dir}" includes="**/Test*.class"
+					excludes="**/Abstract*.class **/TestRunner.class" />
+				<fileset dir="${test.classes.dir}" includes="**/*Test.class"
+					excludes="**/Abstract*.class" />
+				<fileset dir="${test.classes.dir}" includes="**/*TestCase.class"
+					excludes="**/Abstract*.class" />
+			</batchtest>
+		</junit>
+
+		<junitreport todir="${test.reports.data.dir}">
+			<fileset dir="${test.reports.data.dir}">
+				<include name="TEST-*.xml" />
+			</fileset>
+			<report format="frames" todir="${test.reports.dir}" />
+		</junitreport>
+
+		<echo message="last build failed tests" file="${test.last.failed.file}" />
+		<fail if="test.failed">
+			Unit tests failed. Check log or reports for details
+		</fail>
+
+		<!-- Remove test failed file, as these tests succeeded -->
+		<delete file="${test.last.failed.file}" />
+	</target>
 	
 	
+	<!-- Classpath of the files to instrument -->
+	<path id="instrument.classpath">
+		<fileset dir="${out.classes.dir}">
+			<include name="**/*.class" />
+		</fileset>
+	</path>
+
+	<!-- Defines the directory where to find the instrumented classes -->
+	<path id="instrumented.classpath">
+		<pathelement location="${instrumented.dir}" />
+	</path>
+
+	<target name="instrumentClasses" depends="deploy-jar-projet">
+		<delete dir="${cobertura.reports.dir}" />
+		<mkdir dir="${cobertura.reports.dir}" />
+		<path refid="test" />
+		<cobertura-instrument todir="${instrumented.dir}"
+			datafile="cobertura.ser">
+			<ignore regex="org.apache.log4j.*" />
+			<fileset dir="${out.classes.dir}">
+				<include name="**/*.class" />
+				<exclude name="**/*Test.class" />
+			</fileset>
+		</cobertura-instrument>
+	</target>
+
+	<target name="coverage" depends="instrumentClasses, execute-tests">
+		<cobertura-report format="html" srcdir="${src.dir}"
+			destdir="${cobertura.reports.dir}" datafile="cobertura.ser" />
+		<cobertura-report format="xml" srcdir="${src.dir}"
+			destdir="${cobertura.reports.dir}" datafile="cobertura.ser" />
+	</target>
+
+	<target name="audit" description="Generates a report of code convention violations.">
+
+		<delete dir="${checkstyle.reports.dir}" />
+		<delete dir="${pmd.reports.dir}" />
+		<delete dir="${cpd.reports.dir}" />
+
+		<mkdir dir="${checkstyle.reports.dir}" />
+		<mkdir dir="${pmd.reports.dir}" />
+		<mkdir dir="${cpd.reports.dir}" />
+
+		<!-- Audit CHECKSTYLE -->
+		<checkstyle config="${audit.checkstyle.rules.dir}/AKKA-CheckStyle.xml"
+			failureProperty="checkstyle.failure" failOnViolation="false">
+			<formatter type="xml"
+				tofile="${checkstyle.reports.dir}/checkstyle_report.xml" />
+			<fileset dir="${src.dir}" includes="**/*.java" />
+		</checkstyle>
+		<xslt in="${checkstyle.reports.dir}/checkstyle_report.xml" out="${checkstyle.reports.dir}/checkstyle_report.html"
+			style="${audit.xsl.dir}/${checkstyle.xsl}" />
+
+		<!-- Audit PMD -->
+		<pmd rulesetfiles="${audit.pmd.rules.dir}/AKKA-PMD.xml">
+			<formatter type="xml" toFile="${pmd.reports.dir}/pmd_report.xml" />
+			<fileset dir="${src.dir}">
+				<include name="**/*.java" />
+			</fileset>
+		</pmd>
+
+		<!-- Audit CPD -->
+		<cpd minimumTokenCount="100" outputFile="${cpd.reports.dir}/cpd_report.xml"
+			format="xml">
+			<fileset dir="${src.dir}">
+				<include name="**/*.java" />
+			</fileset>
+		</cpd>
+
+	</target>
 	
 	
+
 	
 	
 </project>
