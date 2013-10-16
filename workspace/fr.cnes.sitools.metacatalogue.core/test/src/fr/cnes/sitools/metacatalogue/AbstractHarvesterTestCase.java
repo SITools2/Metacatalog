@@ -63,13 +63,13 @@ public class AbstractHarvesterTestCase {
   public static final String TEST_FILES_REFERENCE_REPOSITORY = HarvesterSettings.getInstance().getString(
       "Tests.REFERENCE_STORE_DIR");
   /**
+   * Default test port for all tests
+   */
+  public static final int DEFAULT_TEST_PORT = 1348;
+  /**
    * system property name for test port
    */
   protected static final String PROPERTY_TEST_PORT = "sitools.test.port";
-  /**
-   * Default test port for all tests
-   */
-  public static final int DEFAULT_TEST_PORT = 1340;
   /**
    * Settings for the test
    */
