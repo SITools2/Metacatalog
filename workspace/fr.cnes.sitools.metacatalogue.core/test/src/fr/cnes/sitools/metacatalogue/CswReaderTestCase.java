@@ -1,0 +1,105 @@
+/*******************************************************************************
+ * Copyright 2011 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
+ * 
+ * This file is part of SITools2.
+ * 
+ * SITools2 is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * SITools2 is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with SITools2.  If not, see <http://www.gnu.org/licenses/>.
+ ******************************************************************************/
+package fr.cnes.sitools.metacatalogue;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+import org.restlet.Context;
+
+import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
+import fr.cnes.sitools.metacatalogue.common.Metadata;
+import fr.cnes.sitools.metacatalogue.csw.reader.CswGetReader;
+import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
+import fr.cnes.sitools.metacatalogue.model.HarvestStatus;
+import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
+import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
+import fr.cnes.sitools.model.HarvesterModel;
+import fr.cnes.sitools.model.HarvesterSource;
+import fr.cnes.sitools.server.ContextAttributes;
+
+public class CswReaderTestCase extends AbstractHarvesterTestCase {
+
+  /** The source url */
+  private String sourceUrl;
+
+  @Test
+  public void testOpenSearchReader() throws ProcessException {
+    HarvesterSettings settings = HarvesterSettings.getInstance();
+
+    String filePath = settings.getRootDirectory() + "/" + settings.getString("Tests.RESOURCES_DIRECTORY")
+        + "/csw/geosud.xml";
+
+    sourceUrl = "file://" + filePath;
+
+    Context context = initContext();
+    Metadata data = null;
+    HarvesterModel model = createHarvesterModelForTest("geosud");
+    HarvesterStep reader = new CswGetReader(model, context);
+    reader.setNext(new AssertDataClass(model, context));
+    reader.execute(data);
+
+  }
+
+  private HarvesterModel createHarvesterModelForTest(String id) {
+    HarvesterModel model = new HarvesterModel();
+    model.setId(id);
+    model.setCatalogType("csw-iso19139-2-Geosud");
+    HarvesterSource source = new HarvesterSource();
+    source.setUrl(sourceUrl);
+    model.setSource(source);
+    return model;
+  }
+
+  private class AssertDataClass extends HarvesterStep {
+
+    private Context context;
+
+    /**
+     * Create a new {@link CswGetReader} with a given {@link HarvesterSource}
+     * 
+     * @param conf
+     *          the {@link HarvesterModel} to harvest
+     */
+    public AssertDataClass(HarvesterModel conf, Context context) {
+      this.context = context;
+
+    }
+
+    @Override
+    public void execute(Metadata data) throws ProcessException {
+      assertNotNull(data);
+      assertNotNull(data.getXmlData());
+      HarvestStatus status = (HarvestStatus) context.getAttributes().get(ContextAttributes.STATUS);
+      assertEquals(1, status.getNbDocumentsRetrieved());
+
+    }
+
+    @Override
+    public void end() {
+    }
+
+    @Override
+    public CheckStepsInformation check() {
+      return new CheckStepsInformation(false);
+    }
+
+  }
+}
