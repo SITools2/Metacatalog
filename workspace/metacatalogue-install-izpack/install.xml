@@ -135,7 +135,7 @@
 		<!-- COTS -->
 		<pack name="Server-Cots" preselected="yes" required="yes" parent="Server">
 			<description>Solr, geoApi, geoTools, Restlet, Saxon</description>
-			<fileset override="update" dir="../../cots/apache-solr-4.5" targetdir="$INSTALL_PATH/cots/apache-solr-4.5"
+			<fileset override="update" dir="../../cots/apache-solr-4.5/solrj" targetdir="$INSTALL_PATH/cots/apache-solr-4.5/solrj"
 				excludes="**/*.zip" />
 			<fileset override="update" dir="../../cots/geoAPI-2.3-M1" targetdir="$INSTALL_PATH/cots/geoAPI-2.3-M1"
 				excludes="**/*.zip" />

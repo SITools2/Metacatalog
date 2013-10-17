@@ -438,7 +438,7 @@
 			failureProperty="checkstyle.failure" failOnViolation="false">
 			<formatter type="xml"
 				tofile="${checkstyle.reports.dir}/checkstyle_report.xml" />
-			<fileset dir="${src.dir}" includes="**/*.java" />
+			<fileset dir="${src.dir}" includes="**/*.java" excludes="**/org/fao/geonet/**/*.java" />
 		</checkstyle>
 		<xslt in="${checkstyle.reports.dir}/checkstyle_report.xml" out="${checkstyle.reports.dir}/checkstyle_report.html"
 			style="${audit.xsl.dir}/${checkstyle.xsl}" />
@@ -448,6 +448,7 @@
 			<formatter type="xml" toFile="${pmd.reports.dir}/pmd_report.xml" />
 			<fileset dir="${src.dir}">
 				<include name="**/*.java" />
+				<exclude name="**/org/fao/geonet/**/*.java"/>
 			</fileset>
 		</pmd>
 
@@ -456,6 +457,7 @@
 			format="xml">
 			<fileset dir="${src.dir}">
 				<include name="**/*.java" />
+				<exclude name="**/org/fao/geonet/**/*.java"/>
 			</fileset>
 		</cpd>
 

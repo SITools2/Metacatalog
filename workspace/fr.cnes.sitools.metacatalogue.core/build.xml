@@ -21,7 +21,7 @@
 <!ENTITY taskdef SYSTEM "build/taskdef.xml">
 <!ENTITY targets SYSTEM "build/targets.xml"> 
 ]>
-<project name="fr.cnes.metacatalogue.metacatalogue.core" default="build" basedir=".">
+<project name="fr.cnes.metacatalogue.core" default="build" basedir=".">
 
 	<property file="build.properties" />
 
