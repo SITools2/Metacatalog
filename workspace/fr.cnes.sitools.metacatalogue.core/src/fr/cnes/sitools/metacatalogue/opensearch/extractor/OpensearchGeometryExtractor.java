@@ -56,11 +56,12 @@ public class OpensearchGeometryExtractor {
 
     Geometry geometry = extractGeometry(geometryJson, context);
 
-    if (!isCountryClockWise(geometry)) {
-      geometry = geometry.reverse();
-    }
-
     if (geometry != null) {
+
+      if (!isCountryClockWise(geometry)) {
+        geometry = geometry.reverse();
+      }
+
       WKTWriter wktWriter = new WKTWriter();
       String geo = wktWriter.writeFormatted(geometry);
       fields.add(MetacatalogField._GEOMETRY.getField(), geo);

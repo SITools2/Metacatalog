@@ -70,11 +70,12 @@ public class CswGeometryExtractor {
     // extract the geometry from the XML
     Geometry geometry = extractGeometry(metadata, sFileGmlXSL);
 
-    if (!isCountryClockWise(geometry)) {
-      geometry = geometry.reverse();
-    }
-
     if (geometry != null) {
+
+      if (!isCountryClockWise(geometry)) {
+        geometry = geometry.reverse();
+      }
+
       WKTWriter wktWriter = new WKTWriter();
       String geo = wktWriter.write(geometry);
       fields.add(MetacatalogField._GEOMETRY.getField(), geo);
