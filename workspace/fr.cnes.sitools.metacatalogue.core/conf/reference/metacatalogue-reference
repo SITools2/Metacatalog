@@ -5,7 +5,7 @@
 # ---------
 
 version() {
-	echo " SITools2 Metacatalogue v.${version} Copyright 2010, 2011, 2012 CNES"
+	echo " SITools2 Metacatalogue v.${version} Copyright 2010-2013 CNES"
 }
 
 usage() {

@@ -6,7 +6,7 @@ Date                                 : 2013-02-08
 Version                              : 0.5
 Developper                           : AKKA Technologies
 Type                                 : Prototype
-Repository url                       : 
+Repository url                       : https://github.com/SITools2/Metacatalog
 Project page                         : 
 Classification                       : 
 Characteristics                      : 
@@ -14,6 +14,15 @@ Role/Function                        :
 Reference tag                        : 
 
 2/ Changes
+
+__________
+- 0.6 (06/11/2013)
+		
+	- Enhancement :
+		-> Update Solr Version to 4.5
+			- Can perform geographic queries natively
+		-> Testability improvement
+
 __________
 - 0.5 (08/02/2013)
 	- New feature :
