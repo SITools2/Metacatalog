@@ -172,18 +172,50 @@
 		<pathelement location="${test.classes.dir}" />
 		<pathelement location="${test.conf.dir}" />
 	</path>
+	
+	<!-- Tous les fichiers ressource -->
+	<patternset id="all.resource.files">
+		<include name="**/*.properties"/>
+		<include name="**/*.xml"/>
+		<include name="**/*.xsd"/>
+		<include name="**/*.dtd"/>
+		<include name="**/*.wav"/>
+		<include name="**/*.gif"/>
+		<include name="**/*.jpg"/>
+		<include name="**/*.jpeg"/>
+		<include name="**/*.ini"/>
+		<include name="**/*.dat"/>
+		<include name="**/*.html"/>
+		<include name="**/*.hs"/>
+		<include name="**/*.jhm"/>
+		<include name="**/*.htm"/>
+		<include name="**/*.ftl"/>
+		<include name="**/*.xsl"/>
+		<include name="**/*Helper"/>
+	</patternset>
 
 	<target name="prepare">
 		<!-- Creation des repertoires dist.dir et out.jar.dir -->
 		<mkdir dir="${dist.dir}" />
 		<mkdir dir="${out.classes.dir}" />
 	</target>
+	
+	
 
 
 	<target name="compile">
 		<javac srcdir="./src" destdir="${out.classes.dir}" debug="${debug}" deprecation="${deprecation}" optimize="${optimize}" encoding="${encoding}" includeAntRuntime="false">
 			<classpath refid="compile.classpath" />
 		</javac>
+		
+
+		<!-- Copie les fichiers de resource qui doivent etre dans le repertoire 
+			classes -->
+		<copy todir="${out.classes.dir}">
+			<fileset dir="${src.dir}">
+				<patternset refid="all.resource.files" />
+			</fileset>
+		</copy>
 	</target>
 
 	<target name="jar">
