@@ -1,4 +1,4 @@
- /*******************************************************************************
+/*******************************************************************************
  * Copyright 2010-2013 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
  *
  * This file is part of SITools2.
@@ -51,13 +51,13 @@ public class WmsHttpsServiceHandler extends AbstractHttpsServiceHandler {
     MetacatalogueApplication application = (MetacatalogueApplication) getApplication();
 
     solrCoreUrl = application.getSolrCoreUrl();
-    
+
     String urn = (String) request.getAttributes().get("urn");
     if (urn == null || urn.isEmpty()) {
       throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST, "urn parameter is mandatory");
     }
 
-    //String serviceUrl = "https://portal.ingeoclouds.eu/sitools/datasets?media=json";
+    // String serviceUrl = "https://portal.ingeoclouds.eu/sitools/datasets?media=json";
     String serviceUrl = getServiceUrl(urn, solrCoreUrl, WMS_URL_FIELD);
 
     // we add {rq} at the end of the url to get all query parameters from the original request to the other
@@ -65,9 +65,9 @@ public class WmsHttpsServiceHandler extends AbstractHttpsServiceHandler {
     // value
     Reference ref = new Reference(serviceUrl);
     ref.addQueryParameter("{rq}", null);
-//    // the reference encodes the special character so we decode them
+    // // the reference encodes the special character so we decode them
     serviceUrl = Reference.decode(ref.toString());
-    
+
     return serviceUrl;
   }
 

@@ -1,4 +1,4 @@
- /*******************************************************************************
+/*******************************************************************************
  * Copyright 2010-2013 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
  *
  * This file is part of SITools2.
@@ -29,40 +29,36 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.restlet.data.MediaType;
 import org.restlet.representation.OutputRepresentation;
 
-
 /**
  * 
  */
 public class SecureOutputRepresentation extends OutputRepresentation {
 
-	CloseableHttpResponse response;
-	
-	public SecureOutputRepresentation(MediaType mediaType) {
-		super(mediaType);
-	}
-	
-	public SecureOutputRepresentation(MediaType _mediaType, CloseableHttpResponse _response) {
-		super(_mediaType);
-		response = _response;
-	}
+  CloseableHttpResponse response;
 
+  public SecureOutputRepresentation(MediaType mediaType) {
+    super(mediaType);
+  }
 
-	@Override
-	public void write(OutputStream os) throws IOException {
-		
-		Writer out = new OutputStreamWriter(os);
-		
-		InputStream is = response.getEntity().getContent();
+  public SecureOutputRepresentation(MediaType _mediaType, CloseableHttpResponse _response) {
+    super(_mediaType);
+    response = _response;
+  }
 
-		BufferedInputStream buff = new BufferedInputStream(is);
-		int i;
-		do {
-			i = buff.read();
-			out.write((char) i);
-		} while (i != -1);
-		
-	}
-	
-	
+  @Override
+  public void write(OutputStream os) throws IOException {
+
+    Writer out = new OutputStreamWriter(os);
+
+    InputStream is = response.getEntity().getContent();
+
+    BufferedInputStream buff = new BufferedInputStream(is);
+    int i;
+    do {
+      i = buff.read();
+      out.write((char) i);
+    } while (i != -1);
+
+  }
 
 }

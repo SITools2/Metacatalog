@@ -59,7 +59,7 @@ import fr.cnes.sitools.proxy.ProxySettings;
 public class RedirectorHttps extends Redirector {
 
   private String user;
-  private String password;  
+  private String password;
   private boolean withproxy = false;
 
   /**
@@ -154,20 +154,20 @@ public class RedirectorHttps extends Redirector {
       request.setProtocol(null);
 
       // Update the request to cleanly go to the target URI
-      //request.setResourceRef(targetRef);
-      //request.getAttributes().remove(HeaderConstants.ATTRIBUTE_HEADERS);
+      // request.setResourceRef(targetRef);
+      // request.getAttributes().remove(HeaderConstants.ATTRIBUTE_HEADERS);
 
       try {
 
         Map map = request.getAttributes();
-        
-        
-        CloseableHttpResponse closeableResponse = getCloseableResponse(targetRef.toString(),  request.getCookies());
+
+        CloseableHttpResponse closeableResponse = getCloseableResponse(targetRef.toString(), request.getCookies());
 
         updateResponseWithOriginalCookies(response, closeableResponse);
         updateResponseWithStatusCode(response, closeableResponse);
 
-        SecureOutputRepresentation representation = new SecureOutputRepresentation(getOriginalMediaType(closeableResponse), closeableResponse);
+        SecureOutputRepresentation representation = new SecureOutputRepresentation(
+            getOriginalMediaType(closeableResponse), closeableResponse);
         response.setEntity(representation);
 
       }
@@ -182,11 +182,11 @@ public class RedirectorHttps extends Redirector {
    * 
    */
   private void updateResponseWithStatusCode(Response response, CloseableHttpResponse closeableResponse) {
-    
+
     int statusCode = closeableResponse.getStatusLine().getStatusCode();
     Status status = new Status(statusCode);
     response.setStatus(status);
-    
+
   }
 
   /**
@@ -197,9 +197,9 @@ public class RedirectorHttps extends Redirector {
     Header[] contentHeaders = closeableResponse.getHeaders("Content-type");
     int index = contentHeaders[0].getValue().indexOf(";");
     MediaType mediaType = new MediaType(contentHeaders[0].getValue().substring(0, index));
-    
+
     return mediaType;
-    
+
   }
 
   /**
@@ -214,10 +214,10 @@ public class RedirectorHttps extends Redirector {
 
     HttpClientBuilder httpclientBuilder = HttpClients.custom();
 
-    if (withproxy)  {
+    if (withproxy) {
       CredentialsProvider credsProvider = new BasicCredentialsProvider();
       credsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(ProxySettings.getProxyUser(),
-        ProxySettings.getProxyPassword()));
+          ProxySettings.getProxyPassword()));
       httpclientBuilder.setDefaultCredentialsProvider(credsProvider).build();
     }
     CloseableHttpClient httpclient = httpclientBuilder.build();
@@ -243,9 +243,10 @@ public class RedirectorHttps extends Redirector {
     HttpGet httpget = new HttpGet(url);
 
     Builder configBuilder = RequestConfig.custom();
-    
-    if (withproxy)  {
-      HttpHost proxy = new HttpHost(ProxySettings.getProxyHost(), Integer.parseInt(ProxySettings.getProxyPort()), "http");
+
+    if (withproxy) {
+      HttpHost proxy = new HttpHost(ProxySettings.getProxyHost(), Integer.parseInt(ProxySettings.getProxyPort()),
+          "http");
       configBuilder.setProxy(proxy).build();
     }
 
@@ -255,14 +256,14 @@ public class RedirectorHttps extends Redirector {
     return httpclient.execute(httpget, context);
 
   }
-  
+
   /**
    * 
    */
   private void updateResponseWithOriginalCookies(Response response, CloseableHttpResponse closeableResponse) {
-    
+
     Header[] cookieHeaders = closeableResponse.getHeaders("Set-Cookie");
-    
+
     Series<CookieSetting> cookieSettings = response.getCookieSettings();
 
     for (int i = 0; i < cookieHeaders.length; i++) {
@@ -308,7 +309,6 @@ public class RedirectorHttps extends Redirector {
 
   }
 
-
   /**
    * splitOnFirst
    * 
@@ -322,24 +322,24 @@ public class RedirectorHttps extends Redirector {
     String tail = str.substring(idx + 1);
     return new String[] { head, tail };
   }
-  
-  
+
   /**
    * getDomainName
+   * 
    * @param url
    * @return
    * @throws MalformedURLException
    */
-  public static String getDomainName(String url) throws MalformedURLException{
-      if(!url.startsWith("http") && !url.startsWith("https")){
-           url = "http://" + url;
-      }        
-      URL netUrl = new URL(url);
-      String host = netUrl.getHost();
-      if(host.startsWith("www")){
-          host = host.substring("www".length()+1);
-      }
-      return host;
+  public static String getDomainName(String url) throws MalformedURLException {
+    if (!url.startsWith("http") && !url.startsWith("https")) {
+      url = "http://" + url;
+    }
+    URL netUrl = new URL(url);
+    String host = netUrl.getHost();
+    if (host.startsWith("www")) {
+      host = host.substring("www".length() + 1);
+    }
+    return host;
   }
 
 }
