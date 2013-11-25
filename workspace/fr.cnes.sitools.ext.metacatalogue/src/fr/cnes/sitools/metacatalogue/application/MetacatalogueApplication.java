@@ -1,4 +1,4 @@
- /*******************************************************************************
+/*******************************************************************************
  * Copyright 2010-2013 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
  *
  * This file is part of SITools2.
@@ -50,6 +50,7 @@ import fr.cnes.sitools.metacatalogue.resources.opensearch.OpensearchSearchResour
 import fr.cnes.sitools.metacatalogue.resources.proxyservices.DownloadProxyServiceHandler;
 import fr.cnes.sitools.metacatalogue.resources.proxyservices.WmsHttpsServiceHandler;
 import fr.cnes.sitools.metacatalogue.resources.proxyservices.WmsProxyServiceHandler;
+import fr.cnes.sitools.metacatalogue.resources.suggest.OpensearchSuggestResource;
 import fr.cnes.sitools.plugins.applications.business.AbstractApplicationPlugin;
 import fr.cnes.sitools.plugins.applications.model.ApplicationPluginModel;
 import fr.cnes.sitools.plugins.applications.model.ApplicationPluginParameter;
@@ -134,6 +135,7 @@ public class MetacatalogueApplication extends AbstractApplicationPlugin {
     router.attach("/search", OpensearchSearchResource.class);
     router.attach("/opensearch.xml", OpensearchDescriptionServiceResource.class);
     router.attach("/describe", OpensearchDescribeResource.class);
+    router.attach("/suggest", OpensearchSuggestResource.class);
 
     // Services redirector exposition
 
@@ -273,7 +275,7 @@ public class MetacatalogueApplication extends AbstractApplicationPlugin {
   /** the common part of constructor */
   public void constructor() {
     this.getModel().setClassAuthor("AKKA Technologies");
-    this.getModel().setClassVersion("0.2");
+    this.getModel().setClassVersion("0.3");
     this.getModel().setClassOwner("CNES");
 
     setCategory(Category.USER);
@@ -296,18 +298,6 @@ public class MetacatalogueApplication extends AbstractApplicationPlugin {
     paramMetacatalogSolrName.setDescription("The name of the metacatalogue SolR core");
     this.addParameter(paramMetacatalogSolrName);
 
-    // // Service user name
-    ApplicationPluginParameter servicesUserName = new ApplicationPluginParameter();
-    servicesUserName.setName("servicesUserName");
-    servicesUserName.setDescription("The username to use for the services authentification");
-    this.addParameter(servicesUserName);
-
-    // // Service password
-    ApplicationPluginParameter servicesPassword = new ApplicationPluginParameter();
-    servicesPassword.setName("servicesPassword");
-    servicesPassword.setDescription("The password to use for the services authentification");
-    this.addParameter(servicesPassword);
-
     ApplicationPluginParameter param = new ApplicationPluginParameter();
     param.setName("shortName");
     param.setDescription("Contains a brief human-readable title that identifies this search engine");
@@ -322,7 +312,8 @@ public class MetacatalogueApplication extends AbstractApplicationPlugin {
 
     param = new ApplicationPluginParameter();
     param.setName("contact");
-    param.setDescription("Contains an email address at which the maintener of the description document can be reached.");
+    param
+        .setDescription("Contains an email address at which the maintener of the description document can be reached.");
     this.addParameter(param);
 
     param = new ApplicationPluginParameter();
@@ -338,22 +329,26 @@ public class MetacatalogueApplication extends AbstractApplicationPlugin {
 
     param = new ApplicationPluginParameter();
     param.setName("imagePng");
-    param.setDescription("Contains a URL that identifies the location of an image that can be used in association with this search content.");
+    param
+        .setDescription("Contains a URL that identifies the location of an image that can be used in association with this search content.");
     this.addParameter(param);
 
     param = new ApplicationPluginParameter();
     param.setName("imageIcon");
-    param.setDescription("Contains a URL that identifies the location of an image that can be used in association with this search content.");
+    param
+        .setDescription("Contains a URL that identifies the location of an image that can be used in association with this search content.");
     this.addParameter(param);
 
     param = new ApplicationPluginParameter();
     param.setName("attribution");
-    param.setDescription("Contains a list of all sources or entities that should be credited for the content contained in the search feed.");
+    param
+        .setDescription("Contains a list of all sources or entities that should be credited for the content contained in the search feed.");
     this.addParameter(param);
 
     param = new ApplicationPluginParameter();
     param.setName("language");
-    param.setDescription("Contains a string that indicates that the search engine supports search results in the specified language.");
+    param
+        .setDescription("Contains a string that indicates that the search engine supports search results in the specified language.");
     param.setValue("fr");
     this.addParameter(param);
 
@@ -366,19 +361,20 @@ public class MetacatalogueApplication extends AbstractApplicationPlugin {
     this.addParameter(param);
 
     param = new ApplicationPluginParameter();
-    param.setName("geometryQueryType");
-    param.setDescription("The type of geometry query to use");
-    param.setValueType("xs:enum[HEALPIX, POSTGIS, BOTH]");
-    param.setValue("POSTGIS");
-    this.addParameter(param);
-
-    param = new ApplicationPluginParameter();
     param.setName("maxTopTerms");
-    param.setDescription("The maximum number of terms to see in the enum describe list (don't display any term if there are more terms)");
+    param
+        .setDescription("The maximum number of terms to see in the enum describe list (don't display any term if there are more terms)");
     param.setValueType("xs:integer");
     param.setValue("30");
     this.addParameter(param);
 
+    param = new ApplicationPluginParameter();
+    param.setName("thesaurus");
+    param.setDescription("The location of the thesaurus on the current server");
+    param.setValueType("xs:string");
+    param
+        .setValue("D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/workspace/fr.cnes.sitools.metacatalogue.core/thesaurus/TechniqueDev3.rdf");
+    this.addParameter(param);
   }
 
   @Override
@@ -398,11 +394,13 @@ public class MetacatalogueApplication extends AbstractApplicationPlugin {
           constraintList.add(constraint);
         }
         else if (!shortName.getValue().isEmpty()
-            && (shortName.getValue().length() > 16 || shortName.getValue().contains("<") || shortName.getValue().contains(">"))) {
+            && (shortName.getValue().length() > 16 || shortName.getValue().contains("<") || shortName.getValue()
+                .contains(">"))) {
           ConstraintViolation constraint = new ConstraintViolation();
           constraint.setValueName("shortName");
           constraint.setLevel(ConstraintViolationLevel.CRITICAL);
-          constraint.setMessage("The value must contain 16 of fewer characters of plain text. The value must not contain HTML or other markup");
+          constraint
+              .setMessage("The value must contain 16 of fewer characters of plain text. The value must not contain HTML or other markup");
           constraintList.add(constraint);
         }
         ApplicationPluginParameter description = params.get("description");
@@ -414,15 +412,18 @@ public class MetacatalogueApplication extends AbstractApplicationPlugin {
           constraintList.add(constraint);
         }
         if (!description.getValue().isEmpty()
-            && (description.getValue().length() > 1024 || description.getValue().contains("<") || description.getValue().contains(">"))) {
+            && (description.getValue().length() > 1024 || description.getValue().contains("<") || description
+                .getValue().contains(">"))) {
           ConstraintViolation constraint = new ConstraintViolation();
           constraint.setValueName("description");
           constraint.setLevel(ConstraintViolationLevel.CRITICAL);
-          constraint.setMessage("The value must contain 1024 of fewer characters of plain text. The value must not contain HTML or other markup");
+          constraint
+              .setMessage("The value must contain 1024 of fewer characters of plain text. The value must not contain HTML or other markup");
           constraintList.add(constraint);
         }
         ApplicationPluginParameter contact = params.get("contact");
-        if (contact != null && !contact.getValue().isEmpty() && !(contact.getValue().contains("@") && contact.getValue().contains("."))) {
+        if (contact != null && !contact.getValue().isEmpty()
+            && !(contact.getValue().contains("@") && contact.getValue().contains("."))) {
           ConstraintViolation constraint = new ConstraintViolation();
           constraint.setValueName("contact");
           constraint.setLevel(ConstraintViolationLevel.CRITICAL);
@@ -430,19 +431,23 @@ public class MetacatalogueApplication extends AbstractApplicationPlugin {
           constraintList.add(constraint);
         }
         ApplicationPluginParameter tags = params.get("tags");
-        if (tags != null && tags.getValue().length() > 256 || tags.getValue().contains("<") || tags.getValue().contains(">")) {
+        if (tags != null && tags.getValue().length() > 256 || tags.getValue().contains("<")
+            || tags.getValue().contains(">")) {
           ConstraintViolation constraint = new ConstraintViolation();
           constraint.setValueName("tags");
           constraint.setLevel(ConstraintViolationLevel.CRITICAL);
-          constraint.setMessage("The value must contain 256 of fewer characters of plain text. The value must not contain HTML or other markup");
+          constraint
+              .setMessage("The value must contain 256 of fewer characters of plain text. The value must not contain HTML or other markup");
           constraintList.add(constraint);
         }
         ApplicationPluginParameter longName = params.get("longName");
-        if (longName != null && longName.getValue().length() > 48 || longName.getValue().contains("<") || longName.getValue().contains(">")) {
+        if (longName != null && longName.getValue().length() > 48 || longName.getValue().contains("<")
+            || longName.getValue().contains(">")) {
           ConstraintViolation constraint = new ConstraintViolation();
           constraint.setValueName("longName");
           constraint.setLevel(ConstraintViolationLevel.CRITICAL);
-          constraint.setMessage("The value must contain 48 of fewer characters of plain text. The value must not contain HTML or other markup");
+          constraint
+              .setMessage("The value must contain 48 of fewer characters of plain text. The value must not contain HTML or other markup");
           constraintList.add(constraint);
         }
         ApplicationPluginParameter imagePng = params.get("imagePng");
@@ -472,12 +477,14 @@ public class MetacatalogueApplication extends AbstractApplicationPlugin {
           constraintList.add(constraint);
         }
         ApplicationPluginParameter syndicationRight = params.get("syndicationRight");
-        if (syndicationRight != null && !syndicationRight.getValue().equals("open") && !syndicationRight.getValue().equals("closed")
-            && !syndicationRight.getValue().equals("private") && !syndicationRight.getValue().equals("limited")) {
+        if (syndicationRight != null && !syndicationRight.getValue().equals("open")
+            && !syndicationRight.getValue().equals("closed") && !syndicationRight.getValue().equals("private")
+            && !syndicationRight.getValue().equals("limited")) {
           ConstraintViolation constraint = new ConstraintViolation();
           constraint.setValueName("syndicationRight");
           constraint.setLevel(ConstraintViolationLevel.CRITICAL);
-          constraint.setMessage("syndicationRight must take one of the following values : open, private, limited, closed");
+          constraint
+              .setMessage("syndicationRight must take one of the following values : open, private, limited, closed");
           constraintList.add(constraint);
         }
         // ApplicationPluginParameter solrCore = params.get("solrCore");

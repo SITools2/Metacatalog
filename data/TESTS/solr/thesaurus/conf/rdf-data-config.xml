@@ -1,0 +1,24 @@
+<dataConfig>
+	<dataSource type="FileDataSource" />
+    <document>
+        <entity name="TechniqueDev3"
+                url="thesaurus/TechniqueDev3.rdf"
+                processor="XPathEntityProcessor"
+                forEach="/RDF/Description"
+				xsl="removeNamespaces.xsl">
+				
+            <field column="pref_en" xpath="/RDF/Description/prefLabel[@lang='en']"/>
+			<field column="pref_fr" xpath="/RDF/Description/prefLabel[@lang='fr']"/>
+			
+			<field column="alt_en" xpath="/RDF/Description/altLabel[@lang='en']"/>
+			<field column="alt_fr" xpath="/RDF/Description/altLabel[@lang='fr']"/>
+			<field column="definition" xpath="/RDF/Description/definition"/>
+			
+			<field column="broader" xpath="/RDF/Description/broader/@resource"/>
+			<field column="narrower" xpath="/RDF/Description/narrower/@resource"/>
+			<field column="related" xpath="/RDF/Description/related/@resource"/>
+            
+			<field column="uri" xpath="/RDF/Description/@about"/>
+        </entity>
+    </document>
+</dataConfig>

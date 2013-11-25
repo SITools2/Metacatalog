@@ -4,4 +4,5 @@ Bundle-Name: Core
 Bundle-SymbolicName: fr.cnes.sitools.metacatalogue.core
 Bundle-Version: 1.0.0
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: fr.cnes.sitools.metacatalogue.libraries;bundle-version="1.0.0"
+Require-Bundle: fr.cnes.sitools.metacatalogue.libraries;bundle-version="1.0.0",
+ com.hp.hpl.jena;bundle-version="2.11.0"
