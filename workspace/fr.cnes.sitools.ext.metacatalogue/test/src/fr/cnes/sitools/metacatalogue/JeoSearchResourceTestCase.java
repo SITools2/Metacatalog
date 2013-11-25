@@ -1,4 +1,4 @@
- /*******************************************************************************
+/*******************************************************************************
  * Copyright 2010-2013 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
  *
  * This file is part of SITools2.
@@ -23,19 +23,29 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.restlet.Component;
+import org.restlet.Context;
 import org.restlet.data.MediaType;
+import org.restlet.data.Protocol;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
 
 import fr.cnes.sitools.AbstractSitoolsTestCase;
+import fr.cnes.sitools.common.SitoolsSettings;
+import fr.cnes.sitools.common.application.ContextAttributes;
+import fr.cnes.sitools.metacatalogue.application.MetacatalogueApplication;
 import fr.cnes.sitools.util.RIAPUtils;
+
+
+//ATTENTION TEST PAS A JOUR AVEC LA NOUVELLE VERSION DU METACATALOGUE .....
 
 /**
  * Tests the search service
@@ -45,37 +55,85 @@ import fr.cnes.sitools.util.RIAPUtils;
  * @author m.gond
  */
 public class JeoSearchResourceTestCase extends AbstractSitoolsTestCase {
-  /** The url of the dataset */
-  private String applicationUrl = "/metacatalogue";
+  private static final String METACATALOGUE_APP_URL = "/metacatalogue";
+
+  /**
+   * Root path for storing files
+   */
+  public static final String TEST_FILES_REPOSITORY = SitoolsSettings.getInstance().getString("Tests.STORE_DIR");
+
+  /**
+   * Restlet Component for server
+   */
+  private Component component = null;
+
+  private MetacatalogueApplication application;
 
   /** The url of the search resource */
   private String searchResourceUrl = "/search";
 
   /**
-   * SetUp function
+   * relative url for dataset management REST API
    * 
-   * @throws Exception
-   *           if there is an error
+   * @return url
    */
-  @Before
-  public void setUp() throws Exception {
-    setMediaTest(MediaType.APPLICATION_JSON);
-
+  protected String getAttachUrl() {
+    return SITOOLS_URL + METACATALOGUE_APP_URL;
   }
 
   /**
-   * To be executed after every tests methods.
+   * absolute url for dataset management REST API
    * 
-   * @throws Exception
-   *           if failed
+   * @return url
    */
-  @After
-  public void tearDown() throws Exception {
-    super.tearDown();
+  protected String getBaseUrl() {
+    return super.getBaseUrl() + METACATALOGUE_APP_URL;
   }
 
-  private String getHostUrl() {
-    return "http://localhost:8182";
+  @Before
+  @Override
+  /**
+   * Init and Start a server with GraphApplication
+   * 
+   * @throws java.lang.Exception
+   */
+  public void setUp() throws Exception {
+    if (this.component == null) {
+      SitoolsSettings settings = SitoolsSettings.getInstance();
+      this.component = new Component();
+      this.component.getServers().add(Protocol.HTTP, getTestPort());
+      this.component.getClients().add(Protocol.HTTP);
+      this.component.getClients().add(Protocol.FILE);
+      this.component.getClients().add(Protocol.CLAP);
+
+      // Context
+      Context ctx = this.component.getContext().createChildContext();
+      settings.setStoreDIR(TEST_FILES_REPOSITORY);
+      settings.setStores(new HashMap<String, Object>());
+      ctx.getAttributes().put(ContextAttributes.SETTINGS, settings);
+
+      ctx.getAttributes().put(ContextAttributes.APP_ATTACH_REF, getAttachUrl());
+
+      application = new MetacatalogueApplication(ctx);
+      this.component.getDefaultHost().attach(getAttachUrl(), application);
+
+    }
+
+    if (!this.component.isStarted()) {
+      this.component.start();
+    }
+  }
+
+  @After
+  @Override
+  /**
+   * Stop server
+   * @throws java.lang.Exception
+   */
+  public void tearDown() throws Exception {
+    super.tearDown();
+    this.component.stop();
+    this.component = null;
   }
 
   /**
@@ -255,7 +313,7 @@ public class JeoSearchResourceTestCase extends AbstractSitoolsTestCase {
    *           if an error occur while parsing the JSON
    * 
    */
-//  @Test
+  // @Test
   public void testWithSpecificParamText() throws IOException, JSONException {
     String textParam = "texte de la note 465456";
     String url = getServiceUrl() + "?notes=" + textParam;
@@ -271,7 +329,7 @@ public class JeoSearchResourceTestCase extends AbstractSitoolsTestCase {
    *           if an error occur while parsing the JSON
    * 
    */
-//  @Test
+  // @Test
   public void testWithSpecificParamNumber() throws IOException, JSONException {
     String numberParam = "172.5";
     String url = getServiceUrl() + "?ele=" + numberParam;
@@ -279,7 +337,7 @@ public class JeoSearchResourceTestCase extends AbstractSitoolsTestCase {
   }
 
   public String getServiceUrl() {
-    return getHostUrl() + getDatasetUrl() + searchResourceUrl;
+    return getBaseUrl() + searchResourceUrl;
   }
 
   /**
@@ -311,25 +369,6 @@ public class JeoSearchResourceTestCase extends AbstractSitoolsTestCase {
       RIAPUtils.exhaust(result);
     }
 
-  }
-
-  /**
-   * Gets the datasetUrl value
-   * 
-   * @return the datasetUrl
-   */
-  public String getDatasetUrl() {
-    return applicationUrl;
-  }
-
-  /**
-   * Sets the value of datasetUrl
-   * 
-   * @param datasetUrl
-   *          the datasetUrl to set
-   */
-  public void setDatasetUrl(String datasetUrl) {
-    this.applicationUrl = datasetUrl;
   }
 
 }

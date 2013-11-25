@@ -20,3 +20,6 @@ extensions/
 build.num
 data/logs/
 Solr-old/
+Solr/solr-webapp/
+dataimport.properties
+Solr/logs

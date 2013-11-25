@@ -49,7 +49,6 @@ import fr.cnes.sitools.metacatalogue.resources.opensearch.OpensearchDescriptionS
 import fr.cnes.sitools.metacatalogue.resources.opensearch.OpensearchSearchResource;
 import fr.cnes.sitools.metacatalogue.resources.proxyservices.DownloadProxyServiceHandler;
 import fr.cnes.sitools.metacatalogue.resources.proxyservices.WmsHttpsServiceHandler;
-import fr.cnes.sitools.metacatalogue.resources.proxyservices.WmsProxyServiceHandler;
 import fr.cnes.sitools.metacatalogue.resources.suggest.OpensearchSuggestResource;
 import fr.cnes.sitools.plugins.applications.business.AbstractApplicationPlugin;
 import fr.cnes.sitools.plugins.applications.model.ApplicationPluginModel;

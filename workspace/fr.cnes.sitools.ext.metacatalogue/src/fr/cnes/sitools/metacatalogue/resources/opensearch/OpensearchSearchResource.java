@@ -1,4 +1,4 @@
- /*******************************************************************************
+/*******************************************************************************
  * Copyright 2010-2013 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
  *
  * This file is part of SITools2.
@@ -18,8 +18,10 @@
  ******************************************************************************/
 package fr.cnes.sitools.metacatalogue.resources.opensearch;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 
 import org.apache.solr.client.solrj.SolrQuery;
@@ -43,17 +45,20 @@ import fr.cnes.sitools.metacatalogue.index.solr.SolRUtils;
 import fr.cnes.sitools.metacatalogue.representation.GeoJsonMDEORepresentation;
 import fr.cnes.sitools.metacatalogue.utils.MetacatalogField;
 import fr.cnes.sitools.plugins.applications.model.ApplicationPluginParameter;
+import fr.cnes.sitools.thesaurus.Concept;
+import fr.cnes.sitools.thesaurus.ThesaurusSearcher;
 import fr.cnes.sitools.util.DateUtils;
 
 public class OpensearchSearchResource extends SitoolsResource {
+  /** The default date format */
+  private static String SOLR_DATE_FORMAT = DateUtils.FORMAT_ISO_8601_WITHOUT_TIME_ZONE + "'Z'";
 
+  /** The parent application */
   private MetacatalogueApplication application;
-
+  /** The url of the solr core to query */
   private String solrCoreUrl;
 
-  private String geometryQueryType;
-
-  private static String SOLR_DATE_FORMAT = DateUtils.FORMAT_ISO_8601_WITHOUT_TIME_ZONE + "'Z'";
+  private String thesaurusName;
 
   @Override
   public void sitoolsDescribe() {
@@ -78,11 +83,14 @@ public class OpensearchSearchResource extends SitoolsResource {
     }
     solrCoreUrl = solrCoreUrlParameter.getValue() + "/" + solrCoreNameParameter.getValue();
 
-    ApplicationPluginParameter geometryQueryTypeParameter = application.getParameter("geometryQueryType");
-    if (geometryQueryTypeParameter == null || geometryQueryTypeParameter.getValue() == null) {
-      throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "No geometry query type defined");
+    ApplicationPluginParameter thesaurusParam = application.getParameter("thesaurus");
+    if (thesaurusParam == null || thesaurusParam.getName() == null || thesaurusParam.getName().isEmpty()) {
+      getResponse().setStatus(Status.SERVER_ERROR_INTERNAL, "No thesaurus parameter defined");
+      return;
     }
-    geometryQueryType = geometryQueryTypeParameter.getValue();
+
+    thesaurusName = thesaurusParam.getValue();
+
   }
 
   /**
@@ -102,6 +110,25 @@ public class OpensearchSearchResource extends SitoolsResource {
       throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "Solr core : " + solrCoreUrl + " not reachable");
     }
 
+    // GET THE CONCEPT ASSOCIATED TO THE SEARCH TERMS PARAMETER
+    String searchTermParam = query.getFirstValue(OpenSearchQuery.SEARCH_TERMS.getParamName(), null);
+    if (searchTermParam != null) {
+      ThesaurusSearcher searcher;
+      try {
+        searcher = new ThesaurusSearcher(thesaurusName);
+        List<Concept> concepts = searcher.search(searchTermParam);
+        if (concepts.size() > 0) {
+          searchTermParam = concepts.get(0).getProperties().get("altLabel").toString();
+          query.removeFirst(OpenSearchQuery.SEARCH_TERMS.getParamName());
+          query.set(OpenSearchQuery.SEARCH_TERMS.getParamName(), searchTermParam);
+        }
+      }
+      catch (IOException e) {
+        throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "Cannot read thesaurus", e);
+      }
+
+    }
+
     SolrQuery solrQuery = new SolrQuery();
 
     Integer count = getIntegerParameter(query, OpenSearchQuery.COUNT);
@@ -118,7 +145,7 @@ public class OpensearchSearchResource extends SitoolsResource {
     solrQuery.setRows(rows);
     solrQuery.add("df", "searchTerms");
 
-//    addGeometryCriteria(solrQuery, query);
+    // addGeometryCriteria(solrQuery, query);
     try {
       setQuery(solrQuery, query);
 
