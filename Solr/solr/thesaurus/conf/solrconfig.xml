@@ -37,8 +37,6 @@
   -->
   <luceneMatchVersion>4.5</luceneMatchVersion>
   
-  <lib dir="../../dist/" regex="solr-dataimporthandler-.*\.jar" />
-
   <!-- <lib/> directives can be used to instruct Solr to load an Jars
        identified and use them to resolve any "plugins" specified in
        your solrconfig.xml or schema.xml (ie: Analyzers, Request

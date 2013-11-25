@@ -293,14 +293,9 @@ feuilles par m2 au sol</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="86398298-f898-44bb-9d1d-9a7569167398">
         <skos:prefLabel xml:lang="fr">Niveau 3</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">Level 3</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">Level-3</skos:altLabel>
+        <skos:prefLabel xml:lang="en">LEVEL3</skos:prefLabel>
         <skos:altLabel xml:lang="fr">PRECISION</skos:altLabel>
-        <skos:altLabel xml:lang="fr">3</skos:altLabel>
-        <skos:altLabel xml:lang="en">LEVEL3</skos:altLabel>
-        <skos:altLabel xml:lang="en">3</skos:altLabel>
         <skos:altLabel xml:lang="en">PRECISION</skos:altLabel>
-        <skos:altLabel xml:lang="en">Level-3</skos:altLabel>
         <skos:definition xml:lang="fr">corrections radiométriques et géométriques avec GCP</skos:definition>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="07c7099b-0b6f-4708-8e55-582312fe3e70"/>
@@ -445,11 +440,8 @@ feuilles par m2 au sol</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="0a8123a4-e8f1-4afd-a7bf-7e38d8864d35">
         <skos:prefLabel xml:lang="fr">Niveau 1C</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">Level 1C</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">LEVEL1C</skos:altLabel>
-        <skos:altLabel xml:lang="fr">L1C CNES</skos:altLabel>
+        <skos:prefLabel xml:lang="en">LEVEL1C</skos:prefLabel>
         <skos:altLabel xml:lang="fr">L1C</skos:altLabel>
-        <skos:altLabel xml:lang="en">LEVEL1C</skos:altLabel>
         <skos:altLabel xml:lang="en">L1C</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="77084a07-5f26-4356-b86b-18c99e1f8608"/>
@@ -540,15 +532,14 @@ feuilles par m2 au sol</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="7a0f1988-b156-49d6-b891-c85ca900091c">
         <skos:prefLabel xml:lang="fr">Niveau 3</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">Level-3</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">Level-3 USGS</skos:altLabel>
-        <skos:altLabel xml:lang="fr">L3</skos:altLabel>
-        <skos:altLabel xml:lang="en">LEVEL3</skos:altLabel>
+        <skos:prefLabel xml:lang="en">LEVEL3</skos:prefLabel>
+        <skos:altLabel xml:lang="fr">3</skos:altLabel>
+        <skos:altLabel xml:lang="en">3</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="3d69a7bf-e972-4bab-ae97-7155b1654bbb"/>
         <skos:broader rdf:resource="a6983904-30f3-4d25-8f89-076a53619db4"/>
-        <skos:related rdf:resource="b4916f1c-6912-4b70-9c89-6b6a8c72f3fc"/>
         <skos:related rdf:resource="ceee7090-43b9-450f-8801-55503b094058"/>
+        <skos:related rdf:resource="b4916f1c-6912-4b70-9c89-6b6a8c72f3fc"/>
     </rdf:Description>
     <rdf:Description rdf:about="b831e1fd-44fe-4875-83ce-a2b9a8661374">
         <skos:prefLabel xml:lang="fr">0.4245 - 0.4645</skos:prefLabel>
@@ -628,11 +619,8 @@ deux</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="574df742-de9c-4b48-a51c-d00effc33795">
         <skos:prefLabel xml:lang="fr">Niveau 1B</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">Level 1B</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">Level 1B</skos:altLabel>
-        <skos:altLabel xml:lang="fr">L1B RE</skos:altLabel>
+        <skos:prefLabel xml:lang="en">LEVEL1B</skos:prefLabel>
         <skos:altLabel xml:lang="fr">L1B</skos:altLabel>
-        <skos:altLabel xml:lang="en">LEVEL1B</skos:altLabel>
         <skos:altLabel xml:lang="en">L1B</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="07c7099b-0b6f-4708-8e55-582312fe3e70"/>
@@ -740,14 +728,9 @@ deux</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="081588ec-0b26-4cb6-b661-a3956745bcc4">
         <skos:prefLabel xml:lang="fr">Niveau 1</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">Level 1</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">Level-1</skos:altLabel>
+        <skos:prefLabel xml:lang="en">LEVEL1</skos:prefLabel>
         <skos:altLabel xml:lang="fr">1</skos:altLabel>
-        <skos:altLabel xml:lang="fr">RAD</skos:altLabel>
-        <skos:altLabel xml:lang="en">LEVEL1</skos:altLabel>
         <skos:altLabel xml:lang="en">1</skos:altLabel>
-        <skos:altLabel xml:lang="en">RAD</skos:altLabel>
-        <skos:altLabel xml:lang="en">Level-1</skos:altLabel>
         <skos:definition xml:lang="fr">corrections radiométriques</skos:definition>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="07c7099b-0b6f-4708-8e55-582312fe3e70"/>
@@ -776,6 +759,16 @@ deux</skos:definition>
         <skos:related rdf:resource="3c8ff3b9-33b8-4871-b91f-20440f36fc09"/>
         <skos:inScheme rdf:resource="th_defaultdsdsd"/>
     </rdf:Description>
+    <rdf:Description rdf:about="31f0d3a7-2981-422b-97fb-4ca62c988e83">
+        <skos:prefLabel xml:lang="fr">Niveau 1B</skos:prefLabel>
+        <skos:prefLabel xml:lang="en">LEVEL1B</skos:prefLabel>
+        <skos:altLabel xml:lang="fr">1B</skos:altLabel>
+        <skos:altLabel xml:lang="en">1B</skos:altLabel>
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <skos:broader rdf:resource="07c7099b-0b6f-4708-8e55-582312fe3e70"/>
+        <skos:related rdf:resource="ab360384-090c-41c8-ac4a-862355a710de"/>
+        <skos:related rdf:resource="1211d6c3-6f5b-4130-baf1-251246b63422"/>
+    </rdf:Description>
     <rdf:Description rdf:about="c58ea0e4-f335-4778-9a0a-a2490745a445">
         <skos:prefLabel xml:lang="fr">LISS3</skos:prefLabel>
         <skos:prefLabel xml:lang="en">LISS3</skos:prefLabel>
@@ -800,29 +793,15 @@ deux</skos:definition>
         <skos:related rdf:resource="7244d392-b340-4488-af06-d59e986bed26"/>
         <skos:inScheme rdf:resource="th_defaultdsdsd"/>
     </rdf:Description>
-    <rdf:Description rdf:about="31f0d3a7-2981-422b-97fb-4ca62c988e83">
-        <skos:prefLabel xml:lang="fr">Niveau 1B</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">Level 1B</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">Level 1B</skos:altLabel>
-        <skos:altLabel xml:lang="fr">1B</skos:altLabel>
-        <skos:altLabel xml:lang="en">LEVEL1B</skos:altLabel>
-        <skos:altLabel xml:lang="en">1B</skos:altLabel>
-        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
-        <skos:broader rdf:resource="07c7099b-0b6f-4708-8e55-582312fe3e70"/>
-        <skos:related rdf:resource="ab360384-090c-41c8-ac4a-862355a710de"/>
-        <skos:related rdf:resource="1211d6c3-6f5b-4130-baf1-251246b63422"/>
-    </rdf:Description>
     <rdf:Description rdf:about="95704ed4-7b48-4f02-850a-dcb1996209a4">
         <skos:prefLabel xml:lang="fr">Niveau 1</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">Level-1</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">Level-1 USGS</skos:altLabel>
-        <skos:altLabel xml:lang="fr">L1</skos:altLabel>
-        <skos:altLabel xml:lang="en">LEVEL1</skos:altLabel>
-        <skos:altLabel xml:lang="en">L1</skos:altLabel>
+        <skos:prefLabel xml:lang="en">LEVEL1</skos:prefLabel>
+        <skos:altLabel xml:lang="fr">1</skos:altLabel>
+        <skos:altLabel xml:lang="en">1</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="07c7099b-0b6f-4708-8e55-582312fe3e70"/>
-        <skos:related rdf:resource="b4916f1c-6912-4b70-9c89-6b6a8c72f3fc"/>
         <skos:related rdf:resource="ceee7090-43b9-450f-8801-55503b094058"/>
+        <skos:related rdf:resource="b4916f1c-6912-4b70-9c89-6b6a8c72f3fc"/>
     </rdf:Description>
     <rdf:Description rdf:about="2aa8ae00-475b-4c5a-9ab3-78e7b44421bc">
         <skos:prefLabel xml:lang="fr">0.4249 - 0.4649</skos:prefLabel>
@@ -836,10 +815,8 @@ deux</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="9287762f-a2ad-49fa-b1bd-5996a7b3f93b">
         <skos:prefLabel xml:lang="fr">Niveau 1A</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">Level 1A</skos:prefLabel>
+        <skos:prefLabel xml:lang="en">LEVEL1A</skos:prefLabel>
         <skos:altLabel xml:lang="fr">1A</skos:altLabel>
-        <skos:altLabel xml:lang="fr">Level 1A</skos:altLabel>
-        <skos:altLabel xml:lang="en">LEVEL1A</skos:altLabel>
         <skos:altLabel xml:lang="en">1A</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="07c7099b-0b6f-4708-8e55-582312fe3e70"/>
@@ -924,6 +901,17 @@ deux</skos:definition>
         <skos:related rdf:resource="f5f09a65-2ab9-40b1-b57b-88844b99f69d"/>
         <skos:inScheme rdf:resource="th_defaultdsdsd"/>
     </rdf:Description>
+    <rdf:Description rdf:about="5c24e140-1a88-45b4-b405-2e4571b7f76b">
+        <skos:prefLabel xml:lang="fr">Niveau 3M</skos:prefLabel>
+        <skos:prefLabel xml:lang="en">LEVEL3M</skos:prefLabel>
+        <skos:altLabel xml:lang="fr">L3M</skos:altLabel>
+        <skos:altLabel xml:lang="en">L3M</skos:altLabel>
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <skos:broader rdf:resource="77084a07-5f26-4356-b86b-18c99e1f8608"/>
+        <skos:broader rdf:resource="cef42c91-46f5-441d-97cd-288f5151d956"/>
+        <skos:related rdf:resource="3f0bf24a-160a-4a72-b56b-91ee9d07063c"/>
+        <skos:related rdf:resource="d8d75324-30de-4739-906d-a2a45cdfc857"/>
+    </rdf:Description>
     <rdf:Description rdf:about="bd81720e-a7d3-440c-bd84-4dee1d9ae2ad">
         <skos:prefLabel xml:lang="fr">9.80 - 11.80</skos:prefLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
@@ -931,19 +919,6 @@ deux</skos:definition>
         <skos:related rdf:resource="f0959eed-4655-4966-bc64-8bfd7e899ff5"/>
         <skos:related rdf:resource="1baa1879-8805-44c6-92d0-f4e4e8fd0a52"/>
         <skos:inScheme rdf:resource="th_defaultdsdsd"/>
-    </rdf:Description>
-    <rdf:Description rdf:about="5c24e140-1a88-45b4-b405-2e4571b7f76b">
-        <skos:prefLabel xml:lang="fr">Niveau 3M</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">Level 3M</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">Level 3M</skos:altLabel>
-        <skos:altLabel xml:lang="fr">L3M</skos:altLabel>
-        <skos:altLabel xml:lang="en">LEVEL3M</skos:altLabel>
-        <skos:altLabel xml:lang="en">L3M</skos:altLabel>
-        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
-        <skos:broader rdf:resource="77084a07-5f26-4356-b86b-18c99e1f8608"/>
-        <skos:broader rdf:resource="cef42c91-46f5-441d-97cd-288f5151d956"/>
-        <skos:related rdf:resource="3f0bf24a-160a-4a72-b56b-91ee9d07063c"/>
-        <skos:related rdf:resource="d8d75324-30de-4739-906d-a2a45cdfc857"/>
     </rdf:Description>
     <rdf:Description rdf:about="80567439-9897-45e2-bc15-29b515173d20">
         <skos:prefLabel xml:lang="fr">SPOT5</skos:prefLabel>
@@ -1077,11 +1052,8 @@ deux</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="74ca171f-bf2e-4f04-a15b-d87bf6d787bd">
         <skos:prefLabel xml:lang="fr">Niveau 2B</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">Level 2B</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">LEVEL2B</skos:altLabel>
-        <skos:altLabel xml:lang="fr">L2B CNES</skos:altLabel>
+        <skos:prefLabel xml:lang="en">LEVEL2B</skos:prefLabel>
         <skos:altLabel xml:lang="fr">L2B</skos:altLabel>
-        <skos:altLabel xml:lang="en">LEVEL2B</skos:altLabel>
         <skos:altLabel xml:lang="en">L2B</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="77084a07-5f26-4356-b86b-18c99e1f8608"/>
@@ -1254,11 +1226,9 @@ deux</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="f08b007d-6a00-49ea-84f0-8290acc43ada">
         <skos:prefLabel xml:lang="fr">Niveau 2G</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">Level-2G</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">Level-2G USGS</skos:altLabel>
-        <skos:altLabel xml:lang="fr">L2G</skos:altLabel>
-        <skos:altLabel xml:lang="en">LEVEL2G</skos:altLabel>
-        <skos:altLabel xml:lang="en">L2G</skos:altLabel>
+        <skos:prefLabel xml:lang="en">LEVEL2G</skos:prefLabel>
+        <skos:altLabel xml:lang="fr">2G</skos:altLabel>
+        <skos:altLabel xml:lang="en">2G</skos:altLabel>
         <skos:definition xml:lang="fr">produit biogeophysique en "grille"</skos:definition>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="3d69a7bf-e972-4bab-ae97-7155b1654bbb"/>
@@ -1390,11 +1360,9 @@ deux</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="821173aa-4586-4746-b153-fd13641c9817">
         <skos:prefLabel xml:lang="fr">Niveau 4</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">Level-4</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">Level-4 USGS</skos:altLabel>
-        <skos:altLabel xml:lang="fr">L4</skos:altLabel>
-        <skos:altLabel xml:lang="en">LEVEL4</skos:altLabel>
-        <skos:altLabel xml:lang="en">L4</skos:altLabel>
+        <skos:prefLabel xml:lang="en">LEVEL4</skos:prefLabel>
+        <skos:altLabel xml:lang="fr">4</skos:altLabel>
+        <skos:altLabel xml:lang="en">4</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="75e85463-c4de-4ec5-a616-f3c06d3ba5c9"/>
         <skos:related rdf:resource="ceee7090-43b9-450f-8801-55503b094058"/>
@@ -1628,11 +1596,8 @@ deux</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="a374fbdf-6838-487c-9beb-562a7089ce46">
         <skos:prefLabel xml:lang="fr">Niveau 1B</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">Level 1B</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">Level-1b</skos:altLabel>
+        <skos:prefLabel xml:lang="en">LEVEL1B</skos:prefLabel>
         <skos:altLabel xml:lang="fr">L1B</skos:altLabel>
-        <skos:altLabel xml:lang="fr">1B ESA</skos:altLabel>
-        <skos:altLabel xml:lang="en">LEVEL1B</skos:altLabel>
         <skos:altLabel xml:lang="en">L1B</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="07c7099b-0b6f-4708-8e55-582312fe3e70"/>
@@ -1797,7 +1762,7 @@ effets atmosphériques)</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="ab2e84b7-1e4f-475e-885f-be3def92132c">
         <skos:prefLabel xml:lang="fr">Niveau OrthoM</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">Level OrthoM</skos:prefLabel>
+        <skos:prefLabel xml:lang="en">ORTHOM</skos:prefLabel>
         <skos:altLabel xml:lang="fr">MOS</skos:altLabel>
         <skos:altLabel xml:lang="en">MOS</skos:altLabel>
         <skos:definition xml:lang="fr">Mosaïque orthorectifiée</skos:definition>
@@ -1886,20 +1851,25 @@ de 3 μm</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="853f9f17-d5b3-452f-9da8-b3a1aa1f94cf">
         <skos:prefLabel xml:lang="fr">Niveau 2</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">Level 2</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">Level-2</skos:altLabel>
-        <skos:altLabel xml:lang="fr">2</skos:altLabel>
+        <skos:prefLabel xml:lang="en">LEVEL2</skos:prefLabel>
         <skos:altLabel xml:lang="fr">BULK</skos:altLabel>
-        <skos:altLabel xml:lang="en">LEVEL2</skos:altLabel>
-        <skos:altLabel xml:lang="en">2</skos:altLabel>
         <skos:altLabel xml:lang="en">BULK</skos:altLabel>
-        <skos:altLabel xml:lang="en">Level-2</skos:altLabel>
         <skos:definition xml:lang="fr">corrections radiométriques et géométriques sans GCP</skos:definition>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="07c7099b-0b6f-4708-8e55-582312fe3e70"/>
         <skos:related rdf:resource="e478ae5b-a927-4750-932a-00fd58c98788"/>
-        <skos:related rdf:resource="a4f0c3f7-817e-4c5b-8257-022ea9777e2e"/>
         <skos:related rdf:resource="1569fe8b-c819-4546-82aa-372c8ecd6d3d"/>
+        <skos:related rdf:resource="a4f0c3f7-817e-4c5b-8257-022ea9777e2e"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="a4e8f5e7-0a05-4817-a06e-65226007de03">
+        <skos:prefLabel xml:lang="fr">Niveau 3 (Ortho)</skos:prefLabel>
+        <skos:prefLabel xml:lang="en">LEVEL3</skos:prefLabel>
+        <skos:altLabel xml:lang="fr">3</skos:altLabel>
+        <skos:altLabel xml:lang="en">3</skos:altLabel>
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <skos:broader rdf:resource="77084a07-5f26-4356-b86b-18c99e1f8608"/>
+        <skos:related rdf:resource="ab360384-090c-41c8-ac4a-862355a710de"/>
+        <skos:related rdf:resource="1211d6c3-6f5b-4130-baf1-251246b63422"/>
     </rdf:Description>
     <rdf:Description rdf:about="07c3589a-ca8a-4c69-ac77-c0c445eb4f6d">
         <skos:prefLabel xml:lang="fr">EC</skos:prefLabel>
@@ -1919,18 +1889,6 @@ de 3 μm</skos:definition>
         <skos:related rdf:resource="86e02ee9-f61d-4978-9ff9-5098e5124272"/>
         <skos:related rdf:resource="1baa1879-8805-44c6-92d0-f4e4e8fd0a52"/>
         <skos:inScheme rdf:resource="th_defaultdsdsd"/>
-    </rdf:Description>
-    <rdf:Description rdf:about="a4e8f5e7-0a05-4817-a06e-65226007de03">
-        <skos:prefLabel xml:lang="fr">Niveau 3 (Ortho)</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">Level 3 (Ortho)</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">Level 3 (Ortho)</skos:altLabel>
-        <skos:altLabel xml:lang="fr">3</skos:altLabel>
-        <skos:altLabel xml:lang="en">LEVEL3</skos:altLabel>
-        <skos:altLabel xml:lang="en">3</skos:altLabel>
-        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
-        <skos:broader rdf:resource="77084a07-5f26-4356-b86b-18c99e1f8608"/>
-        <skos:related rdf:resource="ab360384-090c-41c8-ac4a-862355a710de"/>
-        <skos:related rdf:resource="1211d6c3-6f5b-4130-baf1-251246b63422"/>
     </rdf:Description>
     <rdf:Description rdf:about="773db032-3014-43c6-a941-19d550ac4385">
         <skos:prefLabel xml:lang="fr">AVHRR</skos:prefLabel>
@@ -2334,10 +2292,8 @@ réflectances bidirectionnelles</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="67a8761c-0b65-4e69-b1af-91537d93c580">
         <skos:prefLabel xml:lang="fr">Niveau 1T</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">Level 1T</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">Level 1T</skos:altLabel>
+        <skos:prefLabel xml:lang="en">LEVEL1T</skos:prefLabel>
         <skos:altLabel xml:lang="fr">1T</skos:altLabel>
-        <skos:altLabel xml:lang="en">LEVEL1T</skos:altLabel>
         <skos:altLabel xml:lang="en">1T</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="77084a07-5f26-4356-b86b-18c99e1f8608"/>
@@ -2446,6 +2402,17 @@ effets atmosphériques</skos:definition>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="b5cca4b0-8760-417a-bba4-254f116aa6f2"/>
     </rdf:Description>
+    <rdf:Description rdf:about="3bf24a20-47a6-4184-9f88-dfaf3fbfdaf2">
+        <skos:prefLabel xml:lang="fr">Niveau 3B</skos:prefLabel>
+        <skos:prefLabel xml:lang="en">LEVEL3B</skos:prefLabel>
+        <skos:altLabel xml:lang="fr">L3B</skos:altLabel>
+        <skos:altLabel xml:lang="en">L3B</skos:altLabel>
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <skos:broader rdf:resource="77084a07-5f26-4356-b86b-18c99e1f8608"/>
+        <skos:broader rdf:resource="3d69a7bf-e972-4bab-ae97-7155b1654bbb"/>
+        <skos:broader rdf:resource="a6983904-30f3-4d25-8f89-076a53619db4"/>
+        <skos:related rdf:resource="e4fc6608-08ae-469f-ae47-a9ea9f27bbb2"/>
+    </rdf:Description>
     <rdf:Description rdf:about="477f2902-9524-4aa4-8bce-0243d045692f">
         <skos:prefLabel xml:lang="fr">OLI</skos:prefLabel>
         <skos:prefLabel xml:lang="en">OLI</skos:prefLabel>
@@ -2470,19 +2437,6 @@ effets atmosphériques</skos:definition>
         <skos:related rdf:resource="ea1d749d-37b6-4b50-a941-3d50e52eb8ba"/>
         <skos:related rdf:resource="7de2cf17-5836-4cbc-b3d3-f9ce972ae166"/>
         <skos:inScheme rdf:resource="th_defaultdsdsd"/>
-    </rdf:Description>
-    <rdf:Description rdf:about="3bf24a20-47a6-4184-9f88-dfaf3fbfdaf2">
-        <skos:prefLabel xml:lang="fr">Niveau 3B</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">Level 3B</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">LEVEL3B</skos:altLabel>
-        <skos:altLabel xml:lang="fr">L3B</skos:altLabel>
-        <skos:altLabel xml:lang="en">LEVEL3B</skos:altLabel>
-        <skos:altLabel xml:lang="en">L3B</skos:altLabel>
-        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
-        <skos:broader rdf:resource="77084a07-5f26-4356-b86b-18c99e1f8608"/>
-        <skos:broader rdf:resource="3d69a7bf-e972-4bab-ae97-7155b1654bbb"/>
-        <skos:broader rdf:resource="a6983904-30f3-4d25-8f89-076a53619db4"/>
-        <skos:related rdf:resource="e4fc6608-08ae-469f-ae47-a9ea9f27bbb2"/>
     </rdf:Description>
     <rdf:Description rdf:about="95491e28-e45a-4c77-9bc3-97dfcc06e5f3">
         <skos:prefLabel xml:lang="fr">18.5 - 18.9</skos:prefLabel>
@@ -2775,6 +2729,16 @@ effets atmosphériques</skos:definition>
         <skos:narrower rdf:resource="777662ed-35cc-4ad5-9d62-ac6459daf248"/>
         <skos:inScheme rdf:resource="th_defaultdsdsd"/>
     </rdf:Description>
+    <rdf:Description rdf:about="4b980902-42f6-47e9-8607-ebdac4ca3f04">
+        <skos:prefLabel xml:lang="fr">Niveau 3</skos:prefLabel>
+        <skos:prefLabel xml:lang="en">LEVEL3</skos:prefLabel>
+        <skos:altLabel xml:lang="fr">L3</skos:altLabel>
+        <skos:altLabel xml:lang="en">L3</skos:altLabel>
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <skos:broader rdf:resource="77084a07-5f26-4356-b86b-18c99e1f8608"/>
+        <skos:related rdf:resource="4a0b88a6-3e8d-4be1-b262-87917274eec3"/>
+        <skos:related rdf:resource="a6983904-30f3-4d25-8f89-076a53619db4"/>
+    </rdf:Description>
     <rdf:Description rdf:about="f2fc11d1-94b1-4af9-8918-a965c3e79c76">
         <skos:prefLabel xml:lang="fr">Bande E</skos:prefLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
@@ -2788,19 +2752,6 @@ effets atmosphériques</skos:definition>
         <skos:related rdf:resource="9e7b05bc-efc8-4e0c-89de-9613016acd81"/>
         <skos:related rdf:resource="18a205f5-b181-4881-8d4e-979fe8e228e7"/>
         <skos:inScheme rdf:resource="th_defaultdsdsd"/>
-    </rdf:Description>
-    <rdf:Description rdf:about="4b980902-42f6-47e9-8607-ebdac4ca3f04">
-        <skos:prefLabel xml:lang="fr">Niveau 3</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">Level 3</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">Level-3</skos:altLabel>
-        <skos:altLabel xml:lang="fr">L3 ESA</skos:altLabel>
-        <skos:altLabel xml:lang="fr">L3</skos:altLabel>
-        <skos:altLabel xml:lang="en">LEVEL3</skos:altLabel>
-        <skos:altLabel xml:lang="en">L3</skos:altLabel>
-        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
-        <skos:broader rdf:resource="77084a07-5f26-4356-b86b-18c99e1f8608"/>
-        <skos:related rdf:resource="4a0b88a6-3e8d-4be1-b262-87917274eec3"/>
-        <skos:related rdf:resource="a6983904-30f3-4d25-8f89-076a53619db4"/>
     </rdf:Description>
     <rdf:Description rdf:about="1cccf8a1-c44b-4a70-9044-dc8e187665f3">
         <skos:prefLabel xml:lang="fr">800</skos:prefLabel>
@@ -2855,10 +2806,8 @@ effets atmosphériques</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="ce4d22a9-66a2-4bf4-b11a-9a58057c44c1">
         <skos:prefLabel xml:lang="fr">Primary</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">Primary</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">Primary</skos:altLabel>
+        <skos:prefLabel xml:lang="en">PRIMARY</skos:prefLabel>
         <skos:altLabel xml:lang="fr">SEN</skos:altLabel>
-        <skos:altLabel xml:lang="en">PRIMARY</skos:altLabel>
         <skos:altLabel xml:lang="en">SEN</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="07c7099b-0b6f-4708-8e55-582312fe3e70"/>
@@ -3023,11 +2972,8 @@ effets atmosphériques</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="a17892b9-adeb-4ca8-9faf-ea716885b9cd">
         <skos:prefLabel xml:lang="fr">Niveau 2A</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">Level 2A</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">LEVEL2A</skos:altLabel>
-        <skos:altLabel xml:lang="fr">L2A CNES</skos:altLabel>
+        <skos:prefLabel xml:lang="en">LEVEL2A</skos:prefLabel>
         <skos:altLabel xml:lang="fr">L2A</skos:altLabel>
-        <skos:altLabel xml:lang="en">LEVEL2A</skos:altLabel>
         <skos:altLabel xml:lang="en">L2A</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="77084a07-5f26-4356-b86b-18c99e1f8608"/>
@@ -3269,10 +3215,8 @@ végétation</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="da007aa1-5d6b-4e88-8a13-00cae9b39228">
         <skos:prefLabel xml:lang="fr">Ortho</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">Ortho</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">Ortho</skos:altLabel>
+        <skos:prefLabel xml:lang="en">ORTHO</skos:prefLabel>
         <skos:altLabel xml:lang="fr">ORT</skos:altLabel>
-        <skos:altLabel xml:lang="en">ORTHO</skos:altLabel>
         <skos:altLabel xml:lang="en">ORT</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="77084a07-5f26-4356-b86b-18c99e1f8608"/>
@@ -3489,10 +3433,8 @@ Classification System)</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="b80157ee-7cf1-4cb8-a86d-95a26d3bfe8b">
         <skos:prefLabel xml:lang="fr">Niveau 1G</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">Level 1G</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">Level 1G</skos:altLabel>
+        <skos:prefLabel xml:lang="en">LEVEL1G</skos:prefLabel>
         <skos:altLabel xml:lang="fr">L1G</skos:altLabel>
-        <skos:altLabel xml:lang="en">LEVEL1G</skos:altLabel>
         <skos:altLabel xml:lang="en">L1G</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="07c7099b-0b6f-4708-8e55-582312fe3e70"/>
@@ -3564,10 +3506,8 @@ Classification System)</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="364a10f8-8cc7-4929-a0a0-bda597e8d9e7">
         <skos:prefLabel xml:lang="fr">Niveau 4</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">Level 4</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">LEVEL4</skos:altLabel>
+        <skos:prefLabel xml:lang="en">LEVEL4</skos:prefLabel>
         <skos:altLabel xml:lang="fr">4</skos:altLabel>
-        <skos:altLabel xml:lang="en">LEVEL4</skos:altLabel>
         <skos:altLabel xml:lang="en">4</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="75e85463-c4de-4ec5-a616-f3c06d3ba5c9"/>
@@ -3591,10 +3531,8 @@ Classification System)</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="a09aa9dd-ae35-455d-80c6-a8e5a39ad026">
         <skos:prefLabel xml:lang="fr">Niveau 1Gt</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">Level 1Gt</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">Level 1Gt</skos:altLabel>
+        <skos:prefLabel xml:lang="en">LEVEL1GT</skos:prefLabel>
         <skos:altLabel xml:lang="fr">L1GT</skos:altLabel>
-        <skos:altLabel xml:lang="en">LEVEL1GT</skos:altLabel>
         <skos:altLabel xml:lang="en">L1GT</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="07c7099b-0b6f-4708-8e55-582312fe3e70"/>
@@ -3668,11 +3606,8 @@ Classification System)</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="261e0f9e-d141-4da3-8069-5b94365db029">
         <skos:prefLabel xml:lang="fr">Niveau 1C</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">Level 1C</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">Level-1c</skos:altLabel>
-        <skos:altLabel xml:lang="fr">L1C ESA</skos:altLabel>
+        <skos:prefLabel xml:lang="en">LEVEL1C</skos:prefLabel>
         <skos:altLabel xml:lang="fr">L1C</skos:altLabel>
-        <skos:altLabel xml:lang="en">LEVEL1C</skos:altLabel>
         <skos:altLabel xml:lang="en">L1C</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="77084a07-5f26-4356-b86b-18c99e1f8608"/>
@@ -4161,15 +4096,13 @@ mm3</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="6b4acc80-b012-4b26-bd58-e1c4187a08ec">
         <skos:prefLabel xml:lang="fr">Niveau 2</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">Level-2</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">Level-2 USGS</skos:altLabel>
-        <skos:altLabel xml:lang="fr">L2</skos:altLabel>
-        <skos:altLabel xml:lang="en">LEVEL2</skos:altLabel>
-        <skos:altLabel xml:lang="en">L2</skos:altLabel>
+        <skos:prefLabel xml:lang="en">LEVEL2</skos:prefLabel>
+        <skos:altLabel xml:lang="fr">2</skos:altLabel>
+        <skos:altLabel xml:lang="en">2</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="3d69a7bf-e972-4bab-ae97-7155b1654bbb"/>
-        <skos:related rdf:resource="b4916f1c-6912-4b70-9c89-6b6a8c72f3fc"/>
         <skos:related rdf:resource="ceee7090-43b9-450f-8801-55503b094058"/>
+        <skos:related rdf:resource="b4916f1c-6912-4b70-9c89-6b6a8c72f3fc"/>
     </rdf:Description>
     <rdf:Description rdf:about="c0b18997-327e-4d5d-9122-31d76a827e07">
         <skos:prefLabel xml:lang="fr">8bits</skos:prefLabel>
@@ -4258,6 +4191,17 @@ mm3</skos:definition>
         <skos:related rdf:resource="3148fd97-7b01-493a-8002-2b5746302328"/>
         <skos:inScheme rdf:resource="th_defaultdsdsd"/>
     </rdf:Description>
+    <rdf:Description rdf:about="4b466355-e6ca-49a4-ac76-a42e68485503">
+        <skos:prefLabel xml:lang="fr">Niveau 3A</skos:prefLabel>
+        <skos:prefLabel xml:lang="en">LEVEL3A</skos:prefLabel>
+        <skos:altLabel xml:lang="fr">L3A</skos:altLabel>
+        <skos:altLabel xml:lang="en">L3A</skos:altLabel>
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <skos:broader rdf:resource="77084a07-5f26-4356-b86b-18c99e1f8608"/>
+        <skos:broader rdf:resource="d943ffe5-9957-4a14-8660-e7ddf80d39a5"/>
+        <skos:broader rdf:resource="a6983904-30f3-4d25-8f89-076a53619db4"/>
+        <skos:related rdf:resource="e4fc6608-08ae-469f-ae47-a9ea9f27bbb2"/>
+    </rdf:Description>
     <rdf:Description rdf:about="04f3fd9e-5257-4544-aa3d-8b502886d9df">
         <skos:prefLabel xml:lang="fr">DLR</skos:prefLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
@@ -4281,20 +4225,6 @@ mm3</skos:definition>
         <skos:related rdf:resource="38502e87-b6c6-4dc7-b8c7-0ac9321f127b"/>
         <skos:inScheme rdf:resource="th_defaultdsdsd"/>
     </rdf:Description>
-    <rdf:Description rdf:about="4b466355-e6ca-49a4-ac76-a42e68485503">
-        <skos:prefLabel xml:lang="fr">Niveau 3A</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">Level 3A</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">LEVEL3A</skos:altLabel>
-        <skos:altLabel xml:lang="fr">L3A CNES</skos:altLabel>
-        <skos:altLabel xml:lang="fr">L3A</skos:altLabel>
-        <skos:altLabel xml:lang="en">LEVEL3A</skos:altLabel>
-        <skos:altLabel xml:lang="en">L3A</skos:altLabel>
-        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
-        <skos:broader rdf:resource="77084a07-5f26-4356-b86b-18c99e1f8608"/>
-        <skos:broader rdf:resource="d943ffe5-9957-4a14-8660-e7ddf80d39a5"/>
-        <skos:broader rdf:resource="a6983904-30f3-4d25-8f89-076a53619db4"/>
-        <skos:related rdf:resource="e4fc6608-08ae-469f-ae47-a9ea9f27bbb2"/>
-    </rdf:Description>
     <rdf:Description rdf:about="b795f6c9-d835-4185-ba31-3d747f25474f">
         <skos:prefLabel xml:lang="fr">0.45 - 0.515</skos:prefLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
@@ -4312,11 +4242,8 @@ mm3</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="179cf535-84c1-4ff6-9c63-b1edc2889d51">
         <skos:prefLabel xml:lang="fr">Niveau 2A</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">Level 2A</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">Level-2a</skos:altLabel>
-        <skos:altLabel xml:lang="fr">L2A ESA</skos:altLabel>
+        <skos:prefLabel xml:lang="en">LEVEL2A</skos:prefLabel>
         <skos:altLabel xml:lang="fr">L2A</skos:altLabel>
-        <skos:altLabel xml:lang="en">LEVEL2A</skos:altLabel>
         <skos:altLabel xml:lang="en">L2A</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="77084a07-5f26-4356-b86b-18c99e1f8608"/>
@@ -4498,10 +4425,8 @@ mm3</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="b53f7909-ded5-4880-bc0f-9a0400fe334c">
         <skos:prefLabel xml:lang="fr">Niveau 2A</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">Level 2A</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">Level 2A</skos:altLabel>
+        <skos:prefLabel xml:lang="en">LEVEL2A</skos:prefLabel>
         <skos:altLabel xml:lang="fr">2A</skos:altLabel>
-        <skos:altLabel xml:lang="en">LEVEL2A</skos:altLabel>
         <skos:altLabel xml:lang="en">2A</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="07c7099b-0b6f-4708-8e55-582312fe3e70"/>
@@ -4550,17 +4475,6 @@ mm3</skos:definition>
         <skos:related rdf:resource="7244d392-b340-4488-af06-d59e986bed26"/>
         <skos:inScheme rdf:resource="th_defaultdsdsd"/>
     </rdf:Description>
-    <rdf:Description rdf:about="94ad4b47-8124-4283-af1f-fd3d12800925">
-        <skos:prefLabel xml:lang="fr">Niveau 1A</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">Level 1A</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">LEVEL1A</skos:altLabel>
-        <skos:altLabel xml:lang="fr">1A CNES</skos:altLabel>
-        <skos:altLabel xml:lang="en">LEVEL1A</skos:altLabel>
-        <skos:altLabel xml:lang="en">1A</skos:altLabel>
-        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
-        <skos:broader rdf:resource="07c7099b-0b6f-4708-8e55-582312fe3e70"/>
-        <skos:broader rdf:resource="3d69a7bf-e972-4bab-ae97-7155b1654bbb"/>
-    </rdf:Description>
     <rdf:Description rdf:about="f2d10380-c97a-4e61-bc26-d2d11c38494a">
         <skos:prefLabel xml:lang="fr">8.30 - 9.10</skos:prefLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
@@ -4568,6 +4482,15 @@ mm3</skos:definition>
         <skos:related rdf:resource="f0959eed-4655-4966-bc64-8bfd7e899ff5"/>
         <skos:related rdf:resource="1baa1879-8805-44c6-92d0-f4e4e8fd0a52"/>
         <skos:inScheme rdf:resource="th_defaultdsdsd"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="94ad4b47-8124-4283-af1f-fd3d12800925">
+        <skos:prefLabel xml:lang="fr">Niveau 1A</skos:prefLabel>
+        <skos:prefLabel xml:lang="en">LEVEL1A</skos:prefLabel>
+        <skos:altLabel xml:lang="fr">1A</skos:altLabel>
+        <skos:altLabel xml:lang="en">1A</skos:altLabel>
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <skos:broader rdf:resource="07c7099b-0b6f-4708-8e55-582312fe3e70"/>
+        <skos:broader rdf:resource="3d69a7bf-e972-4bab-ae97-7155b1654bbb"/>
     </rdf:Description>
     <rdf:Description rdf:about="ad3bc3f1-0b5c-4ed3-a2ff-0c8aedf541e6">
         <skos:prefLabel xml:lang="fr">smos</skos:prefLabel>
@@ -4580,10 +4503,8 @@ mm3</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="15de12a9-5992-4762-9845-a8edebf6efdf">
         <skos:prefLabel xml:lang="fr">Niveau 3A (Ortho)</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">Level 3A (Ortho)</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">Level 3A (Ortho)</skos:altLabel>
+        <skos:prefLabel xml:lang="en">LEVEL3A</skos:prefLabel>
         <skos:altLabel xml:lang="fr">L3A</skos:altLabel>
-        <skos:altLabel xml:lang="en">LEVEL3A</skos:altLabel>
         <skos:altLabel xml:lang="en">L3A</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="77084a07-5f26-4356-b86b-18c99e1f8608"/>
@@ -4599,10 +4520,8 @@ mm3</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="dd59f18d-63c8-4ed2-8d0d-540ed28c114a">
         <skos:prefLabel xml:lang="fr">Niveau 1A</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">Level 1A</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">Level-1a</skos:altLabel>
+        <skos:prefLabel xml:lang="en">LEVEL1A</skos:prefLabel>
         <skos:altLabel xml:lang="fr">L1A</skos:altLabel>
-        <skos:altLabel xml:lang="en">LEVEL1A</skos:altLabel>
         <skos:altLabel xml:lang="en">L1A</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="07c7099b-0b6f-4708-8e55-582312fe3e70"/>
