@@ -65,8 +65,8 @@
 
  <fields>
    
-	<field name="alt_en" type="text_general" indexed="true" stored="true" multiValued="true"/>
-	<field name="alt_fr" type="text_general" indexed="true" stored="true" multiValued="true"/>
+	<field name="alt_en" type="text_general" indexed="true" stored="true" multiValued="false"/>
+	<field name="alt_fr" type="text_general" indexed="true" stored="true" multiValued="false"/>
 	<field name="pref_en" type="text_general" indexed="true" stored="true" multiValued="false"/>
 	<field name="pref_fr" type="text_general" indexed="true" stored="true" multiValued="false"/>
 	

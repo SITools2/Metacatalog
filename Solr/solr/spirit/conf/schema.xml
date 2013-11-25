@@ -165,7 +165,8 @@
 	<copyField source="description" dest="searchTerms" maxChars="3000"/>
 	<copyField source="acquisitionSetup.platform" dest="searchTerms" maxChars="3000"/>
 	<copyField source="acquisitionSetup.instrument" dest="searchTerms" maxChars="3000"/>
-
+	<copyField source="product" dest="searchTerms" maxChars="3000"/>
+	<copyField source="project" dest="searchTerms" maxChars="3000"/>
    <!-- uncomment the following to ignore any fields that don't already match an existing 
         field name or dynamic field, rather than reporting them as an error. 
         alternately, change the type="ignored" to some other type e.g. "text" if you want 
