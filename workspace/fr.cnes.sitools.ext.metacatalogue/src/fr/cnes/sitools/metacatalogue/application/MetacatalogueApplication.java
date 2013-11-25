@@ -48,6 +48,7 @@ import fr.cnes.sitools.metacatalogue.resources.opensearch.OpensearchDescribeReso
 import fr.cnes.sitools.metacatalogue.resources.opensearch.OpensearchDescriptionServiceResource;
 import fr.cnes.sitools.metacatalogue.resources.opensearch.OpensearchSearchResource;
 import fr.cnes.sitools.metacatalogue.resources.proxyservices.DownloadProxyServiceHandler;
+import fr.cnes.sitools.metacatalogue.resources.proxyservices.WmsHttpsServiceHandler;
 import fr.cnes.sitools.metacatalogue.resources.proxyservices.WmsProxyServiceHandler;
 import fr.cnes.sitools.plugins.applications.business.AbstractApplicationPlugin;
 import fr.cnes.sitools.plugins.applications.model.ApplicationPluginModel;
@@ -137,7 +138,8 @@ public class MetacatalogueApplication extends AbstractApplicationPlugin {
     // Services redirector exposition
 
     router.attach("/download/{urn}", new DownloadProxyServiceHandler(getContext()));
-    router.attach("/wms/{urn}", new WmsProxyServiceHandler(getContext()));
+    //router.attach("/wms/{urn}", new WmsProxyServiceHandler(getContext()));
+    router.attach("/wms/{urn}", new WmsHttpsServiceHandler(getContext()));
 
     // ADMIN CRUD
     attachRedirector(router, "/ihm/catalogsTypes", urlHarvester, null);
