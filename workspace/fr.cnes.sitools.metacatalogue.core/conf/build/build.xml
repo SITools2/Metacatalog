@@ -160,6 +160,7 @@
 		<path refid="restlet_2_1_0" />
 		<path refid="jsonpath" />
 		<path refid="libraries" />
+		<path refid="com.hp.hpl.jena" />
 	</path>
 	
 	<!-- Classpath pour l'execution des tests -->

@@ -15,4 +15,4 @@ Require-Bundle: org.restlet.patched;bundle-version="1.0.1",
  org.restlet.ext.xstream;bundle-version="2.0.5",
  org.junit4;bundle-version="4.8.0",
  org.apache.solr_4.5.0;bundle-version="4.5.0",
- com.hp.hpl.jena;bundle-version="2.11.0"
+ fr.cnes.sitools.metacatalogue.core;bundle-version="1.0.0"

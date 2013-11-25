@@ -21,7 +21,7 @@
 	<jar src="dist/MetacatalogServer-izpack.jar" stage="install"/>
 	<info>
 		<appname>Metacatalogue</appname>
-		<appversion>0.1</appversion>
+		<appversion>0.6</appversion>
 		<authors>
 			<author email="" name="CNES" />
 			<author email="" name="Akka Technologies" />
@@ -147,6 +147,8 @@
 				excludes="**/*.zip" />
 			<fileset override="update" dir="../../cots/saxon" targetdir="$INSTALL_PATH/cots/saxon"
 				excludes="**/*.zip" />
+			<fileset override="update" dir="../../cots/com.hp.hpl.jena" targetdir="$INSTALL_PATH/cots/com.hp.hpl.jena"
+				excludes="**/*.zip" />
 		</pack>
 		
 		<!-- SCRIPTS, contains the starting scripts -->
@@ -219,6 +221,9 @@
 			<file override="update"
 				src="../fr.cnes.sitools.metacatalogue.core/dist/fr.cnes.sitools.metacatalogue.core.jar"
 				targetdir="$sitoolsPath/workspace/fr.cnes.sitools.core/ext" />
+
+			<fileset override="update" dir="../../cots/com.hp.hpl.jena" targetdir="$sitoolsPath/workspace/fr.cnes.sitools.core/ext"
+				excludes="**/*.zip" />
 			
 		</pack>
 		
