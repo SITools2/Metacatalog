@@ -22,7 +22,7 @@ public class SuggestDTO {
 
   private String suggestion;
 
-  private int nb;
+  private long nb;
 
   /**
    * Gets the suggestion value
@@ -48,7 +48,7 @@ public class SuggestDTO {
    * 
    * @return the nb
    */
-  public int getNb() {
+  public long getNb() {
     return nb;
   }
 
@@ -58,7 +58,7 @@ public class SuggestDTO {
    * @param nb
    *          the nb to set
    */
-  public void setNb(int nb) {
+  public void setNb(long nb) {
     this.nb = nb;
   }
 

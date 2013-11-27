@@ -28,7 +28,6 @@ import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.response.QueryResponse;
-import org.apache.solr.common.SolrDocumentList;
 import org.restlet.data.Form;
 import org.restlet.data.Parameter;
 import org.restlet.data.Status;
@@ -38,59 +37,25 @@ import org.restlet.representation.Variant;
 import org.restlet.resource.Get;
 import org.restlet.resource.ResourceException;
 
-import fr.cnes.sitools.common.SitoolsResource;
 import fr.cnes.sitools.common.SitoolsSettings;
-import fr.cnes.sitools.metacatalogue.application.MetacatalogueApplication;
 import fr.cnes.sitools.metacatalogue.index.solr.SolRUtils;
 import fr.cnes.sitools.metacatalogue.representation.GeoJsonMDEORepresentation;
+import fr.cnes.sitools.metacatalogue.resources.AbstractOpensearchQueryResource;
 import fr.cnes.sitools.metacatalogue.utils.MetacatalogField;
-import fr.cnes.sitools.plugins.applications.model.ApplicationPluginParameter;
 import fr.cnes.sitools.thesaurus.Concept;
 import fr.cnes.sitools.thesaurus.ThesaurusSearcher;
 import fr.cnes.sitools.util.DateUtils;
 
-public class OpensearchSearchResource extends SitoolsResource {
+public class OpensearchSearchResource extends AbstractOpensearchQueryResource {
   /** The default date format */
   private static String SOLR_DATE_FORMAT = DateUtils.FORMAT_ISO_8601_WITHOUT_TIME_ZONE + "'Z'";
 
-  /** The parent application */
-  private MetacatalogueApplication application;
-  /** The url of the solr core to query */
-  private String solrCoreUrl;
-
-  private String thesaurusName;
+  
 
   @Override
   public void sitoolsDescribe() {
     setName("OpensearchSearchResource");
     setDescription("Opensearch search resource, expose the result as GeoJSON");
-  }
-
-  @Override
-  protected void doInit() {
-    super.doInit();
-
-    application = (MetacatalogueApplication) getApplication();
-
-    ApplicationPluginParameter solrCoreUrlParameter = application.getParameter("metacatalogSolrCore");
-    if (solrCoreUrlParameter == null || solrCoreUrlParameter.getValue() == null) {
-      throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "No solr core url defined, cannot perform search");
-    }
-
-    ApplicationPluginParameter solrCoreNameParameter = application.getParameter("metacatalogSolrName");
-    if (solrCoreNameParameter == null || solrCoreNameParameter.getValue() == null) {
-      throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "No solr core name defined, cannot perform search");
-    }
-    solrCoreUrl = solrCoreUrlParameter.getValue() + "/" + solrCoreNameParameter.getValue();
-
-    ApplicationPluginParameter thesaurusParam = application.getParameter("thesaurus");
-    if (thesaurusParam == null || thesaurusParam.getName() == null || thesaurusParam.getName().isEmpty()) {
-      getResponse().setStatus(Status.SERVER_ERROR_INTERNAL, "No thesaurus parameter defined");
-      return;
-    }
-
-    thesaurusName = thesaurusParam.getValue();
-
   }
 
   /**
@@ -148,17 +113,18 @@ public class OpensearchSearchResource extends SitoolsResource {
     // addGeometryCriteria(solrQuery, query);
     try {
       setQuery(solrQuery, query);
+      setFacet(solrQuery);
 
       getLogger().log(Level.INFO, "SOLR query : " + solrQuery.toString());
 
       QueryResponse rsp = server.query(solrQuery);
-      SolrDocumentList listDoc = rsp.getResults();
 
       boolean isAuthenticated = getClientInfo().isAuthenticated();
       SitoolsSettings settings = getSettings();
       String applicationBaseUrl = settings.getPublicHostDomain() + application.getAttachementRef();
 
-      repr = new GeoJsonMDEORepresentation(listDoc, isAuthenticated, applicationBaseUrl);
+      
+      repr = new GeoJsonMDEORepresentation(rsp, isAuthenticated, applicationBaseUrl);
     }
     catch (SolrServerException e) {
       throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "Error while querying solr index", e);
@@ -168,6 +134,18 @@ public class OpensearchSearchResource extends SitoolsResource {
     }
 
     return repr;
+  }
+
+  private void setFacet(SolrQuery solrQuery) {
+
+    solrQuery.addFacetField("acquisitionSetup.resolution");
+    solrQuery.addFacetField("characterisationAxis.temporalAxis.min");
+    solrQuery.add("facet.pivot", "acquisitionSetup.platform,acquisitionSetup.instrument");
+    solrQuery.addFacetField("processingLevel");
+    solrQuery.addFacetField("product");
+    solrQuery.setFacetLimit(10);
+    solrQuery.setFacetMinCount(1);
+
   }
 
   @Override

@@ -1,4 +1,4 @@
- /*******************************************************************************
+/*******************************************************************************
  * Copyright 2010-2013 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
  *
  * This file is part of SITools2.
@@ -22,9 +22,17 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+import java.util.Map.Entry;
 
+import org.apache.solr.client.solrj.response.FacetField;
+import org.apache.solr.client.solrj.response.FacetField.Count;
+import org.apache.solr.client.solrj.response.PivotField;
+import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
+import org.apache.solr.common.util.NamedList;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.restlet.data.MediaType;
@@ -59,6 +67,8 @@ public class GeoJsonMDEORepresentation extends JsonRepresentation {
   private boolean authenticatedUser;
   /** The application base url */
   private String applicationBaseUrl;
+  private List<FacetField> facets;
+  private NamedList<List<PivotField>> pivotFacets;
 
   /**
    * Constructor with a DatabaseRequestParameters, a geometryColName and a converterChained
@@ -70,25 +80,36 @@ public class GeoJsonMDEORepresentation extends JsonRepresentation {
    * @param applicationBaseUrl
    *          the current application base url
    */
-  public GeoJsonMDEORepresentation(SolrDocumentList listDocuments, boolean authenticatedUser, String applicationBaseUrl) {
+  public GeoJsonMDEORepresentation(QueryResponse queryResponse, boolean authenticatedUser, String applicationBaseUrl) {
     super(MediaType.APPLICATION_JSON);
-    this.listDocuments = listDocuments;
+    this.listDocuments = queryResponse.getResults();
+    this.facets = queryResponse.getFacetFields();
+    this.pivotFacets = queryResponse.getFacetPivot();
     this.authenticatedUser = authenticatedUser;
     this.applicationBaseUrl = applicationBaseUrl;
   }
 
   @Override
   public void write(Writer writer) throws IOException {
-
-    writer.write("{");
-    writer.write("\"type\":\"FeatureCollection\",");
-    // start features
-    writer.write("\"totalResults\":" + listDocuments.getNumFound() + ",");
-    writer.write("\"features\":[");
     try {
-      boolean first = true;
-      for (SolrDocument solrDocument : listDocuments) {
-        try {
+      writer.write("{");
+      writer.write("\"type\":\"FeatureCollection\",");
+      // start features
+      writer.write("\"totalResults\":" + listDocuments.getNumFound() + ",");
+      writer.write("\"facet_counts\":");
+      writer.write("{");
+      writer.write("\"facet_fields\":" + getFacetFields());
+      if (this.pivotFacets != null) {
+        writer.write(",");
+        writer.write("\"facet_pivots\":" + getFacetPivots());
+      }
+      writer.write("}");
+      writer.write(",");
+      writer.write("\"features\":[");
+      try {
+        boolean first = true;
+        for (SolrDocument solrDocument : listDocuments) {
+
           // creates a geometry and a properties string
           String geometry = new String();
           String uuid = (String) solrDocument.getFieldValue(UUID_COLUMN);
@@ -213,34 +234,78 @@ public class GeoJsonMDEORepresentation extends JsonRepresentation {
             // end feature
             writer.write("}");
           }
+
         }
-        catch (JSONException e) {
-          throw new ResourceException(Status.SERVER_ERROR_INTERNAL, e);
+        // end features
+        writer.write("]");
+      }
+      // catch (SitoolsException e) {
+      // writer.write("],");
+      // writer.write("\"error\":{");
+      // writer.write("\"code\":");
+      // writer.write("\"message\":" + e.getLocalizedMessage());
+      // writer.write("}");
+      //
+      // }
+      finally {
+        writer.write("}");
+        if (writer != null) {
+          writer.flush();
         }
       }
-      // end features
-      writer.write("]");
     }
-    // catch (SitoolsException e) {
-    // writer.write("],");
-    // writer.write("\"error\":{");
-    // writer.write("\"code\":");
-    // writer.write("\"message\":" + e.getLocalizedMessage());
-    // writer.write("}");
-    //
-    // }
-    finally {
-      writer.write("}");
-      if (writer != null) {
-        writer.flush();
-      }
+    catch (JSONException e) {
+      throw new ResourceException(Status.SERVER_ERROR_INTERNAL, e);
     }
 
   }
+
   // private JSONObject parseJSON(String jsonString) throws JSONException {
   // JSONTokener tokener = new JSONTokener(jsonString);
   // JSONObject root = new JSONObject(tokener);
   // return root;
   //
   // }
+
+  private String getFacetPivots() throws JSONException {
+
+    JSONObject pivotFacetsJSON = new JSONObject();
+
+    for (Entry<String, List<PivotField>> field : this.pivotFacets) {
+      pivotFacetsJSON.put(field.getKey(), getFacetPivots(field.getValue()));
+    }
+    return pivotFacetsJSON.toString();
+  }
+
+  private JSONArray getFacetPivots(List<PivotField> pivotFields) throws JSONException {
+    if (pivotFields == null) {
+      return null;
+    }
+    JSONArray array = new JSONArray();
+    for (PivotField field : pivotFields) {
+      JSONObject out = new JSONObject();
+      out.put("field", field.getField());
+      out.put("value", field.getValue());
+      out.put("count", field.getCount());
+      if (field.getPivot() != null) {
+        out.put("pivot", getFacetPivots(field.getPivot()));
+      }
+      array.put(out);
+    }
+    return array;
+  }
+
+  private String getFacetFields() throws JSONException {
+    JSONObject facetsJSON = new JSONObject();
+    for (FacetField field : this.facets) {
+      JSONArray array = new JSONArray();
+      for (Count count : field.getValues()) {
+        array.put(count.getName());
+        array.put(count.getCount());
+      }
+      facetsJSON.put(field.getName(), array);
+    }
+
+    return facetsJSON.toString();
+  }
 }

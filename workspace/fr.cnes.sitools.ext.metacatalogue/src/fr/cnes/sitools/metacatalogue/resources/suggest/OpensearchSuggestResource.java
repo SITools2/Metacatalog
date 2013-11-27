@@ -20,46 +20,31 @@ package fr.cnes.sitools.metacatalogue.resources.suggest;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.solr.client.solrj.SolrQuery;
+import org.apache.solr.client.solrj.SolrServer;
+import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.response.QueryResponse;
+import org.apache.solr.client.solrj.response.TermsResponse;
+import org.apache.solr.client.solrj.response.TermsResponse.Term;
 import org.restlet.data.Status;
 import org.restlet.representation.Variant;
 import org.restlet.resource.Get;
 
-import fr.cnes.sitools.common.SitoolsResource;
-import fr.cnes.sitools.metacatalogue.application.MetacatalogueApplication;
-import fr.cnes.sitools.plugins.applications.model.ApplicationPluginParameter;
+import fr.cnes.sitools.metacatalogue.index.solr.SolRUtils;
+import fr.cnes.sitools.metacatalogue.resources.AbstractOpensearchQueryResource;
 import fr.cnes.sitools.thesaurus.Concept;
 import fr.cnes.sitools.thesaurus.ThesaurusSearcher;
 
-public class OpensearchSuggestResource extends SitoolsResource {
-
-  private String thesaurusName;
+public class OpensearchSuggestResource extends AbstractOpensearchQueryResource {
 
   @Override
   public void sitoolsDescribe() {
     setName("OpensearchSuggestResource");
     setDescription("Get suggestions");
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see fr.cnes.sitools.common.SitoolsResource#doInit()
-   */
-  @Override
-  protected void doInit() {
-    super.doInit();
-
-    MetacatalogueApplication application = (MetacatalogueApplication) getApplication();
-    ApplicationPluginParameter thesaurusParam = application.getParameter("thesaurus");
-    if (thesaurusParam == null || thesaurusParam.getName() == null || thesaurusParam.getName().isEmpty()) {
-      getResponse().setStatus(Status.SERVER_ERROR_INTERNAL, "No thesaurus parameter defined");
-      return;
-    }
-
-    thesaurusName = thesaurusParam.getValue();
-
   }
 
   @Get
@@ -72,15 +57,46 @@ public class OpensearchSuggestResource extends SitoolsResource {
 
     try {
       ThesaurusSearcher searcher = new ThesaurusSearcher(thesaurusName);
-      List<SuggestDTO> suggest = new ArrayList<SuggestDTO>();
+      List<SuggestDTO> suggests = new ArrayList<SuggestDTO>();
 
       List<Concept> concepts = searcher.searchNarrowersBroader(query + "*");
       for (Concept concept : concepts) {
         SuggestDTO suggestDTO = new SuggestDTO();
         suggestDTO.setSuggestion(concept.getProperties().get("prefLabelNarrower").toString());
-        suggest.add(suggestDTO);
+        suggests.add(suggestDTO);
       }
-      return suggest;
+
+      // get suggestion number in the metacatalogue then
+      if (suggests.size() > 0) {
+        SolrServer server = SolRUtils.getSolRServer(solrCoreUrl);
+        SolrQuery solrQuery = new SolrQuery();
+        solrQuery.setRequestHandler("/terms");
+        solrQuery.setTerms(true);
+        solrQuery.setTermsLimit(-1);
+        solrQuery.addTermsField("concepts");
+
+        QueryResponse rsp;
+        try {
+          rsp = server.query(solrQuery);
+          TermsResponse termsResponse = rsp.getTermsResponse();
+          List<TermsResponse.Term> terms = termsResponse.getTerms("concepts");
+          Map<String, Long> map = createMapFromTerms(terms);
+          for (SuggestDTO suggest : suggests) {
+            Long nb = map.get(suggest.getSuggestion());
+            if (nb == null) {  
+              suggest.setNb(0);
+            }
+            else {
+              suggest.setNb(nb);
+            }
+          }
+        }
+        catch (SolrServerException e) {
+          getLogger().warning("Cannot access Solr server at url : " + solrCoreUrl + " not suggestion number returned");
+        }
+      }
+
+      return suggests;
     }
     catch (IOException e) {
       getResponse().setStatus(Status.SERVER_ERROR_INTERNAL, "Cannot read Thesaurs : " + thesaurusName);
@@ -89,4 +105,11 @@ public class OpensearchSuggestResource extends SitoolsResource {
 
   }
 
+  private Map<String, Long> createMapFromTerms(List<Term> terms) {
+    Map<String, Long> map = new HashMap<String, Long>();
+    for (Term term : terms) {
+      map.put(term.getTerm(), term.getFrequency());
+    }
+    return map;
+  }
 }
