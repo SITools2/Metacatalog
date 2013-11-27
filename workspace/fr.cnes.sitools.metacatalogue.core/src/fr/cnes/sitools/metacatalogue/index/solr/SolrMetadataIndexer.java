@@ -33,7 +33,7 @@ import org.restlet.Context;
 
 import fr.cnes.sitools.metacatalogue.index.MetadataIndexer;
 import fr.cnes.sitools.metacatalogue.model.Field;
-import fr.cnes.sitools.metacatalogue.model.Fields;
+import fr.cnes.sitools.metacatalogue.model.MetadataRecords;
 import fr.cnes.sitools.metacatalogue.utils.MetacatalogField;
 import fr.cnes.sitools.server.ContextAttributes;
 
@@ -81,14 +81,14 @@ public class SolrMetadataIndexer implements MetadataIndexer {
   }
 
   @Override
-  public void addFieldsToIndex(Fields fields) throws Exception {
+  public void addFieldsToIndex(MetadataRecords fields) throws Exception {
     SolrInputDocument inputDocument = buildSolrInput(fields);
     documentsToIndex.add(inputDocument);
   }
 
   @Override
-  public void addListFieldsToIndex(List<Fields> fieldList) throws Exception {
-    for (Fields fields : fieldList) {
+  public void addListFieldsToIndex(List<MetadataRecords> fieldList) throws Exception {
+    for (MetadataRecords fields : fieldList) {
       this.addFieldsToIndex(fields);
     }
   }
@@ -102,12 +102,12 @@ public class SolrMetadataIndexer implements MetadataIndexer {
    * Builds the solr input.
    * 
    * @param fields
-   *          the {@link Fields} object containing the document field
+   *          the {@link MetadataRecords} object containing the document field
    * @return the solr input document
    * @throws Exception
    *           if there is an error
    */
-  protected SolrInputDocument buildSolrInput(Fields fields) throws Exception {
+  protected SolrInputDocument buildSolrInput(MetadataRecords fields) throws Exception {
     SolrInputDocument document = new SolrInputDocument();
     String text;
     SolrInputField solrField;

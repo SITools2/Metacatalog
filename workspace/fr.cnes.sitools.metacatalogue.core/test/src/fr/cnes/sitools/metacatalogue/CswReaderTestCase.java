@@ -25,7 +25,7 @@ import org.junit.Test;
 import org.restlet.Context;
 
 import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
-import fr.cnes.sitools.metacatalogue.common.Metadata;
+import fr.cnes.sitools.metacatalogue.common.MetadataContainer;
 import fr.cnes.sitools.metacatalogue.csw.reader.CswGetReader;
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
 import fr.cnes.sitools.metacatalogue.model.HarvestStatus;
@@ -50,7 +50,7 @@ public class CswReaderTestCase extends AbstractHarvesterTestCase {
     sourceUrl = "file://" + filePath;
 
     Context context = initContext();
-    Metadata data = null;
+    MetadataContainer data = null;
     HarvesterModel model = createHarvesterModelForTest("geosud");
     HarvesterStep reader = new CswGetReader(model, context);
     reader.setNext(new AssertDataClass(model, context));
@@ -84,7 +84,7 @@ public class CswReaderTestCase extends AbstractHarvesterTestCase {
     }
 
     @Override
-    public void execute(Metadata data) throws ProcessException {
+    public void execute(MetadataContainer data) throws ProcessException {
       assertNotNull(data);
       assertNotNull(data.getXmlData());
       HarvestStatus status = (HarvestStatus) context.getAttributes().get(ContextAttributes.STATUS);

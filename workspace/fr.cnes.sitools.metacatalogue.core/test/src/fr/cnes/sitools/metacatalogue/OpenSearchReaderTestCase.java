@@ -24,7 +24,7 @@ import org.junit.Test;
 import org.restlet.Context;
 
 import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
-import fr.cnes.sitools.metacatalogue.common.Metadata;
+import fr.cnes.sitools.metacatalogue.common.MetadataContainer;
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
 import fr.cnes.sitools.metacatalogue.opensearch.reader.OpensearchReader;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
@@ -47,7 +47,7 @@ public class OpenSearchReaderTestCase extends AbstractHarvesterTestCase {
     sourceUrl = "file://" + filePath;
 
     Context context = initContext();
-    Metadata data = null;
+    MetadataContainer data = null;
     HarvesterModel model = createHarvesterModelForTest("kalideos");
     HarvesterStep reader = new OpensearchReader(model, context);
     reader.setNext(new assertDataClass());
@@ -68,7 +68,7 @@ public class OpenSearchReaderTestCase extends AbstractHarvesterTestCase {
   private class assertDataClass extends HarvesterStep {
 
     @Override
-    public void execute(Metadata data) throws ProcessException {
+    public void execute(MetadataContainer data) throws ProcessException {
       assertNotNull(data);
       assertNotNull(data.getJsonData());
     }

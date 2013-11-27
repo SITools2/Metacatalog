@@ -35,7 +35,7 @@ import org.junit.Test;
 import org.restlet.Context;
 
 import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
-import fr.cnes.sitools.metacatalogue.common.Metadata;
+import fr.cnes.sitools.metacatalogue.common.MetadataContainer;
 import fr.cnes.sitools.metacatalogue.csw.extractor.CswMetadataExtractor;
 import fr.cnes.sitools.metacatalogue.csw.indexer.CswMetadataIndexer;
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
@@ -77,7 +77,7 @@ public class CswMetadataIndexerTestCase extends AbstractHarvesterTestCase {
     String filePath = settings.getRootDirectory() + "/" + settings.getString("Tests.RESOURCES_DIRECTORY")
         + "/csw/geosud.xml";
 
-    Metadata data = getXMLDataFromFile(filePath);
+    MetadataContainer data = getXMLDataFromFile(filePath);
 
     SolrMetadataIndexer solrIndexer = new SolrMetadataIndexer(context);
 

@@ -48,7 +48,7 @@ import com.vividsolutions.jts.geom.MultiPolygon;
 import com.vividsolutions.jts.geom.Polygon;
 import com.vividsolutions.jts.io.WKTWriter;
 
-import fr.cnes.sitools.metacatalogue.model.Fields;
+import fr.cnes.sitools.metacatalogue.model.MetadataRecords;
 import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
 import fr.cnes.sitools.metacatalogue.utils.MetacatalogField;
 import fr.cnes.sitools.metacatalogue.utils.XSLTUtils;
@@ -61,7 +61,7 @@ import fr.cnes.sitools.metacatalogue.utils.XSLTUtils;
  */
 public class CswGeometryExtractor {
 
-  public Fields extractGeometry(Element metadata, Fields fields, String schemaName) throws Exception {
+  public MetadataRecords extractGeometry(Element metadata, MetadataRecords fields, String schemaName) throws Exception {
 
     String resourcesFolder = HarvesterSettings.getInstance().getResourcePath(schemaName, "extract-gml.xsl");
     File sFileGmlXSL = new File(resourcesFolder);

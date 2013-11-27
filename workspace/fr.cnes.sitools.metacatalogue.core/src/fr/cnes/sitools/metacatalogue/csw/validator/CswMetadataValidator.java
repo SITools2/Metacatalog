@@ -1,4 +1,4 @@
- /*******************************************************************************
+/*******************************************************************************
  * Copyright 2010-2013 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
  *
  * This file is part of SITools2.
@@ -25,9 +25,9 @@ import java.util.logging.Logger;
 import org.restlet.Context;
 
 import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
-import fr.cnes.sitools.metacatalogue.common.Metadata;
+import fr.cnes.sitools.metacatalogue.common.MetadataContainer;
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
-import fr.cnes.sitools.metacatalogue.model.Fields;
+import fr.cnes.sitools.metacatalogue.model.MetadataRecords;
 import fr.cnes.sitools.metacatalogue.model.HarvestStatus;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
 import fr.cnes.sitools.metacatalogue.utils.MetacatalogField;
@@ -41,26 +41,31 @@ public class CswMetadataValidator extends HarvesterStep {
   private Context context;
 
   public CswMetadataValidator(HarvesterModel conf, Context context) {
-    
+
     this.context = context;
   }
 
   @Override
-  public void execute(Metadata data) throws ProcessException {
+  public void execute(MetadataContainer data) throws ProcessException {
     logger = context.getLogger();
-    List<Fields> fields = data.getFields();
+    List<MetadataRecords> fields = data.getMetadataRecords();
 
     HarvestStatus status = (HarvestStatus) context.getAttributes().get(ContextAttributes.STATUS);
 
     int nbDocInvalid = 0;
-    for (Iterator<Fields> iterator = fields.iterator(); iterator.hasNext();) {
-      Fields doc = iterator.next();
+    for (Iterator<MetadataRecords> iterator = fields.iterator(); iterator.hasNext();) {
+      MetadataRecords doc = iterator.next();
       if (doc.get(MetacatalogField._GEOMETRY.getField()) == null) {
         logger.info("No geometry defined for record : " + doc.get(MetacatalogField.ID.getField())
             + " not inserted in the metacatalog");
         nbDocInvalid++;
 
         iterator.remove();
+      }
+
+      if (doc.get("contry") == null) {
+        logger.info("No country defined for record : " + doc.get(MetacatalogField.ID.getField())
+            + " inserted in the metacatalog anyway");
       }
     }
     status.setNbDocumentsInvalid(status.getNbDocumentsInvalid() + nbDocInvalid);

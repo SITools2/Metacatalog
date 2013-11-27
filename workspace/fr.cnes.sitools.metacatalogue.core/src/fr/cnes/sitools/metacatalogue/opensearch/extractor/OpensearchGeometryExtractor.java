@@ -29,7 +29,7 @@ import com.vividsolutions.jts.algorithm.CGAlgorithms;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.io.WKTWriter;
 
-import fr.cnes.sitools.metacatalogue.model.Fields;
+import fr.cnes.sitools.metacatalogue.model.MetadataRecords;
 import fr.cnes.sitools.metacatalogue.utils.MetacatalogField;
 
 /**
@@ -52,7 +52,7 @@ public class OpensearchGeometryExtractor {
    * @throws Exception
    *           if there is an error while extracting the geometry
    */
-  public Fields extractGeometry(String geometryJson, Fields fields, Context context) throws Exception {
+  public MetadataRecords extractGeometry(String geometryJson, MetadataRecords fields, Context context) throws Exception {
 
     Geometry geometry = extractGeometry(geometryJson, context);
 

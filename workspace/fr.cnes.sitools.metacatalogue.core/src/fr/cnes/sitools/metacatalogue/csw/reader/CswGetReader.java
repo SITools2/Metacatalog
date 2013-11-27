@@ -41,7 +41,7 @@ import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
 
 import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
-import fr.cnes.sitools.metacatalogue.common.Metadata;
+import fr.cnes.sitools.metacatalogue.common.MetadataContainer;
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
 import fr.cnes.sitools.metacatalogue.model.HarvestStatus;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
@@ -89,14 +89,14 @@ public class CswGetReader extends HarvesterStep {
   }
 
   @Override
-  public void execute(Metadata data) throws ProcessException {
+  public void execute(MetadataContainer data) throws ProcessException {
 
     Integer nbRecords = null;
     Integer nextRecord = 1;
 
     boolean keepLooping = true;
     do {
-      data = new Metadata();
+      data = new MetadataContainer();
 
       ClientResourceProxy clientResourceProxy = new ClientResourceProxy(source.getUrl(), Method.GET);
       ClientResource clientResource = clientResourceProxy.getClientResource();

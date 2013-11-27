@@ -23,10 +23,10 @@ import java.util.logging.Logger;
 import org.restlet.Context;
 
 import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
-import fr.cnes.sitools.metacatalogue.common.Metadata;
+import fr.cnes.sitools.metacatalogue.common.MetadataContainer;
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
 import fr.cnes.sitools.metacatalogue.model.Field;
-import fr.cnes.sitools.metacatalogue.model.Fields;
+import fr.cnes.sitools.metacatalogue.model.MetadataRecords;
 import fr.cnes.sitools.model.HarvesterModel;
 
 public class MetadataLogger extends HarvesterStep {
@@ -42,10 +42,10 @@ public class MetadataLogger extends HarvesterStep {
   }
 
   @Override
-  public void execute(Metadata data) throws ProcessException {
+  public void execute(MetadataContainer data) throws ProcessException {
     logger = context.getLogger();
 
-    for (Fields fields : data.getFields()) {
+    for (MetadataRecords fields : data.getMetadataRecords()) {
       for (Field field : fields.getList()) {
         String name = field.getName();
         String value = "";

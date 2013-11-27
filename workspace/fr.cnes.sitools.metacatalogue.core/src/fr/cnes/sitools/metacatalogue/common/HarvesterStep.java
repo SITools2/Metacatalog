@@ -49,7 +49,7 @@ public abstract class HarvesterStep {
    * @throws ProcessException
    *           when an error occured that will stop the process
    */
-  public abstract void execute(Metadata data) throws ProcessException;
+  public abstract void execute(MetadataContainer data) throws ProcessException;
 
   /**
    * Call this method to tell the Step that the previous step is over

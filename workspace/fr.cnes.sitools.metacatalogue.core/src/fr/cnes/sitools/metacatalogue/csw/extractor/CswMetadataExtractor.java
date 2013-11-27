@@ -37,9 +37,9 @@ import org.restlet.Context;
 
 import fr.cnes.sitools.metacatalogue.common.Converter;
 import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
-import fr.cnes.sitools.metacatalogue.common.Metadata;
+import fr.cnes.sitools.metacatalogue.common.MetadataContainer;
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
-import fr.cnes.sitools.metacatalogue.model.Fields;
+import fr.cnes.sitools.metacatalogue.model.MetadataRecords;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
 import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
 import fr.cnes.sitools.metacatalogue.utils.MetacatalogField;
@@ -65,7 +65,7 @@ public class CswMetadataExtractor extends HarvesterStep {
   }
 
   @Override
-  public void execute(Metadata data) throws ProcessException {
+  public void execute(MetadataContainer data) throws ProcessException {
     logger = context.getLogger();
     Element metadata = data.getXmlData();
 
@@ -73,7 +73,7 @@ public class CswMetadataExtractor extends HarvesterStep {
     File sFileXSL = new File(resourcesFolder);
 
     List<Element> children = metadata.getChildren();
-    List<Fields> listFields = new ArrayList<Fields>();
+    List<MetadataRecords> listFields = new ArrayList<MetadataRecords>();
     for (Element child : children) {
 
       try {
@@ -89,7 +89,7 @@ public class CswMetadataExtractor extends HarvesterStep {
 
         Element doc = Xml.loadStream(stream);
 
-        Fields fields = getFields(doc);
+        MetadataRecords fields = getFields(doc);
 
         CswGeometryExtractor extractor = new CswGeometryExtractor();
         fields = extractor.extractGeometry(child, fields, this.schemaName);
@@ -116,19 +116,19 @@ public class CswMetadataExtractor extends HarvesterStep {
       }
     }
 
-    if (data.getFields() == null) {
-      data.setFields(listFields);
+    if (data.getMetadataRecords() == null) {
+      data.setMetadataRecords(listFields);
     }
     else {
-      data.getFields().addAll(listFields);
+      data.getMetadataRecords().addAll(listFields);
     }
     next.execute(data);
 
   }
 
-  private Fields getFields(Element doc) {
+  private MetadataRecords getFields(Element doc) {
 
-    Fields fields = new Fields();
+    MetadataRecords fields = new MetadataRecords();
     List<Element> xmlFields = doc.getChildren();
     String name;
     Object value;
@@ -159,11 +159,11 @@ public class CswMetadataExtractor extends HarvesterStep {
     return new CheckStepsInformation(true);
   }
 
-  private void addField(Fields fields, String value, String fieldName) {
+  private void addField(MetadataRecords fields, String value, String fieldName) {
     fields.add(fieldName, value);
   }
 
-  private void addCustomAttributes(Element xml, Fields fields, List<AttributeCustom> attributes) {
+  private void addCustomAttributes(Element xml, MetadataRecords fields, List<AttributeCustom> attributes) {
     if (attributes != null) {
       for (AttributeCustom attributeCustom : attributes) {
         if (attributeCustom.getValue() != null) {

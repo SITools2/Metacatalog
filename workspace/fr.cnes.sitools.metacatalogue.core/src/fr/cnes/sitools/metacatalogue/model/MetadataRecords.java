@@ -28,14 +28,14 @@ import java.util.List;
  * @author m.gond
  * 
  */
-public class Fields {
+public class MetadataRecords {
   /** List of Field */
   private List<Field> fields;
 
   /**
    * Constuctor
    */
-  public Fields() {
+  public MetadataRecords() {
     fields = new ArrayList<Field>();
   }
 
@@ -101,7 +101,7 @@ public class Fields {
    *          the name of the field
    * @return the first Field found or null if it does not exist
    */
-  private Field findFirstField(String name) {
+  public Field findFirstField(String name) {
     Field fieldResult = null;
     Iterator<Field> it = this.fields.iterator();
     while (it.hasNext() && fieldResult == null) {

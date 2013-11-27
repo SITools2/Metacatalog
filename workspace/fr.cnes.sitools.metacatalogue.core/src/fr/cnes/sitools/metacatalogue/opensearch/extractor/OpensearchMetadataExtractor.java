@@ -32,10 +32,10 @@ import com.jayway.jsonpath.JsonPath;
 
 import fr.cnes.sitools.metacatalogue.common.Converter;
 import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
-import fr.cnes.sitools.metacatalogue.common.Metadata;
+import fr.cnes.sitools.metacatalogue.common.MetadataContainer;
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
 import fr.cnes.sitools.metacatalogue.model.Field;
-import fr.cnes.sitools.metacatalogue.model.Fields;
+import fr.cnes.sitools.metacatalogue.model.MetadataRecords;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
 import fr.cnes.sitools.metacatalogue.utils.MetacatalogField;
 import fr.cnes.sitools.model.AttributeCustom;
@@ -61,18 +61,18 @@ public class OpensearchMetadataExtractor extends HarvesterStep {
   }
 
   @Override
-  public void execute(Metadata data) throws ProcessException {
+  public void execute(MetadataContainer data) throws ProcessException {
     logger = context.getLogger();
     String metadata = data.getJsonData();
 
     List<JSONObject> features = JsonPath.read(metadata, "$.features");
 
-    List<Fields> listFields = new ArrayList<Fields>();
+    List<MetadataRecords> listFields = new ArrayList<MetadataRecords>();
 
     for (JSONObject jsonObject : features) {
 
       String jsonString = jsonObject.toJSONString();
-      Fields fields = new Fields();
+      MetadataRecords fields = new MetadataRecords();
       addField(fields, "$.properties.identifier", jsonString, MetacatalogField.ID.getField());
       addField(fields, "$.properties.identifier", jsonString, MetacatalogField._UUID.getField());
       addField(fields, "$.properties.title", jsonString, MetacatalogField.TITLE.getField());
@@ -149,11 +149,11 @@ public class OpensearchMetadataExtractor extends HarvesterStep {
 
     }
 
-    if (data.getFields() == null) {
-      data.setFields(listFields);
+    if (data.getMetadataRecords() == null) {
+      data.setMetadataRecords(listFields);
     }
     else {
-      data.getFields().addAll(listFields);
+      data.getMetadataRecords().addAll(listFields);
     }
 
     if (next != null) {
@@ -162,7 +162,7 @@ public class OpensearchMetadataExtractor extends HarvesterStep {
 
   }
 
-  private void addCustomAttributes(String json, Fields fields, List<AttributeCustom> attributes) {
+  private void addCustomAttributes(String json, MetadataRecords fields, List<AttributeCustom> attributes) {
     if (attributes != null) {
       for (AttributeCustom attributeCustom : attributes) {
         if (attributeCustom.getValue() != null) {
@@ -180,7 +180,7 @@ public class OpensearchMetadataExtractor extends HarvesterStep {
     }
   }
 
-  private void addField(Fields fields, String jsonPath, String json, String fieldName) {
+  private void addField(MetadataRecords fields, String jsonPath, String json, String fieldName) {
     try {
       Object object = JsonPath.read(json, jsonPath);
       fields.add(fieldName, object);
@@ -190,7 +190,7 @@ public class OpensearchMetadataExtractor extends HarvesterStep {
     }
   }
 
-  private void addField(Fields fields, String value, String fieldName) {
+  private void addField(MetadataRecords fields, String value, String fieldName) {
     fields.add(fieldName, value);
   }
 
@@ -218,7 +218,7 @@ public class OpensearchMetadataExtractor extends HarvesterStep {
    * @param fields
    *          the list of {@link Field}
    */
-  private void addAcquisitionSetupField(Fields fields, String json) {
+  private void addAcquisitionSetupField(MetadataRecords fields, String json) {
     String plateform = JsonPath.read(json, "$.properties.platform");
     String instrument = JsonPath.read(json, "$.properties.instrument");
     fields.add(MetacatalogField.ACQUISITION_SETUP.getField(), plateform + "/" + instrument);

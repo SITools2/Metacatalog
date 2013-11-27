@@ -1,4 +1,4 @@
- /*******************************************************************************
+/*******************************************************************************
  * Copyright 2010-2013 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
  *
  * This file is part of SITools2.
@@ -35,7 +35,7 @@ import org.restlet.Context;
 import org.restlet.data.MediaType;
 import org.restlet.engine.Engine;
 
-import fr.cnes.sitools.metacatalogue.common.Metadata;
+import fr.cnes.sitools.metacatalogue.common.MetadataContainer;
 import fr.cnes.sitools.metacatalogue.model.HarvestStatus;
 import fr.cnes.sitools.metacatalogue.utils.FileCopyUtils;
 import fr.cnes.sitools.metacatalogue.utils.FileUtils;
@@ -181,7 +181,7 @@ public class AbstractHarvesterTestCase {
     return context;
   }
 
-  protected Metadata getJsonDataFromFile(String filePath) throws IOException {
+  protected MetadataContainer getJsonDataFromFile(String filePath) throws IOException {
     BufferedReader reader = new BufferedReader(new FileReader(filePath));
     StringBuffer fileData = new StringBuffer(1000);
     char[] buf = new char[1024];
@@ -192,24 +192,24 @@ public class AbstractHarvesterTestCase {
       buf = new char[1024];
     }
     reader.close();
-    Metadata data = new Metadata();
+    MetadataContainer data = new MetadataContainer();
     data.setJsonData(fileData.toString());
     return data;
 
   }
 
-  protected Metadata getXMLDataFromFile(String filePath) throws FileNotFoundException, IOException, JDOMException {
-  
+  protected MetadataContainer getXMLDataFromFile(String filePath) throws FileNotFoundException, IOException, JDOMException {
+
     File file = new File(filePath);
     FileInputStream fis = new FileInputStream(file);
-  
+
     Element root = Xml.loadStream(fis);
-  
+
     // get the search results and the number of records
     Element searchResults = root.getChild("SearchResults",
         Namespace.getNamespace("http://www.opengis.net/cat/csw/2.0.2"));
-  
-    Metadata data = new Metadata();
+
+    MetadataContainer data = new MetadataContainer();
     data.setXmlData(searchResults);
     return data;
   }
@@ -263,6 +263,11 @@ public class AbstractHarvesterTestCase {
 
   public AbstractHarvesterTestCase() {
     super();
+  }
+
+  public String getTestResourcePath(HarvesterSettings settings, String schemaName, String resourceName) {
+    return settings.getRootDirectory() + "/workspace/fr.cnes.sitools.metacatalogue.core/test/resources" + "/"
+        + schemaName + "/" + resourceName;
   }
 
 }

@@ -29,11 +29,11 @@ import org.junit.Test;
 import org.restlet.Context;
 
 import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
-import fr.cnes.sitools.metacatalogue.common.Metadata;
+import fr.cnes.sitools.metacatalogue.common.MetadataContainer;
 import fr.cnes.sitools.metacatalogue.csw.extractor.CswMetadataExtractor;
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
 import fr.cnes.sitools.metacatalogue.model.Field;
-import fr.cnes.sitools.metacatalogue.model.Fields;
+import fr.cnes.sitools.metacatalogue.model.MetadataRecords;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
 import fr.cnes.sitools.model.HarvesterModel;
 
@@ -44,7 +44,7 @@ public class CSWMetadataExtractorTest extends AbstractHarvesterTestCase {
     String filePath = settings.getRootDirectory() + "/" + settings.getString("Tests.RESOURCES_DIRECTORY")
         + "/csw/geosud.xml";
 
-    Metadata data = getXMLDataFromFile(filePath);
+    MetadataContainer data = getXMLDataFromFile(filePath);
 
     Context context = initContext();
 
@@ -66,12 +66,12 @@ public class CSWMetadataExtractorTest extends AbstractHarvesterTestCase {
   private class assertSolrXML extends HarvesterStep {
 
     @Override
-    public void execute(Metadata data) throws ProcessException {
+    public void execute(MetadataContainer data) throws ProcessException {
       assertNotNull(data);
-      assertNotNull(data.getFields());
-      assertEquals(1, data.getFields().size());
+      assertNotNull(data.getMetadataRecords());
+      assertEquals(1, data.getMetadataRecords().size());
 
-      Fields fields = data.getFields().get(0);
+      MetadataRecords fields = data.getMetadataRecords().get(0);
 
       for (Field field : fields.getList()) {
         String name = field.getName();

@@ -38,7 +38,7 @@ import org.restlet.resource.ClientResource;
 import com.jayway.jsonpath.JsonPath;
 
 import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
-import fr.cnes.sitools.metacatalogue.common.Metadata;
+import fr.cnes.sitools.metacatalogue.common.MetadataContainer;
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
 import fr.cnes.sitools.metacatalogue.model.HarvestStatus;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
@@ -76,14 +76,14 @@ public class OpensearchReader extends HarvesterStep {
   }
 
   @Override
-  public void execute(Metadata data) throws ProcessException {
+  public void execute(MetadataContainer data) throws ProcessException {
     logger = context.getLogger();
     Integer totalResults = null;
     Integer totalResultsRead = 0;
     Integer nextPage = 1;
 
     do {
-      data = new Metadata();
+      data = new MetadataContainer();
 
       Reference sourceRef = new Reference(source.getUrl());
 

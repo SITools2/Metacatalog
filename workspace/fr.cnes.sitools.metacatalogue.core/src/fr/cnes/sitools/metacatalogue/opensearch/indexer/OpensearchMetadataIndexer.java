@@ -25,10 +25,10 @@ import java.util.logging.Logger;
 import org.restlet.Context;
 
 import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
-import fr.cnes.sitools.metacatalogue.common.Metadata;
+import fr.cnes.sitools.metacatalogue.common.MetadataContainer;
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
 import fr.cnes.sitools.metacatalogue.index.MetadataIndexer;
-import fr.cnes.sitools.metacatalogue.model.Fields;
+import fr.cnes.sitools.metacatalogue.model.MetadataRecords;
 import fr.cnes.sitools.metacatalogue.model.HarvestStatus;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
 import fr.cnes.sitools.model.HarvesterModel;
@@ -51,15 +51,15 @@ public class OpensearchMetadataIndexer extends HarvesterStep {
   }
 
   @Override
-  public void execute(Metadata data) throws ProcessException {
+  public void execute(MetadataContainer data) throws ProcessException {
     logger = context.getLogger();
-    List<Fields> fields = data.getFields();
+    List<MetadataRecords> fields = data.getMetadataRecords();
     try {
       logger.info("Add " + fields.size() + " metadata to the solrIndex cache");
       HarvestStatus status = (HarvestStatus) context.getAttributes().get(ContextAttributes.STATUS);
       status.setNbDocumentsIndexed(status.getNbDocumentsIndexed() + fields.size());
 
-      for (Fields doc : fields) {
+      for (MetadataRecords doc : fields) {
         indexer.addFieldsToIndex(doc);
         if (indexer.getCurrentNumberOfFieldsToIndex() == pageSize) {
           logger.info("Index the metadata in the solr server ");

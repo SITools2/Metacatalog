@@ -1,4 +1,4 @@
- /*******************************************************************************
+/*******************************************************************************
  * Copyright 2010-2013 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
  *
  * This file is part of SITools2.
@@ -23,7 +23,7 @@ import java.util.List;
 
 import org.jdom.Element;
 
-import fr.cnes.sitools.metacatalogue.model.Fields;
+import fr.cnes.sitools.metacatalogue.model.MetadataRecords;
 
 /**
  * Metadata object, containing the XML and Java object of multiple metadata
@@ -31,7 +31,7 @@ import fr.cnes.sitools.metacatalogue.model.Fields;
  * @author m.gond
  * 
  */
-public class Metadata {
+public class MetadataContainer {
 
   /** The XML data of the metadatas */
   private Element xmlData;
@@ -39,15 +39,15 @@ public class Metadata {
   /** The JSON data of the metadatas */
   private String jsonData;
 
-  /** The list of {@link Fields} containing the value of the metadatas */
-  private List<Fields> fields;
+  /** The list of {@link MetadataRecords} containing the value of the metadatas */
+  private List<MetadataRecords> metadataRecords;
 
   /**
-   * Default constructor, initialise a new {@link List} of {@link Fields}
+   * Default constructor, initialise a new {@link List} of {@link MetadataRecords}
    */
-  public Metadata() {
+  public MetadataContainer() {
     super();
-    fields = new ArrayList<Fields>();
+    metadataRecords = new ArrayList<MetadataRecords>();
   }
 
   /**
@@ -70,22 +70,22 @@ public class Metadata {
   }
 
   /**
-   * Gets the fields value
+   * Gets the MetadataRecords value
    * 
    * @return the fields
    */
-  public List<Fields> getFields() {
-    return fields;
+  public List<MetadataRecords> getMetadataRecords() {
+    return metadataRecords;
   }
 
   /**
    * Sets the value of fields
    * 
-   * @param fields
+   * @param metadataRecords
    *          the fields to set
    */
-  public void setFields(List<Fields> fields) {
-    this.fields = fields;
+  public void setMetadataRecords(List<MetadataRecords> metadataRecords) {
+    this.metadataRecords = metadataRecords;
   }
 
   public String getJsonData() {

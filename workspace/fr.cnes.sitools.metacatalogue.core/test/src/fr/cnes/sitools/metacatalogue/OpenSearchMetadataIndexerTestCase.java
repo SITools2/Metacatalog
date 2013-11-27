@@ -36,7 +36,7 @@ import org.junit.Test;
 import org.restlet.Context;
 
 import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
-import fr.cnes.sitools.metacatalogue.common.Metadata;
+import fr.cnes.sitools.metacatalogue.common.MetadataContainer;
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
 import fr.cnes.sitools.metacatalogue.index.solr.SolRUtils;
 import fr.cnes.sitools.metacatalogue.index.solr.SolrMetadataIndexer;
@@ -76,7 +76,7 @@ public class OpenSearchMetadataIndexerTestCase extends AbstractHarvesterTestCase
 
     String filePath = settings.getRootDirectory() + "/" + settings.getString("Tests.RESOURCES_DIRECTORY")
         + "/opensearch/kalideos.json";
-    Metadata data = getJsonDataFromFile(filePath);
+    MetadataContainer data = getJsonDataFromFile(filePath);
 
     SolrMetadataIndexer solrIndexer = new SolrMetadataIndexer(context);
 

@@ -20,7 +20,7 @@ package fr.cnes.sitools.metacatalogue.index;
 
 import java.util.List;
 
-import fr.cnes.sitools.metacatalogue.model.Fields;
+import fr.cnes.sitools.metacatalogue.model.MetadataRecords;
 
 /**
  * Interface that define a Metadata Indexer
@@ -38,24 +38,24 @@ public interface MetadataIndexer {
   void indexMetadata() throws Exception;
 
   /**
-   * Add a new {@link Fields} to index
+   * Add a new {@link MetadataRecords} to index
    * 
    * @param fields
-   *          a {@link Fields} object to index
+   *          a {@link MetadataRecords} object to index
    * @throws Exception
    *           if there are some errors
    */
-  void addFieldsToIndex(Fields fields) throws Exception;
+  void addFieldsToIndex(MetadataRecords fields) throws Exception;
 
   /**
-   * Add a new {@link List} of {@link Fields} to index
+   * Add a new {@link List} of {@link MetadataRecords} to index
    * 
    * @param fieldList
-   *          a {@link List} of {@link Fields} object to index
+   *          a {@link List} of {@link MetadataRecords} object to index
    * @throws Exception
    *           if there are some errors
    */
-  void addListFieldsToIndex(List<Fields> fieldList) throws Exception;
+  void addListFieldsToIndex(List<MetadataRecords> fieldList) throws Exception;
 
   /**
    * Get the current number of fields in the cache to index

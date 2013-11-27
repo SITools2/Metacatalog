@@ -27,7 +27,7 @@ import org.junit.Test;
 import org.restlet.Context;
 
 import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
-import fr.cnes.sitools.metacatalogue.common.Metadata;
+import fr.cnes.sitools.metacatalogue.common.MetadataContainer;
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
 import fr.cnes.sitools.metacatalogue.opensearch.extractor.OpensearchMetadataExtractor;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
@@ -42,7 +42,7 @@ public class OpenSearchMetadataExtractorTestCase extends AbstractHarvesterTestCa
     Context context = initContext();
     String filePath = settings.getRootDirectory() + "/" + settings.getString("Tests.RESOURCES_DIRECTORY")
         + "/opensearch/kalideos.json";
-    Metadata data = getJsonDataFromFile(filePath);
+    MetadataContainer data = getJsonDataFromFile(filePath);
 
     HarvesterModel model = createHarvesterModelForTest("kalideos");
     HarvesterStep reader = new OpensearchMetadataExtractor(model, context);
@@ -61,10 +61,10 @@ public class OpenSearchMetadataExtractorTestCase extends AbstractHarvesterTestCa
   private class assertDataClass extends HarvesterStep {
 
     @Override
-    public void execute(Metadata data) throws ProcessException {
+    public void execute(MetadataContainer data) throws ProcessException {
       assertNotNull(data);
-      assertNotNull(data.getFields());
-      assertEquals(nbFieldsExpected, data.getFields().size());
+      assertNotNull(data.getMetadataRecords());
+      assertEquals(nbFieldsExpected, data.getMetadataRecords().size());
     }
 
     @Override
