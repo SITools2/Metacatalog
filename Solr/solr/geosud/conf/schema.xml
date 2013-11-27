@@ -137,7 +137,11 @@
 	<dynamicField name="healpix-order-*" type="long" indexed="true" stored="true" multiValued="true"/>
 	<dynamicField name="properties.*" type="text_general" indexed="true" stored="true" multiValued="false"/>
 	<dynamicField name="*" type="text_general" indexed="false" stored="true" multiValued="true"/>
-
+	
+	<field name="country" type="text_tight" indexed="true" stored="true" multiValued="true"/>
+	<field name="region" type="text_tight" indexed="true" stored="true" multiValued="true"/>
+	<field name="department" type="text_tight" indexed="true" stored="true" multiValued="true"/>
+	<field name="city" type="text_tight" indexed="true" stored="true" multiValued="true"/>
    
     <field name="_version_" type="long" indexed="true" stored="true"/>
 
