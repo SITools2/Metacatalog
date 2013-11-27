@@ -54,6 +54,7 @@
         <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/workspace/fr.cnes.sitools.metacatalogue.libraries/xml-apis-xerces-2.7.1.jar"/>
         <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/workspace/fr.cnes.sitools.metacatalogue.libraries/xpp3-1.1.4c.jar"/>
         <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/workspace/fr.cnes.sitools.metacatalogue.libraries/xsd-2.2.2.jar"/>
+        <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/workspace/fr.cnes.sitools.metacatalogue.libraries/guava-14.0.1.jar"/>
     </library>
     <library name="restlet_2_1_0" systemlibrary="false">
         <archive path="D:/CNES-ULISSE-2.0-GIT/extensions/metacatalogue/cots/restlet-jse-2.1.0/lib/org.restlet.jar"/>
