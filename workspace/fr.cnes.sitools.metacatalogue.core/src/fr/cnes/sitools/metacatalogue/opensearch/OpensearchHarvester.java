@@ -1,4 +1,4 @@
- /*******************************************************************************
+/*******************************************************************************
  * Copyright 2010-2013 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
  *
  * This file is part of SITools2.
@@ -25,6 +25,7 @@ import org.restlet.Context;
 
 import fr.cnes.sitools.metacatalogue.common.Harvester;
 import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
+import fr.cnes.sitools.metacatalogue.csw.extractor.LocalisationExtractor;
 import fr.cnes.sitools.metacatalogue.csw.validator.CswMetadataValidator;
 import fr.cnes.sitools.metacatalogue.exceptions.CheckProcessException;
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
@@ -51,18 +52,19 @@ public class OpensearchHarvester extends Harvester {
     context.getAttributes().put(ContextAttributes.INDEXER_SERVER, solrServer);
     MetadataIndexer indexer = new SolrMetadataIndexer(context);
 
-    HarvesterStep step2, step3, step4;
+    HarvesterStep step2, step3, step4, step5;
     step1 = new OpensearchReader(harvestConf, context);
     step2 = new OpensearchMetadataExtractor(harvestConf, context);
-    step3 = new CswMetadataValidator(harvestConf, context);
+    step3 = new LocalisationExtractor(harvestConf, context);
+    step4 = new CswMetadataValidator(harvestConf, context);
     // step4 = new MetadataLogger(harvestConf, context);
 
-    step4 = new OpensearchMetadataIndexer(harvestConf, context, indexer);
+    step5 = new OpensearchMetadataIndexer(harvestConf, context, indexer);
 
     step1.setNext(step2);
     step2.setNext(step3);
     step3.setNext(step4);
-    // step4.setNext(step5);
+    step4.setNext(step5);
 
     CheckStepsInformation ok = step1.check();
     if (!ok.isOk()) {
