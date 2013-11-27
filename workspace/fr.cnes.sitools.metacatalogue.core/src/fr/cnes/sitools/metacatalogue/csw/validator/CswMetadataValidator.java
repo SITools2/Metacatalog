@@ -63,7 +63,7 @@ public class CswMetadataValidator extends HarvesterStep {
         iterator.remove();
       }
 
-      if (doc.get("contry") == null) {
+      if (doc.get("country") == null) {
         logger.info("No country defined for record : " + doc.get(MetacatalogField.ID.getField())
             + " inserted in the metacatalog anyway");
       }
