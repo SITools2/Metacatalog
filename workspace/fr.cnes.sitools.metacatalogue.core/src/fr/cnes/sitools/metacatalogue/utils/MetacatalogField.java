@@ -46,6 +46,9 @@ public enum MetacatalogField {
   /** The Constant ANY. */
   _ANY("_any"),
 
+  /** The Constant RESOLUTION DOMAIN. */
+  _RESOLUTION_DOMAIN("_resolution_domain"),
+
   /**
    * ##################### Modèle de données du métacatalogue #########################
    */
@@ -100,6 +103,18 @@ public enum MetacatalogField {
 
   /** ACQUISITION_SETUP */
   ACQUISITION_SETUP("acquisitionSetup"),
+
+  /** COUNTRY */
+  COUNTRY("country"),
+
+  /** REGION */
+  REGION("region"),
+
+  /** DEPARTMENT */
+  DEPARTMENT("department"),
+
+  /** CITY */
+  CITY("city");
 
   // POINT_OF_CONTACT_EMAIL_ADDRESS("pointOfContact.emailAddress"),
   //

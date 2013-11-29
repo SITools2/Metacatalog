@@ -55,13 +55,14 @@ public class LocalisationExtractor extends HarvesterStep {
   @Override
   public void execute(MetadataContainer data) throws ProcessException {
     List<MetadataRecords> metadatas = data.getMetadataRecords();
+    String etagReaderUrl = HarvesterSettings.getInstance().getString("ETAG_URL");
     for (MetadataRecords doc : metadatas) {
-      String geometry = doc.get(MetacatalogField._GEOMETRY.getField()).toString();
+      String geometry = getGeometry(doc);
       if (geometry != null) {
         Localisation localisation = cache.getIfPresent(geometry);
         if (localisation == null) {
-          String etagReaderUrl = HarvesterSettings.getInstance().getString("ETAG_URL");
-          ETagReader reader = new ETagReader(etagReaderUrl, geometry);
+          String resolution = getResolution(doc);
+          ETagReader reader = new ETagReader(etagReaderUrl, geometry, "VHR".equals(resolution));
           try {
             reader.read();
 
@@ -73,19 +74,20 @@ public class LocalisationExtractor extends HarvesterStep {
           }
         }
         else {
+          System.out.println("FROM CACHE");
         }
 
         // countries
-        addValuesToMetadata(doc, localisation.getCountries(), "country");
+        addValuesToMetadata(doc, localisation.getCountries(), MetacatalogField.COUNTRY.getField());
 
         // regions
-        addValuesToMetadata(doc, localisation.getRegions(), "region");
+        addValuesToMetadata(doc, localisation.getRegions(), MetacatalogField.REGION.getField());
 
         // departments
-        addValuesToMetadata(doc, localisation.getDepartments(), "department");
+        addValuesToMetadata(doc, localisation.getDepartments(), MetacatalogField.DEPARTMENT.getField());
 
         // city
-        addValuesToMetadata(doc, localisation.getCities(), "city");
+        addValuesToMetadata(doc, localisation.getCities(), MetacatalogField.CITY.getField());
 
       }
     }
@@ -93,6 +95,38 @@ public class LocalisationExtractor extends HarvesterStep {
     if (next != null) {
       this.next.execute(data);
     }
+  }
+
+  /**
+   * Get the resolution string for the MetadataRecords given
+   * 
+   * @param doc
+   *          the {@link MetadataRecords}
+   * @return the resolution string or null if not found
+   */
+  private String getResolution(MetadataRecords doc) {
+    Object resolutionObj = doc.get(MetacatalogField._RESOLUTION_DOMAIN.getField());
+    if (resolutionObj != null) {
+      return resolutionObj.toString();
+
+    }
+    return null;
+  }
+
+  /**
+   * Get the geometry string for the MetadataRecords given
+   * 
+   * @param doc
+   *          the {@link MetadataRecords}
+   * @return the geometry string or null if not found
+   */
+  private String getGeometry(MetadataRecords doc) {
+    Object geometryObj = doc.get(MetacatalogField._GEOMETRY.getField());
+    if (geometryObj != null) {
+      return geometryObj.toString();
+
+    }
+    return null;
   }
 
   private void addValuesToMetadata(MetadataRecords doc, List<String> values, String key) {
