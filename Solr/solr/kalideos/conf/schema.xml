@@ -142,6 +142,8 @@
 	<field name="region" type="text_tight" indexed="true" stored="true" multiValued="true"/>
 	<field name="department" type="text_tight" indexed="true" stored="true" multiValued="true"/>
 	<field name="city" type="text_tight" indexed="true" stored="true" multiValued="true"/>
+	
+	<field name="_resolution_domain" type="string" indexed="true" stored="true" multiValued="true"/>
    
     <field name="_version_" type="long" indexed="true" stored="true"/>
 
