@@ -148,13 +148,13 @@ public abstract class AbstractOpensearchSearchResource extends AbstractOpensearc
       else if (parameter.getName().equals(OpenSearchQuery.TIME_START.getParamName())) {
         String dateStr = getDateParam(parameter, DATE_QUERY_TYPE.GT);
         if (dateStr != null) {
-          pieceOfQuery = MetacatalogField.CHARACTERISATION_AXIS_TEMPORAL_AXIS_MIN.getField() + ":" + dateStr;
+          pieceOfQuery = MetacatalogField.START_DATE.getField() + ":" + dateStr;
         }
       }
       else if (parameter.getName().equals(OpenSearchQuery.TIME_END.getParamName())) {
         String dateStr = getDateParam(parameter, DATE_QUERY_TYPE.LT);
         if (dateStr != null) {
-          pieceOfQuery = MetacatalogField.CHARACTERISATION_AXIS_TEMPORAL_AXIS_MAX.getField() + ":" + dateStr;
+          pieceOfQuery = MetacatalogField.COMPLETION_DATE.getField() + ":" + dateStr;
         }
       }
       else if (parameter.getName().equals(OpenSearchQuery.GEO_BOX.getParamName())) {

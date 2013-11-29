@@ -44,7 +44,7 @@ public class ResolutionExtractor extends HarvesterStep {
     ResolutionConverter converter = new ResolutionConverter();
     List<MetadataRecords> metadatas = data.getMetadataRecords();
     for (MetadataRecords doc : metadatas) {
-      Object resolutionObj = doc.get(MetacatalogField.ACQUISITION_SETUP_RESOLUTION.getField());
+      Object resolutionObj = doc.get(MetacatalogField.RESOLUTION.getField());
       if (resolutionObj != null) {
         double resolution = Double.parseDouble(resolutionObj.toString());
         doc.add(MetacatalogField._RESOLUTION_DOMAIN.getField(), converter.getResolution(resolution));

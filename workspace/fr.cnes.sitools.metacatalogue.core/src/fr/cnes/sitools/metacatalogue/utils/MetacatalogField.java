@@ -114,7 +114,7 @@ public enum MetacatalogField {
   DEPARTMENT("department"),
 
   /** CITY */
-  CITY("city");
+  CITY("city"),
 
   // POINT_OF_CONTACT_EMAIL_ADDRESS("pointOfContact.emailAddress"),
   //
