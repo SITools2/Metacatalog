@@ -70,11 +70,11 @@
 	<field name="pref_en" type="text_general" indexed="true" stored="true" multiValued="false"/>
 	<field name="pref_fr" type="text_general" indexed="true" stored="true" multiValued="false"/>
 	
-	<field name="uri" type="text_general" indexed="true" stored="true" multiValued="false"/>
+	<field name="uri" type="string" indexed="true" stored="true" multiValued="false"/>
    
     <field name="definition" type="text_general" indexed="true" stored="true" multiValued="true"/>
 	<field name="related" type="text_general" indexed="false" stored="true" multiValued="true"/>
-	<field name="broader" type="text_general" indexed="false" stored="true" multiValued="true"/>
+	<field name="broader" type="text_general" indexed="true" stored="true" multiValued="true"/>
 	<field name="narrower" type="text_general" indexed="false" stored="true" multiValued="true"/>
     
 	<field name="_version_" type="long" indexed="true" stored="true"/>

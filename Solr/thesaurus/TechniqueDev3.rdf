@@ -48,9 +48,34 @@
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="3d69a7bf-e972-4bab-ae97-7155b1654bbb"/>
     </rdf:Description>
+    <rdf:Description rdf:about="ae8aaffd-94ee-4410-82ab-a97a9baa4274">
+        <skos:prefLabel xml:lang="fr">postel</skos:prefLabel>
+        <skos:prefLabel xml:lang="en">postel</skos:prefLabel>
+        <skos:altLabel xml:lang="fr">postel</skos:altLabel>
+        <skos:altLabel xml:lang="en">postel</skos:altLabel>
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <skos:broader rdf:resource="315049fd-1332-4ca3-9bcb-ba69a455aa48"/>
+        <skos:related rdf:resource="ee08375a-dae3-4cc7-8f4d-b74f95020e01"/>
+        <skos:related rdf:resource="77230635-715b-4e27-9c7c-bd71101d856f"/>
+        <skos:related rdf:resource="c1af5056-4694-4877-9aa7-1321a388ab44"/>
+        <skos:related rdf:resource="5c129cb5-09fd-4921-8cc1-bddd017f4032"/>
+        <skos:related rdf:resource="62609cc2-04b3-4553-8f19-5e75d8b1f8ef"/>
+        <skos:related rdf:resource="1e49b502-f628-4af5-85fe-5231b9ef6860"/>
+        <skos:related rdf:resource="0c138414-58be-42ec-8e21-78a23fd60d23"/>
+        <skos:related rdf:resource="3bccc301-eb71-4230-94e3-e3d5ea6f11bb"/>
+        <skos:related rdf:resource="57525faa-9e42-4d6e-b307-38bd03991c14"/>
+        <skos:related rdf:resource="bf3f7aa8-ab74-450a-820e-74d2121c2786"/>
+        <skos:related rdf:resource="dfe51f0f-25e9-47d4-9c3d-5b91de976bda"/>
+        <skos:related rdf:resource="6314f87b-2d33-42d1-96ac-dc3bfafd7381"/>
+        <skos:related rdf:resource="590f3414-9fe4-47be-b3fa-06a8254944b6"/>
+        <skos:related rdf:resource="d943ffe5-9957-4a14-8660-e7ddf80d39a5"/>
+    </rdf:Description>
     <rdf:Description rdf:about="1baa1879-8805-44c6-92d0-f4e4e8fd0a52">
         <skos:prefLabel xml:lang="fr">TIR</skos:prefLabel>
-        <skos:definition xml:lang="fr">Thermique</skos:definition>
+        <skos:prefLabel xml:lang="en">TIR</skos:prefLabel>
+        <skos:altLabel xml:lang="en">TIR</skos:altLabel>
+        <skos:definition xml:lang="fr">Infrarouge Thermique</skos:definition>
+        <skos:definition xml:lang="en">Thermal Infrared</skos:definition>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="84bb2025-2509-40a6-9737-b56828f8f08b"/>
         <skos:related rdf:resource="de75c649-b528-4d3d-be41-21e8298b9099"/>
@@ -74,28 +99,6 @@
         <skos:related rdf:resource="8b3ee21d-d771-492c-8a7d-6d017620a66f"/>
         <skos:related rdf:resource="b9bb1577-a185-4944-9c7f-02279b143f0b"/>
         <skos:related rdf:resource="bd81720e-a7d3-440c-bd84-4dee1d9ae2ad"/>
-    </rdf:Description>
-    <rdf:Description rdf:about="ae8aaffd-94ee-4410-82ab-a97a9baa4274">
-        <skos:prefLabel xml:lang="fr">postel</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">postel</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">postel</skos:altLabel>
-        <skos:altLabel xml:lang="en">postel</skos:altLabel>
-        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
-        <skos:broader rdf:resource="315049fd-1332-4ca3-9bcb-ba69a455aa48"/>
-        <skos:related rdf:resource="ee08375a-dae3-4cc7-8f4d-b74f95020e01"/>
-        <skos:related rdf:resource="77230635-715b-4e27-9c7c-bd71101d856f"/>
-        <skos:related rdf:resource="c1af5056-4694-4877-9aa7-1321a388ab44"/>
-        <skos:related rdf:resource="5c129cb5-09fd-4921-8cc1-bddd017f4032"/>
-        <skos:related rdf:resource="62609cc2-04b3-4553-8f19-5e75d8b1f8ef"/>
-        <skos:related rdf:resource="1e49b502-f628-4af5-85fe-5231b9ef6860"/>
-        <skos:related rdf:resource="0c138414-58be-42ec-8e21-78a23fd60d23"/>
-        <skos:related rdf:resource="3bccc301-eb71-4230-94e3-e3d5ea6f11bb"/>
-        <skos:related rdf:resource="57525faa-9e42-4d6e-b307-38bd03991c14"/>
-        <skos:related rdf:resource="bf3f7aa8-ab74-450a-820e-74d2121c2786"/>
-        <skos:related rdf:resource="dfe51f0f-25e9-47d4-9c3d-5b91de976bda"/>
-        <skos:related rdf:resource="6314f87b-2d33-42d1-96ac-dc3bfafd7381"/>
-        <skos:related rdf:resource="590f3414-9fe4-47be-b3fa-06a8254944b6"/>
-        <skos:related rdf:resource="d943ffe5-9957-4a14-8660-e7ddf80d39a5"/>
     </rdf:Description>
     <rdf:Description rdf:about="0c138414-58be-42ec-8e21-78a23fd60d23">
         <skos:prefLabel xml:lang="fr">Fraction de couverture végétale</skos:prefLabel>
@@ -476,6 +479,8 @@ feuilles par m2 au sol</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="3148fd97-7b01-493a-8002-2b5746302328">
         <skos:prefLabel xml:lang="fr">Haute Résolution</skos:prefLabel>
+        <skos:prefLabel xml:lang="en">High Resolution</skos:prefLabel>
+        <skos:altLabel xml:lang="en">HR</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="d7608c99-e92f-4260-a93b-6ed6b907d28c"/>
         <skos:related rdf:resource="c2097e05-6c80-46a6-b0d4-eadc6e83e1f5"/>
@@ -730,18 +735,12 @@ deux</skos:definition>
         <skos:prefLabel xml:lang="fr">Niveau 1</skos:prefLabel>
         <skos:prefLabel xml:lang="en">LEVEL1</skos:prefLabel>
         <skos:altLabel xml:lang="fr">1</skos:altLabel>
-        <skos:altLabel xml:lang="en">1</skos:altLabel>
+        <skos:altLabel xml:lang="en">RAD</skos:altLabel>
         <skos:definition xml:lang="fr">corrections radiométriques</skos:definition>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="07c7099b-0b6f-4708-8e55-582312fe3e70"/>
         <skos:related rdf:resource="e478ae5b-a927-4750-932a-00fd58c98788"/>
         <skos:related rdf:resource="a4f0c3f7-817e-4c5b-8257-022ea9777e2e"/>
-    </rdf:Description>
-    <rdf:Description rdf:about="21347cfc-78b8-42d5-8320-c50cc3513bd6">
-        <skos:prefLabel xml:lang="fr">VNIR</skos:prefLabel>
-        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
-        <skos:broader rdf:resource="84bb2025-2509-40a6-9737-b56828f8f08b"/>
-        <skos:related rdf:resource="4b3e593e-637f-47e8-8fd5-cc25ecbcaa52"/>
     </rdf:Description>
     <rdf:Description rdf:about="8ab39037-d443-49b9-9917-6f970aa8473f">
         <skos:prefLabel xml:lang="fr">6.85 - 7.85</skos:prefLabel>
@@ -750,6 +749,16 @@ deux</skos:definition>
         <skos:related rdf:resource="f0959eed-4655-4966-bc64-8bfd7e899ff5"/>
         <skos:related rdf:resource="1baa1879-8805-44c6-92d0-f4e4e8fd0a52"/>
         <skos:inScheme rdf:resource="th_defaultdsdsd"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="21347cfc-78b8-42d5-8320-c50cc3513bd6">
+        <skos:prefLabel xml:lang="fr">VNIR</skos:prefLabel>
+        <skos:prefLabel xml:lang="en">VNIR</skos:prefLabel>
+        <skos:altLabel xml:lang="en">VNIR</skos:altLabel>
+        <skos:definition xml:lang="fr">Très Proche Infrarouge</skos:definition>
+        <skos:definition xml:lang="en">Very Near Infrared</skos:definition>
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <skos:broader rdf:resource="84bb2025-2509-40a6-9737-b56828f8f08b"/>
+        <skos:related rdf:resource="4b3e593e-637f-47e8-8fd5-cc25ecbcaa52"/>
     </rdf:Description>
     <rdf:Description rdf:about="3f88a7c7-af54-4a70-a13a-10706ea30fc1">
         <skos:prefLabel xml:lang="fr">0.890 - 0.920</skos:prefLabel>
@@ -815,7 +824,7 @@ deux</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="9287762f-a2ad-49fa-b1bd-5996a7b3f93b">
         <skos:prefLabel xml:lang="fr">Niveau 1A</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">LEVEL1A</skos:prefLabel>
+        <skos:prefLabel xml:lang="en">Level 1A</skos:prefLabel>
         <skos:altLabel xml:lang="fr">1A</skos:altLabel>
         <skos:altLabel xml:lang="en">1A</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
@@ -1182,6 +1191,10 @@ deux</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="8dd4d3a6-caee-4409-be03-eb03ea772c9e">
         <skos:prefLabel xml:lang="fr">MIR</skos:prefLabel>
+        <skos:prefLabel xml:lang="en">MIR</skos:prefLabel>
+        <skos:altLabel xml:lang="en">MIR</skos:altLabel>
+        <skos:definition xml:lang="fr">Moyen Infrarouge</skos:definition>
+        <skos:definition xml:lang="en">Medium Infrared</skos:definition>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="84bb2025-2509-40a6-9737-b56828f8f08b"/>
         <skos:related rdf:resource="ca248548-a533-4fe3-b5fa-588c0c7332f2"/>
@@ -1672,6 +1685,8 @@ deux</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="dee4be2d-40d2-4b39-ae6f-0d4cdab7548f">
         <skos:prefLabel xml:lang="fr">cirrus</skos:prefLabel>
+        <skos:prefLabel xml:lang="en">cirrus</skos:prefLabel>
+        <skos:altLabel xml:lang="en">cirrus</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="84bb2025-2509-40a6-9737-b56828f8f08b"/>
     </rdf:Description>
@@ -1814,10 +1829,13 @@ effets atmosphériques)</skos:definition>
         <skos:related rdf:resource="3a3a6e53-90eb-470b-9a0c-6397b13f5f62"/>
     </rdf:Description>
     <rdf:Description rdf:about="38502e87-b6c6-4dc7-b8c7-0ac9321f127b">
-        <skos:prefLabel xml:lang="fr">LIR</skos:prefLabel>
+        <skos:prefLabel xml:lang="fr">FIR</skos:prefLabel>
+        <skos:prefLabel xml:lang="en">FIR</skos:prefLabel>
         <skos:altLabel xml:lang="fr">Water Vapor</skos:altLabel>
         <skos:altLabel xml:lang="fr">FIR</skos:altLabel>
-        <skos:definition xml:lang="fr">Far Infra-Red</skos:definition>
+        <skos:altLabel xml:lang="en">FIR</skos:altLabel>
+        <skos:definition xml:lang="fr">Loin Infrarouge</skos:definition>
+        <skos:definition xml:lang="en">Far Infra-Red</skos:definition>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="84bb2025-2509-40a6-9737-b56828f8f08b"/>
         <skos:related rdf:resource="e63e1c69-5a4c-4d0d-9361-d53084b66d4a"/>
@@ -1947,6 +1965,8 @@ effets atmosphériques</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="3e6eba01-2c7c-4335-a69a-418fc475c11c">
         <skos:prefLabel xml:lang="fr">SWIR</skos:prefLabel>
+        <skos:prefLabel xml:lang="en">SWIR</skos:prefLabel>
+        <skos:altLabel xml:lang="en">SWIR</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="84bb2025-2509-40a6-9737-b56828f8f08b"/>
         <skos:related rdf:resource="8984dc55-939d-4231-be18-518c937201c2"/>
@@ -2205,6 +2225,7 @@ effets atmosphériques</skos:definition>
     <rdf:Description rdf:about="611e8f29-59e5-4567-8724-5e6d359c65a6">
         <skos:prefLabel xml:lang="fr">domaine spectral</skos:prefLabel>
         <skos:prefLabel xml:lang="en">spectral domain</skos:prefLabel>
+        <skos:altLabel xml:lang="en">spectral domain</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:narrower rdf:resource="84bb2025-2509-40a6-9737-b56828f8f08b"/>
         <skos:narrower rdf:resource="f89fc0a4-211f-4f98-9c36-fe00c5a80afc"/>
@@ -2286,6 +2307,8 @@ réflectances bidirectionnelles</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="2d61b2b9-0aed-473b-949f-671e9611c130">
         <skos:prefLabel xml:lang="fr">TIRS-1</skos:prefLabel>
+        <skos:prefLabel xml:lang="en">TIRS-1</skos:prefLabel>
+        <skos:altLabel xml:lang="en">TIRS1</skos:altLabel>
         <skos:definition xml:lang="fr">Thermique</skos:definition>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="84bb2025-2509-40a6-9737-b56828f8f08b"/>
@@ -2293,8 +2316,8 @@ réflectances bidirectionnelles</skos:definition>
     <rdf:Description rdf:about="67a8761c-0b65-4e69-b1af-91537d93c580">
         <skos:prefLabel xml:lang="fr">Niveau 1T</skos:prefLabel>
         <skos:prefLabel xml:lang="en">LEVEL1T</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">1T</skos:altLabel>
-        <skos:altLabel xml:lang="en">1T</skos:altLabel>
+        <skos:altLabel xml:lang="fr">L1T</skos:altLabel>
+        <skos:altLabel xml:lang="en">L1T</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="77084a07-5f26-4356-b86b-18c99e1f8608"/>
         <skos:related rdf:resource="9d9d9c4b-fb3b-44b7-b108-12ce15dc03bd"/>
@@ -2335,25 +2358,10 @@ réflectances bidirectionnelles</skos:definition>
         <skos:related rdf:resource="a65c7614-7019-41e7-ba1f-a01e5bd5b03d"/>
         <skos:inScheme rdf:resource="th_defaultdsdsd"/>
     </rdf:Description>
-    <rdf:Description rdf:about="d943ffe5-9957-4a14-8660-e7ddf80d39a5">
-        <skos:prefLabel xml:lang="fr">Réflectance de surface</skos:prefLabel>
-        <skos:prefLabel xml:lang="en">REFLECTANCE</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">Réflectance TOC (Top Of Canopee)</skos:altLabel>
-        <skos:altLabel xml:lang="en">REFLECTANCE</skos:altLabel>
-        <skos:definition xml:lang="fr">Image de réflectance corrigée des
-effets atmosphériques</skos:definition>
-        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
-        <skos:broader rdf:resource="3d69a7bf-e972-4bab-ae97-7155b1654bbb"/>
-        <skos:related rdf:resource="57525faa-9e42-4d6e-b307-38bd03991c14"/>
-        <skos:related rdf:resource="f6f41c94-70d5-4936-966c-d161b7f14c56"/>
-        <skos:related rdf:resource="179cf535-84c1-4ff6-9c63-b1edc2889d51"/>
-        <skos:related rdf:resource="a17892b9-adeb-4ca8-9faf-ea716885b9cd"/>
-        <skos:related rdf:resource="ae8aaffd-94ee-4410-82ab-a97a9baa4274"/>
-        <skos:related rdf:resource="84f89c48-62ab-4e41-8705-2e7ad4ac9907"/>
-        <skos:related rdf:resource="4b466355-e6ca-49a4-ac76-a42e68485503"/>
-    </rdf:Description>
     <rdf:Description rdf:about="f5f09a65-2ab9-40b1-b57b-88844b99f69d">
         <skos:prefLabel xml:lang="fr">Basse Résolution</skos:prefLabel>
+        <skos:prefLabel xml:lang="en">Low Resolution</skos:prefLabel>
+        <skos:altLabel xml:lang="en">LR</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="d7608c99-e92f-4260-a93b-6ed6b907d28c"/>
         <skos:related rdf:resource="0ed1b9e5-a78b-4256-8be4-1856ac8067ff"/>
@@ -2370,6 +2378,23 @@ effets atmosphériques</skos:definition>
         <skos:related rdf:resource="5eea1b24-d4d4-474a-9832-f56f06e8abfe"/>
         <skos:related rdf:resource="e72f28ac-4952-4d6e-9406-aeb15bc63eee"/>
         <skos:related rdf:resource="1cccf8a1-c44b-4a70-9044-dc8e187665f3"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="d943ffe5-9957-4a14-8660-e7ddf80d39a5">
+        <skos:prefLabel xml:lang="fr">Réflectance de surface</skos:prefLabel>
+        <skos:prefLabel xml:lang="en">REFLECTANCE</skos:prefLabel>
+        <skos:altLabel xml:lang="fr">Réflectance TOC (Top Of Canopee)</skos:altLabel>
+        <skos:altLabel xml:lang="en">REFLECTANCE</skos:altLabel>
+        <skos:definition xml:lang="fr">Image de réflectance corrigée des
+effets atmosphériques</skos:definition>
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <skos:broader rdf:resource="3d69a7bf-e972-4bab-ae97-7155b1654bbb"/>
+        <skos:related rdf:resource="57525faa-9e42-4d6e-b307-38bd03991c14"/>
+        <skos:related rdf:resource="f6f41c94-70d5-4936-966c-d161b7f14c56"/>
+        <skos:related rdf:resource="179cf535-84c1-4ff6-9c63-b1edc2889d51"/>
+        <skos:related rdf:resource="a17892b9-adeb-4ca8-9faf-ea716885b9cd"/>
+        <skos:related rdf:resource="ae8aaffd-94ee-4410-82ab-a97a9baa4274"/>
+        <skos:related rdf:resource="84f89c48-62ab-4e41-8705-2e7ad4ac9907"/>
+        <skos:related rdf:resource="4b466355-e6ca-49a4-ac76-a42e68485503"/>
     </rdf:Description>
     <rdf:Description rdf:about="08d96d83-f2a3-41cf-a740-3366f1b643f7">
         <skos:prefLabel xml:lang="fr">Monospectral</skos:prefLabel>
@@ -2472,6 +2497,8 @@ effets atmosphériques</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="b3fe3ca6-8b6f-427a-a867-19d893741cd8">
         <skos:prefLabel xml:lang="fr">Très Haute Résolution</skos:prefLabel>
+        <skos:prefLabel xml:lang="en">Very High Resolution</skos:prefLabel>
+        <skos:altLabel xml:lang="en">VHR</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="d7608c99-e92f-4260-a93b-6ed6b907d28c"/>
         <skos:related rdf:resource="50c95b57-7fb2-4217-b288-cb5d0c0699e5"/>
@@ -2587,17 +2614,19 @@ effets atmosphériques</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="84bb2025-2509-40a6-9737-b56828f8f08b">
         <skos:prefLabel xml:lang="fr">Infrarouge</skos:prefLabel>
+        <skos:prefLabel xml:lang="en">Infrared</skos:prefLabel>
+        <skos:altLabel xml:lang="en">Infrared</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="611e8f29-59e5-4567-8724-5e6d359c65a6"/>
-        <skos:narrower rdf:resource="21347cfc-78b8-42d5-8320-c50cc3513bd6"/>
-        <skos:narrower rdf:resource="52e0f14c-a6df-4f5f-833b-91cdb6dc4076"/>
-        <skos:narrower rdf:resource="2d61b2b9-0aed-473b-949f-671e9611c130"/>
-        <skos:narrower rdf:resource="1baa1879-8805-44c6-92d0-f4e4e8fd0a52"/>
-        <skos:narrower rdf:resource="3e6eba01-2c7c-4335-a69a-418fc475c11c"/>
         <skos:narrower rdf:resource="dee4be2d-40d2-4b39-ae6f-0d4cdab7548f"/>
-        <skos:narrower rdf:resource="3c8ff3b9-33b8-4871-b91f-20440f36fc09"/>
-        <skos:narrower rdf:resource="8dd4d3a6-caee-4409-be03-eb03ea772c9e"/>
         <skos:narrower rdf:resource="38502e87-b6c6-4dc7-b8c7-0ac9321f127b"/>
+        <skos:narrower rdf:resource="8dd4d3a6-caee-4409-be03-eb03ea772c9e"/>
+        <skos:narrower rdf:resource="3c8ff3b9-33b8-4871-b91f-20440f36fc09"/>
+        <skos:narrower rdf:resource="3e6eba01-2c7c-4335-a69a-418fc475c11c"/>
+        <skos:narrower rdf:resource="1baa1879-8805-44c6-92d0-f4e4e8fd0a52"/>
+        <skos:narrower rdf:resource="2d61b2b9-0aed-473b-949f-671e9611c130"/>
+        <skos:narrower rdf:resource="52e0f14c-a6df-4f5f-833b-91cdb6dc4076"/>
+        <skos:narrower rdf:resource="21347cfc-78b8-42d5-8320-c50cc3513bd6"/>
     </rdf:Description>
     <rdf:Description rdf:about="1569fe8b-c819-4546-82aa-372c8ecd6d3d">
         <skos:prefLabel xml:lang="fr">IRS1C</skos:prefLabel>
@@ -2877,7 +2906,10 @@ effets atmosphériques</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="3c8ff3b9-33b8-4871-b91f-20440f36fc09">
         <skos:prefLabel xml:lang="fr">PIR</skos:prefLabel>
-        <skos:altLabel xml:lang="fr">NIR</skos:altLabel>
+        <skos:prefLabel xml:lang="en">NIR</skos:prefLabel>
+        <skos:altLabel xml:lang="en">NIR</skos:altLabel>
+        <skos:definition xml:lang="fr">Proche Infrarouge</skos:definition>
+        <skos:definition xml:lang="en">Near Infrared</skos:definition>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="84bb2025-2509-40a6-9737-b56828f8f08b"/>
         <skos:related rdf:resource="650cdc6b-207d-4ad7-b759-6dd865dab34b"/>
@@ -2892,6 +2924,7 @@ effets atmosphériques</skos:definition>
         <skos:related rdf:resource="89ecc349-bcc2-4fd9-a267-ed3898d26eea"/>
         <skos:related rdf:resource="59fedb56-d442-47ad-baf3-5fbb01b05556"/>
         <skos:related rdf:resource="bfe8b963-976b-411b-a57a-0bd2c90c5ebb"/>
+        <skos:related rdf:resource="dcd0f567-76bd-4cf5-833b-a5fb1520c371"/>
         <skos:related rdf:resource="6514e26d-10a7-45da-868b-4ddb34aeb5fb"/>
         <skos:related rdf:resource="18c3973d-3cdb-4434-ae05-be1c544bb4c0"/>
         <skos:related rdf:resource="63f876fa-a895-4688-b39f-bd3533d7e623"/>
@@ -2905,7 +2938,6 @@ effets atmosphériques</skos:definition>
         <skos:related rdf:resource="804f9be0-9554-4eb2-bb8f-ba233740ae94"/>
         <skos:related rdf:resource="1c3ae1e2-b2ab-40fa-87b8-e78ce8af8cc2"/>
         <skos:related rdf:resource="62354d7a-23a5-474f-910e-adfbae958abd"/>
-        <skos:related rdf:resource="dcd0f567-76bd-4cf5-833b-a5fb1520c371"/>
     </rdf:Description>
     <rdf:Description rdf:about="ec3150b0-6388-40fa-ae4d-8d6e8c2a57d4">
         <skos:prefLabel xml:lang="fr">kalideos</skos:prefLabel>
@@ -3066,6 +3098,7 @@ incident</skos:definition>
     <rdf:Description rdf:about="d7608c99-e92f-4260-a93b-6ed6b907d28c">
         <skos:prefLabel xml:lang="fr">domaine résolution</skos:prefLabel>
         <skos:prefLabel xml:lang="en">resolution domain</skos:prefLabel>
+        <skos:altLabel xml:lang="en">resolution domain</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:narrower rdf:resource="f5f09a65-2ab9-40b1-b57b-88844b99f69d"/>
         <skos:narrower rdf:resource="3148fd97-7b01-493a-8002-2b5746302328"/>
@@ -3653,7 +3686,7 @@ Classification System)</skos:definition>
         <skos:inScheme rdf:resource="th_defaultdsdsd"/>
     </rdf:Description>
     <rdf:Description rdf:about="3d69a7bf-e972-4bab-ae97-7155b1654bbb">
-        <skos:prefLabel xml:lang="fr">produit biogeophysique</skos:prefLabel>
+        <skos:prefLabel xml:lang="fr">produit biogéophysique</skos:prefLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="c547a6ac-f823-4fb1-bd45-dfea25ca5863"/>
         <skos:narrower rdf:resource="77230635-715b-4e27-9c7c-bd71101d856f"/>
@@ -3668,6 +3701,7 @@ Classification System)</skos:definition>
         <skos:narrower rdf:resource="6b4acc80-b012-4b26-bd58-e1c4187a08ec"/>
         <skos:narrower rdf:resource="74ca171f-bf2e-4f04-a15b-d87bf6d787bd"/>
         <skos:narrower rdf:resource="f08b007d-6a00-49ea-84f0-8290acc43ada"/>
+        <skos:narrower rdf:resource="7a0f1988-b156-49d6-b891-c85ca900091c"/>
         <skos:narrower rdf:resource="3bf24a20-47a6-4184-9f88-dfaf3fbfdaf2"/>
         <skos:narrower rdf:resource="06bd5b44-8fbb-4ee8-ae9f-248ed78e5afd"/>
         <skos:narrower rdf:resource="69898565-bcb5-42f8-9cad-a8b454594713"/>
@@ -3676,7 +3710,6 @@ Classification System)</skos:definition>
         <skos:narrower rdf:resource="50fb866a-2d56-44ff-aa5c-b0ac5b47875a"/>
         <skos:narrower rdf:resource="58417d87-61a1-4001-8a9b-8accb8e83764"/>
         <skos:narrower rdf:resource="1205df9b-9802-41c5-b404-a4f1b35907db"/>
-        <skos:narrower rdf:resource="7a0f1988-b156-49d6-b891-c85ca900091c"/>
     </rdf:Description>
     <rdf:Description rdf:about="ae64ba58-c06d-4f3b-b024-3a1bcdeafc44">
         <skos:prefLabel xml:lang="fr">0.620 - 0.670</skos:prefLabel>
@@ -4148,6 +4181,7 @@ mm3</skos:definition>
     <rdf:Description rdf:about="75e85463-c4de-4ec5-a616-f3c06d3ba5c9">
         <skos:prefLabel xml:lang="fr">produit auxiliaire</skos:prefLabel>
         <skos:prefLabel xml:lang="en">ancillary product</skos:prefLabel>
+        <skos:altLabel xml:lang="en">ancillary product</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="c547a6ac-f823-4fb1-bd45-dfea25ca5863"/>
         <skos:narrower rdf:resource="364a10f8-8cc7-4929-a0a0-bda597e8d9e7"/>
@@ -4549,6 +4583,8 @@ mm3</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="a65c7614-7019-41e7-ba1f-a01e5bd5b03d">
         <skos:prefLabel xml:lang="fr">Moyenne Résolution</skos:prefLabel>
+        <skos:prefLabel xml:lang="en">Medium Resolution</skos:prefLabel>
+        <skos:altLabel xml:lang="en">MR</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="d7608c99-e92f-4260-a93b-6ed6b907d28c"/>
         <skos:related rdf:resource="489bd70d-68a2-4926-be4b-1a2ee342c6a3"/>
@@ -4634,6 +4670,8 @@ mm3</skos:definition>
     </rdf:Description>
     <rdf:Description rdf:about="52e0f14c-a6df-4f5f-833b-91cdb6dc4076">
         <skos:prefLabel xml:lang="fr">TIRS-2</skos:prefLabel>
+        <skos:prefLabel xml:lang="en">TIRS-2</skos:prefLabel>
+        <skos:altLabel xml:lang="en">TIRS2</skos:altLabel>
         <skos:definition xml:lang="fr">Thermique</skos:definition>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="84bb2025-2509-40a6-9737-b56828f8f08b"/>
@@ -4652,6 +4690,7 @@ mm3</skos:definition>
     <rdf:Description rdf:about="907f52b0-8807-4f04-b20b-25243bb5f6dd">
         <skos:prefLabel xml:lang="fr">produit altimétrique</skos:prefLabel>
         <skos:prefLabel xml:lang="en">altimetry product</skos:prefLabel>
+        <skos:altLabel xml:lang="en">altimetry product</skos:altLabel>
         <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <skos:broader rdf:resource="c547a6ac-f823-4fb1-bd45-dfea25ca5863"/>
         <skos:narrower rdf:resource="9b83b685-554f-4447-a43a-ddb22fcc0c56"/>
