@@ -47,6 +47,7 @@ import fr.cnes.sitools.metacatalogue.resources.histogram.HistogramResource;
 import fr.cnes.sitools.metacatalogue.resources.opensearch.OpensearchDescribeResource;
 import fr.cnes.sitools.metacatalogue.resources.opensearch.OpensearchDescriptionServiceResource;
 import fr.cnes.sitools.metacatalogue.resources.opensearch.OpensearchSearchResource;
+import fr.cnes.sitools.metacatalogue.resources.opensearch.OpensearchSearchWithThesaurusResource;
 import fr.cnes.sitools.metacatalogue.resources.proxyservices.DownloadProxyServiceHandler;
 import fr.cnes.sitools.metacatalogue.resources.proxyservices.WmsHttpsServiceHandler;
 import fr.cnes.sitools.metacatalogue.resources.suggest.OpensearchSuggestResource;
@@ -132,6 +133,7 @@ public class MetacatalogueApplication extends AbstractApplicationPlugin {
 
     // Opensearch API exposition
     router.attach("/search", OpensearchSearchResource.class);
+    router.attach("/searchThesaurus", OpensearchSearchWithThesaurusResource.class);
     router.attach("/opensearch.xml", OpensearchDescriptionServiceResource.class);
     router.attach("/describe", OpensearchDescribeResource.class);
     router.attach("/suggest", OpensearchSuggestResource.class);
@@ -139,7 +141,7 @@ public class MetacatalogueApplication extends AbstractApplicationPlugin {
     // Services redirector exposition
 
     router.attach("/download/{urn}", new DownloadProxyServiceHandler(getContext()));
-    //router.attach("/wms/{urn}", new WmsProxyServiceHandler(getContext()));
+    // router.attach("/wms/{urn}", new WmsProxyServiceHandler(getContext()));
     router.attach("/wms/{urn}", new WmsHttpsServiceHandler(getContext()));
 
     // ADMIN CRUD

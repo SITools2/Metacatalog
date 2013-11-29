@@ -26,6 +26,7 @@ import org.restlet.Context;
 import fr.cnes.sitools.metacatalogue.common.Harvester;
 import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
 import fr.cnes.sitools.metacatalogue.csw.extractor.LocalisationExtractor;
+import fr.cnes.sitools.metacatalogue.csw.extractor.ResolutionExtractor;
 import fr.cnes.sitools.metacatalogue.csw.validator.CswMetadataValidator;
 import fr.cnes.sitools.metacatalogue.exceptions.CheckProcessException;
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
@@ -37,6 +38,7 @@ import fr.cnes.sitools.metacatalogue.opensearch.indexer.OpensearchMetadataIndexe
 import fr.cnes.sitools.metacatalogue.opensearch.reader.OpensearchReader;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
 import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
+import fr.cnes.sitools.metacatalogue.utils.MetadataLogger;
 import fr.cnes.sitools.model.HarvesterModel;
 import fr.cnes.sitools.server.ContextAttributes;
 
@@ -52,19 +54,21 @@ public class OpensearchHarvester extends Harvester {
     context.getAttributes().put(ContextAttributes.INDEXER_SERVER, solrServer);
     MetadataIndexer indexer = new SolrMetadataIndexer(context);
 
-    HarvesterStep step2, step3, step4, step5;
+    HarvesterStep step2, step3, step4, step5, step6;
     step1 = new OpensearchReader(harvestConf, context);
     step2 = new OpensearchMetadataExtractor(harvestConf, context);
-    step3 = new LocalisationExtractor(harvestConf, context);
-    step4 = new CswMetadataValidator(harvestConf, context);
-    // step4 = new MetadataLogger(harvestConf, context);
+    step3 = new ResolutionExtractor(harvestConf, context);
+    step4 = new LocalisationExtractor(harvestConf, context);
+    step5 = new CswMetadataValidator(harvestConf, context);
+    // step6 = new MetadataLogger(harvestConf, context);
 
-    step5 = new OpensearchMetadataIndexer(harvestConf, context, indexer);
+    step6 = new OpensearchMetadataIndexer(harvestConf, context, indexer);
 
     step1.setNext(step2);
     step2.setNext(step3);
     step3.setNext(step4);
     step4.setNext(step5);
+    step5.setNext(step6);
 
     CheckStepsInformation ok = step1.check();
     if (!ok.isOk()) {

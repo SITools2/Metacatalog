@@ -59,7 +59,7 @@ public class OpensearchSuggestResource extends AbstractOpensearchQueryResource {
       ThesaurusSearcher searcher = new ThesaurusSearcher(thesaurusName);
       List<SuggestDTO> suggests = new ArrayList<SuggestDTO>();
 
-      List<Concept> concepts = searcher.searchNarrowersBroader(query + "*");
+      List<Concept> concepts = searcher.searchNarrowersBroader(query + "*", getLanguage());
       for (Concept concept : concepts) {
         SuggestDTO suggestDTO = new SuggestDTO();
         suggestDTO.setSuggestion(concept.getProperties().get("prefLabelNarrower").toString());
@@ -83,7 +83,7 @@ public class OpensearchSuggestResource extends AbstractOpensearchQueryResource {
           Map<String, Long> map = createMapFromTerms(terms);
           for (SuggestDTO suggest : suggests) {
             Long nb = map.get(suggest.getSuggestion());
-            if (nb == null) {  
+            if (nb == null) {
               suggest.setNb(0);
             }
             else {

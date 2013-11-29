@@ -23,6 +23,7 @@ import java.io.Writer;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.solr.client.solrj.response.FacetField;
@@ -43,6 +44,8 @@ import org.restlet.resource.ResourceException;
 
 import fr.cnes.sitools.metacatalogue.utils.MDEOExportField;
 import fr.cnes.sitools.metacatalogue.utils.MetacatalogField;
+import fr.cnes.sitools.thesaurus.SimpleConcept;
+import fr.cnes.sitools.thesaurus.ThesaurusSearcher;
 
 /**
  * Produce a GeoJson representation from a DatabaseRequest, a geometry column and a list of converters
@@ -69,6 +72,8 @@ public class GeoJsonMDEORepresentation extends JsonRepresentation {
   private String applicationBaseUrl;
   private List<FacetField> facets;
   private NamedList<List<PivotField>> pivotFacets;
+  private ThesaurusSearcher searcher;
+  private Map<String, SimpleConcept> conceptsMap;
 
   /**
    * Constructor with a DatabaseRequestParameters, a geometryColName and a converterChained
@@ -79,14 +84,17 @@ public class GeoJsonMDEORepresentation extends JsonRepresentation {
    *          true if the user is authenticated, false otherwise
    * @param applicationBaseUrl
    *          the current application base url
+   * @param searcher
    */
-  public GeoJsonMDEORepresentation(QueryResponse queryResponse, boolean authenticatedUser, String applicationBaseUrl) {
+  public GeoJsonMDEORepresentation(QueryResponse queryResponse, boolean authenticatedUser, String applicationBaseUrl,
+      ThesaurusSearcher searcher) {
     super(MediaType.APPLICATION_JSON);
     this.listDocuments = queryResponse.getResults();
     this.facets = queryResponse.getFacetFields();
     this.pivotFacets = queryResponse.getFacetPivot();
     this.authenticatedUser = authenticatedUser;
     this.applicationBaseUrl = applicationBaseUrl;
+    this.conceptsMap = searcher.getAllConceptsAsMap();
   }
 
   @Override
@@ -285,7 +293,7 @@ public class GeoJsonMDEORepresentation extends JsonRepresentation {
     for (PivotField field : pivotFields) {
       JSONObject out = new JSONObject();
       out.put("field", field.getField());
-      out.put("value", field.getValue());
+      out.put("value", getValueFromThesaurus(field.getValue().toString()));
       out.put("count", field.getCount());
       if (field.getPivot() != null) {
         out.put("pivot", getFacetPivots(field.getPivot()));
@@ -300,12 +308,20 @@ public class GeoJsonMDEORepresentation extends JsonRepresentation {
     for (FacetField field : this.facets) {
       JSONArray array = new JSONArray();
       for (Count count : field.getValues()) {
-        array.put(count.getName());
+        array.put(getValueFromThesaurus(count.getName()));
         array.put(count.getCount());
       }
       facetsJSON.put(field.getName(), array);
     }
 
     return facetsJSON.toString();
+  }
+
+  private String getValueFromThesaurus(String name) {
+    SimpleConcept concept = conceptsMap.get(name.toLowerCase());
+    if (concept != null) {
+      return concept.getPrefFr();
+    }
+    return name;
   }
 }

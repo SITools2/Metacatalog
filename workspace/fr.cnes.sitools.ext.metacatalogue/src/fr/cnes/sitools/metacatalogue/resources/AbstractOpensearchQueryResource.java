@@ -18,6 +18,11 @@
  ******************************************************************************/
 package fr.cnes.sitools.metacatalogue.resources;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.restlet.data.Language;
+import org.restlet.data.Preference;
 import org.restlet.data.Status;
 import org.restlet.resource.ResourceException;
 
@@ -34,6 +39,10 @@ public abstract class AbstractOpensearchQueryResource extends SitoolsResource {
   protected String solrCoreUrl;
 
   protected String thesaurusName;
+
+  private String language;
+
+  private List<Language> preferedLanguages;
 
   @Override
   protected void doInit() {
@@ -60,6 +69,36 @@ public abstract class AbstractOpensearchQueryResource extends SitoolsResource {
 
     thesaurusName = thesaurusParam.getValue();
 
+    extractLanguage();
+
+  }
+
+  private void extractLanguage() {
+    preferedLanguages = new ArrayList<Language>();
+
+    preferedLanguages.add(Language.FRENCH);
+    preferedLanguages.add(Language.ENGLISH);
+
+    language = getRequest().getResourceRef().getQueryAsForm().getFirstValue("lang", null);
+    if (language == null) {
+      List<Preference<Language>> acceptedLanguage = getRequest().getClientInfo().getAcceptedLanguages();
+      for (Preference<Language> preference : acceptedLanguage) {
+        Language lang = preference.getMetadata();
+        if (preferedLanguages.contains(lang)) {
+          language = lang.getName();
+          break;
+        }
+      }
+    }
+    // check that the language is ok
+    Language lang = Language.valueOf(language);
+    if (language == null || lang == null || !preferedLanguages.contains(lang)) {
+      language = preferedLanguages.get(0).getName();
+    }
+  }
+
+  protected String getLanguage() {
+    return language;
   }
 
 }
