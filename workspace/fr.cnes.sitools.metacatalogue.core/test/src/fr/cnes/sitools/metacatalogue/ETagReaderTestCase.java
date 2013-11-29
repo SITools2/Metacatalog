@@ -36,6 +36,8 @@ public class ETagReaderTestCase extends AbstractHarvesterTestCase {
 
   private String polygon = "POLYGON ((0.63474993908497 43.060580878688, 1.7157488382218 43.060580878688, 1.7157488382218 43.759319204217, 0.63474993908497 43.759319204217, 0.63474993908497 43.060580878688))";
 
+  private String polygonToulouse = "POLYGON ((43.618928 1.410316, 43.618928 1.472801, 43.57268 1.472801, 43.57268 1.410316, 43.618928 1.410316))";
+
   @Test
   public void testETag() throws ProcessException, JSONException, IOException {
     HarvesterSettings settings = (HarvesterSettings) HarvesterSettings.getInstance();

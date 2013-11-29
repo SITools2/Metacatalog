@@ -71,6 +71,26 @@ public class ETagReader {
   }
 
   /**
+   * Constructor with etagUrl and geometry as WKT
+   * 
+   * @param etagUrl
+   *          the url to query
+   * @param geometry
+   *          the geometry to query
+   * @param withCities
+   *          true to query all cities, false otherwise
+   * 
+   */
+  public ETagReader(String etagUrl, String geometry, boolean withCities) {
+    url = etagUrl.replace("{footprint}", geometry);
+    if (withCities) {
+      Reference reference = new Reference(url);
+      reference.addQueryParameter("cities", "all");
+      url = reference.toString();
+    }
+  }
+
+  /**
    * Perform the call and read/parse the result
    * 
    * @throws ProcessException
