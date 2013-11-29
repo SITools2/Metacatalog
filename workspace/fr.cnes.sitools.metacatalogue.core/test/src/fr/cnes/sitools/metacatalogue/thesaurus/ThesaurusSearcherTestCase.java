@@ -18,49 +18,115 @@
  ******************************************************************************/
 package fr.cnes.sitools.metacatalogue.thesaurus;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 
-import fr.cnes.sitools.metacatalogue.AbstractHarvesterServerTestCase;
+import fr.cnes.sitools.metacatalogue.AbstractHarvesterTestCase;
 import fr.cnes.sitools.thesaurus.Concept;
+import fr.cnes.sitools.thesaurus.SimpleConcept;
 import fr.cnes.sitools.thesaurus.ThesaurusSearcher;
 
-public class ThesaurusSearcherTestCase extends AbstractHarvesterServerTestCase {
+public class ThesaurusSearcherTestCase extends AbstractHarvesterTestCase {
+
+  private static String THESAURUS_NAME = "thesaurus/TechniqueDev3.rdf";
 
   @Test
-  public void testThesaurusSearchFromPrefLabel() throws IOException {
-    String thesaurusName = "thesaurus/TechniqueDev3.rdf";
-    String prefLabel = "Albedo de surface";
+  public void testThesaurusSearchFromPrefLabelFr() throws IOException {
+    String prefLabel = "Réflectance de surface";
 
     // get a concept from its prefLabel
-    ThesaurusSearcher searcher = new ThesaurusSearcher(thesaurusName);
-    List<Concept> concepts = searcher.search(prefLabel);
+    ThesaurusSearcher searcher = new ThesaurusSearcher(THESAURUS_NAME);
+    List<Concept> concepts = searcher.search(prefLabel, "fr");
     assertNotNull(concepts);
     assertEquals(1, concepts.size());
-    
-    System.out.println(concepts.get(0).toString());
   }
-  
-  
+
   @Test
-  public void testThesaurusSearchNarrowersBroader() throws IOException {
-    String thesaurusName = "thesaurus/TechniqueDev3.rdf";
-    String prefLabel = "Albe*";
-    
+  public void testThesaurusSearchFromPrefLabelEn() throws IOException {
+    String prefLabel = "REFLECTANCE";
+
     // get a concept from its prefLabel
-    ThesaurusSearcher searcher = new ThesaurusSearcher(thesaurusName);
-    List<Concept> concepts = searcher.searchNarrowersBroader(prefLabel);
+    ThesaurusSearcher searcher = new ThesaurusSearcher(THESAURUS_NAME);
+    List<Concept> concepts = searcher.search(prefLabel, "en");
+    assertNotNull(concepts);
+    assertEquals(1, concepts.size());
+  }
+
+  @Test
+  public void testThesaurusSearchNarrowersBroaderFr() throws IOException {
+    String prefLabel = "Albe*";
+
+    // get a concept from its prefLabel
+    ThesaurusSearcher searcher = new ThesaurusSearcher(THESAURUS_NAME);
+    List<Concept> concepts = searcher.searchNarrowersBroader(prefLabel, "fr");
     assertNotNull(concepts);
     assertEquals(21, concepts.size());
-    
-    
+    assertConceptExists(concepts, "Albedo de surface");
+
   }
-  
-  
+
+  @Test
+  public void testThesaurusSearchNarrowersBroaderEn() throws IOException {
+    String prefLabel = "Albe*";
+
+    // get a concept from its prefLabel
+    ThesaurusSearcher searcher = new ThesaurusSearcher(THESAURUS_NAME);
+    List<Concept> concepts = searcher.searchNarrowersBroader(prefLabel, "en");
+    assertNotNull(concepts);
+    assertEquals(21, concepts.size());
+
+    assertConceptExists(concepts, "Albedo");
+  }
+
+  private void assertConceptExists(List<Concept> concepts, String assertResult) {
+    boolean found = false;
+    for (Concept concept : concepts) {
+      if (concept.getProperties().get("prefLabelNarrower").toString().equals(assertResult)) {
+        found = true;
+        return;
+      }
+    }
+    assertTrue("CANNOT FIND prefLabelNarrower : " + assertResult, found);
+  }
+
+  @Test
+  public void testThesaurusSearchConceptByAltLabelEn() throws IOException {
+    String altLabelExists = "ALBEDO";
+    String altLabelDontExists = "ALBEDODESURFACE";
+
+    // get a concept from its prefLabel
+    ThesaurusSearcher searcher = new ThesaurusSearcher(THESAURUS_NAME);
+    assertTrue(searcher.conceptExists(altLabelExists));
+    assertFalse(searcher.conceptExists(altLabelDontExists));
+  }
+
+  @Test
+  public void testThesaurusGetAllConcepts() throws IOException {
+
+    // get a concept from its prefLabel
+    ThesaurusSearcher searcher = new ThesaurusSearcher(THESAURUS_NAME);
+    List<Concept> concepts = searcher.getAllConcepts();
+    assertNotNull(concepts);
+    assertEquals(158, concepts.size());
+  }
+
+  @Test
+  public void testThesaurusGetAllConceptsMap() throws IOException {
+
+    // get a concept from its prefLabel
+    ThesaurusSearcher searcher = new ThesaurusSearcher(THESAURUS_NAME);
+    Map<String, SimpleConcept> map = searcher.getAllConceptsAsMap();
+    assertNotNull(map);
+    // Il y a des altLabels en double... du coup on a 150 concepts au lieu des 158...
+    assertEquals(149, map.keySet().size());
+  }
 
 }

@@ -19,13 +19,14 @@
 package fr.cnes.sitools.thesaurus;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
@@ -44,6 +45,10 @@ public class ThesaurusSearcher {
 
   public String SEARCH_NARROWERS_BROADERS;
 
+  public String SEARCH_BY_ALTLABEL_QUERY;
+
+  public String GET_ALL_CONCEPTS_QUERY;
+
   private Model model;
 
   public ThesaurusSearcher(String thesaurusName) throws IOException {
@@ -51,13 +56,9 @@ public class ThesaurusSearcher {
     InputStream inputStream = null;
     try {
       inputStream = new FileInputStream(thesaurusName);
-      model.read(inputStream, "/toto", "RDF/XML");
+      model.read(inputStream, "", "RDF/XML");
 
       initializeSparqlRequests();
-    }
-    catch (FileNotFoundException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
     }
     finally {
       inputStream.close();
@@ -82,19 +83,21 @@ public class ThesaurusSearcher {
 
   }
 
-  public List<Concept> search(String prefLabel) {
+  public List<Concept> search(String prefLabel, String language) {
     String queryString = SEARCH_BY_PREFLABEL_QUERY.replace("{prefLabel}", prefLabel);
+    queryString = queryString.replace("{lang}", language);
     List<Concept> concepts = executeQuery(queryString);
     return concepts;
   }
 
-  public List<Concept> searchNarrowersBroader(String prefLabel) {
+  public List<Concept> searchNarrowersBroader(String prefLabel, String language) {
     String queryString = SEARCH_NARROWERS_BROADERS.replace("{prefLabel}", prefLabel);
+    queryString = queryString.replace("{lang}", language);
     List<Concept> concepts = executeQuery(queryString);
     return concepts;
   }
 
-  private List<Concept> executeQuery(String queryString) {
+  public List<Concept> executeQuery(String queryString) {
     List<Concept> concepts = new ArrayList<Concept>();
     Query query = QueryFactory.create(queryString);
     QueryExecution qexec = QueryExecutionFactory.create(query, model);
@@ -110,6 +113,31 @@ public class ThesaurusSearcher {
       concepts.add(concept);
     }
     return concepts;
+  }
+
+  public boolean conceptExists(String altLabelExists) {
+    String queryString = SEARCH_BY_ALTLABEL_QUERY.replace("{altLabel}", altLabelExists);
+    List<Concept> concepts = executeQuery(queryString);
+    return (concepts != null && concepts.size() == 1);
+  }
+
+  public List<Concept> getAllConcepts() {
+    String queryString = GET_ALL_CONCEPTS_QUERY;
+    return executeQuery(queryString);
+  }
+
+  public Map<String, SimpleConcept> getAllConceptsAsMap() {
+    Map<String, SimpleConcept> out = new HashMap<String, SimpleConcept>();
+    List<Concept> concepts = getAllConcepts();
+    if (concepts != null) {
+      for (Concept concept : concepts) {
+        Object altLabelEn = concept.getProperties().get("altLabelEn");
+        if (altLabelEn != null) {
+          out.put(altLabelEn.toString().toLowerCase(), SimpleConcept.fromConcept(concept));
+        }
+      }
+    }
+    return out;
   }
 
 }
