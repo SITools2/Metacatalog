@@ -72,7 +72,7 @@ public class CswGeometryExtractor {
 
     if (geometry != null) {
 
-      if (!isCountryClockWise(geometry)) {
+      if (!isCounterClockWise(geometry)) {
         geometry = geometry.reverse();
       }
 
@@ -98,7 +98,7 @@ public class CswGeometryExtractor {
    *          the Geometry
    * @return true if the geometry is counterClockWise, false otherwise
    */
-  private boolean isCountryClockWise(Geometry geometry) {
+  private boolean isCounterClockWise(Geometry geometry) {
     return CGAlgorithms.isCCW(geometry.getCoordinates());
   }
 

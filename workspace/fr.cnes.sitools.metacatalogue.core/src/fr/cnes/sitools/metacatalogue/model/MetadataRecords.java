@@ -31,12 +31,19 @@ import java.util.List;
 public class MetadataRecords {
   /** List of Field */
   private List<Field> fields;
+  private List<Error> errors;
 
   /**
    * Constuctor
    */
   public MetadataRecords() {
     fields = new ArrayList<Field>();
+    errors = new ArrayList<Error>();
+  }
+  
+  public MetadataRecords(List<Field> _fields, List<Error> _errors) {
+    fields = _fields;
+    errors = _errors;
   }
 
   /**
@@ -55,6 +62,18 @@ public class MetadataRecords {
       return null;
     }
   }
+  
+  
+  public Object getError(String name) {
+    Error error = findFirstError(name);
+    if (error != null) {
+      return error.getValue();
+    }
+    else {
+      return null;
+    }
+  }
+
 
   /**
    * Add a new Field with the given name and value
@@ -93,7 +112,17 @@ public class MetadataRecords {
   public List<Field> getList() {
     return fields;
   }
+  
+  
+  public List<Field> getFields() {
+    return fields;
+  }
+    
+  public List<Error> getErrors() {
+    return errors;
+  }
 
+  
   /**
    * Util method to find the first Field in the List with the specified name
    * 
@@ -112,6 +141,18 @@ public class MetadataRecords {
     }
     return fieldResult;
   }
+  
+  public Error findFirstError(String name) {
+    Error errorFound = null;
+    Iterator<Error> it = this.errors.iterator();
+    while (it.hasNext() && errorFound == null) {
+      Error error = it.next();
+      if (name.equals(error.getName())) {
+        errorFound = error;
+      }
+    }
+    return errorFound;
+  }
 
   /*
    * (non-Javadoc)
@@ -127,5 +168,7 @@ public class MetadataRecords {
     out += "]";
     return out;
   }
+
+
 
 }

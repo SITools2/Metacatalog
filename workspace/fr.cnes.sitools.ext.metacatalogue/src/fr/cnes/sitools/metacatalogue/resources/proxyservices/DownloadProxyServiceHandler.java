@@ -32,7 +32,7 @@ public class DownloadProxyServiceHandler extends AbstractProxyServiceHandler {
   /** The solr core url */
   protected String solrCoreUrl;
 
-  private static final String DOWNLOAD_URL_FIELD = MetacatalogField.DISTRIBUTION_ACCESS_URL.getField();
+  private static final String DOWNLOAD_URL_FIELD = MetacatalogField.ARCHIVE.getField();
 
   /**
    * @param context

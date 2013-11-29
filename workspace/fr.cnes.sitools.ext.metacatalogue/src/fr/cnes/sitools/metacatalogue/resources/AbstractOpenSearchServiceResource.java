@@ -74,7 +74,7 @@ public abstract class AbstractOpenSearchServiceResource extends SitoolsResource 
     if (metaField != null) {
       addToDescription = !metaField.isInspire()
           && !metaField.isMetacatalogIntern()
-          && !(MetacatalogField.CHARACTERISATION_AXIS_TEMPORAL_AXIS_MIN.equals(metaField) || MetacatalogField.CHARACTERISATION_AXIS_TEMPORAL_AXIS_MAX
+          && !(MetacatalogField.START_DATE.equals(metaField) || MetacatalogField.COMPLETION_DATE
               .equals(metaField));
     }
     return addToDescription;

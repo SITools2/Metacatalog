@@ -51,19 +51,19 @@ public enum MDEOExportField {
   PRODUCT("product", MetacatalogField.PRODUCT),
 
   /** The platform, nom du satellite */
-  PLATFORM("platform", MetacatalogField.ACQUISITION_SETUP_PLATFORM),
+  PLATFORM("platform", MetacatalogField.PLATFORM),
 
   /** The instrument. Nom de l'instrument */
-  INSTRUMENT("instrument", MetacatalogField.ACQUISITION_SETUP_INSTRUMENT),
+  INSTRUMENT("instrument", MetacatalogField.INSTRUMENT),
 
   /** startDate, Date de début d'acquisition au format ISO 8601, i.e. YYYY-MM-DDTHH:MM:SS */
-  START_DATE("startDate", MetacatalogField.CHARACTERISATION_AXIS_TEMPORAL_AXIS_MIN, Date.class),
+  START_DATE("startDate", MetacatalogField.START_DATE, Date.class),
 
   /** completionDate, Date de fin d'acquisition au format ISO 8601, i.e. YYYY-MM-DDTHH:MM:SS */
-  COMPLETIONDATE("completionDate", MetacatalogField.CHARACTERISATION_AXIS_TEMPORAL_AXIS_MAX, Date.class),
+  COMPLETIONDATE("completionDate", MetacatalogField.COMPLETION_DATE, Date.class),
 
   /** resolution, Résolution spatiale exprimée en mètres, */
-  RESOLUTION("resolution", MetacatalogField.ACQUISITION_SETUP_RESOLUTION),
+  RESOLUTION("resolution", MetacatalogField.RESOLUTION),
 
   /** MODIFIED, Date de dernière modification de la métadonnée au format ISO 8601, i.e.YYYY-MM-DDTHH:MM:SS */
   MODIFIED("modified", MetacatalogField.MODIFICATION_DATE, Date.class),
@@ -88,9 +88,9 @@ public enum MDEOExportField {
 
   SERVICES_BROWSE_LAYER_SRS("services.browse.layer.version.srs", MetacatalogField.SERVICES_BROWSE_LAYER_SRS),
 
-  SERVICES_DOWNLOAD_URL("services.download.url", MetacatalogField.DISTRIBUTION_ACCESS_URL),
+  SERVICES_DOWNLOAD_URL("services.download.url", MetacatalogField.ARCHIVE),
 
-  SERVICES_DOWNLOAD_MIME_TYPE("services.download.mimeType", MetacatalogField.DISTRIBUTION_ACCESS_FORMAT),
+  SERVICES_DOWNLOAD_MIME_TYPE("services.download.mimeType", MetacatalogField.MIME_TYPE),
 
   SERVICES_METADATA_URL("services.metadata.url", MetacatalogField.SERVICES_METADATA_URL),
 

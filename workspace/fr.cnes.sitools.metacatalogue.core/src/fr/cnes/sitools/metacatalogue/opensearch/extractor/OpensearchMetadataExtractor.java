@@ -81,17 +81,17 @@ public class OpensearchMetadataExtractor extends HarvesterStep {
       addField(fields, "$.properties.project", jsonString, MetacatalogField.PROJECT.getField());
       addField(fields, "$.properties.product", jsonString, MetacatalogField.PRODUCT.getField());
 
-      addField(fields, "$.properties.platform", jsonString, MetacatalogField.ACQUISITION_SETUP_PLATFORM.getField());
-      addField(fields, "$.properties.instrument", jsonString, MetacatalogField.ACQUISITION_SETUP_INSTRUMENT.getField());
+      addField(fields, "$.properties.platform", jsonString, MetacatalogField.PLATFORM.getField());
+      addField(fields, "$.properties.instrument", jsonString, MetacatalogField.INSTRUMENT.getField());
 
       // addField(fields, new Date().toString(), MetacatalogField.MODIFICATION_DATE.getField());
 
       addField(fields, "$.properties.startDate", jsonString,
-          MetacatalogField.CHARACTERISATION_AXIS_TEMPORAL_AXIS_MIN.getField());
+          MetacatalogField.START_DATE.getField());
       addField(fields, "$.properties.completionDate", jsonString,
-          MetacatalogField.CHARACTERISATION_AXIS_TEMPORAL_AXIS_MAX.getField());
+          MetacatalogField.COMPLETION_DATE.getField());
 
-      addField(fields, "$.properties.resolution", jsonString, MetacatalogField.ACQUISITION_SETUP_RESOLUTION.getField());
+      addField(fields, "$.properties.resolution", jsonString, MetacatalogField.RESOLUTION.getField());
       addField(fields, "$.properties.modified", jsonString, MetacatalogField.MODIFICATION_DATE.getField());
 
       addField(fields, "$.properties.services.browse.title", jsonString,
@@ -110,9 +110,9 @@ public class OpensearchMetadataExtractor extends HarvesterStep {
           MetacatalogField.SERVICES_BROWSE_LAYER_SRS.getField());
 
       addField(fields, "$.properties.services.download.url", jsonString,
-          MetacatalogField.DISTRIBUTION_ACCESS_URL.getField());
+          MetacatalogField.ARCHIVE.getField());
       addField(fields, "$.properties.services.download.mimeType", jsonString,
-          MetacatalogField.DISTRIBUTION_ACCESS_FORMAT.getField());
+          MetacatalogField.MIME_TYPE.getField());
 
 //      addField(fields, "$.properties.services.metadata.url", jsonString,
 //          MetacatalogField.SERVICES_METADATA_URL.getField());

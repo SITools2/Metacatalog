@@ -48,13 +48,56 @@ public class CswMetadataValidator extends HarvesterStep {
   @Override
   public void execute(MetadataContainer data) throws ProcessException {
     logger = context.getLogger();
-    List<MetadataRecords> fields = data.getMetadataRecords();
+    List<MetadataRecords> metadataRecords = data.getMetadataRecords();
 
     HarvestStatus status = (HarvestStatus) context.getAttributes().get(ContextAttributes.STATUS);
 
     int nbDocInvalid = 0;
-    for (Iterator<MetadataRecords> iterator = fields.iterator(); iterator.hasNext();) {
+    
+    /* iterate on errors */
+    for (Iterator<MetadataRecords> iterator = metadataRecords.iterator(); iterator.hasNext();) {
+
       MetadataRecords doc = iterator.next();
+      
+      List<MetacatalogField> mandatoryFields = MetacatalogField.getMandatoryFields();
+      
+      boolean fail = false;
+      
+      for ( MetacatalogField field : mandatoryFields ){
+        
+//        fr.cnes.sitools.metacatalogue.model.Error error = doc.findFirstError(MetacatalogField.PRODUCT.getField());
+        fr.cnes.sitools.metacatalogue.model.Error error = doc.findFirstError(field.getField());
+        
+        if (error != null ){
+          logger.info("" + error.getValue());
+          fail = true;
+        }
+        
+      }
+      
+      if (fail){
+        iterator.remove();
+        nbDocInvalid++;
+      }
+      
+    }
+    
+    for (Iterator<MetadataRecords> iterator = metadataRecords.iterator(); iterator.hasNext();) {
+      
+      MetadataRecords doc = iterator.next();
+      
+      if (doc.get(MetacatalogField._GEOMETRY.getField()) == null) {
+        logger.info("No geometry defined for record : " + doc.get(MetacatalogField.ID.getField())
+            + " not inserted in the metacatalog");
+        nbDocInvalid++;
+        iterator.remove();
+      }
+      
+    }
+    
+    for (Iterator<MetadataRecords> iterator = metadataRecords.iterator(); iterator.hasNext();) {
+      MetadataRecords doc = iterator.next();
+      
       if (doc.get(MetacatalogField._GEOMETRY.getField()) == null) {
         logger.info("No geometry defined for record : " + doc.get(MetacatalogField.ID.getField())
             + " not inserted in the metacatalog");
@@ -62,12 +105,9 @@ public class CswMetadataValidator extends HarvesterStep {
 
         iterator.remove();
       }
-
-      if (doc.get("country") == null) {
-        logger.info("No country defined for record : " + doc.get(MetacatalogField.ID.getField())
-            + " inserted in the metacatalog anyway");
-      }
     }
+    
+    
     status.setNbDocumentsInvalid(status.getNbDocumentsInvalid() + nbDocInvalid);
 
     next.execute(data);

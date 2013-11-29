@@ -34,20 +34,68 @@
 
 
 	<xsl:template match="*" mode="metadata">
+	
+		<!-- authority -->
+		<xsl:if test="not(gmd:contact/gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString)" >
+			<error name="authority">Authority not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this XPath expression "gmd:contact/gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString"</error>
+		</xsl:if>
+		
+		<!-- title -->
+		<xsl:if test="not(gmd:identificationInfo//gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:title/gco:CharacterString)" >
+			<error name="title">Title not found for record with <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> this Xpath expression "gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:title/gco:CharacterString"</error>
+		</xsl:if>
+		
+		<!-- description -->
+		<xsl:if test="not(gmd:identificationInfo//gmd:MD_DataIdentification/gmd:abstract/gco:CharacterString)" >
+			<error name="description">Description not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this Xpath expression "gmd:identificationInfo/gmd:MD_DataIdentification/gmd:abstract/gco:CharacterString"</error>
+		</xsl:if>
+		
+		<!-- product -->
+		<xsl:if test="not(gmd:imageDescription/MD_ImageDescription/contentType)" >
+			<error name="product">Product not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this Xpath expression "gmd:imageDescription/MD_ImageDescription/contentType"</error>
+		</xsl:if>
+		
+		<!-- platform -->
+		<xsl:if test="not(gmi:acquisitionInformation/gmi:MI_AcquisitionInformation/gmi:platform/gmi:MI_Platform/gmi:identifier/gmd:MD_Identifier/gmd:code)" >
+			<error name="platform">Platform not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this Xpath expression "gmi:acquisitionInformation/gmi:MI_AcquisitionInformation/gmi:platform/gmi:MI_Platform/gmi:identifier/gmd:MD_Identifier/gmd:code"</error>
+		</xsl:if>
+		
+		<!-- instrument -->
+		<xsl:if test="not(gmi:acquisitionInformation/gmi:MI_AcquisitionInformation/gmi:instrument/gmi:MI_Instrument/gmi:identifier/gmd:MD_Identifier/gmd:code/gco:CharacterString)" >
+			<error name="instrument">Instrument not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this Xpath expression "gmi:acquisitionInformation/gmi:MI_AcquisitionInformation/gmi:instrument/gmi:MI_Instrument/gmi:identifier/gmd:MD_Identifier/gmd:code/gco:CharacterString"</error>
+		</xsl:if>
+		
+		<!-- resolution -->
+		<xsl:if test="not(gmd:spatialResolution/gmd:MD_Resolution/gmd:distance/gco:Distance)" >
+			<error name="resolution">Resolution not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this Xpath expression "gmd:spatialResolution/gmd:MD_Resolution/gmd:distance/gco:Distance"</error>
+		</xsl:if>
+
+		<!-- start date -->
+		<xsl:if test="not(gmd:identificationInfo//gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:beginPosition)" >
+			<error name="startdate">Start date not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this Xpath expression "gmd:identificationInfo//gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:beginPosition"</error>
+		</xsl:if>
+
+		<!-- completion date -->
+		<xsl:if test="not(gmd:identificationInfo//gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:endPosition)" >
+			<error name="completiondate">Completion date not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this Xpath expression "gmd:identificationInfo//gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:endPosition"</error>
+		</xsl:if>
+
+		<!-- footprint -->
+		<xsl:if test="not(gmd:identificationInfo/gmd:MD_DataIdentification/gmd:geographicElement/EX_GeographicBoundingBox)" >
+			<error name="footprint">Footprint not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this Xpath expression "gmd:identificationInfo/gmd:MD_DataIdentification/gmd:geographicElement/EX_GeographicBoundingBox"</error>
+		</xsl:if>
 
 
+		
+		
 		<xsl:for-each select="gmd:fileIdentifier/gco:CharacterString">
 			<field name="_uuid">urn:ogc:def:EOP:GEOSUD:Geosud:<xsl:value-of select="string(.)" /></field>
 			<field name="id">urn:ogc:def:EOP:GEOSUD:Geosud:<xsl:value-of select="string(.)" /></field>
 		</xsl:for-each>
 
-		<xsl:for-each
-			select="gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword/gco:CharacterString">
-			<field name="keywords"><xsl:value-of select="string(.)" /></field>
-		</xsl:for-each>
-
 		<field name="resourceType">dataset</field>
 
+		<field name="project">geosud</field>
 
 		<xsl:for-each select="gmd:identificationInfo//gmd:MD_DataIdentification">
 
@@ -55,44 +103,30 @@
 				<field name="description"><xsl:value-of select="string(.)" /></field>
 			</xsl:for-each>
 
-
 			<xsl:for-each select="gmd:citation/gmd:CI_Citation">
-
-
 				<xsl:for-each select="gmd:title/gco:CharacterString">
 					<field name="title"><xsl:value-of select="string(.)" /></field>
 				</xsl:for-each>
-
-
 			</xsl:for-each>
 
 			<xsl:for-each select="gmd:spatialResolution/gmd:MD_Resolution">
 				<xsl:for-each select="gmd:distance/gco:Distance">
-					<field name="acquisitionSetup.resolution"><xsl:value-of select="string(.)" /></field>
+					<field name="resolution"><xsl:value-of select="string(.)" /></field>
 				</xsl:for-each>
 			</xsl:for-each>
-
-
 
 			<field name="quicklook"><xsl:value-of select="string(gmd:graphicOverview[1]/gmd:MD_BrowseGraphic/gmd:fileName/gco:CharacterString)" /></field>
 
 			<field name="thumbnail"><xsl:value-of select="string(gmd:graphicOverview[2]/gmd:MD_BrowseGraphic/gmd:fileName/gco:CharacterString)" /></field>
 
 			<xsl:for-each select="gmd:resourceFormat/gmd:MD_Format">
-				
-				<field name="distributionAccess.format"><xsl:value-of select="string(gmd:name/gco:CharacterString)" /></field>
-				
-				<field name="distributionAccess.version"><xsl:value-of select="string(gmd:version/gco:CharacterString)" /></field>
-
+				<field name="mimeType"><xsl:value-of select="string(gmd:name/gco:CharacterString)" /></field>
+				<!--<field name="distributionAccess.version"><xsl:value-of select="string(gmd:version/gco:CharacterString)" /></field>-->
 			</xsl:for-each>
 			
-			
 			<xsl:for-each select="gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod">
-				
-				<field name="characterisationAxis.temporalAxis.min"><xsl:value-of select="string(gml:beginPosition)" /></field>
-				
-				<field name="characterisationAxis.temporalAxis.max"><xsl:value-of select="string(gml:endPosition)" /></field>
-				
+				<field name="startDate"><xsl:value-of select="string(gml:beginPosition)" /></field>
+				<field name="completionDate"><xsl:value-of select="string(gml:endPosition)" /></field>
 			</xsl:for-each>
 
 		</xsl:for-each>
@@ -100,6 +134,7 @@
 		<!-- Services browse WMS -->
 		<xsl:for-each
 			select="gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/ns14:PTSC_WMSParameters">
+			
 			<xsl:for-each select="ns14:type">
 				<field name="services.browse.layer.type"><xsl:value-of select="string(.)" /></field>
 			</xsl:for-each>
@@ -124,37 +159,35 @@
 				<field name="services.browse.layer.srs"><xsl:value-of select="string(.)" /></field>
 			</xsl:for-each>
 
-
-
 		</xsl:for-each>
 
 		<!-- Services download -->
 		<xsl:for-each
 			select="gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:linkage/gmd:URL">
-			<field name="distributionAccess.url"><xsl:value-of select="string(.)" /></field>
+			<field name="archive"><xsl:value-of select="string(.)" /></field>
 		</xsl:for-each>
 
-
+<!-- 
 		<xsl:for-each
-			select="gmd:dataQualityInfo/*/gmd:lineage/*/gmd:statement/gco:CharacterString">
-			<field name="lineage"><xsl:value-of select="string(.)" /></field>
-		</xsl:for-each>
+				select="gmd:dataQualityInfo/*/gmd:lineage/*/gmd:statement/gco:CharacterString">
+				<field name="lineage"><xsl:value-of select="string(.)" /></field>
+		</xsl:for-each> 
 
 		<xsl:for-each select="gmd:language/gco:CharacterString">
 			<field name="language"><xsl:value-of select="string(.)" /></field>
 		</xsl:for-each>
 
-
 		<xsl:for-each select="gmd:dateStamp/gco:DateTime|gmd:dateStamp/gco:Date">
 			<field name="modificationDate"><xsl:value-of select="string(.)" /></field>
 		</xsl:for-each>
-
+-->
 
 		<xsl:for-each select="gmd:contact/*">
-			<xsl:for-each select="gmd:organisationName/gco:CharacterString">
-				<field name="acquisitionSetup.facility.organisationName"><xsl:value-of select="string(.)" /></field>
-			</xsl:for-each>
 
+			<xsl:for-each select="gmd:organisationName/gco:CharacterString">
+				<field name="authority"><xsl:value-of select="string(.)" /></field>
+			</xsl:for-each>
+<!--		
 			<xsl:for-each
 				select="gmd:contactInfo/gmd:CI_CONTACT/gmd:address/gmd:CI_ADDRESS/gmd:electronicMailAddress/gco:CharacterString">
 				<field name="acquisitionSetup.facility.emailAddress"><xsl:value-of select="string(.)" /></field>
@@ -163,20 +196,37 @@
 			<xsl:for-each select="gmd:role/gmd:CI_RoleCode">
 				<field name="acquisitionSetup.facility.role"><xsl:value-of select="string(.)" /></field>
 			</xsl:for-each>
+-->
 		</xsl:for-each>
 
+		
+		<field name="product"><xsl:value-of select="string(gmd:imageDescription/MD_ImageDescription/contentType)"/></field>
+		
 		<xsl:for-each
 			select="gmi:acquisitionInformation/gmi:MI_AcquisitionInformation/gmi:instrument/gmi:MI_Instrument/gmi:identifier/gmd:MD_Identifier/gmd:code/gco:CharacterString">
-			<field name="acquisitionSetup.instrument"><xsl:value-of select="string(.)" /></field>
+			<field name="instrument"><xsl:value-of select="string(.)" /></field>
 		</xsl:for-each>
 
 		<xsl:for-each
 			select="gmi:acquisitionInformation/gmi:MI_AcquisitionInformation/gmi:platform/gmi:MI_Platform/gmi:identifier/gmd:MD_Identifier/gmd:code/gco:CharacterString">
-			<field name="acquisitionSetup.platform"><xsl:value-of select="string(.)" /></field>
+			<field name="platform"><xsl:value-of select="string(.)" /></field>
 		</xsl:for-each>
-
+		
+		
+		<xsl:for-each select="gmd:identificationInfo/gmd:MD_DataIdentification/gmd:geographicElement/EX_GeographicBoundingBox">
+			<field name="footprint"><xsl:value-of select="string(.)" /></field>
+		</xsl:for-each>
+		
+	<!--	
+		<xsl:for-each select="gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword/gco:CharacterString">
+			<field name="keywords"><xsl:value-of select="string(.)" /></field>
+		</xsl:for-each>
+	-->
+		
+		
+	<!--
 		<field name="acquisitionSetup"><xsl:value-of select="string(gmi:acquisitionInformation/gmi:MI_AcquisitionInformation/gmi:platform/gmi:MI_Platform/gmi:identifier/gmd:MD_Identifier/gmd:code/gco:CharacterString)" />/<xsl:value-of select="gmi:acquisitionInformation/gmi:MI_AcquisitionInformation/gmi:instrument/gmi:MI_Instrument/gmi:identifier/gmd:MD_Identifier/gmd:code/gco:CharacterString" /></field>
-
+	-->
 
 	</xsl:template>
 

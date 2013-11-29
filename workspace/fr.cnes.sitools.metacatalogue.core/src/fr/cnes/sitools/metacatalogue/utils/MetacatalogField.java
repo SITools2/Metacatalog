@@ -1,4 +1,4 @@
- /*******************************************************************************
+/*******************************************************************************
  * Copyright 2010-2013 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
  *
  * This file is part of SITools2.
@@ -19,7 +19,9 @@
 package fr.cnes.sitools.metacatalogue.utils;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.solr.common.util.DateUtil;
@@ -44,7 +46,7 @@ public enum MetacatalogField {
   /** The Constant ANY. */
   _ANY("_any"),
 
-    /**
+  /**
    * ##################### Modèle de données du métacatalogue #########################
    */
 
@@ -64,89 +66,25 @@ public enum MetacatalogField {
 
   PROCESSING_LEVEL("processingLevel"),
 
-  POINT_OF_CONTACT_ORGANISATION_NAME("pointOfContact.organisationName"),
+  AUTHORITY("authority"),
 
-  POINT_OF_CONTACT_EMAIL_ADDRESS("pointOfContact.emailAddress"),
+  START_DATE("startDate", Date.class),
 
-  POINT_OF_CONTACT_ROLE("pointOfContact.role"),
+  COMPLETION_DATE("completionDate", Date.class),
 
-  CHARACTERISATION_AXIS_TEMPORAL_AXIS_MIN("characterisationAxis.temporalAxis.min", Date.class),
+  INSTRUMENT("instrument"),
 
-  CHARACTERISATION_AXIS_TEMPORAL_AXIS_MAX("characterisationAxis.temporalAxis.max", Date.class),
+  PLATFORM("platform"),
 
-  CHARACTERISATION_SPATIAL_AXIS("characterisation.spatialAxis"),
+  RESOLUTION("resolution"),
 
-  CHARACTERISATION_WAVELENGTH("characterisation.wavelength"),
+  ARCHIVE("archive"),
 
-  ACQUISITION_SETUP_FACILITY_ORGANISATION("acquisitionSetup.facility.organisationName"),
-
-  ACQUISITION_SETUP_FACILITY_EMAIL_ADDRESS("acquisitionSetup.facility.emailAddress"),
-
-  ACQUISITION_SETUP_FACILITY_ROLE("acquisitionSetup.facility.role"),
-
-  ACQUISITION_SETUP_INSTRUMENT("acquisitionSetup.instrument"),
-
-  ACQUISITION_SETUP_PLATFORM("acquisitionSetup.platform"),
-
-  ACQUISITION_SETUP_RESOLUTION("acquisitionSetup.resolution"),
-
-  ACQUISITION_SETUP_PHYSICAL_PARAMETERS("acquisitionSetup.physicalParameters"),
-
-  ACQUISITION_SETUP_ILLUMINATION_ELEVATION("acquisitionSetup.illuminationElevation"),
-
-  ACQUISITION_SETUP_CLOUD_COVER("acquisitionSetup.cloudCover"),
-
-  CONFORMITY_SPECIFICATION_TITLE("conformity.specification.title"),
-
-  CONFORMITY_SPECIFICATION_DATE("conformity.specification.date", Date.class),
-
-  CONFORMITY_SPECIFICATION_DATETYPE("conformity.specification.dateType"),
-
-  CONFORMITY_EXPLANATION("conformity.explanation"),
-
-  CONFORMITY_PASS("conformity.pass"),
-
-  DISTRIBUTION_ACCESS_LIMITATION_PUBLIC_ACCESS("distributionAccess.limitationPublicAccess"),
-
-  DISTRIBUTION_ACCESS_CONDITION_FOR_ACCESS_AND_USE("distributionAccess.conditionForAccessAndUse"),
-
-  DISTRIBUTION_ACCESS_URL("distributionAccess.url"),
-
-  DISTRIBUTION_ACCESS_FILESIZE("distributionAccess.filesize"),
-
-  DISTRIBUTION_ACCESS_FORMAT("distributionAccess.format"),
-  
-  DISTRIBUTION_ACCESS_VERSION("distributionAccess.version"),
-
-  SERVICES_BROWSE_TITLE("services.browse.title"),
-
-  SERVICES_BROWSE_LAYER_TYPE("services.browse.layer.type"),
-
-  SERVICES_BROWSE_LAYER_URL("services.browse.layer.url"),
-
-  SERVICES_BROWSE_LAYER_LAYERS("services.browse.layer.layers"),
-
-  SERVICES_BROWSE_LAYER_VERSION("services.browse.layer.version"),
-
-  SERVICES_BROWSE_LAYER_BBOX("services.browse.layer.bbox"),
-
-  SERVICES_BROWSE_LAYER_SRS("services.browse.layer.srs"),
-
-  // SERVICES_BROWSE_VERSION("services.wms.version"),
-
-  // SERVICES_BROWSE_CREDITS("services.wms.credits"),
-
-  SERVICES_METADATA_URL("services.metadata.url"),
-
-  TOPIC_CATEGORY("topicCategory"),
+  MIME_TYPE("mimeType"),
 
   KEYWORDS("keywords"),
 
-  PROPERTIES_KEY("properties.key"),
-
-  /**
-   * ##################### Champs manquants dans le modèle de données du métacatalogue #########################
-   */
+  FOOTPRINT("footprint"),
 
   /** QUICKLOOK, url vers le quicklook du produit */
   QUICKLOOK("quicklook"),
@@ -161,19 +99,69 @@ public enum MetacatalogField {
   PRODUCT("product"),
 
   /** ACQUISITION_SETUP */
-  ACQUISITION_SETUP("acquisitionSetup");
+  ACQUISITION_SETUP("acquisitionSetup"),
 
-  /**
-   * ##################### Champs du CNES from INSPIRE #########################
-   */
-  /** The email */
-  // EMAIL("INSPIRE.Email"),
+  // POINT_OF_CONTACT_EMAIL_ADDRESS("pointOfContact.emailAddress"),
+  //
+  // POINT_OF_CONTACT_ROLE("pointOfContact.role"),
 
-  /** The role */
-  // ROLE("INSPIRE.Role"),
+  CHARACTERISATION_SPATIAL_AXIS("characterisation.spatialAxis"),
+ 
+  // CHARACTERISATION_WAVELENGTH("characterisation.wavelength"),
+  //
+  // ACQUISITION_SETUP_FACILITY_ORGANISATION("acquisitionSetup.facility.organisationName"),
+  //
+  // ACQUISITION_SETUP_FACILITY_EMAIL_ADDRESS("acquisitionSetup.facility.emailAddress"),
+  //
+  // ACQUISITION_SETUP_FACILITY_ROLE("acquisitionSetup.facility.role"),
 
-  /** The organisation */
-  // Organisation("INSPIRE.Organisation");
+  // ACQUISITION_SETUP_PHYSICAL_PARAMETERS("acquisitionSetup.physicalParameters"),
+  //
+  // ACQUISITION_SETUP_ILLUMINATION_ELEVATION("acquisitionSetup.illuminationElevation"),
+  //
+  // ACQUISITION_SETUP_CLOUD_COVER("acquisitionSetup.cloudCover"),
+  //
+  // CONFORMITY_SPECIFICATION_TITLE("conformity.specification.title"),
+  //
+  // CONFORMITY_SPECIFICATION_DATE("conformity.specification.date", Date.class),
+  //
+  // CONFORMITY_SPECIFICATION_DATETYPE("conformity.specification.dateType"),
+  //
+  // CONFORMITY_EXPLANATION("conformity.explanation"),
+  //
+  // CONFORMITY_PASS("conformity.pass"),
+  //
+  // DISTRIBUTION_ACCESS_LIMITATION_PUBLIC_ACCESS("distributionAccess.limitationPublicAccess"),
+  //
+  // DISTRIBUTION_ACCESS_CONDITION_FOR_ACCESS_AND_USE("distributionAccess.conditionForAccessAndUse"),
+
+  // DISTRIBUTION_ACCESS_FILESIZE("distributionAccess.filesize"),
+
+  // DISTRIBUTION_ACCESS_VERSION("distributionAccess.version"),
+
+   SERVICES_BROWSE_TITLE("services.browse.title"),
+  
+   SERVICES_BROWSE_LAYER_TYPE("services.browse.layer.type"),
+  
+   SERVICES_BROWSE_LAYER_URL("services.browse.layer.url"),
+  
+   SERVICES_BROWSE_LAYER_LAYERS("services.browse.layer.layers"),
+  
+   SERVICES_BROWSE_LAYER_VERSION("services.browse.layer.version"),
+  
+   SERVICES_BROWSE_LAYER_BBOX("services.browse.layer.bbox"),
+  
+   SERVICES_BROWSE_LAYER_SRS("services.browse.layer.srs"),
+
+   SERVICES_BROWSE_VERSION("services.wms.version"),
+
+   SERVICES_BROWSE_CREDITS("services.wms.credits"),
+
+   SERVICES_METADATA_URL("services.metadata.url");
+  //
+  // TOPIC_CATEGORY("topicCategory"),
+
+  // PROPERTIES_KEY("properties.key"),
 
   /** The field. */
   private final String field;
@@ -279,6 +267,26 @@ public enum MetacatalogField {
       }
     }
     return result;
+  }
+
+  /**
+   * Get the list of mandatory fields from the metacatalogue.properties
+   * 
+   * @return List<MetacatalogField>
+   */
+  public static List<MetacatalogField> getMandatoryFields() {
+
+    List<MetacatalogField> list = new ArrayList<MetacatalogField>();
+    String mandatoryFields = (String) HarvesterSettings.getInstance().get("MANDATORY_FIELDS");
+    
+    for ( String fieldName : mandatoryFields.split(",") ){
+      if (getField(fieldName)!=null){
+        list.add(getField(fieldName));
+      }
+    }
+    
+    return list;
+
   }
 
   public boolean isInspire() {

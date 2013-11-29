@@ -39,6 +39,8 @@ import fr.cnes.sitools.metacatalogue.common.Converter;
 import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
 import fr.cnes.sitools.metacatalogue.common.MetadataContainer;
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
+import fr.cnes.sitools.metacatalogue.model.Error;
+import fr.cnes.sitools.metacatalogue.model.Field;
 import fr.cnes.sitools.metacatalogue.model.MetadataRecords;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
 import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
@@ -73,7 +75,11 @@ public class CswMetadataExtractor extends HarvesterStep {
     File sFileXSL = new File(resourcesFolder);
 
     List<Element> children = metadata.getChildren();
-    List<MetadataRecords> listFields = new ArrayList<MetadataRecords>();
+    
+    List<MetadataRecords> listMetadataRecords = new ArrayList<MetadataRecords>();
+    
+    
+    
     for (Element child : children) {
 
       try {
@@ -89,19 +95,23 @@ public class CswMetadataExtractor extends HarvesterStep {
 
         Element doc = Xml.loadStream(stream);
 
-        MetadataRecords fields = getFields(doc);
+        List<Field> fields = getFields(doc);
+        List<fr.cnes.sitools.metacatalogue.model.Error> errors = getErrors(doc);
 
         CswGeometryExtractor extractor = new CswGeometryExtractor();
-        fields = extractor.extractGeometry(child, fields, this.schemaName);
-        if (fields != null) {
+        
+        MetadataRecords mdRecords = new MetadataRecords(fields, errors);
+        
+        mdRecords = extractor.extractGeometry(child, mdRecords, this.schemaName);
+        if (mdRecords != null) {
           // add the custom attributes
-          addCustomAttributes(child, fields, conf.getAttributes());
+          addCustomAttributes(child, mdRecords, conf.getAttributes());
 
           // public services
-          addField(fields, String.valueOf(conf.isPublicServices()), MetacatalogField._PUBLIC_SERVICES.getField());
+          addField(mdRecords, String.valueOf(conf.isPublicServices()), MetacatalogField._PUBLIC_SERVICES.getField());
 
-          // System.out.println(fields.toString());
-          listFields.add(fields);
+          listMetadataRecords.add(mdRecords);
+          
         }
 
       }
@@ -117,30 +127,48 @@ public class CswMetadataExtractor extends HarvesterStep {
     }
 
     if (data.getMetadataRecords() == null) {
-      data.setMetadataRecords(listFields);
+      data.setMetadataRecords(listMetadataRecords);
     }
     else {
-      data.getMetadataRecords().addAll(listFields);
+      data.getMetadataRecords().addAll(listMetadataRecords);
     }
     next.execute(data);
 
   }
 
-  private MetadataRecords getFields(Element doc) {
+  private List<Field> getFields(Element doc) {
 
-    MetadataRecords fields = new MetadataRecords();
-    List<Element> xmlFields = doc.getChildren();
+    List<Field> fields = new ArrayList();
+    List<Element> xmlFields = doc.getChildren("field");
     String name;
     Object value;
     for (Element child : xmlFields) {
       name = child.getAttributeValue("name");
       value = child.getText();
-      fields.add(name, value);
+      Field field = new Field(name, value);
+      fields.add(field);
     }
     return fields;
 
   }
 
+  private List<Error> getErrors(Element doc) {
+
+    List<Error> errors = new ArrayList();
+    List<Element> xmlFields = doc.getChildren("error");
+    String name;
+    Object value;
+    for (Element child : xmlFields) {
+      name = child.getAttributeValue("name");
+      value = child.getText();
+      Error error = new Error(name, value);
+      errors.add(error);
+    }
+    return errors;
+
+  }
+  
+  
   @Override
   public void end() throws ProcessException {
     if (next != null) {

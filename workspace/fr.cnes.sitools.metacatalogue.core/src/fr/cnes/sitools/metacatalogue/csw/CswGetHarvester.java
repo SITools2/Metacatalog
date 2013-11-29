@@ -36,6 +36,7 @@ import fr.cnes.sitools.metacatalogue.index.solr.SolrMetadataIndexer;
 import fr.cnes.sitools.metacatalogue.model.HarvestStatus;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
 import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
+import fr.cnes.sitools.metacatalogue.utils.MetadataLogger;
 import fr.cnes.sitools.model.HarvesterModel;
 import fr.cnes.sitools.server.ContextAttributes;
 
@@ -56,14 +57,14 @@ public class CswGetHarvester extends Harvester {
     HarvesterStep step2, step3, step4;
     step1 = new CswGetReader(harvestConf, context);
     step2 = new CswMetadataExtractor(harvestConf, context);
-    // step3 = new PrintFieldsStep(harvestConf, context);
+    //step3 = new MetadataLogger(harvestConf, context);
     step3 = new CswMetadataValidator(harvestConf, context);
     step4 = new CswMetadataIndexer(harvestConf, context, indexer);
 
     step1.setNext(step2);
     step2.setNext(step3);
     step3.setNext(step4);
-
+    
     CheckStepsInformation ok = step1.check();
     if (!ok.isOk()) {
       throw new CheckProcessException(ok.getMessage());
