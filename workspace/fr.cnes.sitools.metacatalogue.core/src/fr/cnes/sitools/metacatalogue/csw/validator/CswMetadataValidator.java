@@ -19,9 +19,15 @@
 package fr.cnes.sitools.metacatalogue.csw.validator;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
+
+import net.sf.saxon.functions.Collection;
 
 import org.restlet.Context;
 
@@ -38,6 +44,7 @@ import fr.cnes.sitools.model.HarvesterModel;
 import fr.cnes.sitools.server.Consts;
 import fr.cnes.sitools.server.ContextAttributes;
 import fr.cnes.sitools.thesaurus.ThesaurusSearcher;
+import fr.cnes.sitools.metacatalogue.model.Error;
 
 public class CswMetadataValidator extends HarvesterStep {
 
@@ -70,20 +77,49 @@ public class CswMetadataValidator extends HarvesterStep {
 
       MetadataRecords doc = iterator.next();
 
+      List<Error> errors = doc.getErrors();
+
+      /* warning */
+      for (Error error : errors) {
+        if (error != null && error.getLevel() != null) {
+          if (error.getLevel().equals("warning"))
+            logger.info("WARNING : " + error.getValue());
+        }
+      }
+
+      /* critical errors (mandatory fields) : record is not harvested */
       boolean fail = false;
-
       for (MetacatalogField field : mandatoryFields) {
-
-        // fr.cnes.sitools.metacatalogue.model.Error error = doc.findFirstError(MetacatalogField.PRODUCT.getField());
-        fr.cnes.sitools.metacatalogue.model.Error error = doc.findFirstError(field.getField());
-
+        Error error = doc.findFirstError(field.getField());
+        /* check xpath */
         if (error != null) {
           logger.info("" + error.getValue());
           fail = true;
         }
+        /* check content */
+        if (doc.get(field.getField()) == null) {
+          logger.info(field.getField() + " not defined for record : " + doc.get(MetacatalogField.IDENTIFIER.getField())
+              + " not inserted in the metacatalog");
+          fail = true;
+        }
 
+        if (field.isDate()) {
+
+          List<String> fmts = new ArrayList<String>();
+          fmts.add("yyyy-MM-DD'T'HH:mm:ss(Z)");
+          fmts.add("yyyy-MM-DD'T'HH:mm:ss+HH:mm");
+          fmts.add("yyyy-MM-DD'T'HH:mm:ss-HH:mm");
+          try {
+            org.apache.solr.common.util.DateUtil.parseDate((String) doc.get(field.getField()), fmts);
+          }
+          catch (ParseException e) {
+            logger.info(field.getField() + " - incorrect date format : "
+                  + doc.get(MetacatalogField.IDENTIFIER.getField()) + " not inserted in the metacatalog");
+            fail = true;
+          }
+          
+        }
       }
-
       if (fail) {
         iterator.remove();
         nbDocInvalid++;
@@ -92,26 +128,11 @@ public class CswMetadataValidator extends HarvesterStep {
     }
 
     for (Iterator<MetadataRecords> iterator = metadataRecords.iterator(); iterator.hasNext();) {
-
       MetadataRecords doc = iterator.next();
-
       if (doc.get(MetacatalogField.FOOTPRINT.getField()) == null) {
         logger.info("No geometry defined for record : " + doc.get(MetacatalogField.IDENTIFIER.getField())
             + " not inserted in the metacatalog");
         nbDocInvalid++;
-        iterator.remove();
-      }
-
-    }
-
-    for (Iterator<MetadataRecords> iterator = metadataRecords.iterator(); iterator.hasNext();) {
-      MetadataRecords doc = iterator.next();
-
-      if (doc.get(MetacatalogField.FOOTPRINT.getField()) == null) {
-        logger.info("No geometry defined for record : " + doc.get(MetacatalogField.IDENTIFIER.getField())
-            + " not inserted in the metacatalog");
-        nbDocInvalid++;
-
         iterator.remove();
       }
     }
@@ -130,9 +151,9 @@ public class CswMetadataValidator extends HarvesterStep {
             doc.add(MetacatalogField._CONCEPTS.getField(), value.getValue());
           }
           else {
-            logger.info("Concept  : " + value.getValue().toString()
-                + " not found in the thesaurus for field : " + field.getField() + ". Document "
-                + doc.get(MetacatalogField.IDENTIFIER.getField()) + " not inserted in the metacatalog");
+            logger.info("Concept  : " + value.getValue().toString() + " not found in the thesaurus for field : "
+                + field.getField() + ". Document " + doc.get(MetacatalogField.IDENTIFIER.getField())
+                + " not inserted in the metacatalog");
             fail = true;
 
           }
