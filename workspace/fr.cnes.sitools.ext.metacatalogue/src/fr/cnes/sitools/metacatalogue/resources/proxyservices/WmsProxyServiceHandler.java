@@ -33,7 +33,7 @@ public class WmsProxyServiceHandler extends AbstractProxyServiceHandler {
   /** The solr core url */
   protected String solrCoreUrl;
 
-  static final String WMS_URL_FIELD = MetacatalogField.SERVICES_BROWSE_LAYER_URL.getField();
+  static final String WMS_URL_FIELD = MetacatalogField.WMS.getField();
 
   /**
    * Constuctor with {@link Context}

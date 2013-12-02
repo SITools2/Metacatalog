@@ -64,7 +64,7 @@ public class OpensearchGeometryExtractor {
 
       WKTWriter wktWriter = new WKTWriter();
       String geo = wktWriter.writeFormatted(geometry);
-      fields.add(MetacatalogField._GEOMETRY.getField(), geo);
+      fields.add(MetacatalogField.FOOTPRINT.getField(), geo);
       // Point point = geometry.getInteriorPoint();
       // String geographie = wktWriter.write(point);
       // fields.add("_interiorPoint", geographie);

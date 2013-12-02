@@ -42,9 +42,7 @@ import org.restlet.engine.util.DateUtils;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.resource.ResourceException;
 
-import fr.cnes.sitools.metacatalogue.utils.MDEOExportField;
 import fr.cnes.sitools.metacatalogue.utils.MetacatalogField;
-import fr.cnes.sitools.thesaurus.SimpleConcept;
 import fr.cnes.sitools.thesaurus.ThesaurusSearcher;
 
 /**
@@ -56,7 +54,7 @@ public class GeoJsonMDEORepresentation extends JsonRepresentation {
   /** The name of the geometry column in the solr index */
   private static final String GEOMETRY_COLUMN = MetacatalogField._GEOMETRY_GEOJSON.getField();
   /** The name of the geometry column in the solr index */
-  private static final String UUID_COLUMN = MetacatalogField.ID.getField();
+  private static final String UUID_COLUMN = MetacatalogField.IDENTIFIER.getField();
   /** The date format */
   private static final String FORMAT_ISO_8601_WITHOUT_TIME_ZONE = "yyyy-MM-dd'T'HH:mm:ss";
   /** The WMS proxy uri attachment */
@@ -73,7 +71,7 @@ public class GeoJsonMDEORepresentation extends JsonRepresentation {
   private List<FacetField> facets;
   private NamedList<List<PivotField>> pivotFacets;
   private ThesaurusSearcher searcher;
-  private Map<String, SimpleConcept> conceptsMap;
+  private Map<String, String> conceptsMap;
 
   /**
    * Constructor with a DatabaseRequestParameters, a geometryColName and a converterChained
@@ -87,14 +85,14 @@ public class GeoJsonMDEORepresentation extends JsonRepresentation {
    * @param searcher
    */
   public GeoJsonMDEORepresentation(QueryResponse queryResponse, boolean authenticatedUser, String applicationBaseUrl,
-      ThesaurusSearcher searcher) {
+      Map<String, String> conceptsMap) {
     super(MediaType.APPLICATION_JSON);
     this.listDocuments = queryResponse.getResults();
     this.facets = queryResponse.getFacetFields();
     this.pivotFacets = queryResponse.getFacetPivot();
     this.authenticatedUser = authenticatedUser;
     this.applicationBaseUrl = applicationBaseUrl;
-    this.conceptsMap = searcher.getAllConceptsAsMap();
+    this.conceptsMap = conceptsMap;
   }
 
   @Override
@@ -122,19 +120,13 @@ public class GeoJsonMDEORepresentation extends JsonRepresentation {
           String geometry = new String();
           String uuid = (String) solrDocument.getFieldValue(UUID_COLUMN);
 
-          /** Services fields */
-          JSONObject services = new JSONObject();
-          JSONObject browse = new JSONObject();
-          JSONObject layer = new JSONObject();
-          JSONObject metadata = new JSONObject();
-          JSONObject download = new JSONObject();
-
           boolean publicServices = false;
-
-          String proxifiedUrl;
 
           Collection<String> fieldNames = solrDocument.getFieldNames();
           JSONObject propertiesObject = new JSONObject();
+
+          publicServices = getPublicServices(solrDocument);
+
           for (String fieldName : fieldNames) {
             Object fieldValue = solrDocument.get(fieldName);
             if (fieldName.equals(GEOMETRY_COLUMN)) {
@@ -146,51 +138,29 @@ public class GeoJsonMDEORepresentation extends JsonRepresentation {
                 if (fieldValue instanceof Date) {
                   fieldValue = DateUtils.format((Date) fieldValue, FORMAT_ISO_8601_WITHOUT_TIME_ZONE);
                 }
+
                 MetacatalogField metafield = MetacatalogField.getField(fieldName);
-                MDEOExportField fieldMDEO = MDEOExportField.getField(metafield);
-                // it means that the field is a from the EO data model
-                if (fieldMDEO != null) {
-                  switch (fieldMDEO) {
-                    case SERVICES_BROWSE_LAYER_BBOX:
-                      layer.put("bbox", fieldValue);
+                if (metafield != null) {
+                  switch (metafield) {
+                    case WMS:
+                      if (publicServices || (!publicServices && authenticatedUser)) {
+                        String proxifiedUrl = applicationBaseUrl + WMS_PROXY_URI + "/" + uuid;
+                        propertiesObject.put(fieldName, proxifiedUrl);
+                      }
                       break;
-                    case SERVICES_BROWSE_LAYER_SRS:
-                      layer.put("srs", fieldValue);
-                      break;
-                    case SERVICES_BROWSE_LAYER_LAYERS:
-                      layer.put("layers", fieldValue);
-                      break;
-                    case SERVICES_BROWSE_LAYER_TYPE:
-                      layer.put("type", fieldValue);
-                      break;
-                    case SERVICES_BROWSE_LAYER_URL:
-                      proxifiedUrl = applicationBaseUrl + WMS_PROXY_URI + "/" + uuid;
-                      layer.put("url", proxifiedUrl);
-                      break;
-                    case SERVICES_BROWSE_LAYER_VERSION:
-                      layer.put("version", fieldValue);
-                      break;
-                    case SERVICES_BROWSE_TITLE:
-                      browse.put("title", fieldValue);
-                      break;
-                    case SERVICES_DOWNLOAD_URL:
-                      proxifiedUrl = applicationBaseUrl + DOWNLOAD_PROXY_URI + "/" + uuid;
-                      download.put("url", proxifiedUrl);
-                      break;
-                    case SERVICES_DOWNLOAD_MIME_TYPE:
-                      download.put("mimeType", fieldValue);
-                      break;
-                    case SERVICES_METADATA_URL:
-                      metadata.put("url", fieldValue);
+                    case ARCHIVE:
+                      if (publicServices || (!publicServices && authenticatedUser)) {
+                        String proxifiedUrl = applicationBaseUrl + DOWNLOAD_PROXY_URI + "/" + uuid;
+                        propertiesObject.put(fieldName, proxifiedUrl);
+                      }
                       break;
                     default:
-                      propertiesObject.put(fieldMDEO.getField(), fieldValue);
+                      if (!metafield.isMetacatalogIntern()) {
+                        propertiesObject.put(fieldName, fieldValue);
+                      }
                       break;
-                  }
 
-                }
-                else if (MetacatalogField._PUBLIC_SERVICES.equals(metafield)) {
-                  publicServices = (Boolean) fieldValue;
+                  }
                 }
                 else if (fieldName.startsWith("properties.")) {
                   String name = fieldName.substring("properties.".length());
@@ -205,21 +175,6 @@ public class GeoJsonMDEORepresentation extends JsonRepresentation {
             }
             else {
               first = false;
-            }
-            if (publicServices || (!publicServices && authenticatedUser)) {
-              if (layer.length() > 0) {
-                browse.put("layer", layer);
-              }
-              if (browse.length() > 0) {
-                services.put("browse", browse);
-              }
-              if (download.length() > 0) {
-                services.put("download", download);
-              }
-              if (metadata.length() > 0) {
-                services.put("metadata", metadata);
-              }
-              propertiesObject.put("services", services);
             }
 
             // start feature
@@ -275,6 +230,14 @@ public class GeoJsonMDEORepresentation extends JsonRepresentation {
   //
   // }
 
+  private boolean getPublicServices(SolrDocument solrDocument) {
+    Object obj = solrDocument.getFirstValue(MetacatalogField._PUBLIC_SERVICES.getField());
+    if (obj != null && obj instanceof Boolean) {
+      return (Boolean) obj;
+    }
+    return false;
+  }
+
   private String getFacetPivots() throws JSONException {
 
     JSONObject pivotFacetsJSON = new JSONObject();
@@ -318,9 +281,9 @@ public class GeoJsonMDEORepresentation extends JsonRepresentation {
   }
 
   private String getValueFromThesaurus(String name) {
-    SimpleConcept concept = conceptsMap.get(name.toLowerCase());
+    String concept = conceptsMap.get(name.toLowerCase());
     if (concept != null) {
-      return concept.getPrefFr();
+      return concept;
     }
     return name;
   }

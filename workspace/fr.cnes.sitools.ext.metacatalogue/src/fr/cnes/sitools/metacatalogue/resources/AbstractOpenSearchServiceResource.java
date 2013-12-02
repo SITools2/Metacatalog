@@ -72,8 +72,7 @@ public abstract class AbstractOpenSearchServiceResource extends SitoolsResource 
     MetacatalogField metaField = MetacatalogField.getField(fieldName);
     boolean addToDescription = false;
     if (metaField != null) {
-      addToDescription = !metaField.isInspire()
-          && !metaField.isMetacatalogIntern()
+      addToDescription = !metaField.isMetacatalogIntern()
           && !(MetacatalogField.START_DATE.equals(metaField) || MetacatalogField.COMPLETION_DATE
               .equals(metaField));
     }

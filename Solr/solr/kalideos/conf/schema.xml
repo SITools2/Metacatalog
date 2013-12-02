@@ -66,7 +66,7 @@
  <fields>
    
 	<!-- INTERNAL FIELDS -->
-	<field name="_geometry" type="location_rpt" indexed="true" stored="true" multiValued="false"/>
+	
 	<field name="_uuid" type="string" indexed="true" stored="true" multiValued="false"/>
 	<field name="_publicServices" type="boolean" indexed="false" stored="true" multiValued="false"/>
 	<field name="_geometry_geojson" type="text_general" indexed="false" stored="true" multiValued="false"/>
@@ -74,6 +74,7 @@
 	<field name="searchTerms" type="text_general" indexed="true" stored="false" multiValued="true"/>
 	
 	<!-- Fields -->
+	<field name="footprint" type="location_rpt" indexed="true" stored="true" multiValued="false"/>
 	<field name="id" type="text_general" indexed="true" stored="true" multiValued="false"/>
 	<field name="language" type="text_general" indexed="true" stored="true" multiValued="false"/>
 	<field name="modificationDate" type="date" indexed="true" stored="true" multiValued="false"/>

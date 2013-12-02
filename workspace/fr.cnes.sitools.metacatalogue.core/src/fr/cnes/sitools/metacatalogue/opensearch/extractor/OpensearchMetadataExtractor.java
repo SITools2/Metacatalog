@@ -1,4 +1,4 @@
- /*******************************************************************************
+/*******************************************************************************
  * Copyright 2010-2013 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
  *
  * This file is part of SITools2.
@@ -19,6 +19,7 @@
 package fr.cnes.sitools.metacatalogue.opensearch.extractor;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,17 +35,16 @@ import fr.cnes.sitools.metacatalogue.common.Converter;
 import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
 import fr.cnes.sitools.metacatalogue.common.MetadataContainer;
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
-import fr.cnes.sitools.metacatalogue.model.Field;
+import fr.cnes.sitools.metacatalogue.model.HarvestStatus;
 import fr.cnes.sitools.metacatalogue.model.MetadataRecords;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
 import fr.cnes.sitools.metacatalogue.utils.MetacatalogField;
 import fr.cnes.sitools.model.AttributeCustom;
 import fr.cnes.sitools.model.HarvesterModel;
 import fr.cnes.sitools.model.Property;
+import fr.cnes.sitools.server.ContextAttributes;
 
 public class OpensearchMetadataExtractor extends HarvesterStep {
-
-  private String schemaName;
 
   private Logger logger;
 
@@ -53,10 +53,8 @@ public class OpensearchMetadataExtractor extends HarvesterStep {
   private Context context;
 
   public OpensearchMetadataExtractor(HarvesterModel conf, Context context) {
-    this.schemaName = conf.getCatalogType();
     this.conf = conf;
     this.context = context;
-    
 
   }
 
@@ -73,8 +71,7 @@ public class OpensearchMetadataExtractor extends HarvesterStep {
 
       String jsonString = jsonObject.toJSONString();
       MetadataRecords fields = new MetadataRecords();
-      addField(fields, "$.properties.identifier", jsonString, MetacatalogField.ID.getField());
-      addField(fields, "$.properties.identifier", jsonString, MetacatalogField._UUID.getField());
+      addField(fields, "$.properties.identifier", jsonString, MetacatalogField.IDENTIFIER.getField());
       addField(fields, "$.properties.title", jsonString, MetacatalogField.TITLE.getField());
       addField(fields, "$.properties.description", jsonString, MetacatalogField.DESCRIPTION.getField());
 
@@ -86,41 +83,21 @@ public class OpensearchMetadataExtractor extends HarvesterStep {
 
       // addField(fields, new Date().toString(), MetacatalogField.MODIFICATION_DATE.getField());
 
-      addField(fields, "$.properties.startDate", jsonString,
-          MetacatalogField.START_DATE.getField());
-      addField(fields, "$.properties.completionDate", jsonString,
-          MetacatalogField.COMPLETION_DATE.getField());
+      addField(fields, "$.properties.startDate", jsonString, MetacatalogField.START_DATE.getField());
+      addField(fields, "$.properties.completionDate", jsonString, MetacatalogField.COMPLETION_DATE.getField());
 
       addField(fields, "$.properties.resolution", jsonString, MetacatalogField.RESOLUTION.getField());
-      addField(fields, "$.properties.modified", jsonString, MetacatalogField.MODIFICATION_DATE.getField());
 
-      addField(fields, "$.properties.services.browse.title", jsonString,
-          MetacatalogField.SERVICES_BROWSE_TITLE.getField());
-      addField(fields, "$.properties.services.browse.layer.type", jsonString,
-          MetacatalogField.SERVICES_BROWSE_LAYER_TYPE.getField());
-      addField(fields, "$.properties.services.browse.layer.url", jsonString,
-          MetacatalogField.SERVICES_BROWSE_LAYER_URL.getField());
-      addField(fields, "$.properties.services.browse.layer.layers", jsonString,
-          MetacatalogField.SERVICES_BROWSE_LAYER_LAYERS.getField());
-      addField(fields, "$.properties.services.browse.layer.version", jsonString,
-          MetacatalogField.SERVICES_BROWSE_LAYER_VERSION.getField());
-      addField(fields, "$.properties.services.browse.layer.bbox", jsonString,
-          MetacatalogField.SERVICES_BROWSE_LAYER_BBOX.getField());
-      addField(fields, "$.properties.services.browse.layer.srs", jsonString,
-          MetacatalogField.SERVICES_BROWSE_LAYER_SRS.getField());
+      addField(fields, "$.properties.wms", jsonString, MetacatalogField.WMS.getField());
 
-      addField(fields, "$.properties.services.download.url", jsonString,
-          MetacatalogField.ARCHIVE.getField());
-      addField(fields, "$.properties.services.download.mimeType", jsonString,
-          MetacatalogField.MIME_TYPE.getField());
+      addField(fields, "$.properties.services.download.url", jsonString, MetacatalogField.ARCHIVE.getField());
+      addField(fields, "$.properties.services.download.mimeType", jsonString, MetacatalogField.MIME_TYPE.getField());
 
-//      addField(fields, "$.properties.services.metadata.url", jsonString,
-//          MetacatalogField.SERVICES_METADATA_URL.getField());
+      // addField(fields, "$.properties.services.metadata.url", jsonString,
+      // MetacatalogField.SERVICES_METADATA_URL.getField());
 
       addField(fields, "$.properties.quicklook", jsonString, MetacatalogField.QUICKLOOK.getField());
       addField(fields, "$.properties.thumbnail", jsonString, MetacatalogField.THUMBNAIL.getField());
-
-      addField(fields, "dataset", MetacatalogField.RESOURCE_TYPE.getField());
 
       // geometry
       addField(fields, "$.geometry", jsonString, MetacatalogField._GEOMETRY_GEOJSON.getField());
@@ -128,8 +105,10 @@ public class OpensearchMetadataExtractor extends HarvesterStep {
       // public services
       addField(fields, String.valueOf(conf.isPublicServices()), MetacatalogField._PUBLIC_SERVICES.getField());
 
-      // acquisitionSetup
-      addAcquisitionSetupField(fields, jsonString);
+      HarvestStatus status = (HarvestStatus) context.getAttributes().get(ContextAttributes.STATUS);
+
+      // modified
+      addField(fields, status.getStartDate(), MetacatalogField.MODIFIED.getField());
 
       OpensearchGeometryExtractor extractor = new OpensearchGeometryExtractor();
 
@@ -194,6 +173,10 @@ public class OpensearchMetadataExtractor extends HarvesterStep {
     fields.add(fieldName, value);
   }
 
+  private void addField(MetadataRecords fields, Date value, String fieldName) {
+    fields.add(fieldName, value);
+  }
+
   private Object applyConverter(Object object, String converterClass, List<Property> converterParameters) {
     try {
       Class<Converter> convClass = (Class<Converter>) Class.forName(converterClass);
@@ -210,18 +193,6 @@ public class OpensearchMetadataExtractor extends HarvesterStep {
       logger.log(Level.WARNING, "Cannot access converter class : " + converterClass, e);
     }
     return object;
-  }
-
-  /**
-   * Simply add a new acquisitionSetup field, which contains the concatenation of platform and instrument
-   * 
-   * @param fields
-   *          the list of {@link Field}
-   */
-  private void addAcquisitionSetupField(MetadataRecords fields, String json) {
-    String plateform = JsonPath.read(json, "$.properties.platform");
-    String instrument = JsonPath.read(json, "$.properties.instrument");
-    fields.add(MetacatalogField.ACQUISITION_SETUP.getField(), plateform + "/" + instrument);
   }
 
   @Override

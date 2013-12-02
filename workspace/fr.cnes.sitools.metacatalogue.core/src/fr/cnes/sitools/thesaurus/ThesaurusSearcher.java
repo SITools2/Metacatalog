@@ -121,19 +121,20 @@ public class ThesaurusSearcher {
     return (concepts != null && concepts.size() == 1);
   }
 
-  public List<Concept> getAllConcepts() {
-    String queryString = GET_ALL_CONCEPTS_QUERY;
+  public List<Concept> getAllConcepts(String language) {
+    String queryString = GET_ALL_CONCEPTS_QUERY.replace("{lang}", language);
     return executeQuery(queryString);
   }
 
-  public Map<String, SimpleConcept> getAllConceptsAsMap() {
-    Map<String, SimpleConcept> out = new HashMap<String, SimpleConcept>();
-    List<Concept> concepts = getAllConcepts();
+  public Map<String, String> getAllConceptsAsMap(String language) {
+    Map<String, String> out = new HashMap<String, String>();
+    List<Concept> concepts = getAllConcepts(language);
     if (concepts != null) {
       for (Concept concept : concepts) {
         Object altLabelEn = concept.getProperties().get("altLabelEn");
-        if (altLabelEn != null) {
-          out.put(altLabelEn.toString().toLowerCase(), SimpleConcept.fromConcept(concept));
+        Object prefLabel = concept.getProperties().get("prefLabel");
+        if (altLabelEn != null && prefLabel != null) {
+          out.put(altLabelEn.toString().toLowerCase(), prefLabel.toString());
         }
       }
     }

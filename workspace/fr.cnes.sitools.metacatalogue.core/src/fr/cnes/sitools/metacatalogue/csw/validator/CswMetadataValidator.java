@@ -18,6 +18,7 @@
  ******************************************************************************/
 package fr.cnes.sitools.metacatalogue.csw.validator;
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
@@ -27,12 +28,16 @@ import org.restlet.Context;
 import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
 import fr.cnes.sitools.metacatalogue.common.MetadataContainer;
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
-import fr.cnes.sitools.metacatalogue.model.MetadataRecords;
+import fr.cnes.sitools.metacatalogue.model.Field;
 import fr.cnes.sitools.metacatalogue.model.HarvestStatus;
+import fr.cnes.sitools.metacatalogue.model.MetadataRecords;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
+import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
 import fr.cnes.sitools.metacatalogue.utils.MetacatalogField;
 import fr.cnes.sitools.model.HarvesterModel;
+import fr.cnes.sitools.server.Consts;
 import fr.cnes.sitools.server.ContextAttributes;
+import fr.cnes.sitools.thesaurus.ThesaurusSearcher;
 
 public class CswMetadataValidator extends HarvesterStep {
 
@@ -53,64 +58,111 @@ public class CswMetadataValidator extends HarvesterStep {
     HarvestStatus status = (HarvestStatus) context.getAttributes().get(ContextAttributes.STATUS);
 
     int nbDocInvalid = 0;
-    
+
+    List<MetacatalogField> mandatoryFields = MetacatalogField.getMandatoryFields();
+    List<MetacatalogField> thesaurusFields = MetacatalogField.getThesaurusFields();
+
+    HarvesterSettings settings = HarvesterSettings.getInstance();
+    ThesaurusSearcher searcher = getThesaurusSearcher(settings.getString(Consts.THESAURUS_PATH));
+
     /* iterate on errors */
     for (Iterator<MetadataRecords> iterator = metadataRecords.iterator(); iterator.hasNext();) {
 
       MetadataRecords doc = iterator.next();
-      
-      List<MetacatalogField> mandatoryFields = MetacatalogField.getMandatoryFields();
-      
+
       boolean fail = false;
-      
-      for ( MetacatalogField field : mandatoryFields ){
-        
-//        fr.cnes.sitools.metacatalogue.model.Error error = doc.findFirstError(MetacatalogField.PRODUCT.getField());
+
+      for (MetacatalogField field : mandatoryFields) {
+
+        // fr.cnes.sitools.metacatalogue.model.Error error = doc.findFirstError(MetacatalogField.PRODUCT.getField());
         fr.cnes.sitools.metacatalogue.model.Error error = doc.findFirstError(field.getField());
-        
-        if (error != null ){
+
+        if (error != null) {
           logger.info("" + error.getValue());
           fail = true;
         }
-        
+
       }
-      
-      if (fail){
+
+      if (fail) {
         iterator.remove();
         nbDocInvalid++;
       }
-      
+
     }
-    
+
     for (Iterator<MetadataRecords> iterator = metadataRecords.iterator(); iterator.hasNext();) {
-      
+
       MetadataRecords doc = iterator.next();
-      
-      if (doc.get(MetacatalogField._GEOMETRY.getField()) == null) {
-        logger.info("No geometry defined for record : " + doc.get(MetacatalogField.ID.getField())
+
+      if (doc.get(MetacatalogField.FOOTPRINT.getField()) == null) {
+        logger.info("No geometry defined for record : " + doc.get(MetacatalogField.IDENTIFIER.getField())
             + " not inserted in the metacatalog");
         nbDocInvalid++;
         iterator.remove();
       }
-      
+
     }
-    
+
     for (Iterator<MetadataRecords> iterator = metadataRecords.iterator(); iterator.hasNext();) {
       MetadataRecords doc = iterator.next();
-      
-      if (doc.get(MetacatalogField._GEOMETRY.getField()) == null) {
-        logger.info("No geometry defined for record : " + doc.get(MetacatalogField.ID.getField())
+
+      if (doc.get(MetacatalogField.FOOTPRINT.getField()) == null) {
+        logger.info("No geometry defined for record : " + doc.get(MetacatalogField.IDENTIFIER.getField())
             + " not inserted in the metacatalog");
         nbDocInvalid++;
 
         iterator.remove();
       }
     }
-    
-    
+
+    /* iterate on concepts fields */
+    for (Iterator<MetadataRecords> iterator = metadataRecords.iterator(); iterator.hasNext();) {
+
+      MetadataRecords doc = iterator.next();
+
+      boolean fail = false;
+
+      for (MetacatalogField field : thesaurusFields) {
+        Field value = doc.findFirstField(field.getField());
+        if (value != null) {
+          if (searcher.conceptExists(value.getValue().toString())) {
+            doc.add(MetacatalogField._CONCEPTS.getField(), value.getValue());
+          }
+          else {
+            logger.info("Concept  : " + value.getValue().toString()
+                + " not found in the thesaurus for field : " + field.getField() + ". Document "
+                + doc.get(MetacatalogField.IDENTIFIER.getField()) + " not inserted in the metacatalog");
+            fail = true;
+
+          }
+        }
+        else {
+          logger.info("Concept empty for field : " + field.getField() + ". Document "
+              + doc.get(MetacatalogField.IDENTIFIER.getField()) + " not inserted in the metacatalog");
+          fail = true;
+        }
+      }
+
+      if (fail) {
+        iterator.remove();
+        nbDocInvalid++;
+      }
+
+    }
+
     status.setNbDocumentsInvalid(status.getNbDocumentsInvalid() + nbDocInvalid);
 
     next.execute(data);
+  }
+
+  private ThesaurusSearcher getThesaurusSearcher(String thesaurusPath) throws ProcessException {
+    try {
+      return new ThesaurusSearcher(thesaurusPath);
+    }
+    catch (IOException e) {
+      throw new ProcessException("Cannot find thesaurus : " + thesaurusPath, e);
+    }
   }
 
   @Override
@@ -122,13 +174,23 @@ public class CswMetadataValidator extends HarvesterStep {
 
   @Override
   public CheckStepsInformation check() {
+    CheckStepsInformation info = new CheckStepsInformation(true);
     if (next != null) {
-      CheckStepsInformation ok = this.next.check();
-      if (!ok.isOk()) {
-        return ok;
-      }
+      info = next.check();
     }
-    return new CheckStepsInformation(true);
+    if (!info.isOk()) {
+      return info;
+    }
+    String thesaurusPath = HarvesterSettings.getInstance().getString(Consts.THESAURUS_PATH);
+    try {
+      getThesaurusSearcher(thesaurusPath);
+    }
+    catch (ProcessException e) {
+      info.setOk(false);
+      info.setMessage("Cannot find thesaurus : " + thesaurusPath);
+    }
+    return info;
+
   }
 
 }

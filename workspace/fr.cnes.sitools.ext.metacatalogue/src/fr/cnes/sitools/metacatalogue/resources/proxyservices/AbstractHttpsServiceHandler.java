@@ -93,7 +93,7 @@ public abstract class AbstractHttpsServiceHandler extends Restlet {
       throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "Solr core : " + solrCoreUrl + " not reachable");
     }
 
-    SolrQuery query = new SolrQuery(MetacatalogField.ID.getField() + ":\"" + urn + "\"");
+    SolrQuery query = new SolrQuery(MetacatalogField.IDENTIFIER.getField() + ":\"" + urn + "\"");
 
     try {
       QueryResponse rsp = server.query(query);

@@ -92,7 +92,8 @@ public abstract class AbstractOpensearchSearchResource extends AbstractOpensearc
       SitoolsSettings settings = getSettings();
       String applicationBaseUrl = settings.getPublicHostDomain() + application.getAttachementRef();
 
-      repr = new GeoJsonMDEORepresentation(rsp, isAuthenticated, applicationBaseUrl, searcher);
+      repr = new GeoJsonMDEORepresentation(rsp, isAuthenticated, applicationBaseUrl,
+          searcher.getAllConceptsAsMap(getLanguage()));
     }
     catch (SolrServerException e) {
       throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "Error while querying solr index", e);
@@ -142,7 +143,7 @@ public abstract class AbstractOpensearchSearchResource extends AbstractOpensearc
       else if (parameter.getName().equals(OpenSearchQuery.MODIFIED.getParamName())) {
         String dateStr = getDateParam(parameter, DATE_QUERY_TYPE.GT);
         if (dateStr != null) {
-          pieceOfQuery = MetacatalogField.MODIFICATION_DATE.getField() + ":" + dateStr;
+          pieceOfQuery = MetacatalogField.MODIFIED.getField() + ":" + dateStr;
         }
       }
       else if (parameter.getName().equals(OpenSearchQuery.TIME_START.getParamName())) {
@@ -160,7 +161,7 @@ public abstract class AbstractOpensearchSearchResource extends AbstractOpensearc
       else if (parameter.getName().equals(OpenSearchQuery.GEO_BOX.getParamName())) {
         String bbox = parameter.getValue();
         if (bbox != null && !bbox.isEmpty()) {
-          pieceOfQuery = MetacatalogField._GEOMETRY.getField() + ":" + getGeometryCriteria(bbox);
+          pieceOfQuery = MetacatalogField.FOOTPRINT.getField() + ":" + getGeometryCriteria(bbox);
         }
       }
       if (pieceOfQuery != null) {

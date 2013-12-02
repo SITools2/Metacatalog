@@ -36,6 +36,7 @@ import org.restlet.resource.Get;
 
 import fr.cnes.sitools.metacatalogue.index.solr.SolRUtils;
 import fr.cnes.sitools.metacatalogue.resources.AbstractOpensearchQueryResource;
+import fr.cnes.sitools.metacatalogue.utils.MetacatalogField;
 import fr.cnes.sitools.thesaurus.Concept;
 import fr.cnes.sitools.thesaurus.ThesaurusSearcher;
 
@@ -79,7 +80,7 @@ public class OpensearchSuggestResource extends AbstractOpensearchQueryResource {
         try {
           rsp = server.query(solrQuery);
           TermsResponse termsResponse = rsp.getTermsResponse();
-          List<TermsResponse.Term> terms = termsResponse.getTerms("concepts");
+          List<TermsResponse.Term> terms = termsResponse.getTerms(MetacatalogField._CONCEPTS);
           Map<String, Long> map = createMapFromTerms(terms);
           for (SuggestDTO suggest : suggests) {
             Long nb = map.get(suggest.getSuggestion());

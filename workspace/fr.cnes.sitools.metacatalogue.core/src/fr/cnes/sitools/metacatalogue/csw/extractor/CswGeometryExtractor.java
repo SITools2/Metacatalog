@@ -78,7 +78,7 @@ public class CswGeometryExtractor {
 
       WKTWriter wktWriter = new WKTWriter();
       String geo = wktWriter.write(geometry);
-      fields.add(MetacatalogField._GEOMETRY.getField(), geo);
+      fields.add(MetacatalogField.FOOTPRINT.getField(), geo);
 
       // create a GeoJSON representation of the geometry to be stored
       GeometryJSON gjson = new GeometryJSON();

@@ -101,7 +101,7 @@ public class OpensearchMetadataIndexer extends HarvesterStep {
   public CheckStepsInformation check() {
     CheckStepsInformation info = new CheckStepsInformation(true);
     if (next != null) {
-      info = this.check();
+      info = next.check();
     }
     if (!info.isOk()) {
       return info;

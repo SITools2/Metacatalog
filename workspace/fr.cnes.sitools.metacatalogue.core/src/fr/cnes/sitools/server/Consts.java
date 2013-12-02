@@ -42,5 +42,7 @@ public interface Consts {
 
   /** store */
   String METACATALOG_INDEXER_CORE_NAME = "METACATALOG_INDEXER_CORE_NAME";
-
+  
+  /** ThesaurusPath */
+  String THESAURUS_PATH = "THESAURUS_PATH";
 }

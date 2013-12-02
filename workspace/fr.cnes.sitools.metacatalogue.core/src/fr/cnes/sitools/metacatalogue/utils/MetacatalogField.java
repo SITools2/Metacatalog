@@ -31,11 +31,6 @@ public enum MetacatalogField {
   /**
    * ##################### Champs Internes au métacatalogue #########################
    */
-  /** SPECIFIC, The GEOMETRY WKT STRING. */
-  _GEOMETRY("_geometry"),
-
-  /** SPECIFIC, The UUID used . */
-  _UUID("_uuid"),
 
   /** SPECIFIC, where or not the services are public . */
   _PUBLIC_SERVICES("_publicServices", Boolean.class),
@@ -49,21 +44,22 @@ public enum MetacatalogField {
   /** The Constant RESOLUTION DOMAIN. */
   _RESOLUTION_DOMAIN("_resolution_domain"),
 
+  /** list of AltLabels concepts used for suggestions */
+  _CONCEPTS("_concepts"),
+
   /**
    * ##################### Modèle de données du métacatalogue #########################
    */
 
-  ID("id"),
+  FOOTPRINT("footprint"),
+
+  IDENTIFIER("identifier"),
 
   LANGUAGE("language"),
-
-  MODIFICATION_DATE("modificationDate", Date.class),
 
   TITLE("title"),
 
   DESCRIPTION("description"),
-
-  RESOURCE_TYPE("resourceType"),
 
   LINEAGE("lineage"),
 
@@ -85,9 +81,9 @@ public enum MetacatalogField {
 
   MIME_TYPE("mimeType"),
 
-  KEYWORDS("keywords"),
+  WMS("wms"),
 
-  FOOTPRINT("footprint"),
+  KEYWORDS("keywords"),
 
   /** QUICKLOOK, url vers le quicklook du produit */
   QUICKLOOK("quicklook"),
@@ -101,9 +97,6 @@ public enum MetacatalogField {
   /** The product. */
   PRODUCT("product"),
 
-  /** ACQUISITION_SETUP */
-  ACQUISITION_SETUP("acquisitionSetup"),
-
   /** COUNTRY */
   COUNTRY("country"),
 
@@ -116,67 +109,9 @@ public enum MetacatalogField {
   /** CITY */
   CITY("city"),
 
-  // POINT_OF_CONTACT_EMAIL_ADDRESS("pointOfContact.emailAddress"),
-  //
-  // POINT_OF_CONTACT_ROLE("pointOfContact.role"),
+  CREATED("created", Date.class),
 
-  CHARACTERISATION_SPATIAL_AXIS("characterisation.spatialAxis"),
- 
-  // CHARACTERISATION_WAVELENGTH("characterisation.wavelength"),
-  //
-  // ACQUISITION_SETUP_FACILITY_ORGANISATION("acquisitionSetup.facility.organisationName"),
-  //
-  // ACQUISITION_SETUP_FACILITY_EMAIL_ADDRESS("acquisitionSetup.facility.emailAddress"),
-  //
-  // ACQUISITION_SETUP_FACILITY_ROLE("acquisitionSetup.facility.role"),
-
-  // ACQUISITION_SETUP_PHYSICAL_PARAMETERS("acquisitionSetup.physicalParameters"),
-  //
-  // ACQUISITION_SETUP_ILLUMINATION_ELEVATION("acquisitionSetup.illuminationElevation"),
-  //
-  // ACQUISITION_SETUP_CLOUD_COVER("acquisitionSetup.cloudCover"),
-  //
-  // CONFORMITY_SPECIFICATION_TITLE("conformity.specification.title"),
-  //
-  // CONFORMITY_SPECIFICATION_DATE("conformity.specification.date", Date.class),
-  //
-  // CONFORMITY_SPECIFICATION_DATETYPE("conformity.specification.dateType"),
-  //
-  // CONFORMITY_EXPLANATION("conformity.explanation"),
-  //
-  // CONFORMITY_PASS("conformity.pass"),
-  //
-  // DISTRIBUTION_ACCESS_LIMITATION_PUBLIC_ACCESS("distributionAccess.limitationPublicAccess"),
-  //
-  // DISTRIBUTION_ACCESS_CONDITION_FOR_ACCESS_AND_USE("distributionAccess.conditionForAccessAndUse"),
-
-  // DISTRIBUTION_ACCESS_FILESIZE("distributionAccess.filesize"),
-
-  // DISTRIBUTION_ACCESS_VERSION("distributionAccess.version"),
-
-   SERVICES_BROWSE_TITLE("services.browse.title"),
-  
-   SERVICES_BROWSE_LAYER_TYPE("services.browse.layer.type"),
-  
-   SERVICES_BROWSE_LAYER_URL("services.browse.layer.url"),
-  
-   SERVICES_BROWSE_LAYER_LAYERS("services.browse.layer.layers"),
-  
-   SERVICES_BROWSE_LAYER_VERSION("services.browse.layer.version"),
-  
-   SERVICES_BROWSE_LAYER_BBOX("services.browse.layer.bbox"),
-  
-   SERVICES_BROWSE_LAYER_SRS("services.browse.layer.srs"),
-
-   SERVICES_BROWSE_VERSION("services.wms.version"),
-
-   SERVICES_BROWSE_CREDITS("services.wms.credits"),
-
-   SERVICES_METADATA_URL("services.metadata.url");
-  //
-  // TOPIC_CATEGORY("topicCategory"),
-
-  // PROPERTIES_KEY("properties.key"),
+  MODIFIED("modified", Date.class);
 
   /** The field. */
   private final String field;
@@ -293,24 +228,39 @@ public enum MetacatalogField {
 
     List<MetacatalogField> list = new ArrayList<MetacatalogField>();
     String mandatoryFields = (String) HarvesterSettings.getInstance().get("MANDATORY_FIELDS");
-    
-    for ( String fieldName : mandatoryFields.split(",") ){
-      if (getField(fieldName)!=null){
+
+    for (String fieldName : mandatoryFields.split(",")) {
+      if (getField(fieldName) != null) {
         list.add(getField(fieldName));
       }
     }
-    
+
     return list;
 
   }
 
-  public boolean isInspire() {
-    return field.startsWith("INSPIRE.");
+  /**
+   * Get the list of mandatory fields from the metacatalogue.properties
+   * 
+   * @return List<MetacatalogField>
+   */
+  public static List<MetacatalogField> getThesaurusFields() {
+
+    List<MetacatalogField> list = new ArrayList<MetacatalogField>();
+    String thesaurusFields = (String) HarvesterSettings.getInstance().get("THESAURUS_FIELDS");
+
+    for (String fieldName : thesaurusFields.split(",")) {
+      if (getField(fieldName) != null) {
+        list.add(getField(fieldName));
+      }
+    }
+
+    return list;
+
   }
 
   public boolean isMetacatalogIntern() {
-    return this.equals(MetacatalogField._UUID) || this.equals(MetacatalogField._GEOMETRY)
-        || this.field.startsWith("healpix-order-");
+    return this.equals(MetacatalogField.FOOTPRINT) || this.getField().startsWith("_");
   }
 
   /**

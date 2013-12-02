@@ -31,7 +31,6 @@ import org.junit.Test;
 
 import fr.cnes.sitools.metacatalogue.AbstractHarvesterTestCase;
 import fr.cnes.sitools.thesaurus.Concept;
-import fr.cnes.sitools.thesaurus.SimpleConcept;
 import fr.cnes.sitools.thesaurus.ThesaurusSearcher;
 
 public class ThesaurusSearcherTestCase extends AbstractHarvesterTestCase {
@@ -113,7 +112,7 @@ public class ThesaurusSearcherTestCase extends AbstractHarvesterTestCase {
 
     // get a concept from its prefLabel
     ThesaurusSearcher searcher = new ThesaurusSearcher(THESAURUS_NAME);
-    List<Concept> concepts = searcher.getAllConcepts();
+    List<Concept> concepts = searcher.getAllConcepts("fr");
     assertNotNull(concepts);
     assertEquals(158, concepts.size());
   }
@@ -123,7 +122,7 @@ public class ThesaurusSearcherTestCase extends AbstractHarvesterTestCase {
 
     // get a concept from its prefLabel
     ThesaurusSearcher searcher = new ThesaurusSearcher(THESAURUS_NAME);
-    Map<String, SimpleConcept> map = searcher.getAllConceptsAsMap();
+    Map<String, String> map = searcher.getAllConceptsAsMap("fr");
     assertNotNull(map);
     // Il y a des altLabels en double... du coup on a 150 concepts au lieu des 158...
     assertEquals(149, map.keySet().size());
