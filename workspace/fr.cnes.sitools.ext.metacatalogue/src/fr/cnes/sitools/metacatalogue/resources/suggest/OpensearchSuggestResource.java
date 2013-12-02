@@ -80,7 +80,7 @@ public class OpensearchSuggestResource extends AbstractOpensearchQueryResource {
         try {
           rsp = server.query(solrQuery);
           TermsResponse termsResponse = rsp.getTermsResponse();
-          List<TermsResponse.Term> terms = termsResponse.getTerms(MetacatalogField._CONCEPTS);
+          List<TermsResponse.Term> terms = termsResponse.getTerms(MetacatalogField._CONCEPTS.getField());
           Map<String, Long> map = createMapFromTerms(terms);
           for (SuggestDTO suggest : suggests) {
             Long nb = map.get(suggest.getSuggestion());
