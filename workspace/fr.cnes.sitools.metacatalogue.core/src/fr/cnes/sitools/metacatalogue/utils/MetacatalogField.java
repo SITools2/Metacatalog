@@ -263,6 +263,14 @@ public enum MetacatalogField {
     return this.equals(MetacatalogField.FOOTPRINT) || this.getField().startsWith("_");
   }
 
+  public boolean isMandatory() {
+    return MetacatalogField.getMandatoryFields().contains(this);
+  }
+
+  public boolean isThesaurusField() {
+    return MetacatalogField.getThesaurusFields().contains(this);
+  }
+
   /**
    * Gets the field.
    * 
