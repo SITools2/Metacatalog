@@ -157,11 +157,13 @@ public class CswMetadataExtractor extends HarvesterStep {
     List<Error> errors = new ArrayList();
     List<Element> xmlFields = doc.getChildren("error");
     String name;
+    String level;
     Object value;
     for (Element child : xmlFields) {
       name = child.getAttributeValue("name");
+      level = child.getAttributeValue("level");
       value = child.getText();
-      Error error = new Error(name, value);
+      Error error = new Error(name, level, value);
       errors.add(error);
     }
     return errors;

@@ -84,8 +84,20 @@
 		<xsl:if test="not(gmd:identificationInfo/gmd:MD_DataIdentification/gmd:geographicElement/EX_GeographicBoundingBox)" >
 			<error name="footprint">Footprint not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this Xpath expression "gmd:identificationInfo/gmd:MD_DataIdentification/gmd:geographicElement/EX_GeographicBoundingBox"</error>
 		</xsl:if>
-
-
+		
+		<!-- WMS -->
+		<xsl:if test="not(gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/gco:CharacterString)" >
+			<error name="wms" level="warning">WMS VERSION not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this Xpath expression "gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/gco:CharacterString"</error>
+		</xsl:if>
+		<xsl:if test="not(gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:name/gco:CharacterString)" >
+			<error name="wms" level="warning">WMS LAYERS not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this Xpath expression "gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:name/gco:CharacterString"</error>
+		</xsl:if>
+		<xsl:if test="not(gmd:identificationInfo/gmd:MD_DataIdentification/gmd:geographicElement/EX_GeographicBoundingBox)" >
+			<error name="wms" level="warning">WMS BBOX not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this Xpath expression "gmd:identificationInfo/gmd:MD_DataIdentification/gmd:geographicElement/EX_GeographicBoundingBox"</error>
+		</xsl:if>
+		<xsl:if test="not(gmd:referenceSystemInfo/MD_ReferenceSystem/systemIdentifier/gmd:RS_Identifier/gmd:code/gco:CharacterString)" >
+			<error name="wms" level="warning">WMS SRS not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this Xpath expression "gmd:referenceSystemInfo/MD_ReferenceSystem/systemIdentifier/gmd:RS_Identifier/gmd:code/gco:CharacterString"</error>
+		</xsl:if>
 		
 		
 		<xsl:for-each select="gmd:fileIdentifier/gco:CharacterString">
@@ -132,35 +144,10 @@
 		</xsl:for-each>
 
 		<!-- Services browse WMS -->
-		<xsl:for-each
-			select="gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/ns14:PTSC_WMSParameters">
+		<field name="wms">
+			<xsl:value-of select="string(gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:linkage/gmd:URL)"/>?REQUEST=GetMap&#38;VERSION=<xsl:value-of select="string(gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/gco:CharacterString)"/>&#38;LAYERS=<xsl:value-of select="string(gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:name/gco:CharacterString)"/>&#38;BBOX=<xsl:value-of select="string(gmd:identificationInfo/gmd:MD_DataIdentification/gmd:geographicElement/gmd:EX_GeographicBoundingBox)"/>&#38;SRS=<xsl:value-of select="string(gmd:referenceSystemInfo/MD_ReferenceSystem/systemIdentifier/gmd:RS_Identifier/gmd:code/gco:CharacterString)"/>
+		</field>
 			
-			<xsl:for-each select="ns14:type">
-				<field name="services.browse.layer.type"><xsl:value-of select="string(.)" /></field>
-			</xsl:for-each>
-
-			<xsl:for-each select="ns14:url">
-				<field name="services.browse.layer.url"><xsl:value-of select="string(.)" /></field>
-			</xsl:for-each>
-
-			<xsl:for-each select="ns14:layers">
-				<field name="services.browse.layer.layers"><xsl:value-of select="string(.)" /></field>
-			</xsl:for-each>
-
-			<xsl:for-each select="ns14:version">
-				<field name="services.browse.layer.version"><xsl:value-of select="string(.)" /></field>
-			</xsl:for-each>
-
-			<xsl:for-each select="ns14:bbox">
-				<field name="services.browse.layer.bbox"><xsl:value-of select="string(.)" /></field>
-			</xsl:for-each>
-
-			<xsl:for-each select="ns14:srs">
-				<field name="services.browse.layer.srs"><xsl:value-of select="string(.)" /></field>
-			</xsl:for-each>
-
-		</xsl:for-each>
-
 		<!-- Services download -->
 		<xsl:for-each
 			select="gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:linkage/gmd:URL">

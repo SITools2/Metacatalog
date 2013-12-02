@@ -21,7 +21,8 @@ package fr.cnes.sitools.metacatalogue.model;
 public class Error {
 
   private String name;
-
+  private String level;
+  
   private Object value;
 
   public Error(String name, Object value) {
@@ -30,6 +31,13 @@ public class Error {
     this.value = value;
   }
 
+  public Error(String name, String level, Object value) {
+    super();
+    this.name = name;
+    this.level = level;
+    this.value = value;
+  }
+  
   /**
    * Gets the name value
    * 
@@ -66,6 +74,14 @@ public class Error {
    */
   public void setValue(Object value) {
     this.value = value;
+  }
+
+  public String getLevel() {
+    return level;
+  }
+
+  public void setLevel(String level) {
+    this.level = level;
   }
 
 }
