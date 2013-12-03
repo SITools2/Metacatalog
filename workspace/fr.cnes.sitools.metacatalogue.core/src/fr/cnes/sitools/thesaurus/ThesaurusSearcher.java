@@ -118,7 +118,7 @@ public class ThesaurusSearcher {
   public boolean conceptExists(String altLabelExists) {
     String queryString = SEARCH_BY_ALTLABEL_QUERY.replace("{altLabel}", altLabelExists);
     List<Concept> concepts = executeQuery(queryString);
-    return (concepts != null && concepts.size() == 1);
+    return (concepts != null && concepts.size() >= 1);
   }
 
   public List<Concept> getAllConcepts(String language) {

@@ -128,4 +128,5 @@ public class ThesaurusSearcherTestCase extends AbstractHarvesterTestCase {
     assertEquals(149, map.keySet().size());
   }
 
+
 }

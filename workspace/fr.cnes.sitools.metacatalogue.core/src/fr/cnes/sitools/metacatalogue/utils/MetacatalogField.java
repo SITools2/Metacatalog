@@ -26,16 +26,17 @@ import java.util.List;
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.solr.common.util.DateUtil;
 
+/**
+ * The Enum MetacatalogField.
+ */
 public enum MetacatalogField {
 
-  /**
-   * ##################### Champs Internes au métacatalogue #########################
-   */
+  /** ##################### Champs Internes au métacatalogue #########################. */
 
   /** SPECIFIC, where or not the services are public . */
   _PUBLIC_SERVICES("_publicServices", Boolean.class),
 
-  /** GEOMETRY AS GEOJSON, */
+  /** GEOMETRY AS GEOJSON,. */
   _GEOMETRY_GEOJSON("_geometry_geojson"),
 
   /** The Constant ANY. */
@@ -44,51 +45,65 @@ public enum MetacatalogField {
   /** The Constant RESOLUTION DOMAIN. */
   _RESOLUTION_DOMAIN("_resolution_domain"),
 
-  /** list of AltLabels concepts used for suggestions */
+  /** list of AltLabels concepts used for suggestions. */
   _CONCEPTS("_concepts"),
 
-  /**
-   * ##################### Modèle de données du métacatalogue #########################
-   */
+  /** ##################### Modèle de données du métacatalogue #########################. */
 
   FOOTPRINT("footprint"),
 
+  /** The identifier. */
   IDENTIFIER("identifier"),
 
+  /** The language. */
   LANGUAGE("language"),
 
+  /** The title. */
   TITLE("title"),
 
+  /** The description. */
   DESCRIPTION("description"),
 
+  /** The lineage. */
   LINEAGE("lineage"),
 
+  /** The processing level. */
   PROCESSING_LEVEL("processingLevel"),
 
+  /** The authority. */
   AUTHORITY("authority"),
 
+  /** The start date. */
   START_DATE("startDate", Date.class),
 
+  /** The completion date. */
   COMPLETION_DATE("completionDate", Date.class),
 
+  /** The instrument. */
   INSTRUMENT("instrument"),
 
+  /** The platform. */
   PLATFORM("platform"),
 
+  /** The resolution. */
   RESOLUTION("resolution"),
 
+  /** The archive. */
   ARCHIVE("archive"),
 
+  /** The mime type. */
   MIME_TYPE("mimeType"),
 
+  /** The wms. */
   WMS("wms"),
 
+  /** The keywords. */
   KEYWORDS("keywords"),
 
-  /** QUICKLOOK, url vers le quicklook du produit */
+  /** QUICKLOOK, url vers le quicklook du produit. */
   QUICKLOOK("quicklook"),
 
-  /** THUMBNAIL, url vers l'imagette du produit */
+  /** THUMBNAIL, url vers l'imagette du produit. */
   THUMBNAIL("thumbnail"),
 
   /** The Project. */
@@ -97,20 +112,22 @@ public enum MetacatalogField {
   /** The product. */
   PRODUCT("product"),
 
-  /** COUNTRY */
+  /** COUNTRY. */
   COUNTRY("country"),
 
-  /** REGION */
+  /** REGION. */
   REGION("region"),
 
-  /** DEPARTMENT */
+  /** DEPARTMENT. */
   DEPARTMENT("department"),
 
-  /** CITY */
+  /** CITY. */
   CITY("city"),
 
+  /** The created. */
   CREATED("created", Date.class),
 
+  /** The modified. */
   MODIFIED("modified", Date.class);
 
   /** The field. */
@@ -259,14 +276,29 @@ public enum MetacatalogField {
 
   }
 
+  /**
+   * Checks if is metacatalog intern.
+   * 
+   * @return true, if is metacatalog intern
+   */
   public boolean isMetacatalogIntern() {
     return this.equals(MetacatalogField.FOOTPRINT) || this.getField().startsWith("_");
   }
 
+  /**
+   * Checks if is mandatory.
+   * 
+   * @return true, if is mandatory
+   */
   public boolean isMandatory() {
     return MetacatalogField.getMandatoryFields().contains(this);
   }
 
+  /**
+   * Checks if is thesaurus field.
+   * 
+   * @return true, if is thesaurus field
+   */
   public boolean isThesaurusField() {
     return MetacatalogField.getThesaurusFields().contains(this);
   }

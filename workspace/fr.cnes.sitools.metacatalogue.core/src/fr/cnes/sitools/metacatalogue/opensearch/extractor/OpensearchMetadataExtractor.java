@@ -43,6 +43,7 @@ import fr.cnes.sitools.model.AttributeCustom;
 import fr.cnes.sitools.model.HarvesterModel;
 import fr.cnes.sitools.model.Property;
 import fr.cnes.sitools.server.ContextAttributes;
+import fr.cnes.sitools.metacatalogue.model.Error;
 
 public class OpensearchMetadataExtractor extends HarvesterStep {
 
@@ -70,51 +71,54 @@ public class OpensearchMetadataExtractor extends HarvesterStep {
     for (JSONObject jsonObject : features) {
 
       String jsonString = jsonObject.toJSONString();
-      MetadataRecords fields = new MetadataRecords();
-      addField(fields, "$.properties.identifier", jsonString, MetacatalogField.IDENTIFIER.getField());
-      addField(fields, "$.properties.title", jsonString, MetacatalogField.TITLE.getField());
-      addField(fields, "$.properties.description", jsonString, MetacatalogField.DESCRIPTION.getField());
+      MetadataRecords record = new MetadataRecords();
+      addField(record, "$.properties.identifier", jsonString, MetacatalogField.IDENTIFIER);
+      addField(record, "$.properties.title", jsonString, MetacatalogField.TITLE);
+      addField(record, "$.properties.description", jsonString, MetacatalogField.DESCRIPTION);
 
-      addField(fields, "$.properties.project", jsonString, MetacatalogField.PROJECT.getField());
-      addField(fields, "$.properties.product", jsonString, MetacatalogField.PRODUCT.getField());
+      addField(record, "$.properties.project", jsonString, MetacatalogField.PROJECT);
+      addField(record, "$.properties.product", jsonString, MetacatalogField.PRODUCT);
 
-      addField(fields, "$.properties.platform", jsonString, MetacatalogField.PLATFORM.getField());
-      addField(fields, "$.properties.instrument", jsonString, MetacatalogField.INSTRUMENT.getField());
+      addField(record, "$.properties.platform", jsonString, MetacatalogField.PLATFORM);
+      addField(record, "$.properties.instrument", jsonString, MetacatalogField.INSTRUMENT);
+      
+      addField(record, "$.properties.authority", jsonString, MetacatalogField.AUTHORITY);
+      addField(record, "$.properties.processingLevel", jsonString, MetacatalogField.PROCESSING_LEVEL);
 
-      // addField(fields, new Date().toString(), MetacatalogField.MODIFICATION_DATE.getField());
+      // addField(fields, new Date().toString(), MetacatalogField.MODIFICATION_DATE);
 
-      addField(fields, "$.properties.startDate", jsonString, MetacatalogField.START_DATE.getField());
-      addField(fields, "$.properties.completionDate", jsonString, MetacatalogField.COMPLETION_DATE.getField());
+      addField(record, "$.properties.startDate", jsonString, MetacatalogField.START_DATE);
+      addField(record, "$.properties.completionDate", jsonString, MetacatalogField.COMPLETION_DATE);
 
-      addField(fields, "$.properties.resolution", jsonString, MetacatalogField.RESOLUTION.getField());
+      addField(record, "$.properties.resolution", jsonString, MetacatalogField.RESOLUTION);
 
-      addField(fields, "$.properties.wms", jsonString, MetacatalogField.WMS.getField());
+      addField(record, "$.properties.wms", jsonString, MetacatalogField.WMS);
 
-      addField(fields, "$.properties.services.download.url", jsonString, MetacatalogField.ARCHIVE.getField());
-      addField(fields, "$.properties.services.download.mimeType", jsonString, MetacatalogField.MIME_TYPE.getField());
+      addField(record, "$.properties.services.download.url", jsonString, MetacatalogField.ARCHIVE);
+      addField(record, "$.properties.services.download.mimeType", jsonString, MetacatalogField.MIME_TYPE);
 
       // addField(fields, "$.properties.services.metadata.url", jsonString,
-      // MetacatalogField.SERVICES_METADATA_URL.getField());
+      // MetacatalogField.SERVICES_METADATA_URL);
 
-      addField(fields, "$.properties.quicklook", jsonString, MetacatalogField.QUICKLOOK.getField());
-      addField(fields, "$.properties.thumbnail", jsonString, MetacatalogField.THUMBNAIL.getField());
+      addField(record, "$.properties.quicklook", jsonString, MetacatalogField.QUICKLOOK);
+      addField(record, "$.properties.thumbnail", jsonString, MetacatalogField.THUMBNAIL);
 
       // geometry
-      addField(fields, "$.geometry", jsonString, MetacatalogField._GEOMETRY_GEOJSON.getField());
+      addField(record, "$.geometry", jsonString, MetacatalogField._GEOMETRY_GEOJSON);
 
       // public services
-      addField(fields, String.valueOf(conf.isPublicServices()), MetacatalogField._PUBLIC_SERVICES.getField());
+      addField(record, String.valueOf(conf.isPublicServices()), MetacatalogField._PUBLIC_SERVICES.getField());
 
       HarvestStatus status = (HarvestStatus) context.getAttributes().get(ContextAttributes.STATUS);
 
       // modified
-      addField(fields, status.getStartDate(), MetacatalogField.MODIFIED.getField());
+      addField(record, status.getStartDate(), MetacatalogField.MODIFIED.getField());
 
       OpensearchGeometryExtractor extractor = new OpensearchGeometryExtractor();
 
       try {
         String geometry = JsonPath.read(jsonString, "$.geometry").toString();
-        fields = extractor.extractGeometry(geometry, fields, context);
+        record = extractor.extractGeometry(geometry, record, context);
       }
       catch (Exception e) {
         logger.log(Level.WARNING, e.getMessage(), e);
@@ -122,9 +126,9 @@ public class OpensearchMetadataExtractor extends HarvesterStep {
       }
 
       // add the custom attributes
-      addCustomAttributes(jsonString, fields, conf.getAttributes());
+      addCustomAttributes(jsonString, record, conf.getAttributes());
 
-      listFields.add(fields);
+      listFields.add(record);
 
     }
 
@@ -159,13 +163,23 @@ public class OpensearchMetadataExtractor extends HarvesterStep {
     }
   }
 
-  private void addField(MetadataRecords fields, String jsonPath, String json, String fieldName) {
+  private void addField(MetadataRecords fields, String jsonPath, String json, MetacatalogField metacatalogField) {
     try {
       Object object = JsonPath.read(json, jsonPath);
-      fields.add(fieldName, object);
+      fields.add(metacatalogField.getField(), object);
     }
     catch (InvalidPathException e) {
       logger.log(Level.WARNING, "Invalid path : " + jsonPath, e);
+      if (metacatalogField.isMandatory()) {
+        Object objId = fields.get(MetacatalogField.IDENTIFIER.getField());
+        String id = "";
+        if (objId != null) {
+          id = objId.toString();
+        }
+        Error error = new Error(metacatalogField.getField(), metacatalogField.getField() + " not found for record "
+            + id + " with this JSONPath expression \"" + jsonPath + "\"");
+        fields.getErrors().add(error);
+      }
     }
   }
 

@@ -82,8 +82,9 @@ public class CswMetadataValidator extends HarvesterStep {
       /* warning */
       for (Error error : errors) {
         if (error != null && error.getLevel() != null) {
-          if (error.getLevel().equals("warning"))
+          if (error.getLevel().equals("warning")) {
             logger.info("WARNING : " + error.getValue());
+          }
         }
       }
 
@@ -106,6 +107,7 @@ public class CswMetadataValidator extends HarvesterStep {
         if (field.isDate()) {
 
           List<String> fmts = new ArrayList<String>();
+          fmts.add("yyyy-MM-DD'T'HH:mm:ss");
           fmts.add("yyyy-MM-DD'T'HH:mm:ss(Z)");
           fmts.add("yyyy-MM-DD'T'HH:mm:ss+HH:mm");
           fmts.add("yyyy-MM-DD'T'HH:mm:ss-HH:mm");
@@ -114,10 +116,10 @@ public class CswMetadataValidator extends HarvesterStep {
           }
           catch (ParseException e) {
             logger.info(field.getField() + " - incorrect date format : "
-                  + doc.get(MetacatalogField.IDENTIFIER.getField()) + " not inserted in the metacatalog");
+                + doc.get(MetacatalogField.IDENTIFIER.getField()) + " not inserted in the metacatalog");
             fail = true;
           }
-          
+
         }
       }
       if (fail) {
@@ -151,7 +153,7 @@ public class CswMetadataValidator extends HarvesterStep {
             doc.add(MetacatalogField._CONCEPTS.getField(), value.getValue());
           }
           else {
-            logger.info("Concept  : " + value.getValue().toString() + " not found in the thesaurus for field : "
+            logger.info("Concept " + value.getValue().toString() + " not found in the thesaurus for field : "
                 + field.getField() + ". Document " + doc.get(MetacatalogField.IDENTIFIER.getField())
                 + " not inserted in the metacatalog");
             fail = true;
@@ -166,6 +168,7 @@ public class CswMetadataValidator extends HarvesterStep {
       }
 
       if (fail) {
+        logger.info("-------------------------------------------------------------------------");
         iterator.remove();
         nbDocInvalid++;
       }
