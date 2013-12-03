@@ -20,20 +20,17 @@ package fr.cnes.sitools.metacatalogue.csw.validator;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
-
-import net.sf.saxon.functions.Collection;
 
 import org.restlet.Context;
 
 import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
 import fr.cnes.sitools.metacatalogue.common.MetadataContainer;
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
+import fr.cnes.sitools.metacatalogue.model.Error;
 import fr.cnes.sitools.metacatalogue.model.Field;
 import fr.cnes.sitools.metacatalogue.model.HarvestStatus;
 import fr.cnes.sitools.metacatalogue.model.MetadataRecords;
@@ -44,7 +41,6 @@ import fr.cnes.sitools.model.HarvesterModel;
 import fr.cnes.sitools.server.Consts;
 import fr.cnes.sitools.server.ContextAttributes;
 import fr.cnes.sitools.thesaurus.ThesaurusSearcher;
-import fr.cnes.sitools.metacatalogue.model.Error;
 
 public class CswMetadataValidator extends HarvesterStep {
 
