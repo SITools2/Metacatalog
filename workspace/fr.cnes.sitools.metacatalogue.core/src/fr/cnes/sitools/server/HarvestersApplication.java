@@ -1,4 +1,4 @@
- /*******************************************************************************
+/*******************************************************************************
  * Copyright 2010-2013 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
  *
  * This file is part of SITools2.
@@ -23,6 +23,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.restlet.Application;
 import org.restlet.Context;
 import org.restlet.Restlet;
+import org.restlet.data.Reference;
+import org.restlet.resource.Directory;
 import org.restlet.resource.ResourceException;
 import org.restlet.routing.Router;
 
@@ -96,6 +98,15 @@ public final class HarvestersApplication extends Application implements ILockabl
 
     router.attach("/ihm/catalogsTypes", JsonFileExpositionResource.class);
     router.attach("/ihm/havestersClasses", JsonFileExpositionResource.class);
+
+    String logFolder = HarvesterSettings.getInstance().getString("LOG_FOLDER");
+    logFolder = "file:///" + HarvesterSettings.getInstance().getRootDirectory() + logFolder + "/";
+
+    Directory directory = new Directory(getContext(), logFolder);
+    directory.setDeeplyAccessible(true);
+    directory.setListingAllowed(true);
+    directory.setModifiable(false);
+    router.attach("/admin/logs", directory);
 
     return router;
   }

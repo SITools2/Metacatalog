@@ -20,7 +20,9 @@ package fr.cnes.sitools.metacatalogue.resources.opensearch;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 
 import org.apache.solr.client.solrj.SolrQuery;
@@ -32,6 +34,8 @@ import org.restlet.data.Parameter;
 import org.restlet.data.Status;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ResourceException;
+
+import com.google.common.base.Joiner;
 
 import fr.cnes.sitools.common.SitoolsSettings;
 import fr.cnes.sitools.metacatalogue.index.solr.SolRUtils;
@@ -120,9 +124,20 @@ public abstract class AbstractOpensearchSearchResource extends AbstractOpensearc
     // e.printStackTrace();
     // }
 
-    solrQuery.add("facet.pivot", "acquisitionSetup.platform,acquisitionSetup.instrument");
-    solrQuery.addFacetField("processingLevel");
-    solrQuery.addFacetField("product");
+    List<String> plateformIntrument = new ArrayList<String>();
+    plateformIntrument.add(MetacatalogField.PLATFORM.getField());
+    plateformIntrument.add(MetacatalogField.INSTRUMENT.getField());
+
+    List<String> location = new ArrayList<String>();
+    location.add(MetacatalogField.COUNTRY.getField());
+    location.add(MetacatalogField.REGION.getField());
+    location.add(MetacatalogField.DEPARTMENT.getField());
+    location.add(MetacatalogField.CITY.getField());
+
+    solrQuery.add("facet.pivot", Joiner.on(",").join(plateformIntrument));
+    solrQuery.add("facet.pivot", Joiner.on(",").join(location));
+    solrQuery.addFacetField(MetacatalogField.PROCESSING_LEVEL.getField());
+    solrQuery.addFacetField(MetacatalogField.PRODUCT.getField());
     solrQuery.setFacetLimit(10);
     solrQuery.setFacetMinCount(1);
 

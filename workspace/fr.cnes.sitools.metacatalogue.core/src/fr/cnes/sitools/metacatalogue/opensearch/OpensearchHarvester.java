@@ -38,7 +38,6 @@ import fr.cnes.sitools.metacatalogue.opensearch.indexer.OpensearchMetadataIndexe
 import fr.cnes.sitools.metacatalogue.opensearch.reader.OpensearchReader;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
 import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
-import fr.cnes.sitools.metacatalogue.utils.MetadataLogger;
 import fr.cnes.sitools.model.HarvesterModel;
 import fr.cnes.sitools.server.ContextAttributes;
 

@@ -1,4 +1,4 @@
- /*******************************************************************************
+/*******************************************************************************
  * Copyright 2010-2013 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
  *
  * This file is part of SITools2.
@@ -21,40 +21,62 @@ package fr.cnes.sitools.metacatalogue.model;
 import java.util.Date;
 import java.util.Map;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class HarvestStatus.
+ */
 public class HarvestStatus {
 
+  /** The Constant RESULT_SUCCESS. */
   public static final String RESULT_SUCCESS = "SUCCESS";
 
+  /** The Constant RESULT_STOPPED_USER. */
   public static final String RESULT_STOPPED_USER = "STOPPED_USER";
 
+  /** The Constant RESULT_ERROR. */
   public static final String RESULT_ERROR = "ERROR";
 
+  /** The Constant STATUS_READY. */
   public static final String STATUS_READY = "INACTIVE";
 
+  /** The Constant STATUS_RUNNING. */
   public static final String STATUS_RUNNING = "ACTIVE";
 
+  /** The nb documents retrieved. */
   private int nbDocumentsRetrieved = 0;
 
+  /** The nb documents indexed. */
   private int nbDocumentsIndexed = 0;
 
+  /** The nb documents invalid. */
   private int nbDocumentsInvalid = 0;
 
+  /** The result. */
   private String result;
 
+  /** The error cause. */
   private String errorCause;
 
+  /** The url. */
   private String url;
 
+  /** The status. */
   private String status;
 
+  /** The properties. */
   private Map<String, Object> properties;
 
+  /** The start date. */
   private Date startDate;
 
+  /** The end date. */
   private Date endDate;
 
+  /** The file name of the loggerUsed */
+  private String loggerFileName;
+
   /**
-   * Gets the nbDocumentsRetrieved value
+   * Gets the nbDocumentsRetrieved value.
    * 
    * @return the nbDocumentsRetrieved
    */
@@ -63,7 +85,7 @@ public class HarvestStatus {
   }
 
   /**
-   * Sets the value of nbDocumentsRetrieved
+   * Sets the value of nbDocumentsRetrieved.
    * 
    * @param nbDocumentsRetrieved
    *          the nbDocumentsRetrieved to set
@@ -73,7 +95,7 @@ public class HarvestStatus {
   }
 
   /**
-   * Gets the nbDocumentsIndexed value
+   * Gets the nbDocumentsIndexed value.
    * 
    * @return the nbDocumentsIndexed
    */
@@ -82,7 +104,7 @@ public class HarvestStatus {
   }
 
   /**
-   * Sets the value of nbDocumentsIndexed
+   * Sets the value of nbDocumentsIndexed.
    * 
    * @param nbDocumentsIndexed
    *          the nbDocumentsIndexed to set
@@ -92,7 +114,7 @@ public class HarvestStatus {
   }
 
   /**
-   * Gets the nbDocumentsInvalid value
+   * Gets the nbDocumentsInvalid value.
    * 
    * @return the nbDocumentsInvalid
    */
@@ -101,7 +123,7 @@ public class HarvestStatus {
   }
 
   /**
-   * Sets the value of nbDocumentsInvalid
+   * Sets the value of nbDocumentsInvalid.
    * 
    * @param nbDocumentsInvalid
    *          the nbDocumentsInvalid to set
@@ -122,7 +144,7 @@ public class HarvestStatus {
   }
 
   /**
-   * Gets the result value
+   * Gets the result value.
    * 
    * @return the result
    */
@@ -131,7 +153,7 @@ public class HarvestStatus {
   }
 
   /**
-   * Sets the value of result
+   * Sets the value of result.
    * 
    * @param result
    *          the result to set
@@ -141,8 +163,7 @@ public class HarvestStatus {
   }
 
   /**
-   * true if the result is a success, false otherwise
-   * 
+   * true if the result is a success, false otherwise.
    * 
    * @return true if the result is a success, false otherwise
    */
@@ -151,7 +172,7 @@ public class HarvestStatus {
   }
 
   /**
-   * Gets the errorCause value
+   * Gets the errorCause value.
    * 
    * @return the errorCause
    */
@@ -160,7 +181,7 @@ public class HarvestStatus {
   }
 
   /**
-   * Sets the value of errorCause
+   * Sets the value of errorCause.
    * 
    * @param errorCause
    *          the errorCause to set
@@ -170,7 +191,7 @@ public class HarvestStatus {
   }
 
   /**
-   * Gets the url value
+   * Gets the url value.
    * 
    * @return the url
    */
@@ -179,7 +200,7 @@ public class HarvestStatus {
   }
 
   /**
-   * Sets the value of url
+   * Sets the value of url.
    * 
    * @param url
    *          the url to set
@@ -189,7 +210,7 @@ public class HarvestStatus {
   }
 
   /**
-   * Gets the status value
+   * Gets the status value.
    * 
    * @return the status
    */
@@ -198,7 +219,7 @@ public class HarvestStatus {
   }
 
   /**
-   * Sets the value of status
+   * Sets the value of status.
    * 
    * @param status
    *          the status to set
@@ -208,7 +229,7 @@ public class HarvestStatus {
   }
 
   /**
-   * Gets the properties value
+   * Gets the properties value.
    * 
    * @return the properties
    */
@@ -217,7 +238,7 @@ public class HarvestStatus {
   }
 
   /**
-   * Sets the value of properties
+   * Sets the value of properties.
    * 
    * @param properties
    *          the properties to set
@@ -227,7 +248,7 @@ public class HarvestStatus {
   }
 
   /**
-   * Gets the startDate value
+   * Gets the startDate value.
    * 
    * @return the startDate
    */
@@ -236,7 +257,7 @@ public class HarvestStatus {
   }
 
   /**
-   * Sets the value of startDate
+   * Sets the value of startDate.
    * 
    * @param startDate
    *          the startDate to set
@@ -246,7 +267,7 @@ public class HarvestStatus {
   }
 
   /**
-   * Gets the endDate value
+   * Gets the endDate value.
    * 
    * @return the endDate
    */
@@ -255,13 +276,32 @@ public class HarvestStatus {
   }
 
   /**
-   * Sets the value of endDate
+   * Sets the value of endDate.
    * 
    * @param endDate
    *          the endDate to set
    */
   public void setEndDate(Date endDate) {
     this.endDate = endDate;
+  }
+
+  /**
+   * Gets the loggerFileName value
+   * 
+   * @return the loggerFileName
+   */
+  public String getLoggerFileName() {
+    return loggerFileName;
+  }
+
+  /**
+   * Sets the value of loggerFileName
+   * 
+   * @param loggerFileName
+   *          the loggerFileName to set
+   */
+  public void setLoggerFileName(String loggerFileName) {
+    this.loggerFileName = loggerFileName;
   }
 
 }

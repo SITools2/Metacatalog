@@ -1,4 +1,4 @@
- /*******************************************************************************
+/*******************************************************************************
  * Copyright 2010-2013 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
  *
  * This file is part of SITools2.
@@ -75,6 +75,8 @@ public abstract class Harvester implements Runnable {
       status.setStartDate(new Date());
       Logger logger = initNewLogger(harvestConf, status.getStartDate());
       context.setLogger(logger);
+      status.setLoggerFileName(getLoggerName(status.getStartDate(), harvestConf));
+
       try {
         harvest();
         if (harvestConf.isAutomaticMerge()) {
@@ -111,8 +113,7 @@ public abstract class Harvester implements Runnable {
     Logger logger = Logger.getLogger(conf.getId());
 
     logger.setLevel(Level.INFO);
-    String logFolder = HarvesterSettings.getInstance().getString("LOG_FOLDER");
-    logFolder = HarvesterSettings.getInstance().getRootDirectory() + logFolder;
+    String logFolder = getLoggerDir();
     // create a fileHandler to log into a file
 
     File f = new File(logFolder);
@@ -122,14 +123,27 @@ public abstract class Harvester implements Runnable {
       f.setWritable(true);
     }
 
-    String fileHandlerName = logFolder + "/" + conf.getId() + "_"
-        + DateUtils.format(date, fr.cnes.sitools.util.DateUtils.LOG_FILE_NAME_DATE_FORMAT) + "-%u.log";
+    String fileHandlerName = logFolder + "/" + getLoggerName(date, conf);
 
     FileHandler fl = new FileHandler(fileHandlerName, true);
     fl.setFormatter(new SimpleFormatter());
-    logger.addHandler(fl);    
+    logger.addHandler(fl);
     
     return logger;
+  }
+
+  private String getLoggerDir() {
+    String logFolder = HarvesterSettings.getInstance().getString("LOG_FOLDER");
+    logFolder = HarvesterSettings.getInstance().getRootDirectory() + logFolder;
+
+    return logFolder;
+  }
+
+  private String getLoggerName(Date date, HarvesterModel conf) {
+    String fileHandlerName = conf.getId() + "_"
+        + DateUtils.format(date, fr.cnes.sitools.util.DateUtils.LOG_FILE_NAME_DATE_FORMAT) + ".log";
+    return fileHandlerName;
+
   }
 
   public abstract void harvest() throws Exception;

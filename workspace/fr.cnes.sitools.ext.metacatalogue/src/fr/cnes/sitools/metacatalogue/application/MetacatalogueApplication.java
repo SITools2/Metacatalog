@@ -130,6 +130,8 @@ public class MetacatalogueApplication extends AbstractApplicationPlugin {
     attachRedirector(router, "/admin/{harvesterId}/harvest/clean", urlHarvester, parameters);
     attachRedirector(router, "/admin/{harvesterId}/harvest/stop", urlHarvester, parameters);
     attachRedirector(router, "/admin/{harvesterId}/harvest/status", urlHarvester, parameters);
+    
+    attachRedirector(router, "/logs/{harvesterId}", urlHarvester, parameters);
 
     // Opensearch API exposition
     router.attach("/search", OpensearchSearchResource.class);
