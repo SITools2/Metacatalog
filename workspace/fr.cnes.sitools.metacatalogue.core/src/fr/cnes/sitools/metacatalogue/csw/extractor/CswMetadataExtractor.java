@@ -50,6 +50,7 @@ import fr.cnes.sitools.model.AttributeCustom;
 import fr.cnes.sitools.model.HarvesterModel;
 import fr.cnes.sitools.model.Property;
 
+
 public class CswMetadataExtractor extends HarvesterStep {
 
   private String schemaName;
@@ -96,7 +97,7 @@ public class CswMetadataExtractor extends HarvesterStep {
         Element doc = Xml.loadStream(stream);
 
         List<Field> fields = getFields(doc);
-        List<fr.cnes.sitools.metacatalogue.model.Error> errors = getErrors(doc);
+        List<Error> errors = getErrors(doc);
 
         CswGeometryExtractor extractor = new CswGeometryExtractor();
         

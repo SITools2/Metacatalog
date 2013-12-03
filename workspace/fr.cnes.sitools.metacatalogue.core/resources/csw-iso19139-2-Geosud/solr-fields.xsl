@@ -104,6 +104,8 @@
 			<field name="_uuid">urn:ogc:def:EOP:GEOSUD:Geosud:<xsl:value-of select="string(.)" /></field>
 			<field name="id">urn:ogc:def:EOP:GEOSUD:Geosud:<xsl:value-of select="string(.)" /></field>
 		</xsl:for-each>
+		
+		<field name="identifier">urn:ogc:def:EOP:<xsl:value-of select="string(gmd:contact/gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString)"/>:Geosud:<xsl:value-of select="string(gmd:fileIdentifier/gco:CharacterString)" /></field>
 
 		<field name="resourceType">dataset</field>
 
