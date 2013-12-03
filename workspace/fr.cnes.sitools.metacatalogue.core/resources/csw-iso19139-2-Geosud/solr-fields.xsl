@@ -56,8 +56,8 @@
 		</xsl:if>
 		
 		<!-- product -->
-		<xsl:if test="not(gmd:imageDescription/MD_ImageDescription/contentType)" >
-			<error name="product">Product not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this Xpath expression "gmd:imageDescription/MD_ImageDescription/contentType"</error>
+		<xsl:if test="not(gmd:imageDescription/gmd:MD_ImageDescription/gmd:contentType)" >
+			<error name="product">Product not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this Xpath expression "gmd:imageDescription/gmd:MD_ImageDescription/gmd:contentType"</error>
 		</xsl:if>
 		
 		<!-- platform -->
@@ -194,7 +194,7 @@
 		</xsl:for-each>
 
 		
-		<field name="product"><xsl:value-of select="string(gmd:imageDescription/MD_ImageDescription/contentType)"/></field>
+		<field name="product"><xsl:value-of select="string(gmd:imageDescription/gmd:MD_ImageDescription/gmd:contentType)"/></field>
 		
 		<xsl:for-each
 			select="gmi:acquisitionInformation/gmi:MI_AcquisitionInformation/gmi:instrument/gmi:MI_Instrument/gmi:identifier/gmd:MD_Identifier/gmd:code/gco:CharacterString">
