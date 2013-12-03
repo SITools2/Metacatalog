@@ -35,6 +35,11 @@
 
 	<xsl:template match="*" mode="metadata">
 	
+		<!-- identifier -->
+		<xsl:if test="not(gmd:fileIdentifier/gco:CharacterString)" >
+			<error name="identifier">Identifier not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this XPath expression "gmd:fileIdentifier/gco:CharacterString"</error>
+		</xsl:if>
+	
 		<!-- authority -->
 		<xsl:if test="not(gmd:contact/gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString)" >
 			<error name="authority">Authority not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this XPath expression "gmd:contact/gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString"</error>
