@@ -196,6 +196,9 @@
 		
 		<field name="product"><xsl:value-of select="string(gmd:imageDescription/gmd:MD_ImageDescription/gmd:contentType)"/></field>
 		
+		<field name="processingLevel"><xsl:value-of select="string(gmd:contentInfo/gmd:MD_ImageDescription/gmd:processingLevelCode/gmd:MD_Identifier/gmd:code/gco:CharacterString)"/></field>
+		
+		
 		<xsl:for-each
 			select="gmi:acquisitionInformation/gmi:MI_AcquisitionInformation/gmi:instrument/gmi:MI_Instrument/gmi:identifier/gmd:MD_Identifier/gmd:code/gco:CharacterString">
 			<field name="instrument"><xsl:value-of select="string(.)" /></field>

@@ -300,7 +300,7 @@
                     <gmd:spatialResolution>
                         <gmd:MD_Resolution>
                             <gmd:distance>
-<gco:Distance uom="http://schemas.opengis.net/iso/19139/20070417/resources/uom/gmxUom.xml#xpointer(//*[@gml:id='m'])">10</gco:Distance>
+<gco:Distance uom="http://schemas.opengis.net/iso/19139/20070417/resources/uom/gmxUom.xml#xpointer(//*[@gml:id='m'])">resolution</gco:Distance>
                             </gmd:distance>
                         </gmd:MD_Resolution>
                     </gmd:spatialResolution>
