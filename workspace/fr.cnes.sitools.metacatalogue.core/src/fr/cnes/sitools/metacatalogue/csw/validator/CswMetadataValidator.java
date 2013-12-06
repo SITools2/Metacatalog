@@ -99,7 +99,14 @@ public class CswMetadataValidator extends HarvesterStep {
               + " not inserted in the metacatalog");
           fail = true;
         }
-
+        /* check hierarchy level name = image */
+        if (field.getField().equals("hierarchyLevelName")){
+          if (!doc.get(field.getField()).equals("image")){
+            logger.info(field.getField() + " not set to \"image\" for record : " + doc.get(MetacatalogField.IDENTIFIER.getField())
+                + " not inserted in the metacatalog");
+            fail = true;
+          }
+        }
         if (field.isDate()) {
 
           List<String> fmts = new ArrayList<String>();

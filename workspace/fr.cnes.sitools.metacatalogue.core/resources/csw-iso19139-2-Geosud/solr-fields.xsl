@@ -56,7 +56,7 @@
 		</xsl:if>
 		
 		<!-- product -->
-		<xsl:if test="not(gmd:imageDescription/gmd:MD_ImageDescription/gmd:contentType)" >
+		<xsl:if test="not(gmd:contentInfo/gmd:MD_ImageDescription/gmd:contentType)" >
 			<error name="product">Product not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this Xpath expression "gmd:imageDescription/gmd:MD_ImageDescription/gmd:contentType"</error>
 		</xsl:if>
 		
@@ -71,7 +71,7 @@
 		</xsl:if>
 		
 		<!-- resolution -->
-		<xsl:if test="not(gmd:spatialResolution/gmd:MD_Resolution/gmd:distance/gco:Distance)" >
+		<xsl:if test="not(gmd:identificationInfo//gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:distance/gco:Distance)" >
 			<error name="resolution">Resolution not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this Xpath expression "gmd:spatialResolution/gmd:MD_Resolution/gmd:distance/gco:Distance"</error>
 		</xsl:if>
 
@@ -115,6 +115,9 @@
 		<field name="resourceType">dataset</field>
 
 		<field name="project">geosud</field>
+		
+		<field name="hierarchyLevelName"><xsl:value-of select="string(gmd:hierarchyLevelName/gco:CharacterString)" /></field>
+
 
 		<xsl:for-each select="gmd:identificationInfo//gmd:MD_DataIdentification">
 
@@ -157,7 +160,7 @@
 			
 		<!-- Services download -->
 		<xsl:for-each
-			select="gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:linkage/gmd:URL">
+			select="gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:linkage/gmd:URL">
 			<field name="archive"><xsl:value-of select="string(.)" /></field>
 		</xsl:for-each>
 

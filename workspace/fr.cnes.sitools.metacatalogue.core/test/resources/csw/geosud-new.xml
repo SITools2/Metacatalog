@@ -3,60 +3,64 @@
     <csw:SearchStatus timestamp="2013-10-15T15:09:24.592+02:00"/>
     <csw:SearchResults elementSet="summary" numberOfRecordsMatched="1" numberOfRecordsReturned="1" nextRecord="0">
         <gmi:MI_Metadata>
-            <gmd:fileIdentifier>
+            
+			 <gmd:fileIdentifier>
                 <gco:CharacterString>SCENE_5_037-261_05_07_03_11_12_37_2_J</gco:CharacterString>
-            </gmd:fileIdentifier>
-            <gmd:language>
-                <gmd:LanguageCode codeListValue="eng" codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/ML_gmxCodelists.xml#LanguageCode">English</gmd:LanguageCode>
-            </gmd:language>
+ </gmd:fileIdentifier>
+ 
+<gmd:language>
+	<gmd:LanguageCode codeListValue="eng" codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/ML_gmxCodelists.xml#LanguageCode">English</gmd:LanguageCode>
+</gmd:language>
 			
-			<gmd:imageDescription>
-				<gmd:MD_ImageDescription>					<gmd:contentType>product</gmd:contentType></gmd:MD_ImageDescription></gmd:imageDescription>			
-			<gmd:spatialResolution>
-				<gmd:MD_Resolution>
-					<gmd:distance>
-						<gco:Distance>10</gco:Distance>
-					</gmd:distance>
-				</gmd:MD_Resolution>
-			</gmd:spatialResolution>
-			
-			
-            <gmd:characterSet>
-                <gmd:MD_CharacterSetCode codeListValue="utf8" codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode">UTF-8</gmd:MD_CharacterSetCode>
-            </gmd:characterSet>
-            <gmd:parentIdentifier>
+<gmd:characterSet>
+	<gmd:MD_CharacterSetCode codeListValue="utf8" codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode">UTF-8</gmd:MD_CharacterSetCode>
+</gmd:characterSet>
+
+
+<gmd:parentIdentifier>
                 <gco:CharacterString>SPOT_France_2005:niveau_1A</gco:CharacterString>
-            </gmd:parentIdentifier>
-            <gmd:contact>
-                <gmd:CI_ResponsibleParty>
-                    <gmd:organisationName>
-                        <gco:CharacterString>GEOSUD</gco:CharacterString>
-                    </gmd:organisationName>
-                    <gmd:contactInfo>
-                        <gmd:CI_Contact>
-                            <gmd:address>
-								<gmd:CI_Address>
-									<gmd:electronicMailAddress>
-										<gco:CharacterString>contact_geosud@teledetction.fr</gco:CharacterString>
-									</gmd:electronicMailAddress>
-								</gmd:CI_Address>
-                            </gmd:address>
-                        </gmd:CI_Contact>
-                    </gmd:contactInfo>
-                    <gmd:role>
-                        <gmd:CI_RoleCode codeListValue="pointOfContact" codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/gmxCodelists.xml#CI_RoleCode">Point of contact</gmd:CI_RoleCode>
-                    </gmd:role>
-                </gmd:CI_ResponsibleParty>
-            </gmd:contact>
+</gmd:parentIdentifier>
+
+<gmd:hierarchyLevelName>
+	<gco:CharacterString>image</gco:CharacterString>
+</gmd:hierarchyLevelName>
+
+<gmd:contact>
+	<gmd:CI_ResponsibleParty>
+		<gmd:organisationName>
+			<gco:CharacterString>GEOSUD</gco:CharacterString>
+		</gmd:organisationName>
+		<gmd:contactInfo>
+			<gmd:CI_Contact>
+				<gmd:address>
+					<gmd:CI_Address>
+						<gmd:electronicMailAddress>
+							<gco:CharacterString>contact_geosud@teledetction.fr</gco:CharacterString>
+						</gmd:electronicMailAddress>
+					</gmd:CI_Address>
+				</gmd:address>
+			</gmd:CI_Contact>
+		</gmd:contactInfo>
+		<gmd:role>
+			<gmd:CI_RoleCode codeListValue="pointOfContact" codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/gmxCodelists.xml#CI_RoleCode">Point of contact</gmd:CI_RoleCode>
+		</gmd:role>
+	</gmd:CI_ResponsibleParty>
+</gmd:contact>
+			
+			
+			
             <gmd:dateStamp>
                 <gco:DateTime>2013-03-27T13:47:50+01:00</gco:DateTime>
             </gmd:dateStamp>
+			
             <gmd:metadataStandardName>
                 <gco:CharacterString>x-urn:mdweb:schema:ISO19115-2:imagery-metadata-geosud</gco:CharacterString>
             </gmd:metadataStandardName>
+			
             <gmd:metadataStandardVersion>
                 <gco:CharacterString>First Edition-2009-02-15</gco:CharacterString>
             </gmd:metadataStandardVersion>
+			
             <gmd:spatialRepresentationInfo>
                 <gmd:MD_Georectified>
                     <gmd:numberOfDimensions>
@@ -104,6 +108,8 @@
 <gco:CharacterString>SPOT 5 10m Sun Jul 03 11:12:37 CEST 2005</gco:CharacterString>
                             </gmd:title>
                             <gmd:date>
+							
+							
 <gmd:CI_Date>
     <gmd:dateType>
         <gmd:CI_DateTypeCode codeSpace="eng" codeListValue="creation" codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode">Creation</gmd:CI_DateTypeCode>
@@ -300,7 +306,7 @@
                     <gmd:spatialResolution>
                         <gmd:MD_Resolution>
                             <gmd:distance>
-<gco:Distance uom="http://schemas.opengis.net/iso/19139/20070417/resources/uom/gmxUom.xml#xpointer(//*[@gml:id='m'])">resolution</gco:Distance>
+<gco:Distance uom="http://schemas.opengis.net/iso/19139/20070417/resources/uom/gmxUom.xml#xpointer(//*[@gml:id='m'])">10</gco:Distance>
                             </gmd:distance>
                         </gmd:MD_Resolution>
                     </gmd:spatialResolution>
@@ -370,6 +376,8 @@
                     </gmd:supplementalInformation>
                 </gmd:MD_DataIdentification>
             </gmd:identificationInfo>
+			
+			
             <gmd:contentInfo>
                 <gmd:MD_ImageDescription>
                     <gmd:contentType>
@@ -534,19 +542,28 @@
                     </gmd:processingLevelCode>
                 </gmd:MD_ImageDescription>
             </gmd:contentInfo>
+			
+			
+			
+			
             <gmd:distributionInfo>
                 <gmd:MD_Distribution>
                     <gmd:transferOptions>
                         <gmd:MD_DigitalTransferOptions>
                             <gmd:onLine>
+								<gmd:CI_OnlineResource>
 									<gmd:linkage>
 										<gmd:URL>ftp://geosud-sw.teledetection.fr/SCENE_5_037-261_05_07_03_11_12_37_2_J.zip</gmd:URL>
 									</gmd:linkage>
+								</gmd:CI_OnlineResource>
                             </gmd:onLine>
                         </gmd:MD_DigitalTransferOptions>
                     </gmd:transferOptions>
                 </gmd:MD_Distribution>
             </gmd:distributionInfo>
+			
+			
+			
             <gmd:dataQualityInfo>
                 <gmd:DQ_DataQuality>
                     <gmd:scope>
@@ -638,6 +655,9 @@
                     </gmd:lineage>
                 </gmd:DQ_DataQuality>
             </gmd:dataQualityInfo>
+			
+			
+			
             <gmd:metadataConstraints>
                 <gmd:MD_LegalConstraints>
                     <gmd:useConstraints>
@@ -704,6 +724,9 @@
                     </gmi:platform>
                 </gmi:MI_AcquisitionInformation>
             </gmi:acquisitionInformation>
+
+			
+			
         </gmi:MI_Metadata>
     </csw:SearchResults>
 </csw:GetRecordsResponse>
