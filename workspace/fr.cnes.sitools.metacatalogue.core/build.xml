@@ -160,7 +160,6 @@
 			<entry key="HOST_DOMAIN" value="${HOST_DOMAIN}" />
 			<entry key="PUBLIC_HOST_DOMAIN" value="${PUBLIC_HOST_DOMAIN}" />
 			<entry key="HOST_PORT" value="${HOST_PORT}" />
-			<entry key="ETAG_URL" value="${ETAG_URL}" />
 		</propertyfile>
 		<copy outputencoding="UTF-8" tofile="metacatalogue.properties" file="${conf.properties.dir}/metacatalogue.properties" overwrite="true" />
 
