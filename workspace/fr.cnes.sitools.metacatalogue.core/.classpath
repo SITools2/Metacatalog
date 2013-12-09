@@ -15,5 +15,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/solrj-4.5"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/tests"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/audit"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/com.hp.hpl.jena"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
