@@ -66,87 +66,58 @@
  <fields>
    
 	<!-- INTERNAL FIELDS -->
-	<field name="_geometry" type="location_rpt" indexed="true" stored="true" multiValued="false"/>
-	<field name="_uuid" type="string" indexed="true" stored="true" multiValued="false"/>
 	<field name="_publicServices" type="boolean" indexed="false" stored="true" multiValued="false"/>
 	<field name="_geometry_geojson" type="text_general" indexed="false" stored="true" multiValued="false"/>
+	<field name="_resolution_domain" type="string" indexed="true" stored="true" multiValued="false"/>
+	<field name="_concepts" type="string" indexed="true" stored="true" multiValued="true"/>
+
 	
 	<field name="searchTerms" type="text_general" indexed="true" stored="false" multiValued="true"/>
 	
 	<!-- Fields -->
-	<field name="id" type="text_general" indexed="true" stored="true" multiValued="false"/>
-	<field name="language" type="text_general" indexed="true" stored="true" multiValued="false"/>
-	<field name="modificationDate" type="date" indexed="true" stored="true" multiValued="false"/>
+	<field name="footprint" type="location_rpt" indexed="true" stored="true" multiValued="false"/>
+	<field name="identifier" type="string" indexed="true" stored="true" multiValued="false"/>
+	<field name="authority" type="string" indexed="true" stored="true" multiValued="false"/>
+	<field name="project" type="string" indexed="true" stored="true" multiValued="false"/>
 	<field name="title" type="text_general" indexed="true" stored="true" multiValued="false"/>
 	<field name="description" type="text_general" indexed="true" stored="true" multiValued="false"/>
-	<field name="resourceType" type="text_general" indexed="false" stored="true" multiValued="false"/>
-	<field name="lineage" type="text_general" indexed="false" stored="true" multiValued="false"/>
-	<field name="processingLevel" type="text_general" indexed="false" stored="true" multiValued="false"/>
+	<field name="product" type="string" indexed="true" stored="true" multiValued="false"/>
+	<field name="platform" type="string" indexed="true" stored="true" multiValued="false"/>
+	<field name="instrument" type="string" indexed="true" stored="true" multiValued="false"/>
+	<field name="processingLevel" type="string" indexed="true" stored="true" multiValued="false"/>
 	
-	<field name="pointOfContact.organisationName" type="text_general" indexed="false" stored="true" multiValued="false"/>
-	<field name="pointOfContact.emailAddress" type="text_general" indexed="false" stored="true" multiValued="false"/>
-	<field name="pointOfContact.role" type="text_general" indexed="false" stored="true" multiValued="false"/>
-	
-	<field name="characterisationAxis.temporalAxis.min" type="date" indexed="true" stored="true" multiValued="false"/>
-	<field name="characterisationAxis.temporalAxis.max" type="date" indexed="true" stored="true" multiValued="false"/>
-	<field name="characterisation.spatialAxis" type="text_general" indexed="false" stored="true" multiValued="false"/>
-	<field name="characterisation.wavelength" type="text_general" indexed="false" stored="true" multiValued="false"/>
-	
-	<field name="acquisitionSetup.facility.organisationName" type="text_general" indexed="false" stored="true" multiValued="false"/>
-	<field name="acquisitionSetup.facility.emailAddress" type="text_general" indexed="false" stored="true" multiValued="false"/>
-	<field name="acquisitionSetup.facility.role" type="text_general" indexed="false" stored="true" multiValued="false"/>
-	<field name="acquisitionSetup.instrument" type="text_tight" indexed="true" stored="true" multiValued="false"/>
-	<field name="acquisitionSetup.platform" type="text_tight" indexed="true" stored="true" multiValued="false"/>
-	<field name="acquisitionSetup.resolution" type="text_general" indexed="true" stored="true" multiValued="false"/>
-	<field name="acquisitionSetup.physicalParameters" type="text_general" indexed="false" stored="true" multiValued="false"/>
-	<field name="acquisitionSetup.illuminationElevation" type="text_general" indexed="false" stored="true" multiValued="false"/>
-	<field name="acquisitionSetup.cloudCover" type="text_general" indexed="true" stored="false" multiValued="false"/>
-	
-	<field name="conformity.specification.title" type="text_general" indexed="false" stored="true" multiValued="false"/>
-	<field name="conformity.specification.date" type="date" indexed="false" stored="true" multiValued="false"/>
-	<field name="conformity.specification.dateType" type="text_general" indexed="false" stored="true" multiValued="false"/>
-	<field name="conformity.explanation" type="text_general" indexed="false" stored="true" multiValued="false"/>
-	<field name="conformity.pass" type="text_general" indexed="false" stored="true" multiValued="false"/>
-	
-	<field name="distributionAccess.limitationPublicAccess" type="text_general" indexed="false" stored="true" multiValued="false"/>
-	<field name="distributionAccess.conditionForAccessAndUse" type="text_general" indexed="false" stored="true" multiValued="false"/>
-	<field name="distributionAccess.url" type="text_general" indexed="false" stored="true" multiValued="false"/>
-	<field name="distributionAccess.filesize" type="text_general" indexed="false" stored="true" multiValued="false"/>
-	<field name="distributionAccess.format" type="text_general" indexed="false" stored="true" multiValued="false"/>
-	<!-- Services -->
-	<field name="services.browse.title" type="text_general" indexed="false" stored="true" multiValued="false"/>
-	<field name="services.browse.layer.type" type="text_general" indexed="false" stored="true" multiValued="false"/>
-	<field name="services.browse.layer.url" type="text_general" indexed="false" stored="true" multiValued="false"/>
-	<field name="services.browse.layer.layers" type="text_general" indexed="false" stored="true" multiValued="false"/>
-	<field name="services.browse.layer.version" type="text_general" indexed="false" stored="true" multiValued="false"/>
-	<field name="services.browse.layer.bbox" type="text_general" indexed="false" stored="true" multiValued="false"/>
-	<field name="services.browse.layer.srs" type="text_general" indexed="false" stored="true" multiValued="false"/>
-	<field name="services.metadata.url" type="text_general" indexed="false" stored="true" multiValued="false"/>
-	<field name="topicCategory" type="text_general" indexed="true" stored="true" multiValued="false"/>
-	<field name="keywords" type="text_general" indexed="true" stored="true" multiValued="true"/>
-	<field name="properties.key" type="text_general" indexed="true" stored="true" multiValued="true"/>
-	
-	
-	<!-- Added fields to be compatible with the opensearch EO model -->
+	<field name="resolution" type="tfloat" indexed="true" stored="true" multiValued="false"/>
+	<field name="startDate" type="date" indexed="true" stored="true" multiValued="false"/>
+	<field name="completionDate" type="date" indexed="true" stored="true" multiValued="false"/>
+		
+	<field name="thumbnail" type="string" indexed="false" stored="true" multiValued="false"/>
 	<field name="quicklook" type="text_general" indexed="false" stored="true" multiValued="false"/>
-	<field name="thumbnail" type="text_general" indexed="false" stored="true" multiValued="false"/>
-	<field name="project" type="text_general" indexed="true" stored="true" multiValued="false"/>
-	<field name="product" type="text_general" indexed="true" stored="true" multiValued="false"/>
-	<field name="acquisitionSetup" type="text_tight" indexed="true" stored="true" multiValued="false"/>
+	<field name="archive" type="string" indexed="false" stored="true" multiValued="false"/>
+	<field name="mimeType" type="string" indexed="false" stored="true" multiValued="false"/>
+	<field name="wms" type="string" indexed="false" stored="true" multiValued="false"/>	
 	
-	<dynamicField name="healpix-order-*" type="long" indexed="true" stored="true" multiValued="true"/>
+	<field name="created" type="date" indexed="true" stored="true" multiValued="false"/>
+	<field name="modified" type="date" indexed="true" stored="true" multiValued="false"/>
+	<field name="country" type="text_tight" indexed="true" stored="false" multiValued="true"/>
+	<field name="region" type="text_tight" indexed="true" stored="false" multiValued="true"/>
+	<field name="department" type="text_tight" indexed="true" stored="false" multiValued="true"/>
+	<field name="city" type="text_tight" indexed="true" stored="false" multiValued="true"/>
+	
+	<field name="keywords" type="string" indexed="false" stored="true" multiValued="true"/>
+
+	
+	<!-- dynamicField -->
 	<dynamicField name="properties.*" type="text_general" indexed="true" stored="true" multiValued="false"/>
 	<dynamicField name="*" type="text_general" indexed="false" stored="true" multiValued="true"/>
-
-   
+	   
     <field name="_version_" type="long" indexed="true" stored="true"/>
-
+	
  </fields>
 
  <!-- Field to use to determine and enforce document uniqueness. 
       Unless this field is marked with required="false", it will be a required field
    -->
- <uniqueKey>_uuid</uniqueKey>
+ <uniqueKey>identifier</uniqueKey>
 
   <!-- field for the QueryParser to use when an explicit fieldname is absent
  DEPRECATED: specify "df" in your request handler instead.
@@ -160,12 +131,15 @@
         is added to the index.  It's used either to index the same field differently,
         or to add multiple fields to the same field for easier/faster searching.  -->
 
-   
+
+	<copyField source="authority" dest="searchTerms" maxChars="3000"/>
+	<copyField source="project" dest="searchTerms" maxChars="3000"/>
 	<copyField source="title" dest="searchTerms" maxChars="3000"/>
 	<copyField source="description" dest="searchTerms" maxChars="3000"/>
-	<copyField source="acquisitionSetup.platform" dest="searchTerms" maxChars="3000"/>
-	<copyField source="acquisitionSetup.instrument" dest="searchTerms" maxChars="3000"/>
-
+	<copyField source="product" dest="searchTerms" maxChars="3000"/>
+	<copyField source="platform" dest="searchTerms" maxChars="3000"/>
+	<copyField source="instrument" dest="searchTerms" maxChars="3000"/>
+	
    <!-- uncomment the following to ignore any fields that don't already match an existing 
         field name or dynamic field, rather than reporting them as an error. 
         alternately, change the type="ignored" to some other type e.g. "text" if you want 
@@ -174,20 +148,6 @@
   
 
 
- <!-- Field to use to determine and enforce document uniqueness. 
-      Unless this field is marked with required="false", it will be a required field
-   -->
- <uniqueKey>id</uniqueKey>
-
-   <!-- Above, multiple source fields are copied to the [text] field. 
-	  Another way to map multiple source fields to the same 
-	  destination field is to use the dynamic field syntax. 
-	  copyField also supports a maxChars to copy setting.  -->
-	   
-   <!-- <copyField source="*_t" dest="text" maxChars="3000"/> -->
-
-   <!-- copy name to alphaNameSort, a field designed for sorting by name -->
-   <!-- <copyField source="name" dest="alphaNameSort"/> -->
  
   <types>
     <!-- field type definitions. The "name" attribute is
