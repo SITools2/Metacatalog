@@ -130,7 +130,7 @@ public class MetacatalogueApplication extends AbstractApplicationPlugin {
     attachRedirector(router, "/admin/{harvesterId}/harvest/clean", urlHarvester, parameters);
     attachRedirector(router, "/admin/{harvesterId}/harvest/stop", urlHarvester, parameters);
     attachRedirector(router, "/admin/{harvesterId}/harvest/status", urlHarvester, parameters);
-    
+
     attachRedirector(router, "/logs/{harvesterId}", urlHarvester, parameters);
 
     // Opensearch API exposition
@@ -488,6 +488,15 @@ public class MetacatalogueApplication extends AbstractApplicationPlugin {
           constraint.setLevel(ConstraintViolationLevel.CRITICAL);
           constraint
               .setMessage("syndicationRight must take one of the following values : open, private, limited, closed");
+          constraintList.add(constraint);
+        }
+
+        ApplicationPluginParameter thesaurus = params.get("thesaurus");
+        if (thesaurus == null || (thesaurus != null && !thesaurus.getValue().isEmpty())) {
+          ConstraintViolation constraint = new ConstraintViolation();
+          constraint.setValueName("thesaurus");
+          constraint.setLevel(ConstraintViolationLevel.CRITICAL);
+          constraint.setMessage("thesaurus cannot be empty");
           constraintList.add(constraint);
         }
         // ApplicationPluginParameter solrCore = params.get("solrCore");
