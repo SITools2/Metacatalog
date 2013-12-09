@@ -207,6 +207,14 @@
 			</fileset>
 		</pack>
 		
+		<!-- DATA -->
+		<pack name="thesaurus" preselected="yes" required="yes" parent="Server">
+			<description>Thesaurus file</description>
+			<file override="true" src="../fr.cnes.sitools.metacatalogue.core/thesaurus/TechniqueDev3.rdf"
+				targetdir="$INSTALL_PATH/$fr.cnes.sitools.metacatalogue.corePath/thesaurus">				
+			</file>
+		</pack>
+		
 		<!-- SERVER EXTENSIONS -->
 		<pack name="ServerExtensions" preselected="yes" required="no">
 			<description>Server extensions</description>
