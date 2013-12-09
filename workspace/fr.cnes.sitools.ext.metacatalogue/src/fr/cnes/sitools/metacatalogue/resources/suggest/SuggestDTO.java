@@ -22,6 +22,8 @@ public class SuggestDTO {
 
   private String suggestion;
 
+  private String suggestionAltLabel;
+
   private long nb;
 
   /**
@@ -60,6 +62,25 @@ public class SuggestDTO {
    */
   public void setNb(long nb) {
     this.nb = nb;
+  }
+
+  /**
+   * Gets the suggestionAltLabel value
+   * 
+   * @return the suggestionAltLabel
+   */
+  public String getSuggestionAltLabel() {
+    return suggestionAltLabel;
+  }
+
+  /**
+   * Sets the value of suggestionAltLabel
+   * 
+   * @param suggestionAltLabel
+   *          the suggestionAltLabel to set
+   */
+  public void setSuggestionAltLabel(String suggestionAltLabel) {
+    this.suggestionAltLabel = suggestionAltLabel;
   }
 
 }

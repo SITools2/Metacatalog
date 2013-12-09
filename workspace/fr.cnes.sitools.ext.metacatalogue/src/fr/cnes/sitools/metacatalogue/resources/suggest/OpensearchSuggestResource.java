@@ -27,6 +27,7 @@ import java.util.Map;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.request.QueryRequest;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.client.solrj.response.TermsResponse;
 import org.apache.solr.client.solrj.response.TermsResponse.Term;
@@ -64,26 +65,32 @@ public class OpensearchSuggestResource extends AbstractOpensearchQueryResource {
       for (Concept concept : concepts) {
         SuggestDTO suggestDTO = new SuggestDTO();
         suggestDTO.setSuggestion(concept.getProperties().get("prefLabelNarrower").toString());
+        suggestDTO.setSuggestionAltLabel(concept.getProperties().get("altLabelNarrower").toString());
         suggests.add(suggestDTO);
       }
 
       // get suggestion number in the metacatalogue then
       if (suggests.size() > 0) {
         SolrServer server = SolRUtils.getSolRServer(solrCoreUrl);
+
         SolrQuery solrQuery = new SolrQuery();
         solrQuery.setRequestHandler("/terms");
         solrQuery.setTerms(true);
         solrQuery.setTermsLimit(-1);
-        solrQuery.addTermsField("concepts");
+        solrQuery.addTermsField(MetacatalogField._CONCEPTS.getField());
 
         QueryResponse rsp;
         try {
-          rsp = server.query(solrQuery);
+          QueryRequest request = new QueryRequest(solrQuery);
+          rsp = request.process(server);
           TermsResponse termsResponse = rsp.getTermsResponse();
           List<TermsResponse.Term> terms = termsResponse.getTerms(MetacatalogField._CONCEPTS.getField());
           Map<String, Long> map = createMapFromTerms(terms);
+          Long nb = null;
           for (SuggestDTO suggest : suggests) {
-            Long nb = map.get(suggest.getSuggestion());
+            if (map != null) {
+              nb = map.get(suggest.getSuggestionAltLabel());
+            }
             if (nb == null) {
               suggest.setNb(0);
             }
@@ -108,8 +115,10 @@ public class OpensearchSuggestResource extends AbstractOpensearchQueryResource {
 
   private Map<String, Long> createMapFromTerms(List<Term> terms) {
     Map<String, Long> map = new HashMap<String, Long>();
-    for (Term term : terms) {
-      map.put(term.getTerm(), term.getFrequency());
+    if (terms != null) {
+      for (Term term : terms) {
+        map.put(term.getTerm(), term.getFrequency());
+      }
     }
     return map;
   }
