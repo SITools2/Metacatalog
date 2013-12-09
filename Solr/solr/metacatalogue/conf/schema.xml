@@ -69,19 +69,22 @@
 	<field name="_publicServices" type="boolean" indexed="false" stored="true" multiValued="false"/>
 	<field name="_geometry_geojson" type="text_general" indexed="false" stored="true" multiValued="false"/>
 	<field name="_resolution_domain" type="string" indexed="true" stored="true" multiValued="false"/>
+	<field name="_concepts" type="string" indexed="true" stored="true" multiValued="true"/>
+
 	
 	<field name="searchTerms" type="text_general" indexed="true" stored="false" multiValued="true"/>
 	
 	<!-- Fields -->
 	<field name="footprint" type="location_rpt" indexed="true" stored="true" multiValued="false"/>
 	<field name="identifier" type="string" indexed="true" stored="true" multiValued="false"/>
-	<field name="authority " type="string" indexed="true" stored="true" multiValued="false"/>
+	<field name="authority" type="string" indexed="true" stored="true" multiValued="false"/>
 	<field name="project" type="string" indexed="true" stored="true" multiValued="false"/>
 	<field name="title" type="text_general" indexed="true" stored="true" multiValued="false"/>
 	<field name="description" type="text_general" indexed="true" stored="true" multiValued="false"/>
 	<field name="product" type="string" indexed="true" stored="true" multiValued="false"/>
 	<field name="platform" type="string" indexed="true" stored="true" multiValued="false"/>
 	<field name="instrument" type="string" indexed="true" stored="true" multiValued="false"/>
+	<field name="processingLevel" type="string" indexed="true" stored="true" multiValued="false"/>
 	
 	<field name="resolution" type="tfloat" indexed="true" stored="true" multiValued="false"/>
 	<field name="startDate" type="date" indexed="true" stored="true" multiValued="false"/>
@@ -99,6 +102,9 @@
 	<field name="region" type="text_tight" indexed="true" stored="false" multiValued="true"/>
 	<field name="department" type="text_tight" indexed="true" stored="false" multiValued="true"/>
 	<field name="city" type="text_tight" indexed="true" stored="false" multiValued="true"/>
+	
+	<field name="keywords" type="string" indexed="false" stored="true" multiValued="true"/>
+
 	
 	<!-- dynamicField -->
 	<dynamicField name="properties.*" type="text_general" indexed="true" stored="true" multiValued="false"/>
