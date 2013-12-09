@@ -83,7 +83,7 @@ public class CswMetadataValidator extends HarvesterStep {
           }
         }
       }
-
+      
       /* critical errors (mandatory fields) : record is not harvested */
       boolean fail = false;
       for (MetacatalogField field : mandatoryFields) {
@@ -99,16 +99,7 @@ public class CswMetadataValidator extends HarvesterStep {
               + " not inserted in the metacatalog");
           fail = true;
         }
-        /* check hierarchy level name = image */
-        if (field.getField().equals("hierarchyLevelName")){
-          if (!doc.get(field.getField()).equals("image")){
-            logger.info(field.getField() + " not set to \"image\" for record : " + doc.get(MetacatalogField.IDENTIFIER.getField())
-                + " not inserted in the metacatalog");
-            fail = true;
-          }
-        }
         if (field.isDate()) {
-
           List<String> fmts = new ArrayList<String>();
           fmts.add("yyyy-MM-DD'T'HH:mm:ss");
           fmts.add("yyyy-MM-DD'T'HH:mm:ss(Z)");
@@ -124,6 +115,13 @@ public class CswMetadataValidator extends HarvesterStep {
           }
 
         }
+      }
+      
+      /* check hierarchy level name = image */
+      if (!doc.get(MetacatalogField.getField("hierarchyLevelName").getField()).equals("image")){
+         logger.info(MetacatalogField.getField("hierarchyLevelName").getField() + " not set to \"image\" for record : " + doc.get(MetacatalogField.IDENTIFIER.getField())
+             + " not inserted in the metacatalog");
+         fail = true;
       }
       if (fail) {
         iterator.remove();
