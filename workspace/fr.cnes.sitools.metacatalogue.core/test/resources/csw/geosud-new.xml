@@ -1,732 +1,794 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<csw:GetRecordsResponse xmlns:fra="http://www.cnig.gouv.fr/2005/fra" xmlns:gfc="http://www.isotc211.org/2005/gfc" xmlns:sml1="http://www.opengis.net/sensorML/1.0" xmlns:icism="urn:us:gov:ic:ism:v2" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:gmi="http://www.isotc211.org/2005/gmi" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:swe1="http://www.opengis.net/swe/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gml="http://www.opengis.net/gml" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:ows="http://www.opengis.net/ows" xmlns:ins="http://www.inspire.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ogc="http://www.opengis.net/ogc" xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dct="http://purl.org/dc/terms/" xmlns:ns22="http://www.opengis.net/ows/1.1" xmlns:cat="http://www.opengis.net/cat/csw" xmlns:dc2="http://www.purl.org/dc/elements/1.1/" xmlns:dct2="http://www.purl.org/dc/terms/" xmlns:ns26="http://www.opengis.net/gml/" version="2.0.2">
-    <csw:SearchStatus timestamp="2013-10-15T15:09:24.592+02:00"/>
-    <csw:SearchResults elementSet="summary" numberOfRecordsMatched="1" numberOfRecordsReturned="1" nextRecord="0">
-        <gmi:MI_Metadata>
-            
-			 <gmd:fileIdentifier>
-                <gco:CharacterString>SCENE_5_037-261_05_07_03_11_12_37_2_J</gco:CharacterString>
- </gmd:fileIdentifier>
- 
-<gmd:language>
-	<gmd:LanguageCode codeListValue="eng" codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/ML_gmxCodelists.xml#LanguageCode">English</gmd:LanguageCode>
-</gmd:language>
-			
-<gmd:characterSet>
-	<gmd:MD_CharacterSetCode codeListValue="utf8" codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode">UTF-8</gmd:MD_CharacterSetCode>
-</gmd:characterSet>
+<csw:GetRecordsResponse xmlns:fra="http://www.cnig.gouv.fr/2005/fra"
+	xmlns:gfc="http://www.isotc211.org/2005/gfc" xmlns:sml1="http://www.opengis.net/sensorML/1.0"
+	xmlns:icism="urn:us:gov:ic:ism:v2" xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gmx="http://www.isotc211.org/2005/gmx"
+	xmlns:gmi="http://www.isotc211.org/2005/gmi" xmlns:gmd="http://www.isotc211.org/2005/gmd"
+	xmlns:swe1="http://www.opengis.net/swe/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:gml="http://www.opengis.net/gml" xmlns:srv="http://www.isotc211.org/2005/srv"
+	xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:ows="http://www.opengis.net/ows"
+	xmlns:ins="http://www.inspire.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:ogc="http://www.opengis.net/ogc" xmlns:csw="http://www.opengis.net/cat/csw/2.0.2"
+	xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:ns22="http://www.opengis.net/ows/1.1" xmlns:cat="http://www.opengis.net/cat/csw"
+	xmlns:dc2="http://www.purl.org/dc/elements/1.1/" xmlns:dct2="http://www.purl.org/dc/terms/"
+	xmlns:ns26="http://www.opengis.net/gml/" version="2.0.2">
+	<csw:SearchStatus timestamp="2013-10-15T15:09:24.592+02:00" />
+	<csw:SearchResults elementSet="summary"
+		numberOfRecordsMatched="1" numberOfRecordsReturned="1" nextRecord="0">
+		<gmi:MI_Metadata>
+
+			<gmd:fileIdentifier>
+				<gco:CharacterString>SCENE_5_037-261_05_07_03_11_12_37_2_J
+				</gco:CharacterString>
+			</gmd:fileIdentifier>
+
+			<gmd:language>
+				<gmd:LanguageCode codeListValue="eng"
+					codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/ML_gmxCodelists.xml#LanguageCode">English</gmd:LanguageCode>
+			</gmd:language>
+
+			<gmd:characterSet>
+				<gmd:MD_CharacterSetCode codeListValue="utf8"
+					codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode">UTF-8</gmd:MD_CharacterSetCode>
+			</gmd:characterSet>
 
 
-<gmd:parentIdentifier>
-                <gco:CharacterString>SPOT_France_2005:niveau_1A</gco:CharacterString>
-</gmd:parentIdentifier>
+			<gmd:parentIdentifier>
+				<gco:CharacterString>SPOT_France_2005:niveau_1A
+				</gco:CharacterString>
+			</gmd:parentIdentifier>
 
-<gmd:hierarchyLevelName>
-	<gco:CharacterString>image</gco:CharacterString>
-</gmd:hierarchyLevelName>
+			<gmd:hierarchyLevelName>
+				<gco:CharacterString>image</gco:CharacterString>
+			</gmd:hierarchyLevelName>
 
-<gmd:contact>
-	<gmd:CI_ResponsibleParty>
-		<gmd:organisationName>
-			<gco:CharacterString>GEOSUD</gco:CharacterString>
-		</gmd:organisationName>
-		<gmd:contactInfo>
-			<gmd:CI_Contact>
-				<gmd:address>
-					<gmd:CI_Address>
-						<gmd:electronicMailAddress>
-							<gco:CharacterString>contact_geosud@teledetction.fr</gco:CharacterString>
-						</gmd:electronicMailAddress>
-					</gmd:CI_Address>
-				</gmd:address>
-			</gmd:CI_Contact>
-		</gmd:contactInfo>
-		<gmd:role>
-			<gmd:CI_RoleCode codeListValue="pointOfContact" codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/gmxCodelists.xml#CI_RoleCode">Point of contact</gmd:CI_RoleCode>
-		</gmd:role>
-	</gmd:CI_ResponsibleParty>
-</gmd:contact>
-			
-			
-			
-            <gmd:dateStamp>
-                <gco:DateTime>2013-03-27T13:47:50+01:00</gco:DateTime>
-            </gmd:dateStamp>
-			
-            <gmd:metadataStandardName>
-                <gco:CharacterString>x-urn:mdweb:schema:ISO19115-2:imagery-metadata-geosud</gco:CharacterString>
-            </gmd:metadataStandardName>
-			
-            <gmd:metadataStandardVersion>
-                <gco:CharacterString>First Edition-2009-02-15</gco:CharacterString>
-            </gmd:metadataStandardVersion>
-			
-            <gmd:spatialRepresentationInfo>
-                <gmd:MD_Georectified>
-                    <gmd:numberOfDimensions>
-                        <gco:Integer>2</gco:Integer>
-                    </gmd:numberOfDimensions>
-                    <gmd:axisDimensionProperties>
-                        <gmd:MD_Dimension>
-                            <gmd:dimensionName>
-<gmd:MD_DimensionNameTypeCode codeListValue="row" codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/gmxCodelists.xml#MD_DimensionNameTypeCode">Row</gmd:MD_DimensionNameTypeCode>
-                            </gmd:dimensionName>
-                            <gmd:dimensionSize>
-<gco:Integer>6000</gco:Integer>
-                            </gmd:dimensionSize>
-                        </gmd:MD_Dimension>
-                    </gmd:axisDimensionProperties>
-                    <gmd:axisDimensionProperties>
-                        <gmd:MD_Dimension>
-                            <gmd:dimensionName>
-<gmd:MD_DimensionNameTypeCode codeListValue="column" codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/gmxCodelists.xml#MD_DimensionNameTypeCode">Column</gmd:MD_DimensionNameTypeCode>
-                            </gmd:dimensionName>
-                            <gmd:dimensionSize>
-<gco:Integer>6000</gco:Integer>
-                            </gmd:dimensionSize>
-                        </gmd:MD_Dimension>
-                    </gmd:axisDimensionProperties>
-                    <gmd:cellGeometry>
-                        <gmd:MD_CellGeometryCode codeListValue="point" codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/gmxCodelists.xml#MD_CellGeometryCode">Point</gmd:MD_CellGeometryCode>
-                    </gmd:cellGeometry>
-                    <gmd:transformationParameterAvailability>
-                        <gco:Boolean>false</gco:Boolean>
-                    </gmd:transformationParameterAvailability>
-                    <gmd:checkPointAvailability>
-                        <gco:Boolean>false</gco:Boolean>
-                    </gmd:checkPointAvailability>
-                    <gmd:pointInPixel>
-                        <gmd:MD_PixelOrientationCode>center</gmd:MD_PixelOrientationCode>
-                    </gmd:pointInPixel>
-                </gmd:MD_Georectified>
-            </gmd:spatialRepresentationInfo>
-            <gmd:identificationInfo>
-                <gmd:MD_DataIdentification>
-                    <gmd:citation>
-                        <gmd:CI_Citation>
-                            <gmd:title>
-<gco:CharacterString>SPOT 5 10m Sun Jul 03 11:12:37 CEST 2005</gco:CharacterString>
-                            </gmd:title>
-                            <gmd:date>
-							
-							
-<gmd:CI_Date>
-    <gmd:dateType>
-        <gmd:CI_DateTypeCode codeSpace="eng" codeListValue="creation" codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode">Creation</gmd:CI_DateTypeCode>
-    </gmd:dateType>
-</gmd:CI_Date>
-                            </gmd:date>
-                            <gmd:citedResponsibleParty>
-<gmd:CI_ResponsibleParty>
-    <gmd:role>
-        <gmd:CI_RoleCode codeListValue="originator" codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/gmxCodelists.xml#CI_RoleCode">Originator</gmd:CI_RoleCode>
-    </gmd:role>
-</gmd:CI_ResponsibleParty>
-                            </gmd:citedResponsibleParty>
-                        </gmd:CI_Citation>
-                    </gmd:citation>
-                    <gmd:abstract>
-                        <gco:CharacterString>SPOT 5 SCENE HRG2 J</gco:CharacterString>
-                    </gmd:abstract>
-                    <gmd:graphicOverview>
-                        <gmd:MD_BrowseGraphic>
-                            <gmd:fileName>
-<gco:CharacterString>http://geosud-sw.teledetection.fr/mdweb-geosud/faces/mdwebDl?element=file://quicklook/SCENE_5_037-261_05_07_03_11_12_37_2_J.jpeg</gco:CharacterString>
-                            </gmd:fileName>
-                        </gmd:MD_BrowseGraphic>
-                    </gmd:graphicOverview>
-                    <gmd:graphicOverview>
-                        <gmd:MD_BrowseGraphic>
-                            <gmd:fileName>
-<gco:CharacterString>http://geosud-sw.teledetection.fr/mdweb-geosud/faces/mdwebDl?element=file://thumbnail/SCENE_5_037-261_05_07_03_11_12_37_2_J.jpeg</gco:CharacterString>
-                            </gmd:fileName>
-                        </gmd:MD_BrowseGraphic>
-                    </gmd:graphicOverview>
-                    <gmd:resourceFormat>
-                        <gmd:MD_Format>
-                            <gmd:name>
-<gco:CharacterString>GEOTIFF</gco:CharacterString>
-                            </gmd:name>
-                            <gmd:version>
-<gco:CharacterString>1.0</gco:CharacterString>
-                            </gmd:version>
-                        </gmd:MD_Format>
-                    </gmd:resourceFormat>
-                    <gmd:descriptiveKeywords>
-                        <gmd:MD_Keywords>
-                            <gmd:keyword>
-<gco:CharacterString>0.50 : 0.59 um</gco:CharacterString>
-                            </gmd:keyword>
-                            <gmd:keyword>
-<gco:CharacterString>vert</gco:CharacterString>
-                            </gmd:keyword>
-                            <gmd:keyword>
-<gco:CharacterString>0.61 : 0.68 um</gco:CharacterString>
-                            </gmd:keyword>
-                            <gmd:keyword>
-<gco:CharacterString>rouge</gco:CharacterString>
-                            </gmd:keyword>
-                            <gmd:keyword>
-<gco:CharacterString>0.78 : 0.89 um</gco:CharacterString>
-                            </gmd:keyword>
-                            <gmd:keyword>
-<gco:CharacterString>NIR</gco:CharacterString>
-                            </gmd:keyword>
-                            <gmd:keyword>
-<gco:CharacterString>1.58 : 1.75 um</gco:CharacterString>
-                            </gmd:keyword>
-                            <gmd:keyword>
-<gco:CharacterString>SWIR</gco:CharacterString>
-                            </gmd:keyword>
-                            <gmd:thesaurusName>
-<gmd:CI_Citation>
-    <gmd:title>
-        <gco:CharacterString>Bande spectrale</gco:CharacterString>
-    </gmd:title>
-</gmd:CI_Citation>
-                            </gmd:thesaurusName>
-                        </gmd:MD_Keywords>
-                    </gmd:descriptiveKeywords>
-                    <gmd:descriptiveKeywords>
-                        <gmd:MD_Keywords>
-                            <gmd:keyword>
-<gco:CharacterString>HRG</gco:CharacterString>
-                            </gmd:keyword>
-                            <gmd:thesaurusName>
-<gmd:CI_Citation>
-    <gmd:title>
-        <gco:CharacterString>Plateforme</gco:CharacterString>
-    </gmd:title>
-</gmd:CI_Citation>
-                            </gmd:thesaurusName>
-                        </gmd:MD_Keywords>
-                    </gmd:descriptiveKeywords>
-                    <gmd:descriptiveKeywords>
-                        <gmd:MD_Keywords>
-                            <gmd:keyword>
-<gco:CharacterString>10m</gco:CharacterString>
-                            </gmd:keyword>
-                            <gmd:thesaurusName>
-<gmd:CI_Citation>
-    <gmd:title>
-        <gco:CharacterString>Resolution</gco:CharacterString>
-    </gmd:title>
-</gmd:CI_Citation>
-                            </gmd:thesaurusName>
-                        </gmd:MD_Keywords>
-                    </gmd:descriptiveKeywords>
-                    <gmd:descriptiveKeywords>
-                        <gmd:MD_Keywords>
-                            <gmd:keyword>
-<gco:CharacterString>120km</gco:CharacterString>
-                            </gmd:keyword>
-                            <gmd:thesaurusName>
-<gmd:CI_Citation>
-    <gmd:title>
-        <gco:CharacterString>Fauchee</gco:CharacterString>
-    </gmd:title>
-</gmd:CI_Citation>
-                            </gmd:thesaurusName>
-                        </gmd:MD_Keywords>
-                    </gmd:descriptiveKeywords>
-                    <gmd:descriptiveKeywords>
-                        <gmd:MD_Keywords>
-                            <gmd:keyword>
-<gco:CharacterString>SPOT_France_2005:niveau_1A</gco:CharacterString>
-                            </gmd:keyword>
-                            <gmd:thesaurusName>
-<gmd:CI_Citation>
-    <gmd:title>
-        <gco:CharacterString>Collection</gco:CharacterString>
-    </gmd:title>
-</gmd:CI_Citation>
-                            </gmd:thesaurusName>
-                        </gmd:MD_Keywords>
-                    </gmd:descriptiveKeywords>
-                    <gmd:descriptiveKeywords>
-                        <gmd:MD_Keywords>
-                            <gmd:keyword>
-<gco:CharacterString>8bits</gco:CharacterString>
-                            </gmd:keyword>
-                            <gmd:thesaurusName>
-<gmd:CI_Citation>
-    <gmd:title>
-        <gco:CharacterString>Encodage</gco:CharacterString>
-    </gmd:title>
-</gmd:CI_Citation>
-                            </gmd:thesaurusName>
-                        </gmd:MD_Keywords>
-                    </gmd:descriptiveKeywords>
-                    <gmd:descriptiveKeywords>
-                        <gmd:MD_Keywords>
-                            <gmd:keyword>
-<gco:CharacterString>mont-de-marsan</gco:CharacterString>
-                            </gmd:keyword>
-                            <gmd:keyword>
-<gco:CharacterString>biscarrosse</gco:CharacterString>
-                            </gmd:keyword>
+			<gmd:contact>
+				<gmd:CI_ResponsibleParty>
+					<gmd:organisationName>
+						<gco:CharacterString>GEOSUD</gco:CharacterString>
+					</gmd:organisationName>
+					<gmd:contactInfo>
+						<gmd:CI_Contact>
+							<gmd:address>
+								<gmd:CI_Address>
+									<gmd:electronicMailAddress>
+										<gco:CharacterString>contact_geosud@teledetction.fr
+										</gco:CharacterString>
+									</gmd:electronicMailAddress>
+								</gmd:CI_Address>
+							</gmd:address>
+						</gmd:CI_Contact>
+					</gmd:contactInfo>
+					<gmd:role>
+						<gmd:CI_RoleCode codeListValue="pointOfContact"
+							codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/gmxCodelists.xml#CI_RoleCode">Point of contact</gmd:CI_RoleCode>
+					</gmd:role>
+				</gmd:CI_ResponsibleParty>
+			</gmd:contact>
 
-                            <gmd:thesaurusName>
-<gmd:CI_Citation>
-    <gmd:title>
-        <gco:CharacterString>Villes</gco:CharacterString>
-    </gmd:title>
-</gmd:CI_Citation>
-                            </gmd:thesaurusName>
-                        </gmd:MD_Keywords>
-                    </gmd:descriptiveKeywords>
-                    
+
+
+			<gmd:dateStamp>
+				<gco:DateTime>2013-03-27T13:47:50+01:00</gco:DateTime>
+			</gmd:dateStamp>
+
+			<gmd:metadataStandardName>
+				<gco:CharacterString>x-urn:mdweb:schema:ISO19115-2:imagery-metadata-geosud
+				</gco:CharacterString>
+			</gmd:metadataStandardName>
+
+			<gmd:metadataStandardVersion>
+				<gco:CharacterString>First Edition-2009-02-15</gco:CharacterString>
+			</gmd:metadataStandardVersion>
+
+			<gmd:spatialRepresentationInfo>
+				<gmd:MD_Georectified>
+					<gmd:numberOfDimensions>
+						<gco:Integer>2</gco:Integer>
+					</gmd:numberOfDimensions>
+					<gmd:axisDimensionProperties>
+						<gmd:MD_Dimension>
+							<gmd:dimensionName>
+								<gmd:MD_DimensionNameTypeCode
+									codeListValue="row"
+									codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/gmxCodelists.xml#MD_DimensionNameTypeCode">Row</gmd:MD_DimensionNameTypeCode>
+							</gmd:dimensionName>
+							<gmd:dimensionSize>
+								<gco:Integer>6000</gco:Integer>
+							</gmd:dimensionSize>
+						</gmd:MD_Dimension>
+					</gmd:axisDimensionProperties>
+					<gmd:axisDimensionProperties>
+						<gmd:MD_Dimension>
+							<gmd:dimensionName>
+								<gmd:MD_DimensionNameTypeCode
+									codeListValue="column"
+									codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/gmxCodelists.xml#MD_DimensionNameTypeCode">Column</gmd:MD_DimensionNameTypeCode>
+							</gmd:dimensionName>
+							<gmd:dimensionSize>
+								<gco:Integer>6000</gco:Integer>
+							</gmd:dimensionSize>
+						</gmd:MD_Dimension>
+					</gmd:axisDimensionProperties>
+					<gmd:cellGeometry>
+						<gmd:MD_CellGeometryCode codeListValue="point"
+							codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/gmxCodelists.xml#MD_CellGeometryCode">Point</gmd:MD_CellGeometryCode>
+					</gmd:cellGeometry>
+					<gmd:transformationParameterAvailability>
+						<gco:Boolean>false</gco:Boolean>
+					</gmd:transformationParameterAvailability>
+					<gmd:checkPointAvailability>
+						<gco:Boolean>false</gco:Boolean>
+					</gmd:checkPointAvailability>
+					<gmd:pointInPixel>
+						<gmd:MD_PixelOrientationCode>center</gmd:MD_PixelOrientationCode>
+					</gmd:pointInPixel>
+				</gmd:MD_Georectified>
+			</gmd:spatialRepresentationInfo>
+
+
+			<gmd:identificationInfo>
+				<gmd:MD_DataIdentification>
+					<gmd:citation>
+						<gmd:CI_Citation>
+							<gmd:title>
+								<gco:CharacterString>SPOT 5 10m Sun Jul 03 11:12:37 CEST 2005
+								</gco:CharacterString>
+							</gmd:title>
+							<gmd:date>
+								<gmd:CI_Date>
+									<gmd:dateType>
+										<gmd:CI_DateTypeCode codeSpace="eng"
+											codeListValue="creation"
+											codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode">Creation</gmd:CI_DateTypeCode>
+									</gmd:dateType>
+								</gmd:CI_Date>
+							</gmd:date>
+							<gmd:citedResponsibleParty>
+								<gmd:CI_ResponsibleParty>
+									<gmd:role>
+										<gmd:CI_RoleCode codeListValue="originator"
+											codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/gmxCodelists.xml#CI_RoleCode">Originator</gmd:CI_RoleCode>
+									</gmd:role>
+								</gmd:CI_ResponsibleParty>
+							</gmd:citedResponsibleParty>
+						</gmd:CI_Citation>
+					</gmd:citation>
+					<gmd:abstract>
+						<gco:CharacterString>SPOT 5 SCENE HRG2 J</gco:CharacterString>
+					</gmd:abstract>
+					<gmd:graphicOverview>
+						<gmd:MD_BrowseGraphic>
+							<gmd:fileName>
+								<gco:CharacterString>http://geosud-sw.teledetection.fr/mdweb-geosud/faces/mdwebDl?element=file://quicklook/SCENE_5_037-261_05_07_03_11_12_37_2_J.jpeg
+								</gco:CharacterString>
+							</gmd:fileName>
+						</gmd:MD_BrowseGraphic>
+					</gmd:graphicOverview>
+					<gmd:graphicOverview>
+						<gmd:MD_BrowseGraphic>
+							<gmd:fileName>
+								<gco:CharacterString>http://geosud-sw.teledetection.fr/mdweb-geosud/faces/mdwebDl?element=file://thumbnail/SCENE_5_037-261_05_07_03_11_12_37_2_J.jpeg
+								</gco:CharacterString>
+							</gmd:fileName>
+						</gmd:MD_BrowseGraphic>
+					</gmd:graphicOverview>
+					<gmd:resourceFormat>
+						<gmd:MD_Format>
+							<gmd:name>
+								<gco:CharacterString>GEOTIFF</gco:CharacterString>
+							</gmd:name>
+							<gmd:version>
+								<gco:CharacterString>1.0</gco:CharacterString>
+							</gmd:version>
+						</gmd:MD_Format>
+					</gmd:resourceFormat>
 					<gmd:descriptiveKeywords>
-                        <gmd:MD_Keywords>
-                            <gmd:keyword>
-<gco:CharacterString>forets d'altitude du jura: foret du risol et mont d'or</gco:CharacterString>
-                            </gmd:keyword>
-                            
-                            <gmd:thesaurusName>
+						<gmd:MD_Keywords>
+							<gmd:keyword>
+								<gco:CharacterString>0.50 : 0.59 um</gco:CharacterString>
+							</gmd:keyword>
+							<gmd:keyword>
+								<gco:CharacterString>vert</gco:CharacterString>
+							</gmd:keyword>
+							<gmd:keyword>
+								<gco:CharacterString>0.61 : 0.68 um</gco:CharacterString>
+							</gmd:keyword>
+							<gmd:keyword>
+								<gco:CharacterString>rouge</gco:CharacterString>
+							</gmd:keyword>
+							<gmd:keyword>
+								<gco:CharacterString>0.78 : 0.89 um</gco:CharacterString>
+							</gmd:keyword>
+							<gmd:keyword>
+								<gco:CharacterString>NIR</gco:CharacterString>
+							</gmd:keyword>
+							<gmd:keyword>
+								<gco:CharacterString>1.58 : 1.75 um</gco:CharacterString>
+							</gmd:keyword>
+							<gmd:keyword>
+								<gco:CharacterString>SWIR</gco:CharacterString>
+							</gmd:keyword>
+							<gmd:thesaurusName>
+								<gmd:CI_Citation>
+									<gmd:title>
+										<gco:CharacterString>Bande spectrale</gco:CharacterString>
+									</gmd:title>
+								</gmd:CI_Citation>
+							</gmd:thesaurusName>
+						</gmd:MD_Keywords>
+					</gmd:descriptiveKeywords>
+					<gmd:descriptiveKeywords>
+						<gmd:MD_Keywords>
+							<gmd:keyword>
+								<gco:CharacterString>HRG</gco:CharacterString>
+							</gmd:keyword>
+							<gmd:thesaurusName>
+								<gmd:CI_Citation>
+									<gmd:title>
+										<gco:CharacterString>Plateforme</gco:CharacterString>
+									</gmd:title>
+								</gmd:CI_Citation>
+							</gmd:thesaurusName>
+						</gmd:MD_Keywords>
+					</gmd:descriptiveKeywords>
+					<gmd:descriptiveKeywords>
+						<gmd:MD_Keywords>
+							<gmd:keyword>
+								<gco:CharacterString>10m</gco:CharacterString>
+							</gmd:keyword>
+							<gmd:thesaurusName>
+								<gmd:CI_Citation>
+									<gmd:title>
+										<gco:CharacterString>Resolution</gco:CharacterString>
+									</gmd:title>
+								</gmd:CI_Citation>
+							</gmd:thesaurusName>
+						</gmd:MD_Keywords>
+					</gmd:descriptiveKeywords>
+					<gmd:descriptiveKeywords>
+						<gmd:MD_Keywords>
+							<gmd:keyword>
+								<gco:CharacterString>120km</gco:CharacterString>
+							</gmd:keyword>
+							<gmd:thesaurusName>
+								<gmd:CI_Citation>
+									<gmd:title>
+										<gco:CharacterString>Fauchee</gco:CharacterString>
+									</gmd:title>
+								</gmd:CI_Citation>
+							</gmd:thesaurusName>
+						</gmd:MD_Keywords>
+					</gmd:descriptiveKeywords>
+					<gmd:descriptiveKeywords>
+						<gmd:MD_Keywords>
+							<gmd:keyword>
+								<gco:CharacterString>SPOT_France_2005:niveau_1A
+								</gco:CharacterString>
+							</gmd:keyword>
+							<gmd:thesaurusName>
+								<gmd:CI_Citation>
+									<gmd:title>
+										<gco:CharacterString>Collection</gco:CharacterString>
+									</gmd:title>
+								</gmd:CI_Citation>
+							</gmd:thesaurusName>
+						</gmd:MD_Keywords>
+					</gmd:descriptiveKeywords>
+					<gmd:descriptiveKeywords>
+						<gmd:MD_Keywords>
+							<gmd:keyword>
+								<gco:CharacterString>8bits</gco:CharacterString>
+							</gmd:keyword>
+							<gmd:thesaurusName>
+								<gmd:CI_Citation>
+									<gmd:title>
+										<gco:CharacterString>Encodage</gco:CharacterString>
+									</gmd:title>
+								</gmd:CI_Citation>
+							</gmd:thesaurusName>
+						</gmd:MD_Keywords>
+					</gmd:descriptiveKeywords>
+					<gmd:descriptiveKeywords>
+						<gmd:MD_Keywords>
+							<gmd:keyword>
+								<gco:CharacterString>mont-de-marsan</gco:CharacterString>
+							</gmd:keyword>
+							<gmd:keyword>
+								<gco:CharacterString>biscarrosse</gco:CharacterString>
+							</gmd:keyword>
+
+							<gmd:thesaurusName>
+								<gmd:CI_Citation>
+									<gmd:title>
+										<gco:CharacterString>Villes</gco:CharacterString>
+									</gmd:title>
+								</gmd:CI_Citation>
+							</gmd:thesaurusName>
+						</gmd:MD_Keywords>
+					</gmd:descriptiveKeywords>
+
+					<gmd:descriptiveKeywords>
+						<gmd:MD_Keywords>
+							<gmd:keyword>
+								<gco:CharacterString>forets d'altitude du jura: foret du risol
+									et mont d'or</gco:CharacterString>
+							</gmd:keyword>
+
+							<gmd:thesaurusName>
 								<gmd:CI_Citation>
 									<gmd:title>
 										<gco:CharacterString>Corine landcover</gco:CharacterString>
 									</gmd:title>
 								</gmd:CI_Citation>
-                            </gmd:thesaurusName>
-                        </gmd:MD_Keywords>
-						
-                    </gmd:descriptiveKeywords>
-					
-                    <gmd:resourceConstraints>
-                        <gmd:MD_LegalConstraints>
-                            <gmd:useConstraints>
-<gmd:MD_RestrictionCode codeListValue="copyright" codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/gmxCodelists.xml#MD_RestrictionCode">Copyright</gmd:MD_RestrictionCode>
-                            </gmd:useConstraints>
-                            <gmd:otherConstraints>
-<gco:CharacterString>COPYRIGHT CNES 03 07 2005 11 H 12 MN 37 S</gco:CharacterString>
-                            </gmd:otherConstraints>
-                        </gmd:MD_LegalConstraints>
-                    </gmd:resourceConstraints>
-                    <gmd:spatialResolution>
-                        <gmd:MD_Resolution>
-                            <gmd:distance>
-<gco:Distance uom="http://schemas.opengis.net/iso/19139/20070417/resources/uom/gmxUom.xml#xpointer(//*[@gml:id='m'])">10</gco:Distance>
-                            </gmd:distance>
-                        </gmd:MD_Resolution>
-                    </gmd:spatialResolution>
-                    <gmd:topicCategory>
-                        <gmd:MD_TopicCategoryCode>imageryBaseMapsEarthCover</gmd:MD_TopicCategoryCode>
-                    </gmd:topicCategory>
-                    <gmd:extent>
-                        <gmd:EX_Extent>
-                            <gmd:geographicElement>
-<gmd:EX_GeographicBoundingBox>
-    <gmd:extentTypeCode>
-        <gco:Boolean>true</gco:Boolean>
-    </gmd:extentTypeCode>
-    <gmd:westBoundLongitude>
-        <gco:Decimal>-1.2179816480856145</gco:Decimal>
-    </gmd:westBoundLongitude>
-    <gmd:eastBoundLongitude>
-        <gco:Decimal>-0.2641267524842901</gco:Decimal>
-    </gmd:eastBoundLongitude>
-    <gmd:southBoundLatitude>
-        <gco:Decimal>43.81890634560881</gco:Decimal>
-    </gmd:southBoundLatitude>
-    <gmd:northBoundLatitude>
-        <gco:Decimal>44.4932195390448</gco:Decimal>
-    </gmd:northBoundLatitude>
-</gmd:EX_GeographicBoundingBox>
-                            </gmd:geographicElement>
-                            <gmd:geographicElement>
-<gmd:EX_BoundingPolygon>
-    <gmd:polygon>
-        <gml:Polygon>
-            <gml:exterior>
-                <gml:Ring>
-                    <gml:curveMember>
-                        <gml:Curve>
-                            <gml:segments>
-<gml:LineStringSegment interpolation="linear" numDerivativesAtStart="2147483647" numDerivativesAtEnd="2147483647" numDerivativeInterior="0">
-    <gml:pos srsDimension="2" srsName="EPSG:4326">-1.009979 44.493411</gml:pos>
-    <gml:pos srsDimension="2" srsName="EPSG:4326">-0.26252 44.338979</gml:pos>
-    <gml:pos srsDimension="2" srsName="EPSG:4326">-0.475164 43.819098</gml:pos>
-    <gml:pos srsDimension="2" srsName="EPSG:4326">-1.216375 43.97254</gml:pos>
-    <gml:pos srsDimension="2" srsName="EPSG:4326">-1.009979 44.493411</gml:pos>
-</gml:LineStringSegment>
-                            </gml:segments>
-                        </gml:Curve>
-                    </gml:curveMember>
-                </gml:Ring>
-            </gml:exterior>
-        </gml:Polygon>
-    </gmd:polygon>
-</gmd:EX_BoundingPolygon>
-                            </gmd:geographicElement>
-                            <gmd:temporalElement>
-<gmd:EX_TemporalExtent>
-    <gmd:extent>
-        <gml:TimePeriod gml:id="SZKMWK">
-            <gml:beginPosition>2005-07-03T11:12:37+02:00</gml:beginPosition>
-            <gml:endPosition>2005-07-03T11:12:37+02:00</gml:endPosition>
-        </gml:TimePeriod>
-    </gmd:extent>
-</gmd:EX_TemporalExtent>
-                            </gmd:temporalElement>
-                        </gmd:EX_Extent>
-                    </gmd:extent>
-                    <gmd:supplementalInformation>
-                        <gco:CharacterString>incidence angle :10.694823</gco:CharacterString>
-                    </gmd:supplementalInformation>
-                </gmd:MD_DataIdentification>
-            </gmd:identificationInfo>
-			
-			
-            <gmd:contentInfo>
-                <gmd:MD_ImageDescription>
-                    <gmd:contentType>
-                        <gmd:MD_CoverageContentTypeCode codeListValue="image" codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/gmxCodelists.xml#MD_CoverageContentTypeCode">Image</gmd:MD_CoverageContentTypeCode>
-                    </gmd:contentType>
-                    <gmd:dimension>
-                        <gmd:MD_Band>
-                            <gmd:sequenceIdentifier>
-<gco:MemberName>
-    <gco:aName>
-        <gco:CharacterString>1</gco:CharacterString>
-    </gco:aName>
-    <gco:attributeType>
-        <gco:TypeName>
-            <gco:aName>
-                <gco:CharacterString>BAND_INDEX</gco:CharacterString>
-            </gco:aName>
-        </gco:TypeName>
-    </gco:attributeType>
-</gco:MemberName>
-                            </gmd:sequenceIdentifier>
-                            <gmd:descriptor>
-<gco:CharacterString>XS1</gco:CharacterString>
-                            </gmd:descriptor>
-                            <gmd:maxValue>
-<gco:Real>255.0</gco:Real>
-                            </gmd:maxValue>
-                            <gmd:minValue>
-<gco:Real>1.0</gco:Real>
-                            </gmd:minValue>
-                            <gmd:bitsPerValue>
-<gco:Integer>8</gco:Integer>
-                            </gmd:bitsPerValue>
-                            <gmd:scaleFactor>
-<gco:Decimal>0.5979223394548623</gco:Decimal>
-                            </gmd:scaleFactor>
-                            <gmd:offset>
-<gco:Decimal>0.0</gco:Decimal>
-                            </gmd:offset>
-                        </gmd:MD_Band>
-                    </gmd:dimension>
-                    <gmd:dimension>
-                        <gmd:MD_Band>
-                            <gmd:sequenceIdentifier>
-<gco:MemberName>
-    <gco:aName>
-        <gco:CharacterString>2</gco:CharacterString>
-    </gco:aName>
-    <gco:attributeType>
-        <gco:TypeName>
-            <gco:aName>
-                <gco:CharacterString>BAND_INDEX</gco:CharacterString>
-            </gco:aName>
-        </gco:TypeName>
-    </gco:attributeType>
-</gco:MemberName>
-                            </gmd:sequenceIdentifier>
-                            <gmd:descriptor>
-<gco:CharacterString>XS2</gco:CharacterString>
-                            </gmd:descriptor>
-                            <gmd:maxValue>
-<gco:Real>255.0</gco:Real>
-                            </gmd:maxValue>
-                            <gmd:minValue>
-<gco:Real>1.0</gco:Real>
-                            </gmd:minValue>
-                            <gmd:bitsPerValue>
-<gco:Integer>8</gco:Integer>
-                            </gmd:bitsPerValue>
-                            <gmd:scaleFactor>
-<gco:Decimal>0.6198924734515551</gco:Decimal>
-                            </gmd:scaleFactor>
-                            <gmd:offset>
-<gco:Decimal>0.0</gco:Decimal>
-                            </gmd:offset>
-                        </gmd:MD_Band>
-                    </gmd:dimension>
-                    <gmd:dimension>
-                        <gmd:MD_Band>
-                            <gmd:sequenceIdentifier>
-<gco:MemberName>
-    <gco:aName>
-        <gco:CharacterString>3</gco:CharacterString>
-    </gco:aName>
-    <gco:attributeType>
-        <gco:TypeName>
-            <gco:aName>
-                <gco:CharacterString>BAND_INDEX</gco:CharacterString>
-            </gco:aName>
-        </gco:TypeName>
-    </gco:attributeType>
-</gco:MemberName>
-                            </gmd:sequenceIdentifier>
-                            <gmd:descriptor>
-<gco:CharacterString>XS3</gco:CharacterString>
-                            </gmd:descriptor>
-                            <gmd:maxValue>
-<gco:Real>255.0</gco:Real>
-                            </gmd:maxValue>
-                            <gmd:minValue>
-<gco:Real>1.0</gco:Real>
-                            </gmd:minValue>
-                            <gmd:bitsPerValue>
-<gco:Integer>8</gco:Integer>
-                            </gmd:bitsPerValue>
-                            <gmd:scaleFactor>
-<gco:Decimal>0.9208103130755064</gco:Decimal>
-                            </gmd:scaleFactor>
-                            <gmd:offset>
-<gco:Decimal>0.0</gco:Decimal>
-                            </gmd:offset>
-                        </gmd:MD_Band>
-                    </gmd:dimension>
-                    <gmd:dimension>
-                        <gmd:MD_Band>
-                            <gmd:sequenceIdentifier>
-<gco:MemberName>
-    <gco:aName>
-        <gco:CharacterString>4</gco:CharacterString>
-    </gco:aName>
-    <gco:attributeType>
-        <gco:TypeName>
-            <gco:aName>
-                <gco:CharacterString>BAND_INDEX</gco:CharacterString>
-            </gco:aName>
-        </gco:TypeName>
-    </gco:attributeType>
-</gco:MemberName>
-                            </gmd:sequenceIdentifier>
-                            <gmd:descriptor>
-<gco:CharacterString>SWIR</gco:CharacterString>
-                            </gmd:descriptor>
-                            <gmd:maxValue>
-<gco:Real>255.0</gco:Real>
-                            </gmd:maxValue>
-                            <gmd:minValue>
-<gco:Real>1.0</gco:Real>
-                            </gmd:minValue>
-                            <gmd:bitsPerValue>
-<gco:Integer>8</gco:Integer>
-                            </gmd:bitsPerValue>
-                            <gmd:scaleFactor>
-<gco:Decimal>0.11943201953334566</gco:Decimal>
-                            </gmd:scaleFactor>
-                            <gmd:offset>
-<gco:Decimal>0.0</gco:Decimal>
-                            </gmd:offset>
-                        </gmd:MD_Band>
-                    </gmd:dimension>
-                    <gmd:illuminationElevationAngle>
-                        <gco:Decimal>66.218695</gco:Decimal>
-                    </gmd:illuminationElevationAngle>
-                    <gmd:illuminationAzimuthAngle>
-                        <gco:Decimal>147.82136</gco:Decimal>
-                    </gmd:illuminationAzimuthAngle>
-                    <gmd:processingLevelCode>
-                        <gmd:MD_Identifier>
-                            <gmd:code>
-<gco:CharacterString>1A</gco:CharacterString>
-                            </gmd:code>
-                        </gmd:MD_Identifier>
-                    </gmd:processingLevelCode>
-                </gmd:MD_ImageDescription>
-            </gmd:contentInfo>
-			
-			
-			
-			
-            <gmd:distributionInfo>
-                <gmd:MD_Distribution>
-                    <gmd:transferOptions>
-                        <gmd:MD_DigitalTransferOptions>
-                            <gmd:onLine>
+							</gmd:thesaurusName>
+						</gmd:MD_Keywords>
+
+					</gmd:descriptiveKeywords>
+
+					<gmd:resourceConstraints>
+						<gmd:MD_LegalConstraints>
+							<gmd:useConstraints>
+								<gmd:MD_RestrictionCode codeListValue="copyright"
+									codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/gmxCodelists.xml#MD_RestrictionCode">Copyright</gmd:MD_RestrictionCode>
+							</gmd:useConstraints>
+							<gmd:otherConstraints>
+								<gco:CharacterString>COPYRIGHT CNES 03 07 2005 11 H 12 MN 37 S
+								</gco:CharacterString>
+							</gmd:otherConstraints>
+						</gmd:MD_LegalConstraints>
+					</gmd:resourceConstraints>
+					<gmd:spatialResolution>
+						<gmd:MD_Resolution>
+							<gmd:distance>
+								<gco:Distance
+									uom="http://schemas.opengis.net/iso/19139/20070417/resources/uom/gmxUom.xml#xpointer(//*[@gml:id='m'])">10</gco:Distance>
+							</gmd:distance>
+						</gmd:MD_Resolution>
+					</gmd:spatialResolution>
+					<gmd:topicCategory>
+						<gmd:MD_TopicCategoryCode>imageryBaseMapsEarthCover
+						</gmd:MD_TopicCategoryCode>
+					</gmd:topicCategory>
+					<gmd:extent>
+						<gmd:EX_Extent>
+							<gmd:geographicElement>
+								<gmd:EX_GeographicBoundingBox>
+									<gmd:extentTypeCode>
+										<gco:Boolean>true</gco:Boolean>
+									</gmd:extentTypeCode>
+									<gmd:westBoundLongitude>
+										<gco:Decimal>-1.2179816480856145</gco:Decimal>
+									</gmd:westBoundLongitude>
+									<gmd:eastBoundLongitude>
+										<gco:Decimal>-0.2641267524842901</gco:Decimal>
+									</gmd:eastBoundLongitude>
+									<gmd:southBoundLatitude>
+										<gco:Decimal>43.81890634560881</gco:Decimal>
+									</gmd:southBoundLatitude>
+									<gmd:northBoundLatitude>
+										<gco:Decimal>44.4932195390448</gco:Decimal>
+									</gmd:northBoundLatitude>
+								</gmd:EX_GeographicBoundingBox>
+							</gmd:geographicElement>
+							<gmd:geographicElement>
+								<gmd:EX_BoundingPolygon>
+									<gmd:polygon>
+										<gml:Polygon>
+											<gml:exterior>
+												<gml:Ring>
+													<gml:curveMember>
+														<gml:Curve>
+															<gml:segments>
+																<gml:LineStringSegment
+																	interpolation="linear" numDerivativesAtStart="2147483647"
+																	numDerivativesAtEnd="2147483647" numDerivativeInterior="0">
+																	<gml:pos srsDimension="2" srsName="EPSG:4326">-1.009979
+																		44.493411</gml:pos>
+																	<gml:pos srsDimension="2" srsName="EPSG:4326">-0.26252
+																		44.338979</gml:pos>
+																	<gml:pos srsDimension="2" srsName="EPSG:4326">-0.475164
+																		43.819098</gml:pos>
+																	<gml:pos srsDimension="2" srsName="EPSG:4326">-1.216375
+																		43.97254</gml:pos>
+																	<gml:pos srsDimension="2" srsName="EPSG:4326">-1.009979
+																		44.493411</gml:pos>
+																</gml:LineStringSegment>
+															</gml:segments>
+														</gml:Curve>
+													</gml:curveMember>
+												</gml:Ring>
+											</gml:exterior>
+										</gml:Polygon>
+									</gmd:polygon>
+								</gmd:EX_BoundingPolygon>
+							</gmd:geographicElement>
+							<gmd:temporalElement>
+								<gmd:EX_TemporalExtent>
+									<gmd:extent>
+										<gml:TimePeriod gml:id="SZKMWK">
+											<gml:beginPosition>2005-07-03T11:12:37+02:00
+											</gml:beginPosition>
+											<gml:endPosition>2005-07-03T11:12:37+02:00</gml:endPosition>
+										</gml:TimePeriod>
+									</gmd:extent>
+								</gmd:EX_TemporalExtent>
+							</gmd:temporalElement>
+						</gmd:EX_Extent>
+					</gmd:extent>
+					<gmd:supplementalInformation>
+						<gco:CharacterString>incidence angle :10.694823
+						</gco:CharacterString>
+					</gmd:supplementalInformation>
+				</gmd:MD_DataIdentification>
+			</gmd:identificationInfo>
+
+
+			<gmd:contentInfo>
+				<gmd:MD_ImageDescription>
+					<gmd:contentType>
+						<gmd:MD_CoverageContentTypeCode
+							codeListValue="image"
+							codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/gmxCodelists.xml#MD_CoverageContentTypeCode">ALBEDO</gmd:MD_CoverageContentTypeCode>
+					</gmd:contentType>
+					<gmd:dimension>
+						<gmd:MD_Band>
+							<gmd:sequenceIdentifier>
+								<gco:MemberName>
+									<gco:aName>
+										<gco:CharacterString>1</gco:CharacterString>
+									</gco:aName>
+									<gco:attributeType>
+										<gco:TypeName>
+											<gco:aName>
+												<gco:CharacterString>BAND_INDEX</gco:CharacterString>
+											</gco:aName>
+										</gco:TypeName>
+									</gco:attributeType>
+								</gco:MemberName>
+							</gmd:sequenceIdentifier>
+							<gmd:descriptor>
+								<gco:CharacterString>XS1</gco:CharacterString>
+							</gmd:descriptor>
+							<gmd:maxValue>
+								<gco:Real>255.0</gco:Real>
+							</gmd:maxValue>
+							<gmd:minValue>
+								<gco:Real>1.0</gco:Real>
+							</gmd:minValue>
+							<gmd:bitsPerValue>
+								<gco:Integer>8</gco:Integer>
+							</gmd:bitsPerValue>
+							<gmd:scaleFactor>
+								<gco:Decimal>0.5979223394548623</gco:Decimal>
+							</gmd:scaleFactor>
+							<gmd:offset>
+								<gco:Decimal>0.0</gco:Decimal>
+							</gmd:offset>
+						</gmd:MD_Band>
+					</gmd:dimension>
+					<gmd:dimension>
+						<gmd:MD_Band>
+							<gmd:sequenceIdentifier>
+								<gco:MemberName>
+									<gco:aName>
+										<gco:CharacterString>2</gco:CharacterString>
+									</gco:aName>
+									<gco:attributeType>
+										<gco:TypeName>
+											<gco:aName>
+												<gco:CharacterString>BAND_INDEX</gco:CharacterString>
+											</gco:aName>
+										</gco:TypeName>
+									</gco:attributeType>
+								</gco:MemberName>
+							</gmd:sequenceIdentifier>
+							<gmd:descriptor>
+								<gco:CharacterString>XS2</gco:CharacterString>
+							</gmd:descriptor>
+							<gmd:maxValue>
+								<gco:Real>255.0</gco:Real>
+							</gmd:maxValue>
+							<gmd:minValue>
+								<gco:Real>1.0</gco:Real>
+							</gmd:minValue>
+							<gmd:bitsPerValue>
+								<gco:Integer>8</gco:Integer>
+							</gmd:bitsPerValue>
+							<gmd:scaleFactor>
+								<gco:Decimal>0.6198924734515551</gco:Decimal>
+							</gmd:scaleFactor>
+							<gmd:offset>
+								<gco:Decimal>0.0</gco:Decimal>
+							</gmd:offset>
+						</gmd:MD_Band>
+					</gmd:dimension>
+					<gmd:dimension>
+						<gmd:MD_Band>
+							<gmd:sequenceIdentifier>
+								<gco:MemberName>
+									<gco:aName>
+										<gco:CharacterString>3</gco:CharacterString>
+									</gco:aName>
+									<gco:attributeType>
+										<gco:TypeName>
+											<gco:aName>
+												<gco:CharacterString>BAND_INDEX</gco:CharacterString>
+											</gco:aName>
+										</gco:TypeName>
+									</gco:attributeType>
+								</gco:MemberName>
+							</gmd:sequenceIdentifier>
+							<gmd:descriptor>
+								<gco:CharacterString>XS3</gco:CharacterString>
+							</gmd:descriptor>
+							<gmd:maxValue>
+								<gco:Real>255.0</gco:Real>
+							</gmd:maxValue>
+							<gmd:minValue>
+								<gco:Real>1.0</gco:Real>
+							</gmd:minValue>
+							<gmd:bitsPerValue>
+								<gco:Integer>8</gco:Integer>
+							</gmd:bitsPerValue>
+							<gmd:scaleFactor>
+								<gco:Decimal>0.9208103130755064</gco:Decimal>
+							</gmd:scaleFactor>
+							<gmd:offset>
+								<gco:Decimal>0.0</gco:Decimal>
+							</gmd:offset>
+						</gmd:MD_Band>
+					</gmd:dimension>
+					<gmd:dimension>
+						<gmd:MD_Band>
+							<gmd:sequenceIdentifier>
+								<gco:MemberName>
+									<gco:aName>
+										<gco:CharacterString>4</gco:CharacterString>
+									</gco:aName>
+									<gco:attributeType>
+										<gco:TypeName>
+											<gco:aName>
+												<gco:CharacterString>BAND_INDEX</gco:CharacterString>
+											</gco:aName>
+										</gco:TypeName>
+									</gco:attributeType>
+								</gco:MemberName>
+							</gmd:sequenceIdentifier>
+							<gmd:descriptor>
+								<gco:CharacterString>SWIR</gco:CharacterString>
+							</gmd:descriptor>
+							<gmd:maxValue>
+								<gco:Real>255.0</gco:Real>
+							</gmd:maxValue>
+							<gmd:minValue>
+								<gco:Real>1.0</gco:Real>
+							</gmd:minValue>
+							<gmd:bitsPerValue>
+								<gco:Integer>8</gco:Integer>
+							</gmd:bitsPerValue>
+							<gmd:scaleFactor>
+								<gco:Decimal>0.11943201953334566</gco:Decimal>
+							</gmd:scaleFactor>
+							<gmd:offset>
+								<gco:Decimal>0.0</gco:Decimal>
+							</gmd:offset>
+						</gmd:MD_Band>
+					</gmd:dimension>
+					<gmd:illuminationElevationAngle>
+						<gco:Decimal>66.218695</gco:Decimal>
+					</gmd:illuminationElevationAngle>
+					<gmd:illuminationAzimuthAngle>
+						<gco:Decimal>147.82136</gco:Decimal>
+					</gmd:illuminationAzimuthAngle>
+					<gmd:processingLevelCode>
+						<gmd:MD_Identifier>
+							<gmd:code>
+								<gco:CharacterString>1A</gco:CharacterString>
+							</gmd:code>
+						</gmd:MD_Identifier>
+					</gmd:processingLevelCode>
+				</gmd:MD_ImageDescription>
+			</gmd:contentInfo>
+
+
+
+
+			<gmd:distributionInfo>
+				<gmd:MD_Distribution>
+					<gmd:transferOptions>
+						<gmd:MD_DigitalTransferOptions>
+							<gmd:onLine>
 								<gmd:CI_OnlineResource>
 									<gmd:linkage>
-										<gmd:URL>ftp://geosud-sw.teledetection.fr/SCENE_5_037-261_05_07_03_11_12_37_2_J.zip</gmd:URL>
+										<gmd:URL>ftp://geosud-sw.teledetection.fr/SCENE_5_037-261_05_07_03_11_12_37_2_J.zip
+										</gmd:URL>
 									</gmd:linkage>
 								</gmd:CI_OnlineResource>
-                            </gmd:onLine>
-                        </gmd:MD_DigitalTransferOptions>
-                    </gmd:transferOptions>
-                </gmd:MD_Distribution>
-            </gmd:distributionInfo>
-			
-			
-			
-            <gmd:dataQualityInfo>
-                <gmd:DQ_DataQuality>
-                    <gmd:scope>
-                        <gmd:DQ_Scope>
-                            <gmd:level>
-<gmd:MD_ScopeCode codeSpace="eng" codeListValue="dataset" codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/gmxCodelists.xml#MD_ScopeCode">Dataset</gmd:MD_ScopeCode>
-                            </gmd:level>
-                        </gmd:DQ_Scope>
-                    </gmd:scope>
-                    <gmd:lineage>
-                        <gmd:LI_Lineage>
-                            <gmd:processStep>
-<gmi:LE_ProcessStep>
-    <gmd:description>
-        <gco:CharacterString>Spot SYSTEM SCENE level 1A</gco:CharacterString>
-    </gmd:description>
-    <gmd:dateTime>
-        <gco:DateTime>2010-12-17T16:13:54+01:00</gco:DateTime>
-    </gmd:dateTime>
-    <gmd:processor>
-        <gmd:CI_ResponsibleParty>
-            <gmd:organisationName>
-                <gco:CharacterString>SPOT_IMAGE</gco:CharacterString>
-            </gmd:organisationName>
-            <gmd:role>
-                <gmd:CI_RoleCode codeListValue="originator" codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/gmxCodelists.xml#CI_RoleCode">Originator</gmd:CI_RoleCode>
-            </gmd:role>
-        </gmd:CI_ResponsibleParty>
-    </gmd:processor>
-    <gmi:processingInformation>
-        <gmi:LE_Processing>
-            <gmi:identifier>
-                <gmd:MD_Identifier>
-                    <gmd:code>
-                        <gco:CharacterString>470503101</gco:CharacterString>
-                    </gmd:code>
-                </gmd:MD_Identifier>
-            </gmi:identifier>
-            <gmi:softwareReference>
-                <gmd:CI_Citation>
-                    <gmd:title>
-                        <gco:CharacterString>CAP_T</gco:CharacterString>
-                    </gmd:title>
-                    <gmd:date>
-                        <gmd:CI_Date>
-                            <gmd:dateType>
-<gmd:CI_DateTypeCode codeSpace="eng" codeListValue="creation" codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode">Creation</gmd:CI_DateTypeCode>
-                            </gmd:dateType>
-                        </gmd:CI_Date>
-                    </gmd:date>
-                    <gmd:edition>
-                        <gco:CharacterString>SPOT5_V07_06P1</gco:CharacterString>
-                    </gmd:edition>
-                    <gmd:citedResponsibleParty>
-                        <gmd:CI_ResponsibleParty>
-                            <gmd:organisationName>
-<gco:CharacterString>SLS_TOULOUSE</gco:CharacterString>
-                            </gmd:organisationName>
-                        </gmd:CI_ResponsibleParty>
-                    </gmd:citedResponsibleParty>
-                </gmd:CI_Citation>
-            </gmi:softwareReference>
-            <gmi:algorithm>
-                <gmi:LE_Algorithm>
-                    <gmi:citation>
-                        <gmd:CI_Citation>
-                            <gmd:title>
-<gco:CharacterString>DCT_COMPRESSION_CORRECTION</gco:CharacterString>
-                            </gmd:title>
-                            <gmd:date>
-<gmd:CI_Date>
-    <gmd:dateType>
-        <gmd:CI_DateTypeCode codeSpace="eng" codeListValue="creation" codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode">Creation</gmd:CI_DateTypeCode>
-    </gmd:dateType>
-</gmd:CI_Date>
-                            </gmd:date>
-                        </gmd:CI_Citation>
-                    </gmi:citation>
-                    <gmi:description>
-                        <gco:CharacterString>DCT_COMPRESSION_CORRECTION</gco:CharacterString>
-                    </gmi:description>
-                </gmi:LE_Algorithm>
-            </gmi:algorithm>
-        </gmi:LE_Processing>
-    </gmi:processingInformation>
-</gmi:LE_ProcessStep>
-                            </gmd:processStep>
-                        </gmd:LI_Lineage>
-                    </gmd:lineage>
-                </gmd:DQ_DataQuality>
-            </gmd:dataQualityInfo>
-			
-			
-			
-            <gmd:metadataConstraints>
-                <gmd:MD_LegalConstraints>
-                    <gmd:useConstraints>
-                        <gmd:MD_RestrictionCode codeListValue="copyright" codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/gmxCodelists.xml#MD_RestrictionCode">Copyright</gmd:MD_RestrictionCode>
-                    </gmd:useConstraints>
-                    <gmd:otherConstraints>
-                        <gco:CharacterString>COPYRIGHT CNES 03 07 2005 11 H 12 MN 37 S</gco:CharacterString>
-                    </gmd:otherConstraints>
-                </gmd:MD_LegalConstraints>
-            </gmd:metadataConstraints>
-            <gmi:acquisitionInformation>
-                <gmi:MI_AcquisitionInformation>
-                    <gmi:instrument>
-                        <gmi:MI_Instrument>
-                            <gmi:identifier>
-<gmd:MD_Identifier>
-    <gmd:code>
-        <gco:CharacterString>HRG</gco:CharacterString>
-    </gmd:code>
-</gmd:MD_Identifier>
-                            </gmi:identifier>
-                            <gmi:type>
-<gco:CharacterString>Push-broom</gco:CharacterString>
-                            </gmi:type>
-                            <gmi:description>
-<gco:CharacterString>HRG</gco:CharacterString>
-                            </gmi:description>
-                        </gmi:MI_Instrument>
-                    </gmi:instrument>
-                    <gmi:operation>
-                        <gmi:MI_Operation>
-                            <gmi:description>
-<gco:CharacterString>SPOT</gco:CharacterString>
-                            </gmi:description>
-                            <gmi:identifier>
-<gmd:MD_Identifier>
-    <gmd:code>
-        <gco:CharacterString>5</gco:CharacterString>
-    </gmd:code>
-</gmd:MD_Identifier>
-                            </gmi:identifier>
-                        </gmi:MI_Operation>
-                    </gmi:operation>
-                    <gmi:platform>
-                        <gmi:MI_Platform>
-                            <gmi:citation>
-<gmd:CI_Citation>
-    <gmd:title>
-        <gco:CharacterString>SPOT</gco:CharacterString>
-    </gmd:title>
-</gmd:CI_Citation>
-                            </gmi:citation>
-                            <gmi:identifier>
-<gmd:MD_Identifier>
-    <gmd:code>
-        <gco:CharacterString>SPOT5</gco:CharacterString>
-    </gmd:code>
-</gmd:MD_Identifier>
-                            </gmi:identifier>
-                            <gmi:description>
-<gco:CharacterString>SPOT5</gco:CharacterString>
-                            </gmi:description>
-                        </gmi:MI_Platform>
-                    </gmi:platform>
-                </gmi:MI_AcquisitionInformation>
-            </gmi:acquisitionInformation>
+							</gmd:onLine>
+						</gmd:MD_DigitalTransferOptions>
+					</gmd:transferOptions>
+				</gmd:MD_Distribution>
+			</gmd:distributionInfo>
 
-			
-			
-        </gmi:MI_Metadata>
-    </csw:SearchResults>
+
+
+			<gmd:dataQualityInfo>
+				<gmd:DQ_DataQuality>
+					<gmd:scope>
+						<gmd:DQ_Scope>
+							<gmd:level>
+								<gmd:MD_ScopeCode codeSpace="eng"
+									codeListValue="dataset"
+									codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/gmxCodelists.xml#MD_ScopeCode">Dataset</gmd:MD_ScopeCode>
+							</gmd:level>
+						</gmd:DQ_Scope>
+					</gmd:scope>
+					<gmd:lineage>
+						<gmd:LI_Lineage>
+							<gmd:processStep>
+								<gmi:LE_ProcessStep>
+									<gmd:description>
+										<gco:CharacterString>Spot SYSTEM SCENE level 1A
+										</gco:CharacterString>
+									</gmd:description>
+									<gmd:dateTime>
+										<gco:DateTime>2010-12-17T16:13:54+01:00</gco:DateTime>
+									</gmd:dateTime>
+									<gmd:processor>
+										<gmd:CI_ResponsibleParty>
+											<gmd:organisationName>
+												<gco:CharacterString>SPOT_IMAGE</gco:CharacterString>
+											</gmd:organisationName>
+											<gmd:role>
+												<gmd:CI_RoleCode codeListValue="originator"
+													codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/gmxCodelists.xml#CI_RoleCode">Originator</gmd:CI_RoleCode>
+											</gmd:role>
+										</gmd:CI_ResponsibleParty>
+									</gmd:processor>
+									<gmi:processingInformation>
+										<gmi:LE_Processing>
+											<gmi:identifier>
+												<gmd:MD_Identifier>
+													<gmd:code>
+														<gco:CharacterString>470503101</gco:CharacterString>
+													</gmd:code>
+												</gmd:MD_Identifier>
+											</gmi:identifier>
+											<gmi:softwareReference>
+												<gmd:CI_Citation>
+													<gmd:title>
+														<gco:CharacterString>CAP_T</gco:CharacterString>
+													</gmd:title>
+													<gmd:date>
+														<gmd:CI_Date>
+															<gmd:dateType>
+																<gmd:CI_DateTypeCode codeSpace="eng"
+																	codeListValue="creation"
+																	codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode">Creation</gmd:CI_DateTypeCode>
+															</gmd:dateType>
+														</gmd:CI_Date>
+													</gmd:date>
+													<gmd:edition>
+														<gco:CharacterString>SPOT5_V07_06P1</gco:CharacterString>
+													</gmd:edition>
+													<gmd:citedResponsibleParty>
+														<gmd:CI_ResponsibleParty>
+															<gmd:organisationName>
+																<gco:CharacterString>SLS_TOULOUSE</gco:CharacterString>
+															</gmd:organisationName>
+														</gmd:CI_ResponsibleParty>
+													</gmd:citedResponsibleParty>
+												</gmd:CI_Citation>
+											</gmi:softwareReference>
+											<gmi:algorithm>
+												<gmi:LE_Algorithm>
+													<gmi:citation>
+														<gmd:CI_Citation>
+															<gmd:title>
+																<gco:CharacterString>DCT_COMPRESSION_CORRECTION
+																</gco:CharacterString>
+															</gmd:title>
+															<gmd:date>
+																<gmd:CI_Date>
+																	<gmd:dateType>
+																		<gmd:CI_DateTypeCode codeSpace="eng"
+																			codeListValue="creation"
+																			codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode">Creation</gmd:CI_DateTypeCode>
+																	</gmd:dateType>
+																</gmd:CI_Date>
+															</gmd:date>
+														</gmd:CI_Citation>
+													</gmi:citation>
+													<gmi:description>
+														<gco:CharacterString>DCT_COMPRESSION_CORRECTION
+														</gco:CharacterString>
+													</gmi:description>
+												</gmi:LE_Algorithm>
+											</gmi:algorithm>
+										</gmi:LE_Processing>
+									</gmi:processingInformation>
+								</gmi:LE_ProcessStep>
+							</gmd:processStep>
+						</gmd:LI_Lineage>
+					</gmd:lineage>
+				</gmd:DQ_DataQuality>
+			</gmd:dataQualityInfo>
+
+
+
+			<gmd:metadataConstraints>
+				<gmd:MD_LegalConstraints>
+					<gmd:useConstraints>
+						<gmd:MD_RestrictionCode codeListValue="copyright"
+							codeList="http://schemas.opengis.net/iso/19139/20070417/resources/Codelist/gmxCodelists.xml#MD_RestrictionCode">Copyright</gmd:MD_RestrictionCode>
+					</gmd:useConstraints>
+					<gmd:otherConstraints>
+						<gco:CharacterString>COPYRIGHT CNES 03 07 2005 11 H 12 MN 37 S
+						</gco:CharacterString>
+					</gmd:otherConstraints>
+				</gmd:MD_LegalConstraints>
+			</gmd:metadataConstraints>
+			<gmi:acquisitionInformation>
+				<gmi:MI_AcquisitionInformation>
+					<gmi:instrument>
+						<gmi:MI_Instrument>
+							<gmi:identifier>
+								<gmd:MD_Identifier>
+									<gmd:code>
+										<gco:CharacterString>HRG</gco:CharacterString>
+									</gmd:code>
+								</gmd:MD_Identifier>
+							</gmi:identifier>
+							<gmi:type>
+								<gco:CharacterString>Push-broom</gco:CharacterString>
+							</gmi:type>
+							<gmi:description>
+								<gco:CharacterString>HRG</gco:CharacterString>
+							</gmi:description>
+						</gmi:MI_Instrument>
+					</gmi:instrument>
+					<gmi:operation>
+						<gmi:MI_Operation>
+							<gmi:description>
+								<gco:CharacterString>SPOT</gco:CharacterString>
+							</gmi:description>
+							<gmi:identifier>
+								<gmd:MD_Identifier>
+									<gmd:code>
+										<gco:CharacterString>5</gco:CharacterString>
+									</gmd:code>
+								</gmd:MD_Identifier>
+							</gmi:identifier>
+						</gmi:MI_Operation>
+					</gmi:operation>
+					<gmi:platform>
+						<gmi:MI_Platform>
+							<gmi:citation>
+								<gmd:CI_Citation>
+									<gmd:title>
+										<gco:CharacterString>SPOT</gco:CharacterString>
+									</gmd:title>
+								</gmd:CI_Citation>
+							</gmi:citation>
+							<gmi:identifier>
+								<gmd:MD_Identifier>
+									<gmd:code>
+										<gco:CharacterString>SPOT5</gco:CharacterString>
+									</gmd:code>
+								</gmd:MD_Identifier>
+							</gmi:identifier>
+							<gmi:description>
+								<gco:CharacterString>SPOT5</gco:CharacterString>
+							</gmi:description>
+						</gmi:MI_Platform>
+					</gmi:platform>
+				</gmi:MI_AcquisitionInformation>
+			</gmi:acquisitionInformation>
+
+
+
+		</gmi:MI_Metadata>
+	</csw:SearchResults>
 </csw:GetRecordsResponse>

@@ -57,7 +57,7 @@
 		
 		<!-- product -->
 		<xsl:if test="not(gmd:contentInfo/gmd:MD_ImageDescription/gmd:contentType)" >
-			<error name="product">Product not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this Xpath expression "gmd:imageDescription/gmd:MD_ImageDescription/gmd:contentType"</error>
+			<error name="product">Product not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this Xpath expression "gmd:contentInfo/gmd:MD_ImageDescription/gmd:contentType"</error>
 		</xsl:if>
 		
 		<!-- platform -->
@@ -86,8 +86,8 @@
 		</xsl:if>
 
 		<!-- footprint -->
-		<xsl:if test="not(gmd:identificationInfo/gmd:MD_DataIdentification/gmd:geographicElement/EX_GeographicBoundingBox)" >
-			<error name="footprint">Footprint not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this Xpath expression "gmd:identificationInfo/gmd:MD_DataIdentification/gmd:geographicElement/EX_GeographicBoundingBox"</error>
+		<xsl:if test="not(gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox)" >
+			<error name="footprint">Footprint not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this Xpath expression "gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox"</error>
 		</xsl:if>
 		
 		<!-- WMS -->
@@ -197,7 +197,7 @@
 		</xsl:for-each>
 
 		
-		<field name="product"><xsl:value-of select="string(gmd:imageDescription/gmd:MD_ImageDescription/gmd:contentType)"/></field>
+		<field name="product"><xsl:value-of select="string(gmd:contentInfo/gmd:MD_ImageDescription/gmd:contentType)"/></field>
 		
 		<field name="processingLevel"><xsl:value-of select="string(gmd:contentInfo/gmd:MD_ImageDescription/gmd:processingLevelCode/gmd:MD_Identifier/gmd:code/gco:CharacterString)"/></field>
 		
