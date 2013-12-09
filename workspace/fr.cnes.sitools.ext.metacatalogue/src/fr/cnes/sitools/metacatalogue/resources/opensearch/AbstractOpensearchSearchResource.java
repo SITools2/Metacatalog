@@ -138,6 +138,7 @@ public abstract class AbstractOpensearchSearchResource extends AbstractOpensearc
     solrQuery.add("facet.pivot", Joiner.on(",").join(location));
     solrQuery.addFacetField(MetacatalogField.PROCESSING_LEVEL.getField());
     solrQuery.addFacetField(MetacatalogField.PRODUCT.getField());
+    solrQuery.add("facet.pivot.mincount", "0");
     solrQuery.setFacetLimit(10);
     solrQuery.setFacetMinCount(1);
 

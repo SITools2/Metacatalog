@@ -18,16 +18,24 @@
  ******************************************************************************/
 package fr.cnes.sitools.metacatalogue.resources.suggest;
 
+/**
+ * The Class SuggestDTO.
+ * 
+ * @author m.gond
+ */
 public class SuggestDTO {
 
+  /** The suggestion. */
   private String suggestion;
 
+  /** The suggestion alt label. */
   private String suggestionAltLabel;
 
+  /** The nb. */
   private long nb;
 
   /**
-   * Gets the suggestion value
+   * Gets the suggestion value.
    * 
    * @return the suggestion
    */
@@ -36,7 +44,7 @@ public class SuggestDTO {
   }
 
   /**
-   * Sets the value of suggestion
+   * Sets the value of suggestion.
    * 
    * @param suggestion
    *          the suggestion to set
@@ -46,7 +54,7 @@ public class SuggestDTO {
   }
 
   /**
-   * Gets the nb value
+   * Gets the nb value.
    * 
    * @return the nb
    */
@@ -55,7 +63,7 @@ public class SuggestDTO {
   }
 
   /**
-   * Sets the value of nb
+   * Sets the value of nb.
    * 
    * @param nb
    *          the nb to set
@@ -65,7 +73,7 @@ public class SuggestDTO {
   }
 
   /**
-   * Gets the suggestionAltLabel value
+   * Gets the suggestionAltLabel value.
    * 
    * @return the suggestionAltLabel
    */
@@ -74,7 +82,7 @@ public class SuggestDTO {
   }
 
   /**
-   * Sets the value of suggestionAltLabel
+   * Sets the value of suggestionAltLabel.
    * 
    * @param suggestionAltLabel
    *          the suggestionAltLabel to set
