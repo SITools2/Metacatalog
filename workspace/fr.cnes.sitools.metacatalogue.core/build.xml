@@ -29,8 +29,6 @@
 
 	<property file="build-default.properties" />
 	
-	<property file="conf/build/properties/build-TESTS.properties" />
-
 	<import file="conf/userLibraries/metacatalogue-core.userlibraries.ant.xml" optional="true" />
 
 	<property name="cots.dir" value="${ROOT_DIRECTORY}/cots" />
@@ -170,9 +168,9 @@
 		
 	<!-- TARGET refresh-properties -->
 	<target name="refresh-properties-for-tests" description="Mise à jour du fichier de propriétés sitools.properties pour les propriétés utilisées par les tests ">
-		<copy outputencoding="UTF-8" tofile="${conf.properties.dir}/metacatalogue.properties" file="${conf.properties.dir}/metacatalogue.properties" overwrite="true" />
 		<propertyfile file="${conf.properties.dir}/metacatalogue.properties" comment="Update root property">
-			<entry key="ETAG_URL" value="${ETAG_URL}" />
+			<entry key="PROXY_USER" value="${PROXY_USER}" />
+			<entry key="PROXY_PASSWORD" value="${PROXY_PASSWORD}" />
 		</propertyfile>
 		<copy outputencoding="UTF-8" tofile="metacatalogue.properties" file="${conf.properties.dir}/metacatalogue.properties" overwrite="true" />
 	</target>
