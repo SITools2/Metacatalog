@@ -154,6 +154,11 @@ public class GeoJsonMDEORepresentation extends JsonRepresentation {
                         propertiesObject.put(fieldName, proxifiedUrl);
                       }
                       break;
+                    case MIME_TYPE:
+                      if (publicServices || (!publicServices && authenticatedUser)) {
+                        propertiesObject.put(fieldName, fieldValue);
+                      }
+                      break;
                     default:
                       if (!metafield.isMetacatalogIntern()) {
                         propertiesObject.put(fieldName, fieldValue);
