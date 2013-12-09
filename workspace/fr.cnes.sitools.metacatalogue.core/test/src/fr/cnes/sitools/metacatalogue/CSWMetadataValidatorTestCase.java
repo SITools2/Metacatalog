@@ -31,6 +31,8 @@ import org.restlet.Context;
 import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
 import fr.cnes.sitools.metacatalogue.common.MetadataContainer;
 import fr.cnes.sitools.metacatalogue.csw.extractor.CswMetadataExtractor;
+import fr.cnes.sitools.metacatalogue.csw.extractor.LocalisationExtractor;
+import fr.cnes.sitools.metacatalogue.csw.extractor.ResolutionExtractor;
 import fr.cnes.sitools.metacatalogue.csw.validator.CswMetadataValidator;
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
@@ -70,9 +72,11 @@ public class CSWMetadataValidatorTestCase extends AbstractHarvesterTestCase {
     HarvesterModel conf = createHarvesterModelForTest("geosud_test");
 
     CswMetadataExtractor extractor = new CswMetadataExtractor(conf, context);
+    ResolutionExtractor resolution = new ResolutionExtractor(conf, context);
     CswMetadataValidator validator = new CswMetadataValidator(conf, context);
     
-    extractor.setNext(validator);
+    extractor.setNext(resolution);
+    resolution.setNext(validator);
     validator.setNext(new assertDataClass());
     
     extractor.execute(data);
