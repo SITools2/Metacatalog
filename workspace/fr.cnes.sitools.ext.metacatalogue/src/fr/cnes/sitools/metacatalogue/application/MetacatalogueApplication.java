@@ -492,7 +492,7 @@ public class MetacatalogueApplication extends AbstractApplicationPlugin {
         }
 
         ApplicationPluginParameter thesaurus = params.get("thesaurus");
-        if (thesaurus == null || (thesaurus != null && !thesaurus.getValue().isEmpty())) {
+        if (thesaurus == null || (thesaurus != null && thesaurus.getValue().isEmpty())) {
           ConstraintViolation constraint = new ConstraintViolation();
           constraint.setValueName("thesaurus");
           constraint.setLevel(ConstraintViolationLevel.CRITICAL);

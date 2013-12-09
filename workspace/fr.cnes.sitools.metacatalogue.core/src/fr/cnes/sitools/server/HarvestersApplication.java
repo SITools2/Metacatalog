@@ -106,7 +106,7 @@ public final class HarvestersApplication extends Application implements ILockabl
     directory.setDeeplyAccessible(true);
     directory.setListingAllowed(true);
     directory.setModifiable(false);
-    router.attach("/admin/logs", directory);
+    router.attach("/logs", directory);
 
     return router;
   }
