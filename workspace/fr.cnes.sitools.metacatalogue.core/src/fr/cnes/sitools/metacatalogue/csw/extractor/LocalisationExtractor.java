@@ -57,11 +57,11 @@ public class LocalisationExtractor extends HarvesterStep {
     List<MetadataRecords> metadatas = data.getMetadataRecords();
     String etagReaderUrl = HarvesterSettings.getInstance().getString("ETAG_URL");
     for (MetadataRecords doc : metadatas) {
+      String resolution = getResolution(doc);
       String geometry = getGeometry(doc);
       if (geometry != null) {
         Localisation localisation = cache.getIfPresent(geometry);
         if (localisation == null) {
-          String resolution = getResolution(doc);
           ETagReader reader = new ETagReader(etagReaderUrl, geometry, "VHR".equals(resolution));
           try {
             reader.read();
@@ -73,16 +73,14 @@ public class LocalisationExtractor extends HarvesterStep {
             context.getLogger().log(Level.WARNING, "CANNOT READ URL FROM ETAG", e);
           }
         }
-        else {
-          System.out.println("FROM CACHE");
-        }
 
         // countries
         addValuesToMetadata(doc, localisation.getCountries(), MetacatalogField.COUNTRY.getField());
 
         // regions
         addValuesToMetadata(doc, localisation.getRegions(), MetacatalogField.REGION.getField());
-
+        
+        
         // departments
         addValuesToMetadata(doc, localisation.getDepartments(), MetacatalogField.DEPARTMENT.getField());
 
