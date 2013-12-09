@@ -83,7 +83,7 @@ public class CswMetadataValidator extends HarvesterStep {
           }
         }
       }
-      
+
       /* critical errors (mandatory fields) : record is not harvested */
       boolean fail = false;
       for (MetacatalogField field : mandatoryFields) {
@@ -106,7 +106,15 @@ public class CswMetadataValidator extends HarvesterStep {
           fmts.add("yyyy-MM-DD'T'HH:mm:ss+HH:mm");
           fmts.add("yyyy-MM-DD'T'HH:mm:ss-HH:mm");
           try {
-            org.apache.solr.common.util.DateUtil.parseDate((String) doc.get(field.getField()), fmts);
+            Object date = doc.get(field.getField());
+            if (date != null) {
+              org.apache.solr.common.util.DateUtil.parseDate((String) date, fmts);
+            }
+            else {
+              logger.info(field.getField() + " - is an empty date : " + doc.get(MetacatalogField.IDENTIFIER.getField())
+                  + " not inserted in the metacatalog");
+              fail = true;
+            }
           }
           catch (ParseException e) {
             logger.info(field.getField() + " - incorrect date format : "
@@ -116,28 +124,19 @@ public class CswMetadataValidator extends HarvesterStep {
 
         }
       }
-      
+
       /* check hierarchy level name = image */
-      if (!doc.get(MetacatalogField.getField("hierarchyLevelName").getField()).equals("image")){
-         logger.info(MetacatalogField.getField("hierarchyLevelName").getField() + " not set to \"image\" for record : " + doc.get(MetacatalogField.IDENTIFIER.getField())
-             + " not inserted in the metacatalog");
-         fail = true;
+      if (!"image".equals(doc.get(MetacatalogField.HIERARCHYLEVELNAME.getField()))) {
+        logger.info(MetacatalogField.HIERARCHYLEVELNAME.getField() + " not set to \"image\" for record : "
+            + doc.get(MetacatalogField.IDENTIFIER.getField()) + " not inserted in the metacatalog");
+        fail = true;
       }
+      
       if (fail) {
         iterator.remove();
         nbDocInvalid++;
       }
 
-    }
-
-    for (Iterator<MetadataRecords> iterator = metadataRecords.iterator(); iterator.hasNext();) {
-      MetadataRecords doc = iterator.next();
-      if (doc.get(MetacatalogField.FOOTPRINT.getField()) == null) {
-        logger.info("No geometry defined for record : " + doc.get(MetacatalogField.IDENTIFIER.getField())
-            + " not inserted in the metacatalog");
-        nbDocInvalid++;
-        iterator.remove();
-      }
     }
 
     /* iterate on concepts fields */
