@@ -92,6 +92,24 @@ public class CswMetadataValidator extends HarvesterStep {
         }
       }
 
+      /* check resolution >= 0 */
+      if (MetacatalogField.getField(MetacatalogField.RESOLUTION.getField())!=null){
+        String resolution = (String) doc.get(MetacatalogField.RESOLUTION.getField());
+        try {
+          double res  = new Double(resolution);
+          if (res <= 0){
+            logger.info(MetacatalogField.RESOLUTION.getField() + " - is < 0 : " + doc.get(MetacatalogField.IDENTIFIER.getField())
+                + " not inserted in the metacatalog");
+            fail = true;
+          }
+        } catch (NumberFormatException ex) {
+            System.out.println("resolution was not a double : " + resolution);
+            logger.info(MetacatalogField.RESOLUTION.getField() + " is not a double : " + doc.get(MetacatalogField.IDENTIFIER.getField())
+                + " not inserted in the metacatalog");
+            fail = true;
+        }
+      }
+
       /* critical errors (mandatory fields) : record is not harvested */
       for (MetacatalogField field : mandatoryFields) {
         Error error = doc.findFirstError(field.getField());
