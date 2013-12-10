@@ -75,6 +75,8 @@ public class CswMetadataValidator extends HarvesterStep {
 
       List<Error> errors = doc.getErrors();
 
+      boolean fail = false;
+      
       /* warning */
       for (Error error : errors) {
         if (error != null && error.getLevel() != null) {
@@ -82,10 +84,15 @@ public class CswMetadataValidator extends HarvesterStep {
             logger.info("WARNING : " + error.getValue());
           }
         }
+        if (error != null) {
+          if ("hierarchyLevelName".equals(error.getName())){
+            logger.info("" + error.getValue());
+            fail = true;
+          }
+        }
       }
 
       /* critical errors (mandatory fields) : record is not harvested */
-      boolean fail = false;
       for (MetacatalogField field : mandatoryFields) {
         Error error = doc.findFirstError(field.getField());
         /* check xpath */
@@ -123,13 +130,6 @@ public class CswMetadataValidator extends HarvesterStep {
           }
 
         }
-      }
-
-      /* check hierarchy level name = image */
-      if (!"image".equals(doc.get(MetacatalogField.HIERARCHYLEVELNAME.getField()))) {
-        logger.info(MetacatalogField.HIERARCHYLEVELNAME.getField() + " not set to \"image\" for record : "
-            + doc.get(MetacatalogField.IDENTIFIER.getField()) + " not inserted in the metacatalog");
-        fail = true;
       }
       
       if (fail) {

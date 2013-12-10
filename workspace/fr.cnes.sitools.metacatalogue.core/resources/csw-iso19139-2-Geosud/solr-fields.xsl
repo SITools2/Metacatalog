@@ -121,7 +121,7 @@
 		<!--<field name="hierarchyLevelName"><xsl:value-of select="string(gmd:hierarchyLevelName/gco:CharacterString)" /></field>-->
 		<xsl:variable name="hierarchy" select="string(gmd:hierarchyLevelName/gco:CharacterString)"> </xsl:variable>
 		<xsl:if test="$hierarchy!='image'">
-			<error name="hierarchyLevelName">HierarchyLevelName not set to \"image\" for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> </error>
+			<error name="hierarchyLevelName">HierarchyLevelName not set to "image" for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> </error>
 		</xsl:if>
 		
 
