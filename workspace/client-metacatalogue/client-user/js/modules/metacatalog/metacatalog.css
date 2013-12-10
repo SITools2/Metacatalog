@@ -78,7 +78,7 @@
 
 /* START STATUS HARVEST DETAILS */
 .statusHarvestDetail {
-	padding : 10px;
+	padding : 5px 10px 0px 10px;
 	margin-top: 20px;
 	background : rgba(255, 255, 255, 0.28);
 	text-shadow: 1px 1px 2px rgb(202, 202, 202);
@@ -96,10 +96,13 @@
 #currentHarvest {
 	float: left;
 	margin-left: 70px;
+	width : 220px !important;
+/* 	height: 146px !important; */
 }
 #lastHarvest {
 	float: right;
 	margin-right: 90px;
+	width : 220px !important;
 }
 
 .harvestTitle{
@@ -130,6 +133,12 @@
 	text-decoration : underline;
 	margin: 5px 0px 0px 5px;
 	font-size: 14px;
+}
+
+.showLog {
+	float: right;
+	font-style : italic;
+	padding: 0px 0px 5px 0px;
 }
 
 /* END STATUS HARVEST DETAILS */

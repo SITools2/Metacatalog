@@ -63,6 +63,9 @@ sitools.user.modules.metacatalogStatusHarvest = Ext.extend(Ext.Panel, {
             	name : 'endDate',
                 type : 'date',
                 dateFormat : SITOOLS_DATE_FORMAT
+            }, {
+                name : 'loggerFileName',
+                type : 'string'
             }],
             listeners : {
             	load : function (store, records, ind){
@@ -89,7 +92,7 @@ sitools.user.modules.metacatalogStatusHarvest = Ext.extend(Ext.Panel, {
         				'<br>' +
         				'<p>' +
         				'<tpl if="status == \'ACTIVE\'">' +
-		        			'Status : <b>ACTIVE</b> <img alt="ACTIVE" style=\'position:absolute;\' src="/sitools/client-user/js/modules/metacatalog/images/active_status.png" /> <br>' +
+		        			'Status : <b>ACTIVE</b> <img alt="ACTIVE" style=\'position:absolute;\' src="/sitools/client-user/js/modules/metacatalog/images/active_status.gif" /> <br>' +
 		        		'</tpl>' +
 		        		'<tpl if="status==\'INACTIVE\'">' +
 		        			'Status : <b>INACTIVE</b> <img alt="INACTIVE" style=\'position:absolute;\' src="/sitools/client-user/js/modules/metacatalog/images/inactive_status.png" /> <br>' +
@@ -120,7 +123,15 @@ sitools.user.modules.metacatalogStatusHarvest = Ext.extend(Ext.Panel, {
         							'<img alt="ACTIVE" style=\'position:absolute; padding-left:4px\' src="/sitools/client-user/js/modules/metacatalog/images/error.png" />' +
         						'</a>' +
 		        			'</span>' +
+		        			'<br>' +
 		        		'</tpl>' +
+		        		'<tpl if="this.isEmpty(loggerFileName) == false" >' +
+		        		'<span class="showLog">' +
+                            '<a href="#" onClick=\'sitools.user.modules.metacatalogStatusHarvest.showLog("{loggerFileName}"); return false;\'>' +
+                                'Show log...' +
+                            '</a>' +
+                        '</span>'+
+                        '</tpl>' +
 	        		'</p>' +
         		'</div>' +
 		    '</tpl>',
@@ -154,7 +165,7 @@ sitools.user.modules.metacatalogStatusHarvest = Ext.extend(Ext.Panel, {
      * @param {} crud metacatalogCrud
      */
     refreshHarvestStatus : function (url, id, crud) {
-    	this.url = url;
+        this.url = url;
     	this.store.proxy.conn.url = this.url;
     	this.store.load();
     	
@@ -171,6 +182,17 @@ sitools.user.modules.metacatalogStatusHarvest.showError = function(errorMessage)
 		autoHeight : true,
 		width : 500
 	}).show();
+}
+
+sitools.user.modules.metacatalogStatusHarvest.showLog = function(logName) {
+    var statusHarvestPanel = Ext.getCmp('metacatalogStatusHarvest');
+    new Ext.Window({
+        title : 'Log',
+        autoLoad : statusHarvestPanel.appUrl + "/logs/" + logName,
+        autoScroll : true,
+        height : 400,
+        width : 500
+    }).show();
 }
 
 Ext.reg('sitools.user.modules.metacatalogStatusHarvest', sitools.user.modules.metacatalogStatusHarvest);

@@ -200,12 +200,28 @@ sitools.user.modules.metacatalogCrud = Ext.extend(Ext.grid.GridPanel, {
 	        xtype : 's-menuButton'
 		}); 
 		
+		var openSearchBtn = new Ext.Button({
+            icon : loadUrl.get('APP_URL') + '/common/res/images/icons/open_search_small.png',
+            scope : this,
+            handler : this.openSearchDescription,
+            tooltip : i18n.get('label.metacatalogOpenSearch')
+        }); 
+        
+        var describeBtn = new Ext.Button({
+            icon : loadUrl.get('APP_URL') + '/common/res/images/icons/description_project_small.png',
+            scope : this,
+            handler : this.openDescribe,
+            tooltip : i18n.get('label.metacatalogDescribe')
+        });  
+		
 		this.tbar = {
-	            xtype : 'toolbar',
-	            defaults : {
-	                scope : this
-	            },
-	            items : [ addCatalogBtn, modifyCatalogBtn, deleteCatalogBtn ]
+            xtype : 'toolbar',
+            //cls : 'services-toolbar',
+            defaults : {
+                scope : this,
+                cls : 'services-toolbar-btn'
+            },
+            items : [ addCatalogBtn, modifyCatalogBtn, deleteCatalogBtn, '->',  openSearchBtn, describeBtn]
 	    };
 	    
 	    this.bbar = {
@@ -321,9 +337,9 @@ sitools.user.modules.metacatalogCrud = Ext.extend(Ext.grid.GridPanel, {
     		return Ext.Msg.alert(i18n.get('label.warning'), i18n.get('warning.noselection'));
         }
         
-        var url = this.url + '/' + rec.id + '/harvest/status';
-        
-        this.statusHarvest.refreshHarvestStatus(url, rec.id, this);
+    	 var url = this.url + '/' + rec.id + '/harvest/status';
+         
+         this.statusHarvest.refreshHarvestStatus(url, rec.id, this);
     },
     
     /**
@@ -435,7 +451,22 @@ sitools.user.modules.metacatalogCrud = Ext.extend(Ext.grid.GridPanel, {
 	        txt = i18n.get('warning.serverError') + ': ' + response.statusText;
 	    }
 	    Ext.Msg.alert(i18n.get('label.warning'), txt);
-	}
+	},
+	
+    /**
+     * Open a new window and display open search description
+     */
+    openSearchDescription : function (){
+        window.open(this.appUrl + "/opensearch.xml", "openSearch Description");
+    },
+    
+    
+    /**
+     * Open a new window and display describe
+     */
+    openDescribe : function (){
+        window.open(this.appUrl + "/describe", "Describe");
+    }
 	
 });
 

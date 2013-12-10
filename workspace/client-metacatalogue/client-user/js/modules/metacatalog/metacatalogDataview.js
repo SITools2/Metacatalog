@@ -32,8 +32,7 @@ sitools.user.modules.metacatalogDataview = Ext.extend(Ext.Panel, {
     	
     	this.store = new Ext.data.JsonStore({
             url : this.appUrl,
-            fields : [
-            {
+            fields : [{
                 name : 'description',
                 type : 'string'
             },{
