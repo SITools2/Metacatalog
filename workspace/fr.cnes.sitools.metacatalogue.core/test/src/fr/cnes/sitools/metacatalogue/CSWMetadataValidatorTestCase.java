@@ -1,4 +1,4 @@
- /*******************************************************************************
+/*******************************************************************************
  * Copyright 2010-2013 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
  *
  * This file is part of SITools2.
@@ -37,34 +37,37 @@ import fr.cnes.sitools.metacatalogue.csw.validator.CswMetadataValidator;
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
 import fr.cnes.sitools.model.HarvesterModel;
-
+import fr.cnes.sitools.proxy.ProxySettings;
 
 /**
  * CSWMetadataValidatorTestCase
  * 
  * @author tx.chevallier
  * @project fr.cnes.sitools.metacatalogue.core
- * @version 
+ * @version
  */
 public class CSWMetadataValidatorTestCase extends AbstractHarvesterTestCase {
 
   private int nbFieldsExpected;
-  
+
   /**
    * test
+   * 
    * @throws IOException
    * @throws JDOMException
    * @throws ProcessException
    */
   @Test
   public void test() throws IOException, JDOMException, ProcessException {
+
+    ProxySettings.init();
     
     String filePath = settings.getRootDirectory() + "/" + settings.getString("Tests.RESOURCES_DIRECTORY")
         + "/csw/geosud-new.xml";
 
     MetadataContainer data = getXMLDataFromFile(filePath);
     Element xmldata = data.getXmlData();
-    
+
     nbFieldsExpected = Integer.parseInt(xmldata.getAttributeValue("numberOfRecordsReturned"));
 
     Context context = initContext();
@@ -73,14 +76,18 @@ public class CSWMetadataValidatorTestCase extends AbstractHarvesterTestCase {
 
     CswMetadataExtractor extractor = new CswMetadataExtractor(conf, context);
     ResolutionExtractor resolution = new ResolutionExtractor(conf, context);
+    LocalisationExtractor localisation = new LocalisationExtractor(conf, context);
     CswMetadataValidator validator = new CswMetadataValidator(conf, context);
-    
+
     extractor.setNext(resolution);
-    resolution.setNext(validator);
+    // resolution.setNext(validator);
+    resolution.setNext(localisation);
+    localisation.setNext(validator);
+
     validator.setNext(new assertDataClass());
-    
+
     extractor.execute(data);
-    
+
   }
 
   private HarvesterModel createHarvesterModelForTest(String id) {
@@ -90,12 +97,12 @@ public class CSWMetadataValidatorTestCase extends AbstractHarvesterTestCase {
     return model;
   }
 
-
   /**
    * assertDataClass
+   * 
    * @project fr.cnes.sitools.metacatalogue.core
-   * @version 
-   *
+   * @version
+   * 
    */
   private class assertDataClass extends HarvesterStep {
 
