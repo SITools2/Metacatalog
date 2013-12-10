@@ -2,8 +2,8 @@
 ______________
 
 Identification                       : SITools2/Metacatalogue
-Date                                 : 2013-02-08
-Version                              : 0.5
+Date                                 : 2013-12-10
+Version                              : 0.7
 Developper                           : AKKA Technologies
 Type                                 : Prototype
 Repository url                       : https://github.com/SITools2/Metacatalog
@@ -15,6 +15,25 @@ Reference tag                        :
 
 2/ Changes
 
+__________
+- 0.7 (10/12/2013)
+
+	- New feature :
+		-> Suggestion service using Thesaurus entries
+		-> Search service 
+			- uses Thesaurus entries validation
+			- returns facets
+		-> New validation process
+			- mandatory fields
+			- thesaurus fields
+		-> Extract location from footprint
+		-> Extract resolution domain concept from resolution field
+	
+	- Enhancement :
+		-> Update iso19139 fields extraction
+		-> Update GeoJSON fields extraction
+		
+		
 __________
 - 0.6 (06/11/2013)
 		

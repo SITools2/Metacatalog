@@ -1,4 +1,4 @@
- /*******************************************************************************
+/*******************************************************************************
  * Copyright 2010-2013 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
  *
  * This file is part of SITools2.
@@ -21,6 +21,7 @@ package fr.cnes.sitools.metacatalogue.csw.extractor;
 import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,7 +42,9 @@ import fr.cnes.sitools.metacatalogue.common.MetadataContainer;
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
 import fr.cnes.sitools.metacatalogue.model.Error;
 import fr.cnes.sitools.metacatalogue.model.Field;
+import fr.cnes.sitools.metacatalogue.model.HarvestStatus;
 import fr.cnes.sitools.metacatalogue.model.MetadataRecords;
+import fr.cnes.sitools.metacatalogue.opensearch.extractor.OpensearchGeometryExtractor;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
 import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
 import fr.cnes.sitools.metacatalogue.utils.MetacatalogField;
@@ -49,7 +52,7 @@ import fr.cnes.sitools.metacatalogue.utils.XSLTUtils;
 import fr.cnes.sitools.model.AttributeCustom;
 import fr.cnes.sitools.model.HarvesterModel;
 import fr.cnes.sitools.model.Property;
-
+import fr.cnes.sitools.server.ContextAttributes;
 
 public class CswMetadataExtractor extends HarvesterStep {
 
@@ -76,11 +79,9 @@ public class CswMetadataExtractor extends HarvesterStep {
     File sFileXSL = new File(resourcesFolder);
 
     List<Element> children = metadata.getChildren();
-    
+
     List<MetadataRecords> listMetadataRecords = new ArrayList<MetadataRecords>();
-    
-    
-    
+
     for (Element child : children) {
 
       try {
@@ -100,9 +101,9 @@ public class CswMetadataExtractor extends HarvesterStep {
         List<Error> errors = getErrors(doc);
 
         CswGeometryExtractor extractor = new CswGeometryExtractor();
-        
+
         MetadataRecords mdRecords = new MetadataRecords(fields, errors);
-        
+
         mdRecords = extractor.extractGeometry(child, mdRecords, this.schemaName);
         if (mdRecords != null) {
           // add the custom attributes
@@ -111,8 +112,13 @@ public class CswMetadataExtractor extends HarvesterStep {
           // public services
           addField(mdRecords, String.valueOf(conf.isPublicServices()), MetacatalogField._PUBLIC_SERVICES.getField());
 
+          HarvestStatus status = (HarvestStatus) context.getAttributes().get(ContextAttributes.STATUS);
+
+          // modified
+          addField(mdRecords, status.getStartDate(), MetacatalogField.MODIFIED.getField());
+
           listMetadataRecords.add(mdRecords);
-          
+
         }
 
       }
@@ -170,8 +176,7 @@ public class CswMetadataExtractor extends HarvesterStep {
     return errors;
 
   }
-  
-  
+
   @Override
   public void end() throws ProcessException {
     if (next != null) {
@@ -191,6 +196,10 @@ public class CswMetadataExtractor extends HarvesterStep {
   }
 
   private void addField(MetadataRecords fields, String value, String fieldName) {
+    fields.add(fieldName, value);
+  }
+  
+  private void addField(MetadataRecords fields, Date value, String fieldName) {
     fields.add(fieldName, value);
   }
 
