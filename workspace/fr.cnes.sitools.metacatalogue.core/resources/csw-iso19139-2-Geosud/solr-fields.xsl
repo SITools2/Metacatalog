@@ -97,13 +97,15 @@
 		<xsl:if test="not(gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:name/gco:CharacterString)" >
 			<error name="wms" level="warning">WMS LAYERS not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this Xpath expression "gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:name/gco:CharacterString"</error>
 		</xsl:if>
-		<xsl:if test="not(gmd:identificationInfo/gmd:MD_DataIdentification/gmd:geographicElement/EX_GeographicBoundingBox)" >
-			<error name="wms" level="warning">WMS BBOX not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this Xpath expression "gmd:identificationInfo/gmd:MD_DataIdentification/gmd:geographicElement/EX_GeographicBoundingBox"</error>
+		<xsl:if test="not(gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox)" >
+			<error name="wms" level="warning">WMS BBOX not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this Xpath expression "gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox"</error>
 		</xsl:if>
-		<xsl:if test="not(gmd:referenceSystemInfo/MD_ReferenceSystem/systemIdentifier/gmd:RS_Identifier/gmd:code/gco:CharacterString)" >
-			<error name="wms" level="warning">WMS SRS not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this Xpath expression "gmd:referenceSystemInfo/MD_ReferenceSystem/systemIdentifier/gmd:RS_Identifier/gmd:code/gco:CharacterString"</error>
+		<xsl:if test="not(gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code/gco:CharacterString)" >
+			<error name="wms" level="warning">WMS SRS not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this Xpath expression "gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code/gco:CharacterString"</error>
 		</xsl:if>
 		
+		
+				
 		
 		<xsl:for-each select="gmd:fileIdentifier/gco:CharacterString">
 			<field name="_uuid">urn:ogc:def:EOP:GEOSUD:Geosud:<xsl:value-of select="string(.)" /></field>
@@ -116,8 +118,12 @@
 
 		<field name="project">geosud</field>
 		
-		<field name="hierarchyLevelName"><xsl:value-of select="string(gmd:hierarchyLevelName/gco:CharacterString)" /></field>
-
+		<!--<field name="hierarchyLevelName"><xsl:value-of select="string(gmd:hierarchyLevelName/gco:CharacterString)" /></field>-->
+		<xsl:variable name="hierarchy" select="string(gmd:hierarchyLevelName/gco:CharacterString)"> </xsl:variable>
+		<xsl:if test="$hierarchy!='image'">
+			<error name="hierarchyLevelName">HierarchyLevelName not set to \"image\" for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> </error>
+		</xsl:if>
+		
 
 		<xsl:for-each select="gmd:identificationInfo//gmd:MD_DataIdentification">
 
