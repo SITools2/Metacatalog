@@ -112,9 +112,6 @@ public enum MetacatalogField {
   /** The product. */
   PRODUCT("product"),
   
-  /** The hierarchy level. */
-  HIERARCHYLEVELNAME("hierarchyLevelName"),
-
   /** COUNTRY. */
   COUNTRY("country"),
 
