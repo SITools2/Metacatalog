@@ -27,12 +27,12 @@ sitools.user.modules.metacatalogStatusHarvest = Ext.extend(Ext.Panel, {
 //    layout: 'fit',
     id : "metacatalogStatusHarvest",
     title : i18n.get('label.statusTitle'),
-	initComponent : function () {
-		
-    	this.store = new Ext.data.JsonStore({
-    		autoLoad : false,
-    		url : '/tmp',
-    		root : 'data',
+    initComponent : function () {
+        
+        this.store = new Ext.data.JsonStore({
+            autoLoad : false,
+            url : '/tmp',
+            root : 'data',
             fields : [
             {
                 name : 'id'
@@ -41,26 +41,26 @@ sitools.user.modules.metacatalogStatusHarvest = Ext.extend(Ext.Panel, {
                 name : 'nbDocumentsRetrieved',
                 type : 'int'
             },{
-            	name : 'nbDocumentsIndexed',
+                name : 'nbDocumentsIndexed',
                 type : 'int'
             }, {
-            	name : 'nbDocumentsInvalid',
+                name : 'nbDocumentsInvalid',
                 type : 'int'
             }, {
-            	name : 'status',
+                name : 'status',
                 type : 'string'
             }, {
-            	name : 'errorCause',
+                name : 'errorCause',
                 type : 'string'
             }, {
-            	name : 'result',
+                name : 'result',
                 type : 'string'
             }, {
-            	name : 'startDate',
+                name : 'startDate',
                 type : 'date',
                 dateFormat : SITOOLS_DATE_FORMAT
             }, {
-            	name : 'endDate',
+                name : 'endDate',
                 type : 'date',
                 dateFormat : SITOOLS_DATE_FORMAT
             }, {
@@ -68,94 +68,94 @@ sitools.user.modules.metacatalogStatusHarvest = Ext.extend(Ext.Panel, {
                 type : 'string'
             }],
             listeners : {
-            	load : function (store, records, ind){
-            			Ext.each(records, function (item){
-	                        if (!Ext.isDefined(item.startDate)){
-	                            item.startDate = "";
-	                        }
-	                        if (!Ext.isDefined(item.endDate)){
-	                            item.endDate = "";
-	                        }
-            			});
+                load : function (store, records, ind){
+                        Ext.each(records, function (item){
+                            if (!Ext.isDefined(item.startDate)){
+                                item.startDate = "";
+                            }
+                            if (!Ext.isDefined(item.endDate)){
+                                item.endDate = "";
+                            }
+                        });
                     }
             }
         });
         
         this.tpl = new Ext.XTemplate(
-        	'<tpl for=".">' +
-        			'<tpl if="xindex == 1">' +
-        			'<div id="currentHarvest" class="statusHarvestDetail">' +
-        				'<span class="harvestTitle">Current Harvest</span>' +
-        				'<a href="#" title="Refresh" onClick=\'sitools.user.modules.metacatalogCrud.onRefreshStatusDetail(); return false;\'>' +
-        					'<img alt="ACTIVE" style=\'position:absolute; padding-left:4px\' src="/sitools/common/res/images/icons/refresh.png" />' +
-        				'</a>' +
-        				'<br>' +
-        				'<p>' +
-        				'<tpl if="status == \'ACTIVE\'">' +
-		        			'Status : <b>ACTIVE</b> <img alt="ACTIVE" style=\'position:absolute;\' src="/sitools/client-user/js/modules/metacatalog/images/active_status.gif" /> <br>' +
-		        		'</tpl>' +
-		        		'<tpl if="status==\'INACTIVE\'">' +
-		        			'Status : <b>INACTIVE</b> <img alt="INACTIVE" style=\'position:absolute;\' src="/sitools/client-user/js/modules/metacatalog/images/inactive_status.png" /> <br>' +
-		        		'</tpl>' +
-		        		'<br>' +
-        			'</tpl>' +
-        			'<tpl if="xindex == 2">' +
-        			'<div id="lastHarvest" class="statusHarvestDetail">' +
-        				'<span class="harvestTitle">Last Harvest</span>' +
-        				'<br>' +
-        				'<p>' +
-		        		'<span class="result-{result}"> Result : <b>{result}</b></span><br>' +
-		        		'<br>' +
-        			'</tpl>' +
-		        		
-		        		'Documents Retrieved : <b>{nbDocumentsRetrieved}</b> <br>' +
-		        		'Documents Indexed : <b>{nbDocumentsIndexed}</b> <br>' +
-		        		'Documents Invalid : <b>{nbDocumentsInvalid}</b> <br>' +
-		        		'<tpl if="this.isEmpty(startDate) == false" >' +
-		        			'Start Date : <b>{startDate:date("'+SITOOLS_DEFAULT_IHM_DATE_FORMAT+'")}</b> <br>' +
-		        		'</tpl>' +
-		        		'<tpl if="this.isEmpty(endDate) == false" >' +
-		        			'End Date : <b>{endDate:date("'+SITOOLS_DEFAULT_IHM_DATE_FORMAT+'")}</b> <br>' +
-		        		'</tpl>' +
-		        		'<tpl if="this.isEmpty(errorCause) == false" >' +
-		        			'<span class="errorCause"> errorCause : ' +
-		        				'<a href="#" title="Show Error" onClick=\'sitools.user.modules.metacatalogStatusHarvest.showError("{errorCause}"); return false;\'>' +
-        							'<img alt="ACTIVE" style=\'position:absolute; padding-left:4px\' src="/sitools/client-user/js/modules/metacatalog/images/error.png" />' +
-        						'</a>' +
-		        			'</span>' +
-		        			'<br>' +
-		        		'</tpl>' +
-		        		'<tpl if="this.isEmpty(loggerFileName) == false" >' +
-		        		'<span class="showLog">' +
+            '<tpl for=".">' +
+                    '<tpl if="xindex == 1">' +
+                    '<div id="currentHarvest" class="statusHarvestDetail">' +
+                        '<span class="harvestTitle">Current Harvest</span>' +
+                        '<a href="#" title="Refresh" onClick=\'sitools.user.modules.metacatalogCrud.onRefreshStatusDetail(); return false;\'>' +
+                            '<img alt="ACTIVE" style=\'position:absolute; padding-left:4px\' src="/sitools/common/res/images/icons/refresh.png" />' +
+                        '</a>' +
+                        '<br>' +
+                        '<p>' +
+                        '<tpl if="status == \'ACTIVE\'">' +
+                            'Status : <b>ACTIVE</b> <img alt="ACTIVE" style=\'position:absolute;\' src="/sitools/client-user/js/modules/metacatalog/images/active_status.gif" /> <br>' +
+                        '</tpl>' +
+                        '<tpl if="status==\'INACTIVE\'">' +
+                            'Status : <b>INACTIVE</b> <img alt="INACTIVE" style=\'position:absolute;\' src="/sitools/client-user/js/modules/metacatalog/images/inactive_status.png" /> <br>' +
+                        '</tpl>' +
+                        '<br>' +
+                    '</tpl>' +
+                    '<tpl if="xindex == 2">' +
+                    '<div id="lastHarvest" class="statusHarvestDetail">' +
+                        '<span class="harvestTitle">Last Harvest</span>' +
+                        '<br>' +
+                        '<p>' +
+                        '<span class="result-{result}"> Result : <b>{result}</b></span><br>' +
+                        '<br>' +
+                    '</tpl>' +
+                        
+                        'Documents Retrieved : <b>{nbDocumentsRetrieved}</b> <br>' +
+                        'Documents Indexed : <b>{nbDocumentsIndexed}</b> <br>' +
+                        'Documents Invalid : <b>{nbDocumentsInvalid}</b> <br>' +
+                        '<tpl if="this.isEmpty(startDate) == false" >' +
+                            'Start Date : <b>{startDate:date("'+SITOOLS_DEFAULT_IHM_DATE_FORMAT+'")}</b> <br>' +
+                        '</tpl>' +
+                        '<tpl if="this.isEmpty(endDate) == false" >' +
+                            'End Date : <b>{endDate:date("'+SITOOLS_DEFAULT_IHM_DATE_FORMAT+'")}</b> <br>' +
+                        '</tpl>' +
+                        '<tpl if="this.isEmpty(errorCause) == false" >' +
+                            '<span class="errorCause"> errorCause : ' +
+                                '<a href="#" title="Show Error" onClick=\'sitools.user.modules.metacatalogStatusHarvest.showError("{errorCause}"); return false;\'>' +
+                                    '<img alt="ACTIVE" style=\'position:absolute; padding-left:4px\' src="/sitools/client-user/js/modules/metacatalog/images/error.png" />' +
+                                '</a>' +
+                            '</span>' +
+                            '<br>' +
+                        '</tpl>' +
+                        '<tpl if="this.isEmpty(loggerFileName) == false" >' +
+                        '<span class="showLog">' +
                             '<a href="#" onClick=\'sitools.user.modules.metacatalogStatusHarvest.showLog("{loggerFileName}"); return false;\'>' +
                                 'Show log...' +
                             '</a>' +
                         '</span>'+
                         '</tpl>' +
-	        		'</p>' +
-        		'</div>' +
-		    '</tpl>',
-			{
-					compiled : true, 
-					scope : this,
-					isEmpty : function (item) {
-						return Ext.isEmpty(item);
-					}
-			}
-		);
-		
-    	this.dataview = new Ext.DataView({
-    		store : this.store,
-    		tpl : this.tpl
-    	});
-    	
-    	this.items = [ this.dataview ];
-    	this.addListener("refreshHarvestStatus", this.refreshHarvestStatus);
-    	
-	    sitools.user.modules.metacatalogStatusHarvest.superclass.initComponent.call(this);
-	},
-	
-	onRender : function () {
+                    '</p>' +
+                '</div>' +
+            '</tpl>',
+            {
+                    compiled : true, 
+                    scope : this,
+                    isEmpty : function (item) {
+                        return Ext.isEmpty(item);
+                    }
+            }
+        );
+        
+        this.dataview = new Ext.DataView({
+            store : this.store,
+            tpl : this.tpl
+        });
+        
+        this.items = [ this.dataview ];
+        this.addListener("refreshHarvestStatus", this.refreshHarvestStatus);
+        
+        sitools.user.modules.metacatalogStatusHarvest.superclass.initComponent.call(this);
+    },
+    
+    onRender : function () {
         sitools.user.modules.metacatalogStatusHarvest.superclass.onRender.apply(this, arguments);
     },
     
@@ -166,32 +166,35 @@ sitools.user.modules.metacatalogStatusHarvest = Ext.extend(Ext.Panel, {
      */
     refreshHarvestStatus : function (url, id, crud) {
         this.url = url;
-    	this.store.proxy.conn.url = this.url;
-    	this.store.load();
-    	
-    	this.setTitle(i18n.get('label.statusTitle') + id);
-    	
-    	crud.store.load();
+        this.store.proxy.conn.url = this.url;
+        this.store.load();
+        
+        this.setTitle(i18n.get('label.statusTitle') + id);
+        
+        crud.store.load();
     }
 });
 
 sitools.user.modules.metacatalogStatusHarvest.showError = function(errorMessage) {
-	new Ext.Window({
-		title : i18n.get('label.errorCause'),
-		html : errorMessage,
-		autoHeight : true,
-		width : 500
-	}).show();
+    new Ext.Window({
+        title : i18n.get('label.errorCause'),
+        html : errorMessage,
+        autoHeight : true,
+        width : 500
+    }).show();
 }
 
 sitools.user.modules.metacatalogStatusHarvest.showLog = function(logName) {
     var statusHarvestPanel = Ext.getCmp('metacatalogStatusHarvest');
     new Ext.Window({
         title : 'Log',
-        autoLoad : statusHarvestPanel.appUrl + "/logs/" + logName,
+        autoLoad : statusHarvestPanel.appUrl + "/logs/" + logName+"?_dc=" + new Date().getTime(),
         autoScroll : true,
         height : 400,
-        width : 500
+        width : 500,
+        style : {
+            "white-space" : 'pre-line'        
+        }
     }).show();
 }
 
