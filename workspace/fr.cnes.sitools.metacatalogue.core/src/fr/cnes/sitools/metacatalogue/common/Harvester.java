@@ -126,7 +126,7 @@ public abstract class Harvester implements Runnable {
     String fileHandlerName = logFolder + "/" + getLoggerName(date, conf);
 
     FileHandler fl = new FileHandler(fileHandlerName, true);
-    fl.setFormatter(new SimpleFormatter());
+    fl.setFormatter(new MetacatalogueLogFormatter());
     logger.addHandler(fl);
     
     return logger;

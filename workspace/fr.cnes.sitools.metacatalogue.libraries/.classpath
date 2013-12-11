@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry exported="true" kind="lib" path="xpp3-1.1.4c.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry exported="true" kind="lib" path="common-2.2.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="ecore-2.2.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="jaxen-1.1.1.jar"/>
@@ -14,7 +15,8 @@
 	<classpathentry exported="true" kind="lib" path="xercesImpl-2.7.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="xml-apis-xerces-2.7.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="xsd-2.2.2.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="src" path="src/"/>
+	<classpathentry exported="true" kind="lib" path="xpp3-1.1.4c.jar"/>
+	<classpathentry exported="true" kind="lib" path="guava-14.0.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

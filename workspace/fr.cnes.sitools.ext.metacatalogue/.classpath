@@ -4,6 +4,5 @@
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="test/src"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/fr.cnes.sitools.metacatalogue.core"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
