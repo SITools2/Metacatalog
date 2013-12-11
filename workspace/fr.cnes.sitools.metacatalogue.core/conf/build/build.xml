@@ -244,7 +244,7 @@
 
 
 		<jar jarfile="${dist.dir}/${project.name}.jar" manifest="${out.dir}/tmp/manifest">
-			<fileset includes="**/*.class" dir="${out.classes.dir}" />
+			<fileset dir="${out.classes.dir}" excludes="**/Test*.class, **/*Test.class **/*Helper" />
 			<!--<fileset includes="**/*.properties" dir="${conf.properties.dir}" />-->
 		</jar>
 
