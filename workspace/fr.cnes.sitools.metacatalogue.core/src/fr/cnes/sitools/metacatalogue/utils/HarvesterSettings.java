@@ -18,6 +18,7 @@
  ******************************************************************************/
 package fr.cnes.sitools.metacatalogue.utils;
 
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
@@ -77,7 +78,11 @@ public final class HarvesterSettings {
    * @return the parameter value, or null if not found
    */
   public Object get(String name) {
-    return this.resourceBundle.getObject(name);
+    try {
+      return this.resourceBundle.getObject(name);
+    } catch(MissingResourceException mre) {
+      return null;
+    }
   }
 
   /**
@@ -88,7 +93,11 @@ public final class HarvesterSettings {
    * @return the parameter value, or null if not found
    */
   public String getString(String name) {
-    return this.resourceBundle.getString(name);
+    try {
+      return this.resourceBundle.getString(name);
+    } catch(MissingResourceException mre) {
+      return null;
+    }
   }
 
   /**
