@@ -24,6 +24,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Date;
 import java.util.logging.Logger;
 
 import org.fao.geonet.csw.common.util.Xml;
@@ -177,6 +178,7 @@ public class AbstractHarvesterTestCase {
     HarvestStatus result = new HarvestStatus();
     context.getAttributes().put(ContextAttributes.RESULT, result);
     HarvestStatus status = new HarvestStatus();
+    status.setStartDate(new Date());
     context.getAttributes().put(ContextAttributes.STATUS, status);
     return context;
   }
