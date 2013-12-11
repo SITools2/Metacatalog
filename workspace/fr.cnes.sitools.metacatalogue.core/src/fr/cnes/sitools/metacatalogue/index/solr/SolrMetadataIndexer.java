@@ -34,6 +34,7 @@ import org.restlet.Context;
 import fr.cnes.sitools.metacatalogue.index.MetadataIndexer;
 import fr.cnes.sitools.metacatalogue.model.Field;
 import fr.cnes.sitools.metacatalogue.model.MetadataRecords;
+import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
 import fr.cnes.sitools.metacatalogue.utils.MetacatalogField;
 import fr.cnes.sitools.server.ContextAttributes;
 
@@ -155,7 +156,18 @@ public class SolrMetadataIndexer implements MetadataIndexer {
    */
   private Date parseDate(String sDate) throws ParseException {
     Date result = null;
-    result = DateUtil.parseDate(sDate);
+    
+    if (HarvesterSettings.getInstance().get("DATE_FORMATS")!=null){
+      List<String> fmts = new ArrayList<String>();
+      String[] formats = HarvesterSettings.getInstance().get("DATE_FORMATS").toString().split(",");
+      for ( int i = 0 ; i < formats.length ; i++){
+        fmts.add(formats[i]);
+      }
+      result = DateUtil.parseDate(sDate, fmts);
+      
+    } else {
+      result = DateUtil.parseDate(sDate);  
+    }
     return result;
   }
 

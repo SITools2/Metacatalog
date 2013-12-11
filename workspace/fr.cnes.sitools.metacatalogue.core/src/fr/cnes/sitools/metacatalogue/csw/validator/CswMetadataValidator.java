@@ -123,28 +123,29 @@ public class CswMetadataValidator extends HarvesterStep {
           fail = true;
         }
         if (field.isDate()) {
-          List<String> fmts = new ArrayList<String>();
-          fmts.add("yyyy-MM-DD'T'HH:mm:ss");
-          fmts.add("yyyy-MM-DD'T'HH:mm:ss(Z)");
-          fmts.add("yyyy-MM-DD'T'HH:mm:ss+HH:mm");
-          fmts.add("yyyy-MM-DD'T'HH:mm:ss-HH:mm");
-          try {
-            Object date = doc.get(field.getField());
-            if (date != null) {
-              org.apache.solr.common.util.DateUtil.parseDate((String) date, fmts);
+          if (HarvesterSettings.getInstance().get("DATE_FORMATS")!=null){
+            List<String> fmts = new ArrayList<String>();
+            String[] formats = HarvesterSettings.getInstance().get("DATE_FORMATS").toString().split(",");
+            for ( int i = 0 ; i < formats.length ; i++){
+              fmts.add(formats[i]);
             }
-            else {
-              logger.info(field.getField() + " - is an empty date : " + doc.get(MetacatalogField.IDENTIFIER.getField())
-                  + " not inserted in the metacatalog");
+          try {
+              Object date = doc.get(field.getField());
+              if (date != null) {
+                org.apache.solr.common.util.DateUtil.parseDate((String) date, fmts);
+              }
+              else {
+                logger.info(field.getField() + " - is an empty date : " + doc.get(MetacatalogField.IDENTIFIER.getField())
+                    + " not inserted in the metacatalog");
+                fail = true;
+              }
+            }
+            catch (ParseException e) {
+              logger.info(field.getField() + " - incorrect date format : "
+                  + doc.get(MetacatalogField.IDENTIFIER.getField()) + " not inserted in the metacatalog");
               fail = true;
             }
           }
-          catch (ParseException e) {
-            logger.info(field.getField() + " - incorrect date format : "
-                + doc.get(MetacatalogField.IDENTIFIER.getField()) + " not inserted in the metacatalog");
-            fail = true;
-          }
-
         }
       }
       
