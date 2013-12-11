@@ -45,4 +45,8 @@ public interface Consts {
   
   /** ThesaurusPath */
   String THESAURUS_PATH = "THESAURUS_PATH";
+  
+  /** Date formats  */
+  String DATE_FORMATS = "DATE_FORMATS";
+  
 }

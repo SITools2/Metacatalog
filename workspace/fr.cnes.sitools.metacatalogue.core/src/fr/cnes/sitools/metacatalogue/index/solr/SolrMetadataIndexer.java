@@ -1,4 +1,4 @@
- /*******************************************************************************
+/*******************************************************************************
  * Copyright 2010-2013 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
  *
  * This file is part of SITools2.
@@ -156,17 +156,13 @@ public class SolrMetadataIndexer implements MetadataIndexer {
    */
   private Date parseDate(String sDate) throws ParseException {
     Date result = null;
-    
-    if (HarvesterSettings.getInstance().get("DATE_FORMATS")!=null){
-      List<String> fmts = new ArrayList<String>();
-      String[] formats = HarvesterSettings.getInstance().get("DATE_FORMATS").toString().split(",");
-      for ( int i = 0 ; i < formats.length ; i++){
-        fmts.add(formats[i]);
-      }
+    List<String> fmts = HarvesterSettings.getInstance().getDateFormats();
+
+    if (fmts != null && !fmts.isEmpty()) {
       result = DateUtil.parseDate(sDate, fmts);
-      
-    } else {
-      result = DateUtil.parseDate(sDate);  
+    }
+    else {
+      result = DateUtil.parseDate(sDate);
     }
     return result;
   }

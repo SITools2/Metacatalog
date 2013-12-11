@@ -27,6 +27,7 @@ import java.util.logging.Logger;
 import net.minidev.json.JSONObject;
 
 import org.restlet.Context;
+import org.restlet.engine.util.DateUtils;
 
 import com.jayway.jsonpath.InvalidPathException;
 import com.jayway.jsonpath.JsonPath;
@@ -35,15 +36,16 @@ import fr.cnes.sitools.metacatalogue.common.Converter;
 import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
 import fr.cnes.sitools.metacatalogue.common.MetadataContainer;
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
+import fr.cnes.sitools.metacatalogue.model.Error;
 import fr.cnes.sitools.metacatalogue.model.HarvestStatus;
 import fr.cnes.sitools.metacatalogue.model.MetadataRecords;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
+import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
 import fr.cnes.sitools.metacatalogue.utils.MetacatalogField;
 import fr.cnes.sitools.model.AttributeCustom;
 import fr.cnes.sitools.model.HarvesterModel;
 import fr.cnes.sitools.model.Property;
 import fr.cnes.sitools.server.ContextAttributes;
-import fr.cnes.sitools.metacatalogue.model.Error;
 
 public class OpensearchMetadataExtractor extends HarvesterStep {
 
@@ -81,7 +83,7 @@ public class OpensearchMetadataExtractor extends HarvesterStep {
 
       addField(record, "$.properties.platform", jsonString, MetacatalogField.PLATFORM);
       addField(record, "$.properties.instrument", jsonString, MetacatalogField.INSTRUMENT);
-      
+
       addField(record, "$.properties.authority", jsonString, MetacatalogField.AUTHORITY);
       addField(record, "$.properties.processingLevel", jsonString, MetacatalogField.PROCESSING_LEVEL);
 
@@ -112,7 +114,10 @@ public class OpensearchMetadataExtractor extends HarvesterStep {
       HarvestStatus status = (HarvestStatus) context.getAttributes().get(ContextAttributes.STATUS);
 
       // modified
-      addField(record, status.getStartDate(), MetacatalogField.MODIFIED.getField());
+      List<String> frmt = HarvesterSettings.getInstance().getDateFormats();
+      String modified = DateUtils.format(status.getStartDate(), frmt);
+
+      addField(record, modified, MetacatalogField.MODIFIED.getField());
 
       OpensearchGeometryExtractor extractor = new OpensearchGeometryExtractor();
 

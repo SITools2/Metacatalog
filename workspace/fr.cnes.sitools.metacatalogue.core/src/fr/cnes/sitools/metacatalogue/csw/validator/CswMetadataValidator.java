@@ -76,7 +76,7 @@ public class CswMetadataValidator extends HarvesterStep {
       List<Error> errors = doc.getErrors();
 
       boolean fail = false;
-      
+
       /* warning */
       for (Error error : errors) {
         if (error != null && error.getLevel() != null) {
@@ -85,7 +85,7 @@ public class CswMetadataValidator extends HarvesterStep {
           }
         }
         if (error != null) {
-          if ("hierarchyLevelName".equals(error.getName())){
+          if ("hierarchyLevelName".equals(error.getName())) {
             logger.info("" + error.getValue());
             fail = true;
           }
@@ -93,18 +93,19 @@ public class CswMetadataValidator extends HarvesterStep {
       }
 
       /* check resolution >= 0 */
-      if (MetacatalogField.getField(MetacatalogField.RESOLUTION.getField())!=null){
+      if (MetacatalogField.getField(MetacatalogField.RESOLUTION.getField()) != null) {
         try {
-          double res  = Double.parseDouble(doc.get(MetacatalogField.RESOLUTION.getField()).toString());
-          if (res <= 0){
-            logger.info(MetacatalogField.RESOLUTION.getField() + " - is < 0 : " + doc.get(MetacatalogField.IDENTIFIER.getField())
-                + " not inserted in the metacatalog");
+          double res = Double.parseDouble(doc.get(MetacatalogField.RESOLUTION.getField()).toString());
+          if (res <= 0) {
+            logger.info(MetacatalogField.RESOLUTION.getField() + " - is < 0 : "
+                + doc.get(MetacatalogField.IDENTIFIER.getField()) + " not inserted in the metacatalog");
             fail = true;
           }
-        } catch (NumberFormatException ex) {
-            logger.info(MetacatalogField.RESOLUTION.getField() + " is not a double : " + doc.get(MetacatalogField.IDENTIFIER.getField())
-                + " not inserted in the metacatalog");
-            fail = true;
+        }
+        catch (NumberFormatException ex) {
+          logger.info(MetacatalogField.RESOLUTION.getField() + " is not a double : "
+              + doc.get(MetacatalogField.IDENTIFIER.getField()) + " not inserted in the metacatalog");
+          fail = true;
         }
       }
 
@@ -123,32 +124,26 @@ public class CswMetadataValidator extends HarvesterStep {
           fail = true;
         }
         if (field.isDate()) {
-          if (HarvesterSettings.getInstance().get("DATE_FORMATS")!=null){
-            List<String> fmts = new ArrayList<String>();
-            String[] formats = HarvesterSettings.getInstance().get("DATE_FORMATS").toString().split(",");
-            for ( int i = 0 ; i < formats.length ; i++){
-              fmts.add(formats[i]);
-            }
           try {
-              Object date = doc.get(field.getField());
-              if (date != null) {
-                org.apache.solr.common.util.DateUtil.parseDate((String) date, fmts);
-              }
-              else {
-                logger.info(field.getField() + " - is an empty date : " + doc.get(MetacatalogField.IDENTIFIER.getField())
-                    + " not inserted in the metacatalog");
-                fail = true;
-              }
+            Object date = doc.get(field.getField());
+            if (date != null) {
+              org.apache.solr.common.util.DateUtil.parseDate((String) date, HarvesterSettings.getInstance()
+                  .getDateFormats());
             }
-            catch (ParseException e) {
-              logger.info(field.getField() + " - incorrect date format : "
-                  + doc.get(MetacatalogField.IDENTIFIER.getField()) + " not inserted in the metacatalog");
+            else {
+              logger.info(field.getField() + " - is an empty date : " + doc.get(MetacatalogField.IDENTIFIER.getField())
+                  + " not inserted in the metacatalog");
               fail = true;
             }
           }
+          catch (ParseException e) {
+            logger.info(field.getField() + " - incorrect date format : "
+                + doc.get(MetacatalogField.IDENTIFIER.getField()) + " not inserted in the metacatalog");
+            fail = true;
+          }
         }
       }
-      
+
       if (fail) {
         iterator.remove();
         nbDocInvalid++;

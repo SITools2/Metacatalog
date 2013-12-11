@@ -1,4 +1,4 @@
- /*******************************************************************************
+/*******************************************************************************
  * Copyright 2010-2013 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
  *
  * This file is part of SITools2.
@@ -18,9 +18,13 @@
  ******************************************************************************/
 package fr.cnes.sitools.metacatalogue.utils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
+
+import fr.cnes.sitools.server.Consts;
 
 /**
  * Util class to get the settings of the application
@@ -43,6 +47,8 @@ public final class HarvesterSettings {
 
   private String publicHostDomain;
 
+  private List<String> dateFormats;
+
   /** Private constuctor */
   private HarvesterSettings() {
   }
@@ -55,6 +61,7 @@ public final class HarvesterSettings {
     log = Logger.getLogger(BUNDLE_NAME);
     setStoreDIR(getString("STORE_DIR"));
     setPublicHostDomain(this.getString("PUBLIC_HOST_DOMAIN"));
+    initDateFormat();
   }
 
   /**
@@ -80,7 +87,8 @@ public final class HarvesterSettings {
   public Object get(String name) {
     try {
       return this.resourceBundle.getObject(name);
-    } catch(MissingResourceException mre) {
+    }
+    catch (MissingResourceException mre) {
       return null;
     }
   }
@@ -95,7 +103,8 @@ public final class HarvesterSettings {
   public String getString(String name) {
     try {
       return this.resourceBundle.getString(name);
-    } catch(MissingResourceException mre) {
+    }
+    catch (MissingResourceException mre) {
       return null;
     }
   }
@@ -180,6 +189,39 @@ public final class HarvesterSettings {
    */
   public void setPublicHostDomain(String publicHostDomain) {
     this.publicHostDomain = publicHostDomain;
+  }
+
+  /**
+   * initialize date formats
+   */
+  private void initDateFormat() {
+    dateFormats = new ArrayList<String>();
+    String dateFormatAsString = HarvesterSettings.getInstance().getString(Consts.DATE_FORMATS);
+    if (dateFormatAsString != null) {
+      String[] formats = dateFormatAsString.split(",");
+      for (int i = 0; i < formats.length; i++) {
+        dateFormats.add(formats[i]);
+      }
+    }
+  }
+
+  /**
+   * Gets the dateFormats value
+   * 
+   * @return the dateFormats
+   */
+  public List<String> getDateFormats() {
+    return dateFormats;
+  }
+
+  /**
+   * Sets the value of dateFormats
+   * 
+   * @param dateFormats
+   *          the dateFormats to set
+   */
+  public void setDateFormats(List<String> dateFormats) {
+    this.dateFormats = dateFormats;
   }
 
 }

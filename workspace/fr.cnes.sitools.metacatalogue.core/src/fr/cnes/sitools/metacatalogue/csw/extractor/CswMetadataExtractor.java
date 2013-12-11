@@ -35,6 +35,7 @@ import org.jdom.JDOMException;
 import org.jdom.Namespace;
 import org.jdom.xpath.XPath;
 import org.restlet.Context;
+import org.restlet.engine.util.DateUtils;
 
 import fr.cnes.sitools.metacatalogue.common.Converter;
 import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
@@ -115,7 +116,10 @@ public class CswMetadataExtractor extends HarvesterStep {
           HarvestStatus status = (HarvestStatus) context.getAttributes().get(ContextAttributes.STATUS);
 
           // modified
-          addField(mdRecords, status.getStartDate(), MetacatalogField.MODIFIED.getField());
+          List<String> frmt = HarvesterSettings.getInstance().getDateFormats();
+          String modified = DateUtils.format(status.getStartDate(), frmt);
+
+          addField(mdRecords, modified, MetacatalogField.MODIFIED.getField());
 
           listMetadataRecords.add(mdRecords);
 
@@ -198,7 +202,7 @@ public class CswMetadataExtractor extends HarvesterStep {
   private void addField(MetadataRecords fields, String value, String fieldName) {
     fields.add(fieldName, value);
   }
-  
+
   private void addField(MetadataRecords fields, Date value, String fieldName) {
     fields.add(fieldName, value);
   }
