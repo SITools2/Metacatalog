@@ -18,7 +18,6 @@
  ******************************************************************************/
 package fr.cnes.sitools.metacatalogue.resources.opensearch;
 
-import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,14 +37,13 @@ import org.restlet.resource.ResourceException;
 import com.google.common.base.Joiner;
 
 import fr.cnes.sitools.common.SitoolsSettings;
-import fr.cnes.sitools.metacatalogue.index.solr.SolRUtils;
 import fr.cnes.sitools.metacatalogue.representation.GeoJsonMDEORepresentation;
-import fr.cnes.sitools.metacatalogue.resources.AbstractOpensearchQueryResource;
+import fr.cnes.sitools.metacatalogue.resources.AbstractSearchResource;
 import fr.cnes.sitools.metacatalogue.utils.MetacatalogField;
 import fr.cnes.sitools.thesaurus.ThesaurusSearcher;
 import fr.cnes.sitools.util.DateUtils;
 
-public abstract class AbstractOpensearchSearchResource extends AbstractOpensearchQueryResource {
+public abstract class AbstractOpensearchSearchResource extends AbstractSearchResource {
 
   protected enum DATE_QUERY_TYPE {
     /** ALL dates greater than the given one */
@@ -106,10 +104,6 @@ public abstract class AbstractOpensearchSearchResource extends AbstractOpensearc
       throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "Error while querying solr index", e);
     }
     return repr;
-  }
-
-  protected ThesaurusSearcher getThesaurusSearcher() throws IOException {
-    return new ThesaurusSearcher(thesaurusName);
   }
 
   private void setFacet(SolrQuery solrQuery) {
@@ -306,14 +300,6 @@ public abstract class AbstractOpensearchSearchResource extends AbstractOpensearc
 
   private String escapeDate(String dateStr) {
     return dateStr.replace(":", "\\:");
-  }
-
-  protected SolrServer getSolrServer() {
-    SolrServer server = SolRUtils.getSolRServer(solrCoreUrl);
-    if (server == null) {
-      throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "Solr core : " + solrCoreUrl + " not reachable");
-    }
-    return server;
   }
 
 }

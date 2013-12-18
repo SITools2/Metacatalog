@@ -44,6 +44,7 @@ import fr.cnes.sitools.common.validator.ConstraintViolationLevel;
 import fr.cnes.sitools.common.validator.Validator;
 import fr.cnes.sitools.metacatalogue.resources.administration.MetacatalogStatusResource;
 import fr.cnes.sitools.metacatalogue.resources.histogram.HistogramResource;
+import fr.cnes.sitools.metacatalogue.resources.mdweb.MdWebSearchResource;
 import fr.cnes.sitools.metacatalogue.resources.opensearch.OpensearchDescribeResource;
 import fr.cnes.sitools.metacatalogue.resources.opensearch.OpensearchDescriptionServiceResource;
 import fr.cnes.sitools.metacatalogue.resources.opensearch.OpensearchSearchResource;
@@ -140,6 +141,10 @@ public class MetacatalogueApplication extends AbstractApplicationPlugin {
     router.attach("/describe", OpensearchDescribeResource.class);
     router.attach("/suggest", OpensearchSuggestResource.class);
 
+    //MDWEB API exposition
+    router.attach("/mdweb/search", MdWebSearchResource.class);
+    
+    
     // Services redirector exposition
 
     router.attach("/download/{urn}", new DownloadProxyServiceHandler(getContext()));

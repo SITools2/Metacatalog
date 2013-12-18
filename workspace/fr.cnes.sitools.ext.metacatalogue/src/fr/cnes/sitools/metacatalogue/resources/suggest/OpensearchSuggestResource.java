@@ -36,12 +36,12 @@ import org.restlet.representation.Variant;
 import org.restlet.resource.Get;
 
 import fr.cnes.sitools.metacatalogue.index.solr.SolRUtils;
-import fr.cnes.sitools.metacatalogue.resources.AbstractOpensearchQueryResource;
+import fr.cnes.sitools.metacatalogue.resources.AbstractSearchResource;
 import fr.cnes.sitools.metacatalogue.utils.MetacatalogField;
 import fr.cnes.sitools.thesaurus.Concept;
 import fr.cnes.sitools.thesaurus.ThesaurusSearcher;
 
-public class OpensearchSuggestResource extends AbstractOpensearchQueryResource {
+public class OpensearchSuggestResource extends AbstractSearchResource {
 
   @Override
   public void sitoolsDescribe() {

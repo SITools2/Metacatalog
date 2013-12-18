@@ -30,6 +30,7 @@ import org.apache.solr.client.solrj.response.FacetField;
 import org.apache.solr.client.solrj.response.FacetField.Count;
 import org.apache.solr.client.solrj.response.PivotField;
 import org.apache.solr.client.solrj.response.QueryResponse;
+import org.apache.solr.client.solrj.response.RangeFacet;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.util.NamedList;
@@ -68,10 +69,13 @@ public class GeoJsonMDEORepresentation extends JsonRepresentation {
   private boolean authenticatedUser;
   /** The application base url */
   private String applicationBaseUrl;
+
   private List<FacetField> facets;
   private NamedList<List<PivotField>> pivotFacets;
+
   private ThesaurusSearcher searcher;
   private Map<String, String> conceptsMap;
+  private List<RangeFacet> rangesFacets;
 
   /**
    * Constructor with a DatabaseRequestParameters, a geometryColName and a converterChained
@@ -90,6 +94,7 @@ public class GeoJsonMDEORepresentation extends JsonRepresentation {
     this.listDocuments = queryResponse.getResults();
     this.facets = queryResponse.getFacetFields();
     this.pivotFacets = queryResponse.getFacetPivot();
+    this.rangesFacets = queryResponse.getFacetRanges();
     this.authenticatedUser = authenticatedUser;
     this.applicationBaseUrl = applicationBaseUrl;
     this.conceptsMap = conceptsMap;
@@ -104,10 +109,23 @@ public class GeoJsonMDEORepresentation extends JsonRepresentation {
       writer.write("\"totalResults\":" + listDocuments.getNumFound() + ",");
       writer.write("\"facet_counts\":");
       writer.write("{");
-      writer.write("\"facet_fields\":" + getFacetFields());
-      if (this.pivotFacets != null) {
-        writer.write(",");
-        writer.write("\"facet_pivots\":" + getFacetPivots());
+      boolean commaFacet = false;
+      if (this.facets != null && !this.facets.isEmpty()) {
+        commaFacet = true;
+        writer.write("\"facet_fields\":" + getFacetFields());
+      }
+      if (this.pivotFacets != null && this.pivotFacets.size() > 0) {
+        if (commaFacet) {
+          writer.write(",");
+        }
+        commaFacet = true;
+        writer.write("\"facet_pivot\":" + getFacetPivots());
+      }
+      if (this.rangesFacets != null && !this.rangesFacets.isEmpty()) {
+        if (commaFacet) {
+          writer.write(",");
+        }
+        writer.write("\"facet_ranges\":" + getFacetRanges());
       }
       writer.write("}");
       writer.write(",");
@@ -273,13 +291,50 @@ public class GeoJsonMDEORepresentation extends JsonRepresentation {
 
   private String getFacetFields() throws JSONException {
     JSONObject facetsJSON = new JSONObject();
-    for (FacetField field : this.facets) {
-      JSONArray array = new JSONArray();
-      for (Count count : field.getValues()) {
-        array.put(getValueFromThesaurus(count.getName()));
-        array.put(count.getCount());
+    if (this.facets != null) {
+      for (FacetField field : this.facets) {
+        JSONArray array = new JSONArray();
+        for (Count count : field.getValues()) {
+          array.put(getValueFromThesaurus(count.getName()));
+          array.put(count.getCount());
+        }
+        facetsJSON.put(field.getName(), array);
       }
-      facetsJSON.put(field.getName(), array);
+    }
+
+    return facetsJSON.toString();
+  }
+
+  private String getFacetRanges() throws JSONException {
+    JSONObject facetsJSON = new JSONObject();
+    if (this.rangesFacets != null) {
+      for (RangeFacet facet : this.rangesFacets) {
+        JSONObject facetObject = new JSONObject();
+        JSONArray counts = new JSONArray();
+        if (facet instanceof RangeFacet.Date) {
+          RangeFacet.Date facetDate = (RangeFacet.Date) facet;
+          for (RangeFacet.Count count : facetDate.getCounts()) {
+            counts.put(count.getValue());
+            counts.put(count.getCount());
+          }
+        }
+        if (facet instanceof RangeFacet.Numeric) {
+          RangeFacet.Numeric facetDate = (RangeFacet.Numeric) facet;
+          for (RangeFacet.Count count : facetDate.getCounts()) {
+            counts.put(count.getValue());
+            counts.put(count.getCount());
+          }
+        }
+        facetObject.put("counts", counts);
+        facetObject.put("start", facet.getStart());
+        facetObject.put("end", facet.getEnd());
+        facetObject.put("gap", facet.getGap());
+        facetObject.put("after", facet.getAfter());
+        facetObject.put("before", facet.getBefore());
+        facetObject.put("between", facet.getBetween());
+
+        facetsJSON.put(facet.getName(), facetObject);
+      }
     }
 
     return facetsJSON.toString();

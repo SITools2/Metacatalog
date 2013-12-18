@@ -18,9 +18,11 @@
  ******************************************************************************/
 package fr.cnes.sitools.metacatalogue.resources;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.solr.client.solrj.SolrServer;
 import org.restlet.data.Language;
 import org.restlet.data.Preference;
 import org.restlet.data.Status;
@@ -28,9 +30,11 @@ import org.restlet.resource.ResourceException;
 
 import fr.cnes.sitools.common.SitoolsResource;
 import fr.cnes.sitools.metacatalogue.application.MetacatalogueApplication;
+import fr.cnes.sitools.metacatalogue.index.solr.SolRUtils;
 import fr.cnes.sitools.plugins.applications.model.ApplicationPluginParameter;
+import fr.cnes.sitools.thesaurus.ThesaurusSearcher;
 
-public abstract class AbstractOpensearchQueryResource extends SitoolsResource {
+public abstract class AbstractSearchResource extends SitoolsResource {
 
   /** The parent application */
   protected MetacatalogueApplication application;
@@ -90,6 +94,10 @@ public abstract class AbstractOpensearchQueryResource extends SitoolsResource {
         }
       }
     }
+    else {
+      // remove the lang parameter as we don't need it anymore
+      getRequest().getResourceRef().getQueryAsForm().removeFirst("lang");
+    }
     // check that the language is ok
     Language lang = Language.valueOf(language);
     if (language == null || lang == null || !preferedLanguages.contains(lang)) {
@@ -99,6 +107,18 @@ public abstract class AbstractOpensearchQueryResource extends SitoolsResource {
 
   protected String getLanguage() {
     return language;
+  }
+
+  protected SolrServer getSolrServer() {
+    SolrServer server = SolRUtils.getSolRServer(solrCoreUrl);
+    if (server == null) {
+      throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "Solr core : " + solrCoreUrl + " not reachable");
+    }
+    return server;
+  }
+
+  protected ThesaurusSearcher getThesaurusSearcher() throws IOException {
+    return new ThesaurusSearcher(thesaurusName);
   }
 
 }
