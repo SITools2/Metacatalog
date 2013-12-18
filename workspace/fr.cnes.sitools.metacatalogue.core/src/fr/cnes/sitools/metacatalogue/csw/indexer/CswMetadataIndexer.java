@@ -51,7 +51,7 @@ public class CswMetadataIndexer extends HarvesterStep {
 
   @Override
   public void execute(MetadataContainer data) {
-    logger = context.getLogger();
+    logger = getLogger(context);
     List<MetadataRecords> fields = data.getMetadataRecords();
     try {
       logger.info("Add " + fields.size() + " metadata to the solrIndex cache");

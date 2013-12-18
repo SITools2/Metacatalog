@@ -24,7 +24,6 @@ import java.util.Date;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 import org.restlet.Context;
 import org.restlet.engine.util.DateUtils;
@@ -74,7 +73,7 @@ public abstract class Harvester implements Runnable {
       status = (HarvestStatus) context.getAttributes().get(ContextAttributes.STATUS);
       status.setStartDate(new Date());
       Logger logger = initNewLogger(harvestConf, status.getStartDate());
-      context.setLogger(logger);
+      context.getAttributes().put(ContextAttributes.LOGGER, logger);
       status.setLoggerFileName(getLoggerName(status.getStartDate(), harvestConf));
 
       try {
@@ -128,7 +127,7 @@ public abstract class Harvester implements Runnable {
     FileHandler fl = new FileHandler(fileHandlerName, true);
     fl.setFormatter(new MetacatalogueLogFormatter());
     logger.addHandler(fl);
-    
+
     return logger;
   }
 

@@ -86,7 +86,7 @@ public class CswPostReader extends HarvesterStep {
 
   @Override
   public void execute(MetadataContainer data) throws ProcessException {
-    logger = context.getLogger();
+    logger = getLogger(context);
     Integer nbRecords = null;
     Integer nextRecord = 1;
 

@@ -1,4 +1,4 @@
- /*******************************************************************************
+/*******************************************************************************
  * Copyright 2010-2013 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
  *
  * This file is part of SITools2.
@@ -18,8 +18,13 @@
  ******************************************************************************/
 package fr.cnes.sitools.metacatalogue.common;
 
+import java.util.logging.Logger;
+
+import org.restlet.Context;
+
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
+import fr.cnes.sitools.server.ContextAttributes;
 
 /**
  * Abstract class to implement to have a new step in the harvesting process
@@ -65,5 +70,16 @@ public abstract class HarvesterStep {
    * @return true if the current step can be executed, false otherwise
    */
   public abstract CheckStepsInformation check();
+
+  /**
+   * Get the logger from the Context
+   * 
+   * @param context
+   *          the Context
+   * @return the Logger
+   */
+  public Logger getLogger(Context context) {
+    return (Logger) context.getAttributes().get(ContextAttributes.LOGGER);
+  }
 
 }

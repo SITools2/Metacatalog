@@ -77,7 +77,7 @@ public class OpensearchReader extends HarvesterStep {
 
   @Override
   public void execute(MetadataContainer data) throws ProcessException {
-    logger = context.getLogger();
+    logger = getLogger(context);
     Integer totalResults = null;
     Integer totalResultsRead = 0;
     Integer nextPage = 1;

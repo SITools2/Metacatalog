@@ -35,5 +35,7 @@ public interface ContextAttributes {
   String STATUS = "STATUS";
   /** Attribute String for the result object */
   String RESULT = "RESULT";
+  /** Attribute String for the logger */
+  String LOGGER = "LOGGER";
 
 }

@@ -43,7 +43,7 @@ public class MetadataLogger extends HarvesterStep {
 
   @Override
   public void execute(MetadataContainer data) throws ProcessException {
-    logger = context.getLogger();
+    logger = getLogger(context);
 
     for (MetadataRecords fields : data.getMetadataRecords()) {
       for (Field field : fields.getList()) {

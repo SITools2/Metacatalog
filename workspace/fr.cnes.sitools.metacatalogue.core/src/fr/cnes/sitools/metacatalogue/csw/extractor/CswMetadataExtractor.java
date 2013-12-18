@@ -73,7 +73,7 @@ public class CswMetadataExtractor extends HarvesterStep {
 
   @Override
   public void execute(MetadataContainer data) throws ProcessException {
-    logger = context.getLogger();
+    logger = getLogger(context);
     Element metadata = data.getXmlData();
 
     String resourcesFolder = HarvesterSettings.getInstance().getResourcePath(schemaName, "solr-fields.xsl");

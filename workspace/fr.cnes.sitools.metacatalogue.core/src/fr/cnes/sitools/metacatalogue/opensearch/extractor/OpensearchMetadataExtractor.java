@@ -63,7 +63,7 @@ public class OpensearchMetadataExtractor extends HarvesterStep {
 
   @Override
   public void execute(MetadataContainer data) throws ProcessException {
-    logger = context.getLogger();
+    logger = getLogger(context);
     String metadata = data.getJsonData();
 
     List<JSONObject> features = JsonPath.read(metadata, "$.features");

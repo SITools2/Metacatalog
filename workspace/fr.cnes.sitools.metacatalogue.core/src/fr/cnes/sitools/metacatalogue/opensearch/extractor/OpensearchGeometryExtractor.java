@@ -1,4 +1,4 @@
- /*******************************************************************************
+/*******************************************************************************
  * Copyright 2010-2013 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
  *
  * This file is part of SITools2.
@@ -21,6 +21,7 @@ package fr.cnes.sitools.metacatalogue.opensearch.extractor;
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.geotools.geojson.geom.GeometryJSON;
 import org.restlet.Context;
@@ -31,6 +32,7 @@ import com.vividsolutions.jts.io.WKTWriter;
 
 import fr.cnes.sitools.metacatalogue.model.MetadataRecords;
 import fr.cnes.sitools.metacatalogue.utils.MetacatalogField;
+import fr.cnes.sitools.server.ContextAttributes;
 
 /**
  * Extract the geometry from a json geometry string and add a new Field to the Fields collection
@@ -102,8 +104,8 @@ public class OpensearchGeometryExtractor {
       geo = gjson.read(reader);
     }
     catch (Exception e) {
-
-      context.getLogger().log(Level.WARNING, "Failed to convert geoJSON to jts object: " + geometryJson, e);
+      Logger logger = (Logger) context.getAttributes().get(ContextAttributes.LOGGER);
+      logger.log(Level.WARNING, "Failed to convert geoJSON to jts object: " + geometryJson, e);
     }
 
     if (geo == null) {

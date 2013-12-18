@@ -19,6 +19,7 @@
 package fr.cnes.sitools.metacatalogue.opensearch;
 
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.apache.solr.client.solrj.SolrServer;
 import org.restlet.Context;
@@ -82,7 +83,8 @@ public class OpensearchHarvester extends Harvester {
       step1.execute(null);
     }
     catch (ProcessException e) {
-      HarvesterSettings.getInstance().getLogger().log(Level.WARNING, e.getMessage(), e);
+      Logger logger = (Logger) context.getAttributes().get(ContextAttributes.LOGGER);
+      logger.log(Level.WARNING, e.getMessage(), e);
       throw e;
     }
   }

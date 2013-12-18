@@ -52,7 +52,7 @@ public class OpensearchMetadataIndexer extends HarvesterStep {
 
   @Override
   public void execute(MetadataContainer data) throws ProcessException {
-    logger = context.getLogger();
+    logger = getLogger(context);
     List<MetadataRecords> fields = data.getMetadataRecords();
     try {
       logger.info("Add " + fields.size() + " metadata to the solrIndex cache");

@@ -20,7 +20,6 @@ package fr.cnes.sitools.metacatalogue.csw.validator;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
@@ -55,7 +54,7 @@ public class CswMetadataValidator extends HarvesterStep {
 
   @Override
   public void execute(MetadataContainer data) throws ProcessException {
-    logger = context.getLogger();
+    logger = getLogger(context);
     List<MetadataRecords> metadataRecords = data.getMetadataRecords();
 
     HarvestStatus status = (HarvestStatus) context.getAttributes().get(ContextAttributes.STATUS);

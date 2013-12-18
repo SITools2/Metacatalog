@@ -19,6 +19,7 @@
 package fr.cnes.sitools.metacatalogue.csw;
 
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.apache.solr.client.solrj.SolrServer;
 import org.restlet.Context;
@@ -89,7 +90,8 @@ public class CswPostHarvester extends Harvester {
     }
     catch (Exception e) {
       status.setResult(HarvestStatus.RESULT_ERROR);
-      HarvesterSettings.getInstance().getLogger().log(Level.WARNING, e.getMessage(), e);
+      Logger logger = (Logger) context.getAttributes().get(ContextAttributes.LOGGER);
+      logger.log(Level.WARNING, e.getMessage(), e);
       throw e;
     }
   }

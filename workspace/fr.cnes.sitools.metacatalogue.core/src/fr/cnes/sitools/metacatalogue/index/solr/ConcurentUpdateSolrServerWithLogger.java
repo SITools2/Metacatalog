@@ -19,10 +19,13 @@
 package fr.cnes.sitools.metacatalogue.index.solr;
 
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.apache.http.client.HttpClient;
 import org.apache.solr.client.solrj.impl.ConcurrentUpdateSolrServer;
 import org.restlet.Context;
+
+import fr.cnes.sitools.server.ContextAttributes;
 
 public class ConcurentUpdateSolrServerWithLogger extends ConcurrentUpdateSolrServer {
 
@@ -52,7 +55,8 @@ public class ConcurentUpdateSolrServerWithLogger extends ConcurrentUpdateSolrSer
   @Override
   public void handleError(Throwable ex) {
     super.handleError(ex);
-    this.context.getLogger().log(Level.WARNING, ex.getLocalizedMessage(), ex);
+    Logger logger = (Logger) context.getAttributes().get(ContextAttributes.LOGGER);
+    logger.log(Level.WARNING, ex.getLocalizedMessage(), ex);
   }
 
 }

@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.solr.client.solrj.SolrServer;
@@ -52,6 +53,8 @@ public class SolrMetadataIndexer implements MetadataIndexer {
   protected Collection<SolrInputDocument> documentsToIndex;
   /** The context */
   protected Context context;
+  /** The logger */
+  private Logger logger;
 
   /**
    * Constructor with a server url
@@ -64,6 +67,7 @@ public class SolrMetadataIndexer implements MetadataIndexer {
     documentsToIndex = new ArrayList<SolrInputDocument>();
     server = (SolrServer) context.getAttributes().get(ContextAttributes.INDEXER_SERVER);
     this.context = context;
+    this.logger = (Logger) context.getAttributes().get(ContextAttributes.LOGGER);
   }
 
   @Override
@@ -117,7 +121,7 @@ public class SolrMetadataIndexer implements MetadataIndexer {
       String name = field.getName();
       indexField = MetacatalogField.getField(name);
       if (indexField == null) {
-        context.getLogger().info("Unknown field " + name + " add it to the index as a String object");
+        logger.info("Unknown field " + name + " add it to the index as a String object");
         indexField = MetacatalogField._ANY;
       }
       if (field.getValue() != null) {

@@ -84,7 +84,7 @@ public class CswGetReader extends HarvesterStep {
     this.schemaName = conf.getCatalogType();
     this.conf = conf;
     this.context = context;
-    logger = context.getLogger();
+    logger = getLogger(context);
 
   }
 
