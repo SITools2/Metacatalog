@@ -19,23 +19,40 @@
 package fr.cnes.sitools.metacatalogue.mock;
 
 import org.restlet.Context;
-import org.restlet.data.ChallengeScheme;
-import org.restlet.security.ChallengeAuthenticator;
-import org.restlet.security.Verifier;
+import org.restlet.Restlet;
+import org.restlet.routing.Router;
 
-public class OAuthChallengeAuthenticator extends ChallengeAuthenticator {
+import fr.cnes.sitools.common.application.SitoolsApplication;
 
-  public OAuthChallengeAuthenticator(Context context, boolean optional, ChallengeScheme challengeScheme, String realm) {
-    super(context, optional, challengeScheme, realm);
+/**
+ * Mock application to simulate a Oauth validation server
+ * 
+ * @author m.gond, tx.chevallier
+ * 
+ */
+public class DummyTokenValidationApplication extends SitoolsApplication {
+  /**
+   * Constructor with a Context
+   * 
+   * @param context
+   *          the Context
+   */
+  public DummyTokenValidationApplication(Context context) {
+    super(context);
   }
 
-  public OAuthChallengeAuthenticator(Context context, boolean optional, ChallengeScheme challengeScheme, String realm,
-      Verifier verifier) {
-    super(context, optional, challengeScheme, realm, verifier);
+  @Override
+  public void sitoolsDescribe() {
+    setName("DummyTokenValidationApplication");
+    setDescription("Mock application to simulate a Oauth validation server");
   }
 
-  public OAuthChallengeAuthenticator(Context context, ChallengeScheme challengeScheme, String realm) {
-    super(context, challengeScheme, realm);
+  @Override
+  public Restlet createInboundRoot() {
+    Router router = new Router(getContext());
+    router.attachDefault(DummyTokenValidationResource.class);
+    return router;
+
   }
 
 }

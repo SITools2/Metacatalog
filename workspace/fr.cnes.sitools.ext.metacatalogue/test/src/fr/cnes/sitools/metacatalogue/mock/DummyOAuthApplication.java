@@ -19,35 +19,39 @@
 package fr.cnes.sitools.metacatalogue.mock;
 
 import org.restlet.Context;
-import org.restlet.Request;
-import org.restlet.Response;
 import org.restlet.Restlet;
-import org.restlet.routing.Filter;
 import org.restlet.routing.Router;
 import org.restlet.security.Authorizer;
 import org.restlet.security.ChallengeAuthenticator;
+import org.restlet.security.Verifier;
 
 import fr.cnes.sitools.common.application.ContextAttributes;
 import fr.cnes.sitools.common.application.SitoolsApplication;
-import fr.cnes.sitools.dataset.ActivationDataSetResource;
-import fr.cnes.sitools.dataset.DataSetCollectionResource;
-import fr.cnes.sitools.dataset.DataSetDictionaryMappingCollectionResource;
-import fr.cnes.sitools.dataset.DataSetDictionaryMappingResource;
-import fr.cnes.sitools.dataset.DataSetNotificationResource;
-import fr.cnes.sitools.dataset.DataSetResource;
-import fr.cnes.sitools.dataset.RefreshDataSetResource;
 import fr.cnes.sitools.metacatalogue.security.OAuthVerifier;
 import fr.cnes.sitools.metacatalogue.security.SitoolsChallengeScheme;
-import fr.cnes.sitools.notification.business.NotifierFilter;
-import fr.cnes.sitools.util.RIAPUtils;
 
-public class OAuthApplication extends SitoolsApplication {
+/**
+ * The Class DummyOAuthApplication. Mock application to simulate an application where the authorizations are delegated
+ * to a Oauth SSO server
+ * 
+ * @author m.gond, tx.chevallier
+ */
+public class DummyOAuthApplication extends SitoolsApplication {
 
-  
-  
-  public OAuthApplication(Context context) {
+  /**
+   * Instantiates a new dummy oAuth application.
+   * 
+   * @param context
+   *          the context
+   * @param oauthValidationUrl
+   *          the oauth validation url
+   */
+  public DummyOAuthApplication(Context context, String oauthValidationUrl) {
     super(context);
-    ChallengeAuthenticator oauthAuthenticator = new ChallengeAuthenticator(context, true, SitoolsChallengeScheme.HTTP_BEARER, null, new OAuthVerifier(RIAPUtils.getRiapBase() + this.getAttachementRef() + "/dummyTokenValidation"));
+    Verifier verifier = new OAuthVerifier(oauthValidationUrl);
+
+    ChallengeAuthenticator oauthAuthenticator = new ChallengeAuthenticator(context, true,
+        SitoolsChallengeScheme.HTTP_BEARER, null, verifier);
     Authorizer authorizer = Authorizer.ALWAYS;
     context.getAttributes().put(ContextAttributes.CUSTOM_CHALLENGE_AUTHENTICATOR, oauthAuthenticator);
     context.getAttributes().put(ContextAttributes.CUSTOM_AUTHORIZER, authorizer);
@@ -55,25 +59,24 @@ public class OAuthApplication extends SitoolsApplication {
 
   @Override
   public void sitoolsDescribe() {
-
-
+    setName("DummyOAuthApplication");
+    setDescription("Mock application to simulate an application where the authorizations are delegated to a Oauth SSO server");
   }
-  
-  
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.restlet.Application#createInboundRoot()
+   */
   @Override
   public Restlet createInboundRoot() {
 
     Router router = new Router(getContext());
 
-    router.attachDefault(OAuthResource.class);
-    
-    router.attach("/dummyTokenValidation", DummyTokenValidationResource.class);
+    router.attachDefault(DummyOAuthResource.class);
 
     return router;
 
   }
-  
-  
-  
 
 }

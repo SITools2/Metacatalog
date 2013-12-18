@@ -24,22 +24,34 @@ import org.restlet.resource.ResourceException;
 
 import fr.cnes.sitools.common.SitoolsResource;
 
-public class OAuthResource extends SitoolsResource {
+/**
+ * The Class DummyOAuthResource. Mock ressource to simulate a Oauth authorization validated resource
+ * 
+ * @author m.gond, tx.chevallier
+ */
+public class DummyOAuthResource extends SitoolsResource {
 
   @Override
   public void sitoolsDescribe() {
+    setName("DummyOAuthResource");
+    setDescription("Mock ressource to simulate a Oauth authorization validated resource");
   }
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.restlet.resource.ServerResource#get()
+   */
   @Override
   protected Representation get() throws ResourceException {
 
-    if (getRequest().getClientInfo().isAuthenticated())
-        return new StringRepresentation("OK");
-    else
+    if (getRequest().getClientInfo().isAuthenticated()) {
+      return new StringRepresentation("OK");
+    }
+    else {
       return new StringRepresentation("KO");
-    
+    }
+
   }
 
-  
-  
 }
