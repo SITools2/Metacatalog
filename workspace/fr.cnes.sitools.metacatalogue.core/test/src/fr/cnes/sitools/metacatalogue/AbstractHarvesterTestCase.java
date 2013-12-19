@@ -180,6 +180,7 @@ public class AbstractHarvesterTestCase {
     HarvestStatus status = new HarvestStatus();
     status.setStartDate(new Date());
     context.getAttributes().put(ContextAttributes.STATUS, status);
+    context.getAttributes().put(ContextAttributes.LOGGER, LOGGER);
     return context;
   }
 
@@ -200,7 +201,8 @@ public class AbstractHarvesterTestCase {
 
   }
 
-  protected MetadataContainer getXMLDataFromFile(String filePath) throws FileNotFoundException, IOException, JDOMException {
+  protected MetadataContainer getXMLDataFromFile(String filePath) throws FileNotFoundException, IOException,
+    JDOMException {
 
     File file = new File(filePath);
     FileInputStream fis = new FileInputStream(file);
