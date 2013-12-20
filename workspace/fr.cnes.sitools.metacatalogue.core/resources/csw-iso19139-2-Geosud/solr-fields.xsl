@@ -91,11 +91,14 @@
 		</xsl:if>
 		
 		<!-- WMS -->
-		<xsl:if test="not(gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/gco:CharacterString)" >
-			<error name="wms" level="warning">WMS VERSION not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this Xpath expression "gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/gco:CharacterString"</error>
+		<xsl:if test="not(gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions[2]/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:linkage/gmd:URL)" >
+			<error name="wms" level="warning">WMS not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this Xpath expression "gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions[2]/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:linkage/gmd:URL"</error>
 		</xsl:if>
-		<xsl:if test="not(gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:name/gco:CharacterString)" >
-			<error name="wms" level="warning">WMS LAYERS not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this Xpath expression "gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:name/gco:CharacterString"</error>
+		<xsl:if test="not(gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions[2]/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/gco:CharacterString)" >
+			<error name="wms" level="warning">WMS VERSION not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this Xpath expression "gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions[2]/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/gco:CharacterString"</error>
+		</xsl:if>
+		<xsl:if test="not(gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions[2]/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:name/gco:CharacterString)" >
+			<error name="wms" level="warning">WMS LAYERS not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this Xpath expression "gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions[2]/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:name/gco:CharacterString"</error>
 		</xsl:if>
 		<xsl:if test="not(gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox)" >
 			<error name="wms" level="warning">WMS BBOX not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this Xpath expression "gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox"</error>
@@ -161,12 +164,12 @@
 
 		<!-- Services browse WMS -->
 		<field name="wms">
-			<xsl:value-of select="string(gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:linkage/gmd:URL)"/>?REQUEST=GetMap&#38;VERSION=<xsl:value-of select="string(gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/gco:CharacterString)"/>&#38;LAYERS=<xsl:value-of select="string(gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:name/gco:CharacterString)"/>&#38;BBOX=<xsl:value-of select="string(gmd:identificationInfo/gmd:MD_DataIdentification/gmd:geographicElement/gmd:EX_GeographicBoundingBox)"/>&#38;SRS=<xsl:value-of select="string(gmd:referenceSystemInfo/MD_ReferenceSystem/systemIdentifier/gmd:RS_Identifier/gmd:code/gco:CharacterString)"/>
+			<xsl:value-of select="string(gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions[2]/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:linkage/gmd:URL)"/>?REQUEST=GetMap&#38;VERSION=<xsl:value-of select="string(gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/gco:CharacterString)"/>&#38;LAYERS=<xsl:value-of select="string(gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:name/gco:CharacterString)"/>&#38;BBOX=<xsl:value-of select="string(gmd:identificationInfo/gmd:MD_DataIdentification/gmd:geographicElement/gmd:EX_GeographicBoundingBox)"/>&#38;SRS=<xsl:value-of select="string(gmd:referenceSystemInfo/MD_ReferenceSystem/systemIdentifier/gmd:RS_Identifier/gmd:code/gco:CharacterString)"/>
 		</field>
 			
 		<!-- Services download -->
 		<xsl:for-each
-			select="gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:linkage/gmd:URL">
+			select="gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions[1]/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:linkage/gmd:URL">
 			<field name="archive"><xsl:value-of select="string(.)" /></field>
 		</xsl:for-each>
 
