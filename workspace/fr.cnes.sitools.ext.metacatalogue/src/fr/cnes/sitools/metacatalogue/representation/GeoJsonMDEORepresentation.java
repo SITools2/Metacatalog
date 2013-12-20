@@ -161,17 +161,7 @@ public class GeoJsonMDEORepresentation extends JsonRepresentation {
                 if (metafield != null) {
                   switch (metafield) {
                     case WMS:
-                      if (publicServices || (!publicServices && authenticatedUser)) {
-                        String proxifiedUrl = applicationBaseUrl + WMS_PROXY_URI + "/" + uuid;
-                        propertiesObject.put(fieldName, proxifiedUrl);
-                      }
-                      break;
                     case ARCHIVE:
-                      if (publicServices || (!publicServices && authenticatedUser)) {
-                        String proxifiedUrl = applicationBaseUrl + DOWNLOAD_PROXY_URI + "/" + uuid;
-                        propertiesObject.put(fieldName, proxifiedUrl);
-                      }
-                      break;
                     case MIME_TYPE:
                       if (publicServices || (!publicServices && authenticatedUser)) {
                         propertiesObject.put(fieldName, fieldValue);
