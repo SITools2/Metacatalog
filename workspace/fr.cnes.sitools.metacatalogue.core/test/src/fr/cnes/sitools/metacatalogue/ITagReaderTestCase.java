@@ -19,8 +19,8 @@
 package fr.cnes.sitools.metacatalogue;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.util.List;
@@ -29,10 +29,10 @@ import org.json.JSONException;
 import org.junit.Test;
 
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
-import fr.cnes.sitools.metacatalogue.utils.ETagReader;
 import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
+import fr.cnes.sitools.metacatalogue.utils.ITagReader;
 
-public class ETagReaderTestCase extends AbstractHarvesterTestCase {
+public class ITagReaderTestCase extends AbstractHarvesterTestCase {
 
   private String polygon = "POLYGON ((0.63474993908497 43.060580878688, 1.7157488382218 43.060580878688, 1.7157488382218 43.759319204217, 0.63474993908497 43.759319204217, 0.63474993908497 43.060580878688))";
 
@@ -44,7 +44,7 @@ public class ETagReaderTestCase extends AbstractHarvesterTestCase {
 
     String etagUrl = "file://" + getTestResourcePath(settings, "etag", "etag.json");
 
-    ETagReader reader = new ETagReader(etagUrl, polygon);
+    ITagReader reader = new ITagReader(etagUrl, polygon);
     reader.read();
 
     // assert Continents

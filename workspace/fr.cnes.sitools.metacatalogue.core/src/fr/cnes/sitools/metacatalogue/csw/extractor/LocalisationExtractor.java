@@ -34,7 +34,7 @@ import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
 import fr.cnes.sitools.metacatalogue.model.Localisation;
 import fr.cnes.sitools.metacatalogue.model.MetadataRecords;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
-import fr.cnes.sitools.metacatalogue.utils.ETagReader;
+import fr.cnes.sitools.metacatalogue.utils.ITagReader;
 import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
 import fr.cnes.sitools.metacatalogue.utils.MetacatalogField;
 import fr.cnes.sitools.model.HarvesterModel;
@@ -55,14 +55,14 @@ public class LocalisationExtractor extends HarvesterStep {
   @Override
   public void execute(MetadataContainer data) throws ProcessException {
     List<MetadataRecords> metadatas = data.getMetadataRecords();
-    String etagReaderUrl = HarvesterSettings.getInstance().getString("ETAG_URL");
+    String itagReaderUrl = HarvesterSettings.getInstance().getString("ITAG_URL");
     for (MetadataRecords doc : metadatas) {
       String resolution = getResolution(doc);
       String geometry = getGeometry(doc);
       if (geometry != null) {
         Localisation localisation = cache.getIfPresent(geometry);
         if (localisation == null) {
-          ETagReader reader = new ETagReader(etagReaderUrl, geometry, "VHR".equals(resolution));
+          ITagReader reader = new ITagReader(itagReaderUrl, geometry, "VHR".equals(resolution));
           try {
             reader.read();
 

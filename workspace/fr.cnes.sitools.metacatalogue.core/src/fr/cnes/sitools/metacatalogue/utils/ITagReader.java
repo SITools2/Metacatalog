@@ -37,14 +37,14 @@ import fr.cnes.sitools.metacatalogue.model.Localisation;
 import fr.cnes.sitools.util.ClientResourceProxy;
 
 /**
- * Utility class to Read response from the Etag service
+ * Utility class to Read response from the Itag service
  * 
  * @author m.gond
  * 
  * @version
  * 
  */
-public class ETagReader {
+public class ITagReader {
   /** The url to query */
   private String url;
   /** The countries */
@@ -66,7 +66,7 @@ public class ETagReader {
    * @param geometry
    *          the geometry to query
    */
-  public ETagReader(String etagUrl, String geometry) {
+  public ITagReader(String etagUrl, String geometry) {
     url = etagUrl.replace("{footprint}", geometry);
   }
 
@@ -81,7 +81,7 @@ public class ETagReader {
    *          true to query all cities, false otherwise
    * 
    */
-  public ETagReader(String etagUrl, String geometry, boolean withCities) {
+  public ITagReader(String etagUrl, String geometry, boolean withCities) {
     url = etagUrl.replace("{footprint}", geometry);
     if (withCities) {
       Reference reference = new Reference(url);
