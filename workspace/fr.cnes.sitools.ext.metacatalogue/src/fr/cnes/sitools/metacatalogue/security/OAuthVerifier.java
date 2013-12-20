@@ -1,6 +1,8 @@
 package fr.cnes.sitools.metacatalogue.security;
 
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -32,6 +34,9 @@ public class OAuthVerifier implements Verifier {
 
   /** whether or not to use a cache */
   private boolean cacheToken;
+
+  /** The Logger */
+  private Logger logger;
 
   /**
    * Instantiates a new Oauth verifier.
@@ -70,6 +75,8 @@ public class OAuthVerifier implements Verifier {
     }
 
     this.url = url;
+    logger = Logger.getLogger(OAuthVerifier.class.getName());
+
   }
 
   /*
@@ -88,7 +95,7 @@ public class OAuthVerifier implements Verifier {
     try {
       String token = challengeResponse.getRawValue();
       if (this.cacheToken && this.tokenCache.getIfPresent(token) != null) {
-        System.out.println("FROM CACHE");
+        logger.fine("GET TOKEN FROM CACHE");
         return this.tokenCache.getIfPresent(token);
       }
       Reference ref = new Reference(url);
@@ -108,16 +115,17 @@ public class OAuthVerifier implements Verifier {
         else {
           result = Verifier.RESULT_MISSING;
         }
+        if (this.cacheToken) {
+          tokenCache.put(token, result);
+        }
       }
       else {
+        logger.log(Level.WARNING, "Error while calling SSO token validation", resp.getStatus().getThrowable());
         result = Verifier.RESULT_MISSING;
-      }
-      if (this.cacheToken) {
-        tokenCache.put(token, result);
       }
     }
     catch (Exception e) {
-      e.printStackTrace();
+      logger.log(Level.WARNING, "Error while calling SSO token validation", e);
       result = Verifier.RESULT_MISSING;
     }
     return result;
