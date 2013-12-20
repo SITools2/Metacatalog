@@ -19,7 +19,7 @@
 package fr.cnes.sitools.metacatalogue.resources;
 
 import fr.cnes.sitools.common.SitoolsResource;
-import fr.cnes.sitools.metacatalogue.application.MetacatalogueApplication;
+import fr.cnes.sitools.metacatalogue.application.MetacatalogueAccessApplication;
 import fr.cnes.sitools.metacatalogue.utils.MetacatalogField;
 import fr.cnes.sitools.plugins.applications.model.ApplicationPluginParameter;
 
@@ -34,7 +34,7 @@ public abstract class AbstractOpenSearchServiceResource extends SitoolsResource 
   /** The default Max number of terms to look for */
   protected static final int DEFAULT_MAX_TOP_TERMS = 30;
   /** The metacatalogue Application */
-  protected MetacatalogueApplication application;
+  protected MetacatalogueAccessApplication application;
   /** The solr core url */
   protected String solrCoreUrl;
   /** The actual Max number of terms to look for */
@@ -43,7 +43,7 @@ public abstract class AbstractOpenSearchServiceResource extends SitoolsResource 
   @Override
   public void doInit() {
     super.doInit();
-    application = (MetacatalogueApplication) getApplication();
+    application = (MetacatalogueAccessApplication) getApplication();
     solrCoreUrl = application.getSolrCoreUrl();
 
     ApplicationPluginParameter maxTopTermsParam = application.getParameter("maxTopTerms");

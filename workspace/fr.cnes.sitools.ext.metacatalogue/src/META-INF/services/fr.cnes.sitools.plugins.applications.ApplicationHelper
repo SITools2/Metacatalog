@@ -1,1 +1,2 @@
-fr.cnes.sitools.metacatalogue.application.MetacatalogueApplication
+fr.cnes.sitools.metacatalogue.application.MetacatalogueAccessApplication
+fr.cnes.sitools.metacatalogue.application.MetacatalogueAdminApplication

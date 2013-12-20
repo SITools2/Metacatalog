@@ -32,7 +32,7 @@ import org.restlet.resource.Put;
 import org.restlet.resource.ResourceException;
 
 import fr.cnes.sitools.common.SitoolsResource;
-import fr.cnes.sitools.metacatalogue.application.MetacatalogueApplication;
+import fr.cnes.sitools.metacatalogue.application.MetacatalogueAdminApplication;
 import fr.cnes.sitools.plugins.applications.model.ApplicationPluginParameter;
 
 public class HarvesterProxyResource extends SitoolsResource {
@@ -41,7 +41,7 @@ public class HarvesterProxyResource extends SitoolsResource {
 
   protected String harvesterId;
 
-  protected MetacatalogueApplication application;
+  protected MetacatalogueAdminApplication application;
 
   @Override
   public void sitoolsDescribe() {
@@ -57,7 +57,7 @@ public class HarvesterProxyResource extends SitoolsResource {
   protected void doInit() {
     super.doInit();
 
-    application = (MetacatalogueApplication) getApplication();
+    application = (MetacatalogueAdminApplication) getApplication();
 
     ApplicationPluginParameter harvesterServerUrlParam = application.getParameter("metacatalogServer");
     if (harvesterServerUrlParam == null) {

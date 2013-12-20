@@ -42,7 +42,7 @@ import org.restlet.resource.ClientResource;
 import fr.cnes.sitools.AbstractSitoolsTestCase;
 import fr.cnes.sitools.common.SitoolsSettings;
 import fr.cnes.sitools.common.application.ContextAttributes;
-import fr.cnes.sitools.metacatalogue.application.MetacatalogueApplication;
+import fr.cnes.sitools.metacatalogue.application.MetacatalogueAdminApplication;
 import fr.cnes.sitools.util.RIAPUtils;
 
 
@@ -68,7 +68,7 @@ public class JeoSearchResourceTestCase extends AbstractSitoolsTestCase {
    */
   private Component component = null;
 
-  private MetacatalogueApplication application;
+  private MetacatalogueAdminApplication application;
 
   /** The url of the search resource */
   private String searchResourceUrl = "/search";
@@ -115,7 +115,7 @@ public class JeoSearchResourceTestCase extends AbstractSitoolsTestCase {
 
       ctx.getAttributes().put(ContextAttributes.APP_ATTACH_REF, getAttachUrl());
 
-      application = new MetacatalogueApplication(ctx);
+      application = new MetacatalogueAdminApplication(ctx);
       this.component.getDefaultHost().attach(getAttachUrl(), application);
 
     }

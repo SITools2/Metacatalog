@@ -29,7 +29,7 @@ import org.restlet.data.Status;
 import org.restlet.resource.ResourceException;
 
 import fr.cnes.sitools.common.SitoolsResource;
-import fr.cnes.sitools.metacatalogue.application.MetacatalogueApplication;
+import fr.cnes.sitools.metacatalogue.application.MetacatalogueAccessApplication;
 import fr.cnes.sitools.metacatalogue.index.solr.SolRUtils;
 import fr.cnes.sitools.plugins.applications.model.ApplicationPluginParameter;
 import fr.cnes.sitools.thesaurus.ThesaurusSearcher;
@@ -37,7 +37,7 @@ import fr.cnes.sitools.thesaurus.ThesaurusSearcher;
 public abstract class AbstractSearchResource extends SitoolsResource {
 
   /** The parent application */
-  protected MetacatalogueApplication application;
+  protected MetacatalogueAccessApplication application;
 
   /** The url of the solr core to query */
   protected String solrCoreUrl;
@@ -52,7 +52,7 @@ public abstract class AbstractSearchResource extends SitoolsResource {
   protected void doInit() {
     super.doInit();
 
-    application = (MetacatalogueApplication) getApplication();
+    application = (MetacatalogueAccessApplication) getApplication();
 
     ApplicationPluginParameter solrCoreUrlParameter = application.getParameter("metacatalogSolrCore");
     if (solrCoreUrlParameter == null || solrCoreUrlParameter.getValue() == null) {

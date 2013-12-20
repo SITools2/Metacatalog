@@ -35,7 +35,7 @@ import org.restlet.resource.Get;
 
 import fr.cnes.sitools.common.SitoolsResource;
 import fr.cnes.sitools.common.model.Response;
-import fr.cnes.sitools.metacatalogue.application.MetacatalogueApplication;
+import fr.cnes.sitools.metacatalogue.application.MetacatalogueAdminApplication;
 import fr.cnes.sitools.metacatalogue.dto.MetacatalogApplicationDTO;
 import fr.cnes.sitools.util.ClientResourceProxy;
 
@@ -56,7 +56,7 @@ public class MetacatalogStatusResource extends SitoolsResource {
   @Get
   public Representation get(Variant variant) {
     Response response;
-    MetacatalogueApplication application = (MetacatalogueApplication) getApplication();
+    MetacatalogueAdminApplication application = (MetacatalogueAdminApplication) getApplication();
     MetacatalogApplicationDTO appDTO = new MetacatalogApplicationDTO();
 
     appDTO.setDescription(getParameter("description", application));
@@ -82,14 +82,14 @@ public class MetacatalogStatusResource extends SitoolsResource {
     addStandardInternalServerErrorInfo(info);
   }
 
-  private String getParameter(String paramName, MetacatalogueApplication application) {
+  private String getParameter(String paramName, MetacatalogueAdminApplication application) {
     if (application.getParameter(paramName) != null) {
       return application.getParameter(paramName).getValue();
     }
     return null;
   }
 
-  private void addHarvesterStatusInformation(MetacatalogApplicationDTO appDTO, MetacatalogueApplication application) {
+  private void addHarvesterStatusInformation(MetacatalogApplicationDTO appDTO, MetacatalogueAdminApplication application) {
 
     String urlHarvester = getParameter("metacatalogServer", application);
     if (urlHarvester == null) {
