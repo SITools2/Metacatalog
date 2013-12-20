@@ -84,13 +84,14 @@ public class CswGetReader extends HarvesterStep {
     this.schemaName = conf.getCatalogType();
     this.conf = conf;
     this.context = context;
-    logger = getLogger(context);
 
   }
 
   @Override
   public void execute(MetadataContainer data) throws ProcessException {
 
+    logger = getLogger(context);
+    
     Integer nbRecords = null;
     Integer nextRecord = 1;
 
