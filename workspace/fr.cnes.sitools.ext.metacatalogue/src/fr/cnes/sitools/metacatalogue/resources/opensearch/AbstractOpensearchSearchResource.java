@@ -171,7 +171,7 @@ public abstract class AbstractOpensearchSearchResource extends AbstractSearchRes
       else if (parameter.getName().equals(OpenSearchQuery.GEO_BOX.getParamName())) {
         String bbox = parameter.getValue();
         if (bbox != null && !bbox.isEmpty()) {
-          pieceOfQuery = MetacatalogField.FOOTPRINT.getField() + ":" + getGeometryCriteria(bbox);
+          pieceOfQuery = MetacatalogField.GEOGRAPHICAL_EXTENT.getField() + ":" + getGeometryCriteria(bbox);
         }
       }
       if (pieceOfQuery != null) {

@@ -60,13 +60,13 @@ public class OpensearchGeometryExtractor {
 
     if (geometry != null) {
 
-      if (!isCountryClockWise(geometry)) {
+      if (geometry.getCoordinates().length > 2 && !isCounterClockWise(geometry)) {
         geometry = geometry.reverse();
       }
 
       WKTWriter wktWriter = new WKTWriter();
       String geo = wktWriter.writeFormatted(geometry);
-      fields.add(MetacatalogField.FOOTPRINT.getField(), geo);
+      fields.add(MetacatalogField.GEOGRAPHICAL_EXTENT.getField(), geo);
       // Point point = geometry.getInteriorPoint();
       // String geographie = wktWriter.write(point);
       // fields.add("_interiorPoint", geographie);
@@ -83,7 +83,7 @@ public class OpensearchGeometryExtractor {
    *          the Geometry
    * @return true if the geometry is counterClockWise, false otherwise
    */
-  private boolean isCountryClockWise(Geometry geometry) {
+  private boolean isCounterClockWise(Geometry geometry) {
     return CGAlgorithms.isCCW(geometry.getCoordinates());
   }
 

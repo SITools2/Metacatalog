@@ -147,7 +147,7 @@ public class LocalisationExtractor extends HarvesterStep {
    * @return the geometry string or null if not found
    */
   private String getGeometry(MetadataRecords doc) {
-    Object geometryObj = doc.get(MetacatalogField.FOOTPRINT.getField());
+    Object geometryObj = doc.get(MetacatalogField.GEOGRAPHICAL_EXTENT.getField());
     if (geometryObj != null) {
       return geometryObj.toString();
 

@@ -4,15 +4,15 @@
 	"features" : [{
 			"type" : "Feature",
 			"geometry" : {
-				"type" : "Polygon",
-				"coordinates" : [[[0.63474993908497, 43.060580878688], [1.7157488382218, 43.060580878688], [1.7157488382218, 43.759319204217], [0.63474993908497, 43.759319204217], [0.63474993908497, 43.060580878688]]]
+				"type" : "Point",
+				"coordinates" : [0.63474993908497, 43.060580878688]
 			},
 			"properties" : {
 				"identifier" : "urn:ogc:def:EOP:IGN::Kalideos:1245",
 				"title" : "OSR_MiPy_2012-02-21_SPOT 5_REFLECTANCE_J_HRV\/HRG 1",
 				"description" : "description",
 				"project" : "kalideos",
-				"product" : "REFLECTANCE",
+				"product" : "LANDCOVER",
 				"platform" : "SPOT5",
 				"instrument" : "HRG",
 				"startDate" : "2012-02-21T00:00:00",
@@ -53,8 +53,8 @@
 		}, {
 			"type" : "Feature",
 			"geometry" : {
-				"type" : "Polygon",
-				"coordinates" : [[[0.63474993908497, 43.060580878688], [1.7157488382218, 43.060580878688], [1.7157488382218, 43.759319204217], [0.63474993908497, 43.759319204217], [0.63474993908497, 43.060580878688]]]
+				"type" : "Point",
+				"coordinates" : [0, 0]
 			},
 			"properties" : {
 				"identifier" : "urn:ogc:def:EOP:IGN::Kalideos:1244",

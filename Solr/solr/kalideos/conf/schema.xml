@@ -78,7 +78,7 @@
 	<field name="searchTerms" type="text_general" indexed="true" stored="false" multiValued="true"/>
 	
 	<!-- Fields -->
-	<field name="footprint" type="location_rpt" indexed="true" stored="true" multiValued="false"/>
+	<field name="geographicalExtent" type="location_rpt" indexed="true" stored="true" multiValued="false"/>
 	<field name="identifier" type="string" indexed="true" stored="true" multiValued="false"/>
 	<field name="authority" type="string" indexed="true" stored="true" multiValued="false"/>
 	<field name="project" type="string" indexed="true" stored="true" multiValued="false"/>

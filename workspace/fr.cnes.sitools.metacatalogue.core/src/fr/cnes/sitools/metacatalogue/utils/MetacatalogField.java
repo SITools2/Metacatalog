@@ -62,7 +62,7 @@ public enum MetacatalogField {
 
   /** ##################### Modèle de données du métacatalogue #########################. */
 
-  FOOTPRINT("footprint"),
+  GEOGRAPHICAL_EXTENT("geographicalExtent"),
 
   /** The identifier. */
   IDENTIFIER("identifier"),
@@ -297,7 +297,7 @@ public enum MetacatalogField {
    * @return true, if is metacatalog intern
    */
   public boolean isMetacatalogIntern() {
-    return this.equals(MetacatalogField.FOOTPRINT) || this.getField().startsWith("_");
+    return this.equals(MetacatalogField.GEOGRAPHICAL_EXTENT) || this.getField().startsWith("_");
   }
 
   /**

@@ -63,7 +63,7 @@ public class LocalisationExtractorTestCase extends AbstractHarvesterTestCase {
     List<MetadataRecords> documents = new ArrayList<MetadataRecords>();
 
     MetadataRecords fields = new MetadataRecords();
-    fields.add(MetacatalogField.FOOTPRINT.getField(), polygon);
+    fields.add(MetacatalogField.GEOGRAPHICAL_EXTENT.getField(), polygon);
     fields.add(MetacatalogField._RESOLUTION_DOMAIN.getField(), "HR");
 
     documents.add(fields);
@@ -93,7 +93,7 @@ public class LocalisationExtractorTestCase extends AbstractHarvesterTestCase {
     List<MetadataRecords> documents = new ArrayList<MetadataRecords>();
 
     MetadataRecords fields = new MetadataRecords();
-    fields.add(MetacatalogField.FOOTPRINT.getField(), polygonToulouse);
+    fields.add(MetacatalogField.GEOGRAPHICAL_EXTENT.getField(), polygonToulouse);
     fields.add(MetacatalogField._RESOLUTION_DOMAIN.getField(), "VHR");
 
     documents.add(fields);
