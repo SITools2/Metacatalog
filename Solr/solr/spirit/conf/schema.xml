@@ -70,7 +70,10 @@
 	<field name="_geometry_geojson" type="text_general" indexed="false" stored="true" multiValued="false"/>
 	<field name="_resolution_domain" type="string" indexed="true" stored="true" multiValued="false"/>
 	<field name="_concepts" type="string" indexed="true" stored="true" multiValued="true"/>
-
+	<field name="_product_category" type="string" indexed="true" stored="false" multiValued="false"/>
+	<field name="_year" type="tint" indexed="true" stored="false" multiValued="false"/>
+	<field name="_month" type="tint" indexed="true" stored="false" multiValued="false"/>
+	<field name="_day" type="tint" indexed="true" stored="false" multiValued="false"/>
 	
 	<field name="searchTerms" type="text_general" indexed="true" stored="false" multiValued="true"/>
 	
@@ -98,6 +101,7 @@
 	
 	<field name="created" type="date" indexed="true" stored="true" multiValued="false"/>
 	<field name="modified" type="date" indexed="true" stored="true" multiValued="false"/>
+	<field name="continent" type="text_tight" indexed="true" stored="false" multiValued="true"/>
 	<field name="country" type="text_tight" indexed="true" stored="false" multiValued="true"/>
 	<field name="region" type="text_tight" indexed="true" stored="false" multiValued="true"/>
 	<field name="department" type="text_tight" indexed="true" stored="false" multiValued="true"/>
