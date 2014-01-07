@@ -27,6 +27,8 @@
 
 	<property file="conf/build/properties/build-${HOST}.properties" />
 
+	<property file="conf/build/properties/build-TESTS.properties" />
+
 	<property file="build-default.properties" />
 	
 	<import file="conf/userLibraries/metacatalogue-core.userlibraries.ant.xml" optional="true" />
@@ -168,8 +170,7 @@
 	<!-- TARGET refresh-properties -->
 	<target name="refresh-properties-for-tests" description="Mise à jour du fichier de propriétés sitools.properties pour les propriétés utilisées par les tests ">
 		<propertyfile file="${conf.properties.dir}/metacatalogue.properties" comment="Update root property">
-			<entry key="PROXY_USER" value="${PROXY_USER}" />
-			<entry key="PROXY_PASSWORD" value="${PROXY_PASSWORD}" />
+			<entry key="ITAG_URL" value="${ITAG_URL}" />
 		</propertyfile>
 		<copy outputencoding="UTF-8" tofile="metacatalogue.properties" file="${conf.properties.dir}/metacatalogue.properties" overwrite="true" />
 	</target>
