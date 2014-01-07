@@ -18,27 +18,28 @@
  ******************************************************************************/
 package fr.cnes.sitools.metacatalogue.utils;
 
-public class ResolutionConverter {
-  
-  
-  
-  
-  public String getResolution(double resolution) {
+import java.io.IOException;
 
-    if (resolution >= 0 && resolution <= 2) {
-      return "VHR";
-    }
-    if (resolution > 2 && resolution <= 30) {
-      return "HR";
-    }
-    if (resolution > 30 && resolution <= 200) {
-      return "MR";
-    }
-    if (resolution > 200) {
-      return "LR";
-    }
+import fr.cnes.sitools.thesaurus.Concept;
+import fr.cnes.sitools.thesaurus.ThesaurusSearcher;
 
-    return null;
+public class ProductCategoryExtractorUtil {
+
+  private String thesaurusPath;
+
+  public ProductCategoryExtractorUtil(String thesaurusPath) {
+    this.thesaurusPath = thesaurusPath;
   }
 
+  public String extractCategory(String productName) throws IOException {
+
+    ThesaurusSearcher searcher = new ThesaurusSearcher(thesaurusPath);
+    Concept concept = searcher.getBroader(productName);
+    if (concept != null && concept.getProperties().get("altLabelBroader") != null) {
+      return concept.getProperties().get("altLabelBroader").toString();
+    }
+    else {
+      return null;
+    }
+  }
 }

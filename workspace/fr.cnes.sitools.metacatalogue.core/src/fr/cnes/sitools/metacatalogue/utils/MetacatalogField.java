@@ -48,6 +48,18 @@ public enum MetacatalogField {
   /** list of AltLabels concepts used for suggestions. */
   _CONCEPTS("_concepts"),
 
+  /** The category of the product */
+  _PRODUCT_CATEGORY("_product_category"),
+
+  /** The startDate year */
+  _YEAR("_year"),
+
+  /** The startDate month */
+  _MONTH("_month"),
+
+  /** The startDate day */
+  _DAY("_day"),
+
   /** ##################### Modèle de données du métacatalogue #########################. */
 
   FOOTPRINT("footprint"),
@@ -111,7 +123,10 @@ public enum MetacatalogField {
 
   /** The product. */
   PRODUCT("product"),
-  
+
+  /** CONTINENTS */
+  CONTINENT("continent"),
+
   /** COUNTRY. */
   COUNTRY("country"),
 

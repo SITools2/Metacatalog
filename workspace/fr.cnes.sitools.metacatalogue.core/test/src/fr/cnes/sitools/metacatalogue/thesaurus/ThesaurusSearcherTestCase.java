@@ -127,6 +127,19 @@ public class ThesaurusSearcherTestCase extends AbstractHarvesterTestCase {
     // Il y a des altLabels en double... du coup on a 150 concepts au lieu des 158...
     assertEquals(149, map.keySet().size());
   }
+  
+  @Test
+  public void testThesaurusGetBroader() throws IOException {
+    
+    String altLabelEn = "ALBEDO";
+
+    // get a concept from its prefLabel
+    ThesaurusSearcher searcher = new ThesaurusSearcher(THESAURUS_NAME);
+    Concept concept = searcher.getBroader(altLabelEn);
+    assertNotNull(concept);
+    assertEquals("produit biogéophysique", concept.getProperties().get("altLabelBroader"));
+
+  }
 
 
 }

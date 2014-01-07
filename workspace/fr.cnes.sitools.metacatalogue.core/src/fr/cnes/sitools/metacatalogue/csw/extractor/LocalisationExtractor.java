@@ -31,11 +31,12 @@ import com.google.common.cache.CacheBuilder;
 import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
 import fr.cnes.sitools.metacatalogue.common.MetadataContainer;
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
-import fr.cnes.sitools.metacatalogue.model.Localisation;
 import fr.cnes.sitools.metacatalogue.model.MetadataRecords;
+import fr.cnes.sitools.metacatalogue.model.itag.ItagLocalization;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
-import fr.cnes.sitools.metacatalogue.utils.ITagReader;
 import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
+import fr.cnes.sitools.metacatalogue.utils.ITagReader;
+import fr.cnes.sitools.metacatalogue.utils.Localization;
 import fr.cnes.sitools.metacatalogue.utils.MetacatalogField;
 import fr.cnes.sitools.model.HarvesterModel;
 
@@ -43,7 +44,7 @@ public class LocalisationExtractor extends HarvesterStep {
 
   private Context context;
 
-  private Cache<String, Localisation> cache;
+  private Cache<String, ItagLocalization> cache;
 
   public LocalisationExtractor(HarvesterModel conf, Context context) {
     this.context = context;
@@ -60,7 +61,7 @@ public class LocalisationExtractor extends HarvesterStep {
       String resolution = getResolution(doc);
       String geometry = getGeometry(doc);
       if (geometry != null) {
-        Localisation localisation = cache.getIfPresent(geometry);
+        ItagLocalization localisation = cache.getIfPresent(geometry);
         if (localisation == null) {
           ITagReader reader = new ITagReader(itagReaderUrl, geometry, "VHR".equals(resolution));
           try {
@@ -74,18 +75,45 @@ public class LocalisationExtractor extends HarvesterStep {
           }
         }
 
-        // countries
-        addValuesToMetadata(doc, localisation.getCountries(), MetacatalogField.COUNTRY.getField());
-
-        // regions
-        addValuesToMetadata(doc, localisation.getRegions(), MetacatalogField.REGION.getField());
+        List<Localization> continents = localisation.getContinents();
         
-        
-        // departments
-        addValuesToMetadata(doc, localisation.getDepartments(), MetacatalogField.DEPARTMENT.getField());
+        if (continents != null && !continents.isEmpty()) {
+          // continents
+          addLocalizationToMetadata(doc, localisation.getContinents().get(0), MetacatalogField.CONTINENT.getField());
 
-        // city
-        addValuesToMetadata(doc, localisation.getCities(), MetacatalogField.CITY.getField());
+          List<Localization> countries = continents.get(0).getChildren();
+          if ("LR".equals(resolution)) {
+            // countries
+            addLocalizationsToMetadata(doc, countries, MetacatalogField.COUNTRY.getField());
+          }
+          else {
+            addLocalizationToMetadata(doc, countries.get(0), MetacatalogField.COUNTRY.getField());
+            List<Localization> regions = countries.get(0).getChildren();
+            if ("MR".equals(resolution)) {
+              // regions
+              addLocalizationsToMetadata(doc, regions, MetacatalogField.REGION.getField());
+
+            }
+            else {
+              addLocalizationToMetadata(doc, regions.get(0), MetacatalogField.REGION.getField());
+              List<Localization> departments = regions.get(0).getChildren();
+              if ("HR".equals(resolution)) {
+                // regions
+                addLocalizationsToMetadata(doc, departments, MetacatalogField.DEPARTMENT.getField());
+              }
+              else {
+                addLocalizationToMetadata(doc, departments.get(0), MetacatalogField.DEPARTMENT.getField());
+                List<Localization> cities = departments.get(0).getChildren();
+                if ("VHR".equals(resolution)) {
+                  // regions
+                  addLocalizationsToMetadata(doc, cities, MetacatalogField.CITY.getField());
+                }
+              }
+
+            }
+
+          }
+        }
 
       }
     }
@@ -127,11 +155,17 @@ public class LocalisationExtractor extends HarvesterStep {
     return null;
   }
 
-  private void addValuesToMetadata(MetadataRecords doc, List<String> values, String key) {
+  private void addLocalizationsToMetadata(MetadataRecords doc, List<Localization> values, String key) {
     if (values != null) {
-      for (String value : values) {
-        doc.add(key, value);
+      for (Localization value : values) {
+        addLocalizationToMetadata(doc, value, key);
       }
+    }
+  }
+
+  private void addLocalizationToMetadata(MetadataRecords doc, Localization value, String key) {
+    if (value != null) {
+      doc.add(key, value.getName());
     }
   }
 

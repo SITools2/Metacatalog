@@ -19,8 +19,7 @@
 package fr.cnes.sitools.metacatalogue.utils;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Iterator;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,7 +32,7 @@ import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
 
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
-import fr.cnes.sitools.metacatalogue.model.Localisation;
+import fr.cnes.sitools.metacatalogue.model.itag.ItagLocalization;
 import fr.cnes.sitools.util.ClientResourceProxy;
 
 /**
@@ -47,16 +46,7 @@ import fr.cnes.sitools.util.ClientResourceProxy;
 public class ITagReader {
   /** The url to query */
   private String url;
-  /** The countries */
-  private List<String> countries;
-  /** The continents */
-  private List<String> continents;
-  /** The regions */
-  private List<String> regions;
-  /** The departments */
-  private List<String> departements;
-  /** The cities */
-  private List<String> cities;
+  private ItagLocalization itagLoc;
 
   /**
    * Constructor with etagUrl and geometry as WKT
@@ -68,6 +58,8 @@ public class ITagReader {
    */
   public ITagReader(String etagUrl, String geometry) {
     url = etagUrl.replace("{footprint}", geometry);
+    itagLoc = new ItagLocalization();
+
   }
 
   /**
@@ -82,7 +74,7 @@ public class ITagReader {
    * 
    */
   public ITagReader(String etagUrl, String geometry, boolean withCities) {
-    url = etagUrl.replace("{footprint}", geometry);
+    this(etagUrl, geometry);
     if (withCities) {
       Reference reference = new Reference(url);
       reference.addQueryParameter("cities", "all");
@@ -105,7 +97,6 @@ public class ITagReader {
     Representation repr = null;
     try {
       repr = clientResource.get(MediaType.APPLICATION_JSON);
-
       if (clientResource.getStatus().isError()) {
         throw new ProcessException("Cannot read ETAG", clientResource.getStatus().getThrowable());
       }
@@ -117,12 +108,10 @@ public class ITagReader {
         JSONObject feature = features.getJSONObject(0);
         JSONObject properties = feature.getJSONObject("properties");
         JSONObject political = properties.getJSONObject("political");
-
-        continents = parseJSONString(political, "continents");
-        countries = parseJSONString(political, "countries");
-        regions = parseJSONString(political, "regions");
-        departements = parseJSONString(political, "departements");
-        cities = parseJSONString(political, "cities");
+        if (political != null) {
+          JSONObject jsonContinents = political.getJSONObject("continents");
+          processContinent(jsonContinents);
+        }
       }
       else {
         throw new ProcessException("Invalid JSON response from Etag");
@@ -139,94 +128,97 @@ public class ITagReader {
 
   }
 
-  /**
-   * Get the list of continents
-   * 
-   * @return the list of continents
-   */
-  public List<String> getContinents() {
-    return continents;
+  private void processContinent(JSONObject continents) {
 
+    Iterator keys = continents.keys();
+    while (keys.hasNext()) {
+      String continentName = keys.next().toString();
+      Localization continentLoc = new Localization(continentName, Localization.Type.CONTINENT);
+      itagLoc.getContinents().add(continentLoc);
+
+      try {
+        JSONObject continentJsonObject = continents.getJSONObject(continentName);
+        processCountries(continentJsonObject, continentLoc);
+      }
+      catch (JSONException e) {
+        continue;
+      }
+    }
   }
 
-  /**
-   * Get the list of countries
-   * 
-   * @return the list of countries
-   */
-  public List<String> getCountries() {
-    return countries;
-
-  }
-
-  /**
-   * Get the list of regions
-   * 
-   * @return the list of regions
-   */
-  public List<String> getRegions() {
-    return regions;
-  }
-
-  /**
-   * Get the list of departements
-   * 
-   * @return the list of departements
-   */
-  public List<String> getDepartments() {
-    return departements;
-  }
-
-  /**
-   * Get the list of cities
-   * 
-   * @return the list of cities
-   */
-  public List<String> getCities() {
-    return cities;
-
-  }
-
-  public Localisation getLocalisation() {
-    Localisation location = new Localisation();
-    location.setContinents(continents);
-    location.setCountries(countries);
-    location.setRegions(regions);
-    location.setDepartments(departements);
-    location.setCities(cities);
-    return location;
-  }
-
-  /**
-   * Get the list of values from the given object with the given key
-   * 
-   * @param object
-   *          the JSONObject to parse
-   * @param key
-   *          the key to search for
-   * @return the list of values or null if the key is not found
-   */
-  private List<String> parseJSONString(JSONObject object, String key) {
+  private void processCountries(JSONObject countriesRoot, Localization continent) {
 
     try {
-      String values = object.getString(key);
-      return parseString(values);
+      JSONArray countries = countriesRoot.getJSONArray("countries");
+      for (int i = 0; i < countries.length(); i++) {
+        try {
+          JSONObject country = countries.getJSONObject(i);
+          Localization countriesLoc = new Localization(country.getString("name"), Localization.Type.COUNTRY,
+              country.getDouble("pcover"));
+          continent.getChildren().add(countriesLoc);
+          processRegions(country.getJSONObject("regions"), countriesLoc);
+          // processCities(country, countriesLoc);
+        }
+        catch (Exception e) {
+          continue;
+        }
+      }
     }
     catch (JSONException e) {
-      return null;
+      return;
     }
 
   }
 
-  /**
-   * Split the given string by ; and return a List
-   * 
-   * @param string
-   *          the string to split
-   * @return the list of values
-   */
-  private List<String> parseString(String string) {
-    return Arrays.asList(string.split(";"));
+  // private void processCities(JSONObject citiesRoot, Localization countriesLoc) {
+  // try {
+  // JSONArray cities = citiesRoot.getJSONArray("cities");
+  // }
+  // catch (JSONException e) {
+  // }
+  //
+  // }
+
+  private void processRegions(JSONObject jsonObject, Localization countriesLoc) {
+    Iterator keys = jsonObject.keys();
+    while (keys.hasNext()) {
+      String regionName = keys.next().toString();
+      Localization regionLoc = new Localization(regionName, Localization.Type.REGION);
+      countriesLoc.getChildren().add(regionLoc);
+
+      try {
+        JSONObject regionJSONObject = jsonObject.getJSONObject(regionName);
+        processDepartments(regionJSONObject, regionLoc);
+      }
+      catch (JSONException e) {
+        continue;
+      }
+    }
+  }
+
+  private void processDepartments(JSONObject departmentsRoot, Localization regionLoc) {
+    try {
+      JSONArray departments = departmentsRoot.getJSONArray("departements");
+      for (int i = 0; i < departments.length(); i++) {
+        try {
+          JSONObject department = departments.getJSONObject(i);
+          Localization countriesLoc = new Localization(department.getString("name"), Localization.Type.DEPARTMENT,
+              department.getDouble("pcover"));
+          regionLoc.getChildren().add(countriesLoc);
+        }
+        catch (Exception e) {
+          continue;
+        }
+        // processCities(department.getJSONObject("cities"), countriesLoc);
+      }
+    }
+    catch (JSONException e) {
+      return;
+    }
+  }
+
+  public ItagLocalization getLocalisation() {
+    return itagLoc;
   }
 
 }

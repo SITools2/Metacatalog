@@ -18,8 +18,8 @@
  ******************************************************************************/
 package fr.cnes.sitools.metacatalogue;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
@@ -29,53 +29,75 @@ import org.json.JSONException;
 import org.junit.Test;
 
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
+import fr.cnes.sitools.metacatalogue.model.itag.ItagLocalization;
 import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
 import fr.cnes.sitools.metacatalogue.utils.ITagReader;
+import fr.cnes.sitools.metacatalogue.utils.Localization;
 
 public class ITagReaderTestCase extends AbstractHarvesterTestCase {
 
   private String polygon = "POLYGON ((0.63474993908497 43.060580878688, 1.7157488382218 43.060580878688, 1.7157488382218 43.759319204217, 0.63474993908497 43.759319204217, 0.63474993908497 43.060580878688))";
 
-  private String polygonToulouse = "POLYGON ((43.618928 1.410316, 43.618928 1.472801, 43.57268 1.472801, 43.57268 1.410316, 43.618928 1.410316))";
-
   @Test
   public void testETag() throws ProcessException, JSONException, IOException {
     HarvesterSettings settings = (HarvesterSettings) HarvesterSettings.getInstance();
 
-    String etagUrl = "file://" + getTestResourcePath(settings, "etag", "etag.json");
+    String itagUrl = "file://" + getTestResourcePath(settings, "itag", "itag.json");
 
-    ITagReader reader = new ITagReader(etagUrl, polygon);
+    ITagReader reader = new ITagReader(itagUrl, polygon);
     reader.read();
 
+    ItagLocalization loc = reader.getLocalisation();
+
     // assert Continents
-    List<String> countinents = reader.getContinents();
-    assertNotNull(countinents);
-    assertTrue(countinents.contains("Europe"));
+    List<Localization> continents = loc.getContinents();
+    assertNotNull(continents);
+    assertEquals(1, continents.size());
+    assertEquals("Europe", continents.get(0).getName());
 
-    // assert Country
-    List<String> countries = reader.getCountries();
-    assertNotNull(countries);
-    assertTrue(countries.contains("France"));
+    for (Localization continent : continents) {
 
-    // assert Regions
-    List<String> regions = reader.getRegions();
-    assertNotNull(regions);
-    assertTrue(regions.contains("Languedoc-Roussillon"));
-    assertTrue(regions.contains("Midi-Pyrenees"));
+      // assert Country
+      List<Localization> countries = continent.getChildren();
+      assertNotNull(countries);
+      assertEquals(1, countries.size());
+      assertEquals("France", countries.get(0).getName());
 
-    // assert Departments
-    List<String> departements = reader.getDepartments();
-    assertNotNull(departements);
-    assertTrue(departements.contains("Ariege"));
-    assertTrue(departements.contains("Aude"));
-    assertTrue(departements.contains("Gers"));
-    assertTrue(departements.contains("Haute-Garonne"));
-    assertTrue(departements.contains("Hautes-Pyrenees"));
-    assertTrue(departements.contains("Tarn"));
+      for (Localization country : countries) {
 
-    // assert Departments
-    List<String> cities = reader.getCities();
-    assertNull(cities);
+        // assert Regions
+        List<Localization> regions = country.getChildren();
+        assertNotNull(regions);
+        assertEquals(2, regions.size());
+        assertEquals("Midi-Pyrenees", regions.get(0).getName());
+        assertEquals("Languedoc-Roussillon", regions.get(1).getName());
+
+        for (Localization region : regions) {
+
+          List<Localization> departements = region.getChildren();
+          assertNotNull(departements);
+
+          if ("Midi-Pyrenees".equals(region.getName())) {
+            // assert Departments
+            assertEquals(5, departements.size());
+            assertEquals("Haute-Garonne", departements.get(0).getName());
+            assertEquals("Gers", departements.get(1).getName());
+            assertEquals("Ariege", departements.get(2).getName());
+            assertEquals("Tarn", departements.get(3).getName());
+            assertEquals("Hautes-Pyrenees", departements.get(4).getName());
+          }
+          else {
+            assertEquals("Aude", departements.get(0).getName());
+          }
+
+          for (Localization departement : departements) {
+            // assert Departments
+            List<Localization> cities = departement.getChildren();
+            assertTrue(cities.isEmpty());
+          }
+        }
+      }
+    }
 
   }
 

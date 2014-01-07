@@ -1,4 +1,4 @@
- /*******************************************************************************
+/*******************************************************************************
  * Copyright 2010-2013 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
  *
  * This file is part of SITools2.
@@ -28,6 +28,7 @@ import fr.cnes.sitools.metacatalogue.common.Harvester;
 import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
 import fr.cnes.sitools.metacatalogue.csw.extractor.CswMetadataExtractor;
 import fr.cnes.sitools.metacatalogue.csw.extractor.LocalisationExtractor;
+import fr.cnes.sitools.metacatalogue.csw.extractor.FacetsInformationExtractor;
 import fr.cnes.sitools.metacatalogue.csw.extractor.ResolutionExtractor;
 import fr.cnes.sitools.metacatalogue.csw.indexer.CswMetadataIndexer;
 import fr.cnes.sitools.metacatalogue.csw.reader.CswGetReader;
@@ -56,21 +57,23 @@ public class CswGetHarvester extends Harvester {
     context.getAttributes().put(ContextAttributes.INDEXER_SERVER, solrServer);
     MetadataIndexer indexer = new SolrMetadataIndexer(context);
 
-    HarvesterStep step2, step3, step4, step5, step6;
+    HarvesterStep step2, step3, step4, step5, step6, step7;
     step1 = new CswGetReader(harvestConf, context);
     step2 = new CswMetadataExtractor(harvestConf, context);
-    //step3 = new MetadataLogger(harvestConf, context);
+    // step3 = new MetadataLogger(harvestConf, context);
     step3 = new ResolutionExtractor(harvestConf, context);
     step4 = new LocalisationExtractor(harvestConf, context);
-    step5 = new CswMetadataValidator(harvestConf, context);
-    step6 = new CswMetadataIndexer(harvestConf, context, indexer);
+    step5 = new FacetsInformationExtractor(harvestConf, context);
+    step6 = new CswMetadataValidator(harvestConf, context);
+    step7 = new CswMetadataIndexer(harvestConf, context, indexer);
 
     step1.setNext(step2);
     step2.setNext(step3);
     step3.setNext(step4);
     step4.setNext(step5);
     step5.setNext(step6);
-    
+    step6.setNext(step7);
+
     CheckStepsInformation ok = step1.check();
     if (!ok.isOk()) {
       throw new CheckProcessException(ok.getMessage());

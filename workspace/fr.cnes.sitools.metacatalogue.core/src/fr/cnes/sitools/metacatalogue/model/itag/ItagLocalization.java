@@ -16,29 +16,42 @@
  * You should have received a copy of the GNU General Public License
  * along with SITools2.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
-package fr.cnes.sitools.metacatalogue.utils;
+package fr.cnes.sitools.metacatalogue.model.itag;
 
-public class ResolutionConverter {
-  
-  
-  
-  
-  public String getResolution(double resolution) {
+import java.util.ArrayList;
+import java.util.List;
 
-    if (resolution >= 0 && resolution <= 2) {
-      return "VHR";
-    }
-    if (resolution > 2 && resolution <= 30) {
-      return "HR";
-    }
-    if (resolution > 30 && resolution <= 200) {
-      return "MR";
-    }
-    if (resolution > 200) {
-      return "LR";
-    }
+import fr.cnes.sitools.metacatalogue.utils.Localization;
 
-    return null;
+public class ItagLocalization {
+
+  /** The continents */
+  private List<Localization> continents;
+
+  public ItagLocalization() {
+    super();
+    continents = new ArrayList<Localization>();
   }
+
+  /**
+   * Gets the continents value
+   * 
+   * @return the continents
+   */
+  public List<Localization> getContinents() {
+    return continents;
+  }
+
+  /**
+   * Sets the value of continents
+   * 
+   * @param continents
+   *          the continents to set
+   */
+  public void setContinents(List<Localization> continents) {
+    this.continents = continents;
+  }
+  
+  
 
 }

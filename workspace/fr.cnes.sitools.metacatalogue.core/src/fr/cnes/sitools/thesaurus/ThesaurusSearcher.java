@@ -49,6 +49,8 @@ public class ThesaurusSearcher {
 
   public String GET_ALL_CONCEPTS_QUERY;
 
+  public String GET_BROADER_QUERY;
+
   private Model model;
 
   public ThesaurusSearcher(String thesaurusName) throws IOException {
@@ -139,6 +141,17 @@ public class ThesaurusSearcher {
       }
     }
     return out;
+  }
+
+  public Concept getBroader(String altLabelEn) {
+    String queryString = GET_BROADER_QUERY.replace("{altLabel}", altLabelEn);
+    List<Concept> concepts = executeQuery(queryString);
+    if (concepts.size() != 0) {
+      return concepts.get(0);
+    }
+    else {
+      return null;
+    }
   }
 
 }

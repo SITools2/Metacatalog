@@ -28,9 +28,9 @@ import fr.cnes.sitools.metacatalogue.common.Harvester;
 import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
 import fr.cnes.sitools.metacatalogue.csw.extractor.CswMetadataExtractor;
 import fr.cnes.sitools.metacatalogue.csw.extractor.LocalisationExtractor;
+import fr.cnes.sitools.metacatalogue.csw.extractor.FacetsInformationExtractor;
 import fr.cnes.sitools.metacatalogue.csw.extractor.ResolutionExtractor;
 import fr.cnes.sitools.metacatalogue.csw.indexer.CswMetadataIndexer;
-import fr.cnes.sitools.metacatalogue.csw.reader.CswGetReader;
 import fr.cnes.sitools.metacatalogue.csw.reader.CswPostReader;
 import fr.cnes.sitools.metacatalogue.csw.validator.CswMetadataValidator;
 import fr.cnes.sitools.metacatalogue.exceptions.CheckProcessException;
@@ -39,7 +39,6 @@ import fr.cnes.sitools.metacatalogue.index.solr.SolRUtils;
 import fr.cnes.sitools.metacatalogue.index.solr.SolrMetadataIndexer;
 import fr.cnes.sitools.metacatalogue.model.HarvestStatus;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
-import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
 import fr.cnes.sitools.model.HarvesterModel;
 import fr.cnes.sitools.server.ContextAttributes;
 
@@ -53,7 +52,7 @@ public class CswPostHarvester extends Harvester {
   public void initHarvester(HarvesterModel harvestConf, Context context) throws CheckProcessException {
     super.initHarvester(harvestConf, context);
     
-    HarvesterStep step2, step3, step4, step5, step6;
+    HarvesterStep step2, step3, step4, step5, step6, step7;
     
     SolrServer solrServer = SolRUtils.getSolRServer(harvestConf.getIndexerConf().getUrl());
     context.getAttributes().put(ContextAttributes.INDEXER_SERVER, solrServer);
@@ -64,14 +63,16 @@ public class CswPostHarvester extends Harvester {
     step2 = new CswMetadataExtractor(harvestConf, context);
     step3 = new ResolutionExtractor(harvestConf, context);
     step4 = new LocalisationExtractor(harvestConf, context);
-    step5 = new CswMetadataValidator(harvestConf, context);
-    step6 = new CswMetadataIndexer(harvestConf, context, indexer);
+    step5 = new FacetsInformationExtractor(harvestConf, context);
+    step6 = new CswMetadataValidator(harvestConf, context);
+    step7 = new CswMetadataIndexer(harvestConf, context, indexer);
 
     step1.setNext(step2);
     step2.setNext(step3);
     step3.setNext(step4);
     step4.setNext(step5);
     step5.setNext(step6);
+    step6.setNext(step7);
     
 
     CheckStepsInformation ok = step1.check();
