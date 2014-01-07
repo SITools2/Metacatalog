@@ -95,7 +95,7 @@ public abstract class AbstractOpensearchSearchResource extends AbstractSearchRes
       String applicationBaseUrl = settings.getPublicHostDomain() + application.getAttachementRef();
 
       repr = new GeoJsonMDEORepresentation(rsp, isAuthenticated, applicationBaseUrl,
-          searcher.getAllConceptsAsMap(getLanguage()));
+          searcher.getAllConceptsAsMap(getLanguage()), thesaurusFacetFields);
     }
     catch (SolrServerException e) {
       throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "Error while querying solr index", e);

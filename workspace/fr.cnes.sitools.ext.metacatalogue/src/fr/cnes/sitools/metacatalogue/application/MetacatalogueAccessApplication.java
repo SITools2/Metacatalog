@@ -171,7 +171,7 @@ public class MetacatalogueAccessApplication extends AbstractApplicationPlugin {
   /** the common part of constructor */
   public void constructor() {
     this.getModel().setClassAuthor("AKKA Technologies");
-    this.getModel().setClassVersion("0.4");
+    this.getModel().setClassVersion("0.5");
     this.getModel().setClassOwner("CNES");
 
     setCategory(Category.USER);
@@ -286,16 +286,23 @@ public class MetacatalogueAccessApplication extends AbstractApplicationPlugin {
 
     param = new ApplicationPluginParameter();
     param.setName("cacheSize");
-    param.setDescription("The size in number of the cache");
+    param.setDescription("The size in number of the SSO cache");
     param.setValueType("xs:integer");
     param.setValue("100");
     this.addParameter(param);
 
     param = new ApplicationPluginParameter();
     param.setName("expireCacheTime");
-    param.setDescription("The time in minutes to keep an entry in the cache");
+    param.setDescription("The time in minutes to keep an entry in the SSO cache");
     param.setValueType("xs:integer");
     param.setValue("120");
+    this.addParameter(param);
+
+    param = new ApplicationPluginParameter();
+    param.setName("thesaurusFacetFields");
+    param.setDescription("The list of fields to get the values from the thesaurus when displaying the facets (used for traduction)");
+    param.setValueType("xs:list");
+    param.setValue("product,_product_category,instrument,platform,_resolution_domain,processingLevel");
     this.addParameter(param);
   }
 

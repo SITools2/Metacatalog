@@ -97,9 +97,9 @@ public class MdWebSearchResource extends AbstractSearchResource {
       boolean isAuthenticated = getClientInfo().isAuthenticated();
       SitoolsSettings settings = getSettings();
       String applicationBaseUrl = settings.getPublicHostDomain() + application.getAttachementRef();
-
+      
       return new GeoJsonMDEORepresentation(rsp, isAuthenticated, applicationBaseUrl,
-          searcher.getAllConceptsAsMap(getLanguage()));
+          searcher.getAllConceptsAsMap(getLanguage()), thesaurusFacetFields);
     }
     catch (SolrServerException e) {
       throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "Error while querying solr index", e);

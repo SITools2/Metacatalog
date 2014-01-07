@@ -48,6 +48,8 @@ public abstract class AbstractSearchResource extends SitoolsResource {
 
   private List<Language> preferedLanguages;
 
+  protected List<String> thesaurusFacetFields;
+
   @Override
   protected void doInit() {
     super.doInit();
@@ -74,6 +76,15 @@ public abstract class AbstractSearchResource extends SitoolsResource {
     thesaurusName = thesaurusParam.getValue();
 
     extractLanguage();
+
+    ApplicationPluginParameter thesaurusFacetFieldsParam = application.getParameter("thesaurusFacetFields");
+    if (thesaurusFacetFieldsParam == null || thesaurusFacetFieldsParam.getName() == null
+        || thesaurusFacetFieldsParam.getName().isEmpty()) {
+      getResponse().setStatus(Status.SERVER_ERROR_INTERNAL, "No thesaurusFacetFieldsParam parameter defined");
+      return;
+    }
+
+    thesaurusFacetFields = getThesaurusFacetFields(thesaurusFacetFieldsParam.getValue());
 
   }
 
@@ -119,6 +130,15 @@ public abstract class AbstractSearchResource extends SitoolsResource {
 
   protected ThesaurusSearcher getThesaurusSearcher() throws IOException {
     return new ThesaurusSearcher(thesaurusName);
+  }
+
+  private List<String> getThesaurusFacetFields(String fields) {
+    String[] fieldsArray = fields.split(",");
+    List<String> fieldsList = new ArrayList<String>();
+    for (String field : fieldsArray) {
+      fieldsList.add(field.trim());
+    }
+    return fieldsList;
   }
 
 }
