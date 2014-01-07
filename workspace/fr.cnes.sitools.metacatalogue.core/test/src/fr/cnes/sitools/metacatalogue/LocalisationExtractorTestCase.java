@@ -136,14 +136,12 @@ public class LocalisationExtractorTestCase extends AbstractHarvesterTestCase {
       // assert Regions
       List<String> regions = localisations.get(MetacatalogField.REGION.getField());
       assertNotNull(regions);
-      assertTrue(regions.contains("Languedoc-Roussillon"));
       assertTrue(regions.contains("Midi-Pyrenees"));
 
       // assert Departments
       List<String> departements = localisations.get(MetacatalogField.DEPARTMENT.getField());
       assertNotNull(departements);
       assertTrue(departements.contains("Ariege"));
-      assertTrue(departements.contains("Aude"));
       assertTrue(departements.contains("Gers"));
       assertTrue(departements.contains("Haute-Garonne"));
       assertTrue(departements.contains("Hautes-Pyrenees"));
@@ -194,8 +192,7 @@ public class LocalisationExtractorTestCase extends AbstractHarvesterTestCase {
 
       // Assert city
       List<String> cities = localisations.get(MetacatalogField.CITY.getField());
-      assertNotNull(cities);
-      assertTrue(cities.contains("Toulouse"));
+      assertNull(cities);
 
     }
 
