@@ -37,7 +37,7 @@ public class ProductCategoryExtractorTestCase {
     ProductCategoryExtractorUtil extractor = new ProductCategoryExtractorUtil(THESAURUS_NAME);
     String category = extractor.extractCategory(product);
 
-    assertEquals("produit biogéophysique", category);
+    assertEquals("biogeophysic product", category);
   }
   
   @Test
@@ -47,7 +47,7 @@ public class ProductCategoryExtractorTestCase {
     ProductCategoryExtractorUtil extractor = new ProductCategoryExtractorUtil(THESAURUS_NAME);
     String category = extractor.extractCategory(product);
 
-    assertEquals("produit thématique", category);
+    assertEquals("thematic product", category);
   }
 
 }

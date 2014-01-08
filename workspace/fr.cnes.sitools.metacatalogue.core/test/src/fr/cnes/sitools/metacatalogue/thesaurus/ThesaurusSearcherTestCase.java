@@ -50,7 +50,7 @@ public class ThesaurusSearcherTestCase extends AbstractHarvesterTestCase {
 
   @Test
   public void testThesaurusSearchFromPrefLabelEn() throws IOException {
-    String prefLabel = "REFLECTANCE";
+    String prefLabel = "Reflectance";
 
     // get a concept from its prefLabel
     ThesaurusSearcher searcher = new ThesaurusSearcher(THESAURUS_NAME);
@@ -114,7 +114,7 @@ public class ThesaurusSearcherTestCase extends AbstractHarvesterTestCase {
     ThesaurusSearcher searcher = new ThesaurusSearcher(THESAURUS_NAME);
     List<Concept> concepts = searcher.getAllConcepts("fr");
     assertNotNull(concepts);
-    assertEquals(158, concepts.size());
+    assertEquals(169, concepts.size());
   }
 
   @Test
@@ -124,8 +124,8 @@ public class ThesaurusSearcherTestCase extends AbstractHarvesterTestCase {
     ThesaurusSearcher searcher = new ThesaurusSearcher(THESAURUS_NAME);
     Map<String, String> map = searcher.getAllConceptsAsMap("fr");
     assertNotNull(map);
-    // Il y a des altLabels en double... du coup on a 150 concepts au lieu des 158...
-    assertEquals(149, map.keySet().size());
+    // Il y a des altLabels en double... du coup on a 160 concepts au lieu des 158...
+    assertEquals(160, map.keySet().size());
   }
   
   @Test
@@ -137,7 +137,7 @@ public class ThesaurusSearcherTestCase extends AbstractHarvesterTestCase {
     ThesaurusSearcher searcher = new ThesaurusSearcher(THESAURUS_NAME);
     Concept concept = searcher.getBroader(altLabelEn);
     assertNotNull(concept);
-    assertEquals("produit biogéophysique", concept.getProperties().get("altLabelBroader"));
+    assertEquals("biogeophysic product", concept.getProperties().get("altLabelBroader"));
 
   }
 
