@@ -107,17 +107,7 @@
 			<error name="wms" level="warning">WMS SRS not found for record <xsl:value-of select="gmd:fileIdentifier/gco:CharacterString"/> with this Xpath expression "gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code/gco:CharacterString"</error>
 		</xsl:if>
 		
-		
-				
-		
-		<xsl:for-each select="gmd:fileIdentifier/gco:CharacterString">
-			<field name="_uuid">urn:ogc:def:EOP:GEOSUD:Geosud:<xsl:value-of select="string(.)" /></field>
-			<field name="id">urn:ogc:def:EOP:GEOSUD:Geosud:<xsl:value-of select="string(.)" /></field>
-		</xsl:for-each>
-		
 		<field name="identifier">urn:ogc:def:EOP:<xsl:value-of select="string(gmd:contact/gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString)"/>:Geosud:<xsl:value-of select="string(gmd:fileIdentifier/gco:CharacterString)" /></field>
-
-		<field name="resourceType">dataset</field>
 
 		<field name="project">geosud</field>
 		
