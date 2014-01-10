@@ -26,8 +26,8 @@ import org.restlet.Context;
 
 import fr.cnes.sitools.metacatalogue.common.Harvester;
 import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
-import fr.cnes.sitools.metacatalogue.csw.extractor.LocalisationExtractor;
 import fr.cnes.sitools.metacatalogue.csw.extractor.FacetsInformationExtractor;
+import fr.cnes.sitools.metacatalogue.csw.extractor.LocalisationExtractor;
 import fr.cnes.sitools.metacatalogue.csw.extractor.ResolutionExtractor;
 import fr.cnes.sitools.metacatalogue.csw.validator.CswMetadataValidator;
 import fr.cnes.sitools.metacatalogue.exceptions.CheckProcessException;
@@ -39,7 +39,6 @@ import fr.cnes.sitools.metacatalogue.opensearch.extractor.OpensearchMetadataExtr
 import fr.cnes.sitools.metacatalogue.opensearch.indexer.OpensearchMetadataIndexer;
 import fr.cnes.sitools.metacatalogue.opensearch.reader.OpensearchReader;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
-import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
 import fr.cnes.sitools.model.HarvesterModel;
 import fr.cnes.sitools.server.ContextAttributes;
 

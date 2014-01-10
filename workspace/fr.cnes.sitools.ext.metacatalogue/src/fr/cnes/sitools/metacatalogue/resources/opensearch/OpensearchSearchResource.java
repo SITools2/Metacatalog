@@ -55,7 +55,7 @@ public class OpensearchSearchResource extends AbstractOpensearchSearchResource {
     Representation repr = null;
 
     Form query = getRequest().getResourceRef().getQueryAsForm();
-    SolrServer server = getSolrServer();
+    SolrServer server = getSolrServer(getContext());
 
     ThesaurusSearcher searcher = null;
 

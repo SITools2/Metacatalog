@@ -75,7 +75,7 @@ public class MdWebSearchResource extends AbstractSearchResource {
       list.add(parameter.getName(), parameter.getValue());
     }
 
-    SolrServer server = getSolrServer();
+    SolrServer server = getSolrServer(getContext());
 
     ThesaurusSearcher searcher = null;
 
@@ -93,11 +93,11 @@ public class MdWebSearchResource extends AbstractSearchResource {
     try {
       getLogger().info("Query : " + solrQuery.toString());
       QueryResponse rsp = server.query(solrQuery);
-      
+
       boolean isAuthenticated = getClientInfo().isAuthenticated();
       SitoolsSettings settings = getSettings();
       String applicationBaseUrl = settings.getPublicHostDomain() + application.getAttachementRef();
-      
+
       return new GeoJsonMDEORepresentation(rsp, isAuthenticated, applicationBaseUrl,
           searcher.getAllConceptsAsMap(getLanguage()), thesaurusFacetFields);
     }

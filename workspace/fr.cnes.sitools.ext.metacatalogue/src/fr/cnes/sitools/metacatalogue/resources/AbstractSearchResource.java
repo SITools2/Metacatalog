@@ -23,14 +23,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.solr.client.solrj.SolrServer;
+import org.restlet.Context;
 import org.restlet.data.Language;
 import org.restlet.data.Preference;
 import org.restlet.data.Status;
-import org.restlet.resource.ResourceException;
 
 import fr.cnes.sitools.common.SitoolsResource;
 import fr.cnes.sitools.metacatalogue.application.MetacatalogueAccessApplication;
-import fr.cnes.sitools.metacatalogue.index.solr.SolRUtils;
 import fr.cnes.sitools.plugins.applications.model.ApplicationPluginParameter;
 import fr.cnes.sitools.thesaurus.ThesaurusSearcher;
 
@@ -38,9 +37,6 @@ public abstract class AbstractSearchResource extends SitoolsResource {
 
   /** The parent application */
   protected MetacatalogueAccessApplication application;
-
-  /** The url of the solr core to query */
-  protected String solrCoreUrl;
 
   protected String thesaurusName;
 
@@ -55,17 +51,6 @@ public abstract class AbstractSearchResource extends SitoolsResource {
     super.doInit();
 
     application = (MetacatalogueAccessApplication) getApplication();
-
-    ApplicationPluginParameter solrCoreUrlParameter = application.getParameter("metacatalogSolrCore");
-    if (solrCoreUrlParameter == null || solrCoreUrlParameter.getValue() == null) {
-      throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "No solr core url defined, cannot perform search");
-    }
-
-    ApplicationPluginParameter solrCoreNameParameter = application.getParameter("metacatalogSolrName");
-    if (solrCoreNameParameter == null || solrCoreNameParameter.getValue() == null) {
-      throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "No solr core name defined, cannot perform search");
-    }
-    solrCoreUrl = solrCoreUrlParameter.getValue() + "/" + solrCoreNameParameter.getValue();
 
     ApplicationPluginParameter thesaurusParam = application.getParameter("thesaurus");
     if (thesaurusParam == null || thesaurusParam.getName() == null || thesaurusParam.getName().isEmpty()) {
@@ -120,11 +105,8 @@ public abstract class AbstractSearchResource extends SitoolsResource {
     return language;
   }
 
-  protected SolrServer getSolrServer() {
-    SolrServer server = SolRUtils.getSolRServer(solrCoreUrl);
-    if (server == null) {
-      throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "Solr core : " + solrCoreUrl + " not reachable");
-    }
+  protected SolrServer getSolrServer(Context context) {
+    SolrServer server = (SolrServer) context.getAttributes().get("INDEXER_SERVER");
     return server;
   }
 

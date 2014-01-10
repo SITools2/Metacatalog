@@ -52,7 +52,7 @@ public class OpensearchSearchWithThesaurusResource extends AbstractOpensearchSea
     Representation repr = null;
 
     Form query = getRequest().getResourceRef().getQueryAsForm();
-    SolrServer server = getSolrServer();
+    SolrServer server = getSolrServer(getContext());
 
     // GET THE CONCEPT ASSOCIATED TO THE SEARCH TERMS PARAMETER
     String searchTermParam = query.getFirstValue(OpenSearchQuery.SEARCH_TERMS.getParamName(), null);

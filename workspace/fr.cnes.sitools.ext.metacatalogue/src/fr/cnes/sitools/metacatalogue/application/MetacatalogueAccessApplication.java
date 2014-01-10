@@ -24,6 +24,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.solr.client.solrj.SolrServer;
 import org.restlet.Context;
 import org.restlet.Restlet;
 import org.restlet.data.Status;
@@ -38,6 +39,7 @@ import fr.cnes.sitools.common.model.Category;
 import fr.cnes.sitools.common.validator.ConstraintViolation;
 import fr.cnes.sitools.common.validator.ConstraintViolationLevel;
 import fr.cnes.sitools.common.validator.Validator;
+import fr.cnes.sitools.metacatalogue.index.solr.SolRUtils;
 import fr.cnes.sitools.metacatalogue.resources.histogram.HistogramResource;
 import fr.cnes.sitools.metacatalogue.resources.mdweb.MdWebSearchResource;
 import fr.cnes.sitools.metacatalogue.resources.opensearch.OpensearchDescribeResource;
@@ -80,13 +82,13 @@ public class MetacatalogueAccessApplication extends AbstractApplicationPlugin {
    * Constructor with context and model of the application configuration. This is the constructor called when the
    * application is started
    * 
-   * @param arg0
+   * @param context
    *          Restlet context
    * @param model
    *          model
    */
-  public MetacatalogueAccessApplication(Context arg0, ApplicationPluginModel model) {
-    super(arg0, model);
+  public MetacatalogueAccessApplication(Context context, ApplicationPluginModel model) {
+    super(context, model);
 
     ApplicationPluginParameter appSSO = getParameter("SSO_Token_validator_URL");
     if (appSSO != null && appSSO.getName() != null) {
@@ -112,6 +114,16 @@ public class MetacatalogueAccessApplication extends AbstractApplicationPlugin {
       getContext().getAttributes().put(ContextAttributes.CUSTOM_CHALLENGE_AUTHENTICATOR, oauthAuthenticator);
       getContext().getAttributes().put(ContextAttributes.CUSTOM_AUTHORIZER, authorizer);
     }
+
+    // get the solr server from the context or put it inside if not
+    if (!context.getAttributes().containsKey("INDEXER_SERVER")) {
+      String solrCoreUrl = getSolrCoreUrl();
+      SolrServer server = SolRUtils.getSolRServer(solrCoreUrl);
+      if (server == null) {
+        throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "Solr core : " + solrCoreUrl + " not reachable");
+      }
+    }
+
   }
 
   @Override
@@ -300,7 +312,8 @@ public class MetacatalogueAccessApplication extends AbstractApplicationPlugin {
 
     param = new ApplicationPluginParameter();
     param.setName("thesaurusFacetFields");
-    param.setDescription("The list of fields to get the values from the thesaurus when displaying the facets (used for traduction)");
+    param
+        .setDescription("The list of fields to get the values from the thesaurus when displaying the facets (used for traduction)");
     param.setValueType("xs:list");
     param.setValue("product,_product_category,instrument,platform,_resolution_domain,processingLevel");
     this.addParameter(param);

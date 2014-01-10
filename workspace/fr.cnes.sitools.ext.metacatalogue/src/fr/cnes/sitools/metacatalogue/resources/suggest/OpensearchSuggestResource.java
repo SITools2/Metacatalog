@@ -71,7 +71,7 @@ public class OpensearchSuggestResource extends AbstractSearchResource {
 
       // get suggestion number in the metacatalogue then
       if (suggests.size() > 0) {
-        SolrServer server = SolRUtils.getSolRServer(solrCoreUrl);
+        SolrServer server = getSolrServer(getContext());
 
         SolrQuery solrQuery = new SolrQuery();
         solrQuery.setRequestHandler("/terms");
@@ -100,7 +100,7 @@ public class OpensearchSuggestResource extends AbstractSearchResource {
           }
         }
         catch (SolrServerException e) {
-          getLogger().warning("Cannot access Solr server at url : " + solrCoreUrl + " not suggestion number returned");
+          getLogger().warning("Cannot access Solr server no suggestion number returned");
         }
       }
 
