@@ -71,7 +71,6 @@
 <target name="test-init">
 	<mkdir dir="${test.dir}" />
 	<delete dir="${test.reports.data.dir}" />
-	<delete dir="${test.reports.dir}" />
 	<mkdir dir="${test.reports.dir}" />
 	<mkdir dir="${test.reports.data.dir}" />
 </target>
@@ -165,7 +164,7 @@
 	</cobertura-instrument>
 </target>
 
-<target name="coverage" depends="instrumentClasses, execute-tests-ext">
+<target name="coverage" depends="instrumentClasses, execute-tests-ext, execute-tests-concordion">
 	<cobertura-report format="html" srcdir="${src.dir}"
 		destdir="${cobertura.reports.dir}" datafile="cobertura.ser" />
 	<cobertura-report format="xml" srcdir="${src.dir}"
@@ -349,6 +348,7 @@
 			</fileset>
 		</classpath>
 	</javadoc>
+	
 
 	<!-- Creation du ZIP contenant la javadoc du projet -->
 	<zip
@@ -357,4 +357,57 @@
 
 	<!-- Suppression du repertoire out.javadoc.dir -->
 	<!-- delete dir="${out.javadoc.dir}"/ -->
+	
 </target>
+<!-- ========================================================================================= 
+test-init : Creation de l'arborescence pour les tests ========================================================================================= -->
+	<target name="test-concordion-init">
+		<delete dir="${test.concordion.reports.data.dir}" />
+		<mkdir dir="${test.reports.dir}" />
+		<mkdir dir="${test.concordion.reports.data.dir}" />
+	</target>
+	
+	
+<target name="test-concordion-compile">
+       <mkdir dir="${test.concordion.classes.dir}"/>
+
+	       <javac srcdir="${test.concordion.src.dir}" destdir="${test.concordion.classes.dir}"
+		debug="${debug}" deprecation="${deprecation}" optimize="${optimize}"
+		includeAntRuntime="false">
+		<classpath>
+			<path refid="test.concordion.classpath" />
+		</classpath>
+	</javac>
+<!--         Copie les ressources des tests dans le repertoire ${test.conf.dir} -->
+<!-- 		<copy todir="${test.conf.dir}" includeemptydirs="false"> -->
+<!-- 			<fileset dir="${test.src.dir}" excludes="**/*.java" /> -->
+<!-- 		</copy> -->
+
+	<copy todir="${test.concordion.classes.dir}">
+       <fileset dir="${test.concordion.src.dir}" excludes="**/*.java" />
+       <fileset dir="${test.src.dir}" excludes="**/*.java" />
+     </copy>
+
+</target>
+
+<target name="test-concordion">
+
+	<junit printsummary="yes" errorProperty="test.failed"
+		failureProperty="test.failed" fork="yes" dir="${basedir}">
+		<sysproperty key="net.sourceforge.cobertura.datafile" file="cobertura.ser" />
+		<jvmarg value="-Dconcordion.output.dir=${test.concordion.reports.data.dir}" />
+
+		<classpath refid="instrumented.classpath" />
+		<classpath refid="test.concordion.classpath" />
+
+		<formatter type="plain" usefile="false" />
+
+		<batchtest todir="${test.concordion.reports.data.dir}">
+			<fileset dir="${test.concordion.classes.dir}">
+				<include name="**/*Test.class" />
+				<include name="**/*Fixture.class" />
+			</fileset>
+		</batchtest>
+	</junit>
+</target>
+

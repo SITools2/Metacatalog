@@ -4,5 +4,10 @@
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="test/src"/>
+	<classpathentry kind="src" path="test/specifications/src"/>
+	<classpathentry kind="lib" path="concordion-1.4.4/concordion-1.4.4.jar"/>
+	<classpathentry kind="lib" path="concordion-1.4.4/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="concordion-1.4.4/ognl-2.6.9.jar"/>
+	<classpathentry kind="lib" path="concordion-1.4.4/xom-1.2.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

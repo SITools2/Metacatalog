@@ -34,6 +34,8 @@
 	
 	<target name="execute-tests-ext" depends="test-init, test-compile, test" />
 	
+	<target name="execute-tests-concordion" depends="test-concordion-init, test-concordion-compile, test-concordion" />
+	
 	<target name="javadoc-project" description="Generation du ZIP contenant la javadoc du projet" depends="init, clean, prepare, javadoc, javadoc-tests" />
 	
 

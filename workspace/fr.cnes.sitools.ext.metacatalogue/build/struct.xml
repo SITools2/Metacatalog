@@ -25,6 +25,10 @@
 	<import
 		file="${ROOT_DIRECTORY}/workspace/fr.cnes.sitools.core/conf/build/userlibrairies/sitools.userlibraries.ant.xml"
 		optional="false" />	
+
+	<import
+		file="${SITOOLS_METACATALOGUE_CORE_DIR}/conf/build/userlibraries/metacatalogue-core.userlibraries.ant.xml"
+		optional="false" />	
 	
 	<property name="comp.wp.dir" value="${ROOT_DIRECTORY}/workspace" />
 	<property name="comp.lib.dir" value="${ROOT_DIRECTORY}/workspace/libraries" />
@@ -66,15 +70,7 @@
 	<property name="lib.dir" value="lib" />
 	<property name="src.dir" value="src" />
 	
-	<!-- Arborescence pour la construction des tests -->
-	<property name="test.dir" value="test" />
-	<!-- au lieu de test.dir/conf -->
-	<property name="test.lib.dir" value="${test.dir}/lib" />
-	<property name="test.reports.dir" value="${test.dir}/reports" />
-	<property name="test.reports.data.dir" value="${test.reports.dir}/xml" />
-	<property name="test.src.dir" value="${test.dir}/src" />
-
-	<property name="test.data.dir" value="${test.dir}/data" />
+	
 	<property name="root.data.dir" value="${ROOT_DIRECTORY}/data" />
 
 	<!-- Repertoires destination pour la construction de l'application  -->
@@ -87,11 +83,27 @@
 	<property name="pmd.reports.dir" value="${out.audit.dir}/pmd" />
 	<property name="cpd.reports.dir" value="${out.audit.dir}/cpd" />
 	<property name="cobertura.reports.dir" value="${out.audit.dir}/cobertura" />
-	<property name="test.classes.dir" value="${out.dir}/classes" />
 	<property name="checkstyle.xsl" value="checkstyle-noframes-sorted.xsl" />
 	<!-- properties for Cobertura -->
 	<property name="instrumented.dir" value="${out.classes.dir}" />
 
+	<!-- Arborescence pour la construction des tests -->
+	<property name="test.dir" value="test" />
+	<!-- au lieu de test.dir/conf -->
+	<property name="test.lib.dir" value="${test.dir}/lib" />
+	<property name="test.reports.dir" value="${test.dir}/reports" />
+	<property name="test.reports.data.dir" value="${test.reports.dir}/xml" />
+	<property name="test.src.dir" value="${test.dir}/src" />
+	<property name="test.classes.dir" value="${out.dir}/classes" />
+	<property name="test.data.dir" value="${test.dir}/data" />
+	<property name="test.conf.dir" value="${ROOT_DIRECTORY}/workspace/fr.cnes.sitools.core/conf/properties"/>
+
+	<!-- Arborescence pour la construction des tests concordion-->
+	<property name="test.concordion.reports.data.dir" value="${test.reports.dir}/concordion" />
+	<property name="test.concordion.src.dir" value="${test.dir}/specifications/src" />
+	<property name="test.concordion.classes.dir" value="${out.dir}/specifications/classes" />
+	<property name="concordion.lib.dir" value="concordion-1.4.4" />
+	
 	<!-- Repertoires de deploiement des fichiers "externes" de l'application -->
 	<property name="dist.dir" value="dist" />
 	<property name="dist.bin.dir" value="${dist.dir}" />
@@ -127,10 +139,21 @@
 	<pathelement location="${out.classes.dir}" />
 	<pathelement location="${test.classes.dir}" />
 	<pathelement location="${test.conf.dir}" />
+	<path refid="libraries" />
+	<path refid="com.hp.hpl.jena" />
 	<!-- <fileset dir="${test.lib.dir}"> -->
 	<!-- <include name="**/*.jar" /> -->
 	<!-- <include name="**/*.zip" /> -->
 	<!-- </fileset> -->
+</path>
+
+<!-- Classpath pour l'execution des tests concordions-->
+<path id="test.concordion.classpath">
+	<path refid="test.classpath" />
+	<pathelement location="${test.concordion.classes.dir}" />
+	 <fileset dir="${concordion.lib.dir}">
+	 	<include name="**/*.jar" />
+	 </fileset>
 </path>
 
 <!-- Tous les fichiers ressource -->

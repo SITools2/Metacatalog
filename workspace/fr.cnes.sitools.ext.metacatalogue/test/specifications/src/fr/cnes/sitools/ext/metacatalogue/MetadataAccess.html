@@ -1,0 +1,39 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+
+<head>
+<link href="../../../../../concordion.css" rel="stylesheet"
+	type="text/css" />
+</head>
+
+<body>
+
+	<h1>MetadataAccess</h1>
+
+	<p></p>
+
+	<p>The system therefore attempts to break a supplied full name into
+		its constituents by splitting around whitespace.</p>
+
+	<div class="example">
+
+		<h3>Examples</h3>
+
+
+		<h4>Recherche full text (scénario 1)</h4>
+		<p> Lorsque l'utilisateur demande une recherche textuelle avec comme paramètre : <span concordion:set="#query">q=LANDCOVER</span> , 
+		<span concordion:assertTrue="queryMetacatalogue(#query)">les résultats retournés sont des métadonnées au format GeoJSON</span></p> 
+		
+		Pour rechercher une valeur particulière
+		(matching exact) il faut utiliser des guillemets.
+		<h4>Recherche géographique (scénario 2)</h4>
+		/mdweb/search ?q=footprint :"Intersects(POLYGON((-10 30, -40 40, -10
+		-20, 40 20, 0 0, -10 30)))"
+		<h4>Recherche temporelle (scénario 2)</h4>
+		/mdweb/search ?q=startDate :[1995-12-31T00:00:00.000Z TO
+		2007-03-06T00:00:00Z]
+		<h4>Recherche temporelle avec pas de temps (scénario 3)</h4>
+		/mdweb/search ?q=startDate :[1995-12-31T00:00:00.000Z TO
+		2007-03-06T00:00:00Z] AND _month=[5 TO 7] 
+	</div>
+</body>
+</html>
