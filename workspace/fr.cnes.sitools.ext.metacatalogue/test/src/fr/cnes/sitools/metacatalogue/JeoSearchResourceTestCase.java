@@ -1,4 +1,5 @@
 package fr.cnes.sitools.metacatalogue;
+
 /*******************************************************************************
  * Copyright 2010-2013 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
  *
@@ -18,7 +19,6 @@ package fr.cnes.sitools.metacatalogue;
  * along with SITools2.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -26,6 +26,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.IOException;
 import java.util.HashMap;
 
+import org.apache.solr.client.solrj.SolrServer;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.After;
@@ -33,7 +34,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.restlet.Component;
 import org.restlet.Context;
-import org.restlet.data.MediaType;
 import org.restlet.data.Protocol;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
@@ -42,9 +42,9 @@ import org.restlet.resource.ClientResource;
 import fr.cnes.sitools.AbstractSitoolsTestCase;
 import fr.cnes.sitools.common.SitoolsSettings;
 import fr.cnes.sitools.common.application.ContextAttributes;
-import fr.cnes.sitools.metacatalogue.application.MetacatalogueAdminApplication;
+import fr.cnes.sitools.metacatalogue.application.MetacatalogueAccessApplication;
+import fr.cnes.sitools.metacatalogue.index.solr.SolRUtils;
 import fr.cnes.sitools.util.RIAPUtils;
-
 
 //ATTENTION TEST PAS A JOUR AVEC LA NOUVELLE VERSION DU METACATALOGUE .....
 
@@ -68,10 +68,12 @@ public class JeoSearchResourceTestCase extends AbstractSitoolsTestCase {
    */
   private Component component = null;
 
-  private MetacatalogueAdminApplication application;
+  private MetacatalogueAccessApplication application;
 
   /** The url of the search resource */
   private String searchResourceUrl = "/search";
+
+  private SolrServer server;
 
   /**
    * relative url for dataset management REST API
@@ -113,9 +115,16 @@ public class JeoSearchResourceTestCase extends AbstractSitoolsTestCase {
       settings.setStores(new HashMap<String, Object>());
       ctx.getAttributes().put(ContextAttributes.SETTINGS, settings);
 
-      ctx.getAttributes().put(ContextAttributes.APP_ATTACH_REF, getAttachUrl());
+      server = SolRUtils.getEmbeddedSolRServer(settings.getRootDirectory()
+          + "/extensions/metacatalogue/workspace/fr.cnes.sitools.ext.metacatalogue/test/data/solr", "solr.xml",
+          "kalideos_mock");
 
-      application = new MetacatalogueAdminApplication(ctx);
+      
+      
+      ctx.getAttributes().put(ContextAttributes.APP_ATTACH_REF, getAttachUrl());
+      ctx.getAttributes().put("INDEXER_SERVER", server);
+
+      application = new MetacatalogueAccessApplication(ctx);
       this.component.getDefaultHost().attach(getAttachUrl(), application);
 
     }
@@ -133,8 +142,9 @@ public class JeoSearchResourceTestCase extends AbstractSitoolsTestCase {
    */
   public void tearDown() throws Exception {
     super.tearDown();
+    server.shutdown();
     this.component.stop();
-    this.component = null;
+    this.component = null;    
   }
 
   /**
