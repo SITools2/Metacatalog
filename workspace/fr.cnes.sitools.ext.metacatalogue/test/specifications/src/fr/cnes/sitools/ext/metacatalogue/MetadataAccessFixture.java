@@ -117,8 +117,7 @@ public class MetadataAccessFixture extends AbstractSitoolsTestCase {
       settings.setStores(new HashMap<String, Object>());
       ctx.getAttributes().put(ContextAttributes.SETTINGS, settings);
 
-      server = SolRUtils.getEmbeddedSolRServer(settings.getRootDirectory()
-          + "/extensions/metacatalogue/workspace/fr.cnes.sitools.ext.metacatalogue/test/data/solr", "solr.xml",
+      server = SolRUtils.getEmbeddedSolRServer("./test/data/solr", "solr.xml",
           "kalideos_mock");
 
       ctx.getAttributes().put(ContextAttributes.APP_ATTACH_REF, getAttachUrl());
