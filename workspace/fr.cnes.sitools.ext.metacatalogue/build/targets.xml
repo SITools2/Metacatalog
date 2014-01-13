@@ -113,11 +113,11 @@
 		<formatter type="xml" />
 		<test name="${testcase}" if="testcase" />
 		<batchtest todir="${test.reports.data.dir}" unless="testcase">
-			<fileset dir="${test.classes.dir}" includes="**/ext/test/**/Test*.class"
+			<fileset dir="${test.classes.dir}" includes="**/Test*.class"
 				excludes="**/Abstract*.class **/TestRunner.class" />
-			<fileset dir="${test.classes.dir}" includes="**/ext/test/**/*Test.class"
+			<fileset dir="${test.classes.dir}" includes="**/*Test.class"
 				excludes="**/Abstract*.class" />
-			<fileset dir="${test.classes.dir}" includes="**/ext/test/**/*TestCase.class"
+			<fileset dir="${test.classes.dir}" includes="**/*TestCase.class"
 				excludes="**/Abstract*.class" />
 		</batchtest>
 	</junit>
@@ -129,10 +129,7 @@
 		<report format="frames" todir="${test.reports.dir}" />
 	</junitreport>
 
-	<echo message="last build failed tests" file="${test.last.failed.file}" />
-	<fail if="test.failed">
-		Unit tests failed. Check log or reports for details
-	</fail>
+	
 
 	<!-- Remove test failed file, as these tests succeeded -->
 	<delete file="${test.last.failed.file}" />
@@ -164,11 +161,23 @@
 	</cobertura-instrument>
 </target>
 
-<target name="coverage" depends="instrumentClasses, execute-tests-ext, execute-tests-concordion">
+<target name="coverage" depends="instrumentClasses, execute-tests-ext, execute-tests-concordion, coverage-fail-check">
 	<cobertura-report format="html" srcdir="${src.dir}"
 		destdir="${cobertura.reports.dir}" datafile="cobertura.ser" />
 	<cobertura-report format="xml" srcdir="${src.dir}"
 		destdir="${cobertura.reports.dir}" datafile="cobertura.ser" />
+</target>
+
+<target name="coverage-fail-check">
+	<echo message="last build failed tests" file="${test.last.failed.file}" />
+	<fail if="test.failed">
+		Unit tests failed. Check log or reports for details
+	</fail>
+	
+	<echo message="last build failed tests" file="${test.last.failed.file}" />
+	<fail if="test.concordion.failed">
+		Concordion unit tests failed. Check log or reports for details
+	</fail>
 </target>
 
 <target name="audit" description="Generates a report of code convention violations.">
@@ -393,7 +402,7 @@ test-init : Creation de l'arborescence pour les tests ==========================
 <target name="test-concordion">
 
 	<junit printsummary="yes" errorProperty="test.failed"
-		failureProperty="test.failed" fork="yes" dir="${basedir}">
+		failureProperty="test.concordion.failed" fork="yes" dir="${basedir}">
 		<sysproperty key="net.sourceforge.cobertura.datafile" file="cobertura.ser" />
 		<jvmarg value="-Dconcordion.output.dir=${test.concordion.reports.data.dir}" />
 

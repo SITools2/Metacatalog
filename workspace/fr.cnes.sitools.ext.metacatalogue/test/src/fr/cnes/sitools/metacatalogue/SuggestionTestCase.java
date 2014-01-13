@@ -1,6 +1,5 @@
 package fr.cnes.sitools.metacatalogue;
 
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -23,7 +22,7 @@ import org.restlet.resource.ClientResource;
 import fr.cnes.sitools.AbstractSitoolsTestCase;
 import fr.cnes.sitools.common.SitoolsSettings;
 import fr.cnes.sitools.common.application.ContextAttributes;
-import fr.cnes.sitools.metacatalogue.application.MetacatalogueAdminApplication;
+import fr.cnes.sitools.metacatalogue.application.MetacatalogueAccessApplication;
 import fr.cnes.sitools.metacatalogue.resources.suggest.SuggestDTO;
 import fr.cnes.sitools.util.RIAPUtils;
 
@@ -41,7 +40,7 @@ public class SuggestionTestCase extends AbstractSitoolsTestCase {
    */
   private Component component = null;
 
-  private MetacatalogueAdminApplication application;
+  private MetacatalogueAccessApplication application;
 
   /**
    * relative url for dataset management REST API
@@ -85,7 +84,9 @@ public class SuggestionTestCase extends AbstractSitoolsTestCase {
 
       ctx.getAttributes().put(ContextAttributes.APP_ATTACH_REF, getAttachUrl());
 
-      application = new MetacatalogueAdminApplication(ctx);
+      application = new MetacatalogueAccessApplication(ctx);
+      application.getModel().getParametersMap().get("thesaurus")
+          .setValue("./test/resources/thesaurus/TechniqueDev3.rdf");
       this.component.getDefaultHost().attach(getAttachUrl(), application);
 
     }
