@@ -117,13 +117,14 @@ public class MetadataAccessFixture extends AbstractSitoolsTestCase {
       settings.setStores(new HashMap<String, Object>());
       ctx.getAttributes().put(ContextAttributes.SETTINGS, settings);
 
-      server = SolRUtils.getEmbeddedSolRServer("./test/data/solr", "solr.xml",
-          "kalideos_mock");
+      server = SolRUtils.getEmbeddedSolRServer("./test/data/solr", "solr.xml", "kalideos_mock");
 
       ctx.getAttributes().put(ContextAttributes.APP_ATTACH_REF, getAttachUrl());
       ctx.getAttributes().put("INDEXER_SERVER", server);
 
       application = new MetacatalogueAccessApplication(ctx);
+      application.getModel().getParametersMap().get("thesaurus")
+          .setValue("./test/resources/thesaurus/TechniqueDev3.rdf");
       this.component.getDefaultHost().attach(getAttachUrl(), application);
 
     }
