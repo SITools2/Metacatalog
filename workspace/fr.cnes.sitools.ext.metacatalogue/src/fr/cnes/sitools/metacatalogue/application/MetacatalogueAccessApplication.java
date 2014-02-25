@@ -35,6 +35,7 @@ import org.restlet.security.ChallengeAuthenticator;
 import org.restlet.security.Verifier;
 
 import fr.cnes.sitools.common.application.ContextAttributes;
+import fr.cnes.sitools.common.exception.SitoolsException;
 import fr.cnes.sitools.common.model.Category;
 import fr.cnes.sitools.common.validator.ConstraintViolation;
 import fr.cnes.sitools.common.validator.ConstraintViolationLevel;
@@ -78,6 +79,27 @@ public class MetacatalogueAccessApplication extends AbstractApplicationPlugin {
     constructor();
   }
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see fr.cnes.sitools.plugins.applications.business.AbstractApplicationPlugin#start()
+   */
+  @Override
+  public synchronized void start() throws Exception {
+    Context context = getContext();
+    // get the solr server from the context or put it inside if not
+    if (!context.getAttributes().containsKey("INDEXER_SERVER")) {
+      String solrCoreUrl = getSolrCoreUrl();
+      SolrServer server = SolRUtils.getSolRServer(solrCoreUrl);
+      if (server == null) {
+        throw new SitoolsException("Solr core : " + solrCoreUrl + " not reachable");
+      }
+      context.getAttributes().put("INDEXER_SERVER", server);
+    }
+    super.start();
+
+  }
+
   /**
    * Constructor with context and model of the application configuration. This is the constructor called when the
    * application is started
@@ -113,15 +135,6 @@ public class MetacatalogueAccessApplication extends AbstractApplicationPlugin {
 
       getContext().getAttributes().put(ContextAttributes.CUSTOM_CHALLENGE_AUTHENTICATOR, oauthAuthenticator);
       getContext().getAttributes().put(ContextAttributes.CUSTOM_AUTHORIZER, authorizer);
-    }
-
-    // get the solr server from the context or put it inside if not
-    if (!context.getAttributes().containsKey("INDEXER_SERVER")) {
-      String solrCoreUrl = getSolrCoreUrl();
-      SolrServer server = SolRUtils.getSolRServer(solrCoreUrl);
-      if (server == null) {
-        throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "Solr core : " + solrCoreUrl + " not reachable");
-      }
     }
 
   }
