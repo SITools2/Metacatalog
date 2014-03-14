@@ -19,7 +19,6 @@
 package fr.cnes.sitools.metacatalogue.csw.extractor;
 
 import java.io.IOException;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 

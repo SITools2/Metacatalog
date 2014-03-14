@@ -23,9 +23,10 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import org.json.JSONException;
 import org.restlet.data.Status;
+import org.restlet.engine.Engine;
 import org.restlet.ext.wadl.MethodInfo;
 import org.restlet.ext.wadl.ParameterInfo;
 import org.restlet.ext.wadl.ParameterStyle;
@@ -56,15 +57,15 @@ public class HistogramResource extends AbstractOpenSearchServiceResource {
       histo = new Histogram(numBins, this.solrCoreUrl);
     }
     catch (ParseException ex) {
-      Logger.getLogger(HistogramResource.class.getName()).log(Level.SEVERE, null, ex);
+      Engine.getLogger(HistogramResource.class.getName()).log(Level.SEVERE, null, ex);
       throw new ResourceException(Status.SERVER_ERROR_INTERNAL, ex.getMessage());
     }
     catch (IOException ex) {
-      Logger.getLogger(HistogramResource.class.getName()).log(Level.SEVERE, null, ex);
+      Engine.getLogger(HistogramResource.class.getName()).log(Level.SEVERE, null, ex);
       throw new ResourceException(Status.SERVER_ERROR_INTERNAL, ex.getMessage());
     }
     catch (JSONException ex) {
-      Logger.getLogger(HistogramResource.class.getName()).log(Level.SEVERE, null, ex);
+      Engine.getLogger(HistogramResource.class.getName()).log(Level.SEVERE, null, ex);
       throw new ResourceException(Status.SERVER_ERROR_INTERNAL, ex.getMessage());
     }
   }
@@ -76,7 +77,7 @@ public class HistogramResource extends AbstractOpenSearchServiceResource {
       return this.histo.getHistogram();
     }
     catch (ParseException ex) {
-      Logger.getLogger(HistogramResource.class.getName()).log(Level.SEVERE, null, ex);
+      Engine.getLogger(HistogramResource.class.getName()).log(Level.SEVERE, null, ex);
       throw new ResourceException(Status.SERVER_ERROR_INTERNAL, ex.getMessage());
     }
   }

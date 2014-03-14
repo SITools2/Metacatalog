@@ -75,7 +75,7 @@ public class OAuthVerifier implements Verifier {
     }
 
     this.url = url;
-    logger = Logger.getLogger(OAuthVerifier.class.getName());
+    logger = Engine.getLogger(OAuthVerifier.class.getName());
 
   }
 

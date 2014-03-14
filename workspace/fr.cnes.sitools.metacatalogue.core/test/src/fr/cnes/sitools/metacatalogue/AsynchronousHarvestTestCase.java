@@ -23,10 +23,10 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
-import java.util.logging.Logger;
 
 import org.junit.Test;
 import org.restlet.data.MediaType;
+import org.restlet.engine.Engine;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
 
@@ -192,7 +192,7 @@ public class AsynchronousHarvestTestCase extends AbstractHarvesterServerTestCase
   public static Response getResponse(MediaType media, Representation representation, Class<?> dataClass, boolean isArray) {
     try {
       if (!media.isCompatible(MediaType.APPLICATION_JSON) && !media.isCompatible(MediaType.APPLICATION_XML)) {
-        Logger.getLogger(AsynchronousHarvestTestCase.class.getName()).warning("Only JSON or XML supported in tests");
+        Engine.getLogger(AsynchronousHarvestTestCase.class.getName()).warning("Only JSON or XML supported in tests");
         return null;
       }
 
@@ -229,7 +229,7 @@ public class AsynchronousHarvestTestCase extends AbstractHarvesterServerTestCase
         return response;
       }
       else {
-        Logger.getLogger(AsynchronousHarvestTestCase.class.getName()).warning("Only JSON or XML supported in tests");
+        Engine.getLogger(AsynchronousHarvestTestCase.class.getName()).warning("Only JSON or XML supported in tests");
         return null; // TODO complete test with ObjectRepresentation
       }
     }

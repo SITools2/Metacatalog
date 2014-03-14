@@ -49,7 +49,7 @@ public class AbstractHarvesterTestCase {
   /**
    * Class logger
    */
-  public static final Logger LOGGER = Logger.getLogger(AbstractHarvesterServerTestCase.class.getName());
+  public static final Logger LOGGER = Engine.getLogger(AbstractHarvesterServerTestCase.class.getName());
   /**
    * BASE URL of global Sitools application
    */
@@ -105,7 +105,7 @@ public class AbstractHarvesterTestCase {
       FileUtils.cleanDirectory(dir, new String[] { "xml" }, false);
     }
     catch (IOException e) {
-      Logger.getLogger(AbstractHarvesterServerTestCase.class.getName()).warning(
+      Engine.getLogger(AbstractHarvesterServerTestCase.class.getName()).warning(
           "Unable to clean " + dir.getPath() + "\n cause:" + e.getMessage());
     }
   }
@@ -127,7 +127,7 @@ public class AbstractHarvesterTestCase {
       FileUtils.cleanDirectory(dir, new String[] {}, false);
     }
     catch (IOException e) {
-      Logger.getLogger(AbstractHarvesterServerTestCase.class.getName()).warning(
+      Engine.getLogger(AbstractHarvesterServerTestCase.class.getName()).warning(
           "Unable to clean " + dir.getPath() + "\n cause:" + e.getMessage());
     }
   }

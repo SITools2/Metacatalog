@@ -45,7 +45,6 @@ import fr.cnes.sitools.metacatalogue.model.Error;
 import fr.cnes.sitools.metacatalogue.model.Field;
 import fr.cnes.sitools.metacatalogue.model.HarvestStatus;
 import fr.cnes.sitools.metacatalogue.model.MetadataRecords;
-import fr.cnes.sitools.metacatalogue.opensearch.extractor.OpensearchGeometryExtractor;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
 import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
 import fr.cnes.sitools.metacatalogue.utils.MetacatalogField;

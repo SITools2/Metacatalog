@@ -28,7 +28,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.logging.Logger;
+
+import org.restlet.engine.Engine;
 
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
@@ -76,10 +77,10 @@ public class ThesaurusSearcher {
         field.set(this, bundle.getString(field.getName()));
       }
       catch (IllegalArgumentException e) {
-        Logger.getLogger("initializeSparqlRequests").severe(e.getMessage());
+        Engine.getLogger("initializeSparqlRequests").severe(e.getMessage());
       }
       catch (IllegalAccessException e) {
-        Logger.getLogger("initializeSparqlRequests").severe(e.getMessage());
+        Engine.getLogger("initializeSparqlRequests").severe(e.getMessage());
       }
     }
 

@@ -24,6 +24,8 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
+import org.restlet.engine.Engine;
+
 import fr.cnes.sitools.server.Consts;
 
 /**
@@ -58,7 +60,7 @@ public final class HarvesterSettings {
    */
   private void init() {
     resourceBundle = ResourceBundle.getBundle(BUNDLE_NAME);
-    log = Logger.getLogger(BUNDLE_NAME);
+    log = Engine.getLogger(BUNDLE_NAME);
     setStoreDIR(getString("STORE_DIR"));
     setPublicHostDomain(this.getString("PUBLIC_HOST_DOMAIN"));
     initDateFormat();

@@ -23,7 +23,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.restlet.Application;
 import org.restlet.Context;
 import org.restlet.Restlet;
-import org.restlet.data.Reference;
 import org.restlet.resource.Directory;
 import org.restlet.resource.ResourceException;
 import org.restlet.routing.Router;

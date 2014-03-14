@@ -30,6 +30,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 
+import org.restlet.engine.Engine;
+
 /**
  * 
  * <DIV lang="en"></DIV> <DIV lang="ja"></DIV>
@@ -39,7 +41,7 @@ import java.util.logging.Logger;
 public final class FileUtils {
 
   /** Class logger */
-  private static Logger logger = Logger.getLogger(FileUtils.class.getName());
+  private static Logger logger = Engine.getLogger(FileUtils.class.getName());
 
   /** Private constructor for utility class */
   private FileUtils() {

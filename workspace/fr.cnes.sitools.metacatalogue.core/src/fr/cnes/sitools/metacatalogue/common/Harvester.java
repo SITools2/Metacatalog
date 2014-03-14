@@ -26,6 +26,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.restlet.Context;
+import org.restlet.engine.Engine;
 import org.restlet.engine.util.DateUtils;
 
 import fr.cnes.sitools.metacatalogue.exceptions.CheckProcessException;
@@ -109,7 +110,7 @@ public abstract class Harvester implements Runnable {
   private Logger initNewLogger(HarvesterModel conf, Date date) throws SecurityException, IOException {
 
     // create a logger for the Task
-    Logger logger = Logger.getLogger(conf.getId());
+    Logger logger = Engine.getLogger(conf.getId());
 
     logger.setLevel(Level.INFO);
     String logFolder = getLoggerDir();

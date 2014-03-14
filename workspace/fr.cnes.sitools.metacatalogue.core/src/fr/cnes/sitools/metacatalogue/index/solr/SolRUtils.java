@@ -29,6 +29,7 @@ import org.apache.solr.client.solrj.embedded.EmbeddedSolrServer;
 import org.apache.solr.client.solrj.impl.HttpSolrServer;
 import org.apache.solr.client.solrj.response.SolrPingResponse;
 import org.apache.solr.core.CoreContainer;
+import org.restlet.engine.Engine;
 
 /**
  * The Class SolRUtils.
@@ -41,7 +42,7 @@ import org.apache.solr.core.CoreContainer;
 public final class SolRUtils {
 
   /** The logger. */
-  private static Logger logger = Logger.getLogger(SolRUtils.class.getName());
+  private static Logger logger = Engine.getLogger(SolRUtils.class.getName());
 
   /**
    * Instantiates a new SolR utils.

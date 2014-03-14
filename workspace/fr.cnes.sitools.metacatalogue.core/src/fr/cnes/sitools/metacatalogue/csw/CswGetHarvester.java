@@ -27,8 +27,8 @@ import org.restlet.Context;
 import fr.cnes.sitools.metacatalogue.common.Harvester;
 import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
 import fr.cnes.sitools.metacatalogue.csw.extractor.CswMetadataExtractor;
-import fr.cnes.sitools.metacatalogue.csw.extractor.LocalisationExtractor;
 import fr.cnes.sitools.metacatalogue.csw.extractor.FacetsInformationExtractor;
+import fr.cnes.sitools.metacatalogue.csw.extractor.LocalisationExtractor;
 import fr.cnes.sitools.metacatalogue.csw.extractor.ResolutionExtractor;
 import fr.cnes.sitools.metacatalogue.csw.indexer.CswMetadataIndexer;
 import fr.cnes.sitools.metacatalogue.csw.reader.CswGetReader;
@@ -39,7 +39,6 @@ import fr.cnes.sitools.metacatalogue.index.solr.SolRUtils;
 import fr.cnes.sitools.metacatalogue.index.solr.SolrMetadataIndexer;
 import fr.cnes.sitools.metacatalogue.model.HarvestStatus;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
-import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
 import fr.cnes.sitools.model.HarvesterModel;
 import fr.cnes.sitools.server.ContextAttributes;
 

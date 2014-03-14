@@ -24,9 +24,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.restlet.engine.Engine;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
 
@@ -160,13 +161,13 @@ public final class Histogram {
       System.out.println(histo.getHistogram().getText());
     }
     catch (IOException ex) {
-      Logger.getLogger(Histogram.class.getName()).log(Level.SEVERE, null, ex);
+      Engine.getLogger(Histogram.class.getName()).log(Level.SEVERE, null, ex);
     }
     catch (JSONException ex) {
-      Logger.getLogger(Histogram.class.getName()).log(Level.SEVERE, null, ex);
+      Engine.getLogger(Histogram.class.getName()).log(Level.SEVERE, null, ex);
     }
     catch (ParseException ex) {
-      Logger.getLogger(Histogram.class.getName()).log(Level.SEVERE, null, ex);
+      Engine.getLogger(Histogram.class.getName()).log(Level.SEVERE, null, ex);
     }
 
   }

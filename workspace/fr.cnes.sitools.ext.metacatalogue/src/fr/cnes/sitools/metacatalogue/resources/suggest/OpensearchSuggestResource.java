@@ -35,7 +35,6 @@ import org.restlet.data.Status;
 import org.restlet.representation.Variant;
 import org.restlet.resource.Get;
 
-import fr.cnes.sitools.metacatalogue.index.solr.SolRUtils;
 import fr.cnes.sitools.metacatalogue.resources.AbstractSearchResource;
 import fr.cnes.sitools.metacatalogue.utils.MetacatalogField;
 import fr.cnes.sitools.thesaurus.Concept;
