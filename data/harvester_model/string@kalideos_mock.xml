@@ -1,0 +1,28 @@
+<HarvesterModel>
+  <id>kalideos_mock</id>
+  <catalogType>opensearch</catalogType>
+  <source>
+    <url>http://sitools.akka.eu:8184/sitools/datastorage/user/storage/kalideos_corrected.json</url>
+  </source>
+  <description>Moissonnage du catalogue kalideos</description>
+  <harvesterClassName>fr.cnes.sitools.metacatalogue.opensearch.OpensearchHarvester</harvesterClassName>
+  <indexerConf>
+    <url>http://localhost:8983/solr/kalideos_mock</url>
+  </indexerConf>
+  <lastHarvest>2014-01-07 16:45:38.225 UTC</lastHarvest>
+  <attributes/>
+  <automaticMerge>false</automaticMerge>
+  <publicServices>false</publicServices>
+  <status>INACTIVE</status>
+  <lastRunResult>
+    <nbDocumentsRetrieved>10</nbDocumentsRetrieved>
+    <nbDocumentsIndexed>10</nbDocumentsIndexed>
+    <nbDocumentsInvalid>0</nbDocumentsInvalid>
+    <result>SUCCESS</result>
+    <url>http://localhost:8184/harvesters/admin/kalideos_mock/harvest/status</url>
+    <status>INACTIVE</status>
+    <startDate>2014-01-07 16:45:31.265 UTC</startDate>
+    <endDate>2014-01-07 16:45:38.237 UTC</endDate>
+    <loggerFileName>kalideos_mock_2014-01-07_16-45-31.log</loggerFileName>
+  </lastRunResult>
+</HarvesterModel>

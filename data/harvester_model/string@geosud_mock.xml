@@ -1,0 +1,28 @@
+<HarvesterModel>
+  <id>geosud_mock</id>
+  <catalogType>csw-iso19139-2-Geosud</catalogType>
+  <source>
+    <url>http://sitools.akka.eu:8184/sitools/datastorage/user/storage/geosud-new.xml</url>
+  </source>
+  <description>Bouchon de moissonnage d&apos;un catalogue CSW issue des données du catalogue GeoSud</description>
+  <harvesterClassName>fr.cnes.sitools.metacatalogue.csw.CswGetHarvester</harvesterClassName>
+  <indexerConf>
+    <url>http://localhost:8983/solr/geosud_mock</url>
+  </indexerConf>
+  <lastHarvest>2014-01-08 09:26:22.795 UTC</lastHarvest>
+  <attributes/>
+  <automaticMerge>false</automaticMerge>
+  <publicServices>false</publicServices>
+  <status>INACTIVE</status>
+  <lastRunResult>
+    <nbDocumentsRetrieved>1</nbDocumentsRetrieved>
+    <nbDocumentsIndexed>1</nbDocumentsIndexed>
+    <nbDocumentsInvalid>0</nbDocumentsInvalid>
+    <result>SUCCESS</result>
+    <url>http://localhost:8184/harvesters/admin/geosud_mock/harvest/status</url>
+    <status>INACTIVE</status>
+    <startDate>2014-01-08 09:26:21.219 UTC</startDate>
+    <endDate>2014-01-08 09:26:22.799 UTC</endDate>
+    <loggerFileName>geosud_mock_2014-01-08_09-26-21.log</loggerFileName>
+  </lastRunResult>
+</HarvesterModel>
