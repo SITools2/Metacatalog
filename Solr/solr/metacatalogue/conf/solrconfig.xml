@@ -817,7 +817,7 @@
      <lst name="defaults">
        <str name="echoParams">explicit</str>
        <int name="rows">10</int>
-       <str name="df">text</str>
+       <str name="df">searchTerms</str>
      </lst>
     <!-- In addition to defaults, "appends" params can be specified
          to identify values which should be appended to the list of
@@ -879,7 +879,7 @@
        <str name="echoParams">explicit</str>
        <str name="wt">json</str>
        <str name="indent">true</str>
-       <str name="df">text</str>
+       <str name="df">searchTerms</str>
      </lst>
   </requestHandler>
 
@@ -921,7 +921,7 @@
           text^0.5 features^1.0 name^1.2 sku^1.5 id^10.0 manu^1.1 cat^1.4
           title^10.0 description^5.0 keywords^5.0 author^2.0 resourcename^1.0
        </str>
-       <str name="df">text</str>
+       <str name="df">searchTerms</str>
        <str name="mm">100%</str>
        <str name="q.alt">*:*</str>
        <str name="rows">10</str>
@@ -1347,7 +1347,7 @@
     -->
   <requestHandler name="/spell" class="solr.SearchHandler" startup="lazy">
     <lst name="defaults">
-      <str name="df">text</str>
+      <str name="df">searchTerms</str>
       <!-- Solr will use suggestions from both the 'default' spellchecker
            and from the 'wordbreak' spellchecker and combine them.
            collations (re-written queries) can include a combination of
@@ -1384,7 +1384,7 @@
     -->
   <requestHandler name="/tvrh" class="solr.SearchHandler" startup="lazy">
     <lst name="defaults">
-      <str name="df">text</str>
+      <str name="df">searchTerms</str>
       <bool name="tv">true</bool>
     </lst>
     <arr name="last-components">
@@ -1441,7 +1441,7 @@
   <requestHandler name="/elevate" class="solr.SearchHandler" startup="lazy">
     <lst name="defaults">
       <str name="echoParams">explicit</str>
-      <str name="df">text</str>
+      <str name="df">searchTerms</str>
     </lst>
     <arr name="last-components">
       <str>elevator</str>
