@@ -19,6 +19,7 @@
 package fr.cnes.sitools.metacatalogue.representation;
 
 import java.io.IOException;
+import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Collection;
 import java.util.Date;
@@ -34,13 +35,13 @@ import org.apache.solr.client.solrj.response.RangeFacet;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.util.NamedList;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.codehaus.jackson.JsonFactory;
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.JsonGenerator;
 import org.restlet.data.MediaType;
 import org.restlet.data.Status;
 import org.restlet.engine.util.DateUtils;
-import org.restlet.ext.json.JsonRepresentation;
+import org.restlet.representation.WriterRepresentation;
 import org.restlet.resource.ResourceException;
 
 import fr.cnes.sitools.metacatalogue.utils.MetacatalogField;
@@ -51,7 +52,7 @@ import fr.cnes.sitools.thesaurus.ThesaurusSearcher;
  * 
  * @author m.gond
  */
-public class GeoJsonMDEORepresentation extends JsonRepresentation {
+public class GeoJsonMDEORepresentation extends WriterRepresentation {
   /** The name of the geometry column in the solr index */
   private static final String GEOMETRY_COLUMN = MetacatalogField._GEOMETRY_GEOJSON.getField();
   /** The name of the geometry column in the solr index */
@@ -106,118 +107,97 @@ public class GeoJsonMDEORepresentation extends JsonRepresentation {
 
   @Override
   public void write(Writer writer) throws IOException {
+
+    JsonFactory jfactory = new JsonFactory();
+    JsonGenerator jGenerator = null;
+
     try {
-      writer.write("{");
-      writer.write("\"type\":\"FeatureCollection\",");
-      // start features
-      writer.write("\"totalResults\":" + listDocuments.getNumFound() + ",");
-      writer.write("\"facet_counts\":");
-      writer.write("{");
-      boolean commaFacet = false;
+      jGenerator = jfactory.createJsonGenerator(writer);
+
+      jGenerator.writeStartObject();
+      jGenerator.writeStringField("type", "FeatureCollection");
+      jGenerator.writeNumberField("totalResults", listDocuments.getNumFound());
+      // Facets
+      jGenerator.writeObjectFieldStart("facet_counts");
       if (this.facets != null && !this.facets.isEmpty()) {
-        commaFacet = true;
-        writer.write("\"facet_fields\":" + getFacetFields());
+        writeFacetFields(jGenerator);
       }
       if (this.pivotFacets != null && this.pivotFacets.size() > 0) {
-        if (commaFacet) {
-          writer.write(",");
-        }
-        commaFacet = true;
-        writer.write("\"facet_pivot\":" + getFacetPivots());
+        writeFacetPivots(jGenerator);
       }
       if (this.rangesFacets != null && !this.rangesFacets.isEmpty()) {
-        if (commaFacet) {
-          writer.write(",");
-        }
-        writer.write("\"facet_ranges\":" + getFacetRanges());
+        writeFacetRanges(jGenerator);
       }
-      writer.write("}");
-      writer.write(",");
-      writer.write("\"features\":[");
+      jGenerator.writeEndObject();
+      // End Facets
+      // Features
+      jGenerator.writeArrayFieldStart("features");
       try {
-        boolean first = true;
         for (SolrDocument solrDocument : listDocuments) {
 
           // creates a geometry and a properties string
-          String geometry = new String();
           String uuid = (String) solrDocument.getFieldValue(UUID_COLUMN);
 
           boolean publicServices = false;
 
           Collection<String> fieldNames = solrDocument.getFieldNames();
-          JSONObject propertiesObject = new JSONObject();
 
-          publicServices = getPublicServices(solrDocument);
+          Object geometry = solrDocument.get(GEOMETRY_COLUMN);
 
-          for (String fieldName : fieldNames) {
-            Object fieldValue = solrDocument.get(fieldName);
-            if (fieldName.equals(GEOMETRY_COLUMN)) {
-              geometry += fieldValue;
-            }
-            else {
-              if (fieldValue != null && !"".equals(fieldValue)) {
+          if (geometry != null) {
+            // feature
+            jGenerator.writeStartObject();
+            jGenerator.writeStringField("type", "Feature");
+            // geometry
+            jGenerator.writeObjectFieldStart("geometry");
+            jGenerator.writeRaw("\"geometry\":" + geometry.toString());
+            jGenerator.writeEndObject();
+            // end geometry
+            // properties
+            jGenerator.writeObjectFieldStart("properties");
+            publicServices = getPublicServices(solrDocument);
 
-                if (fieldValue instanceof Date) {
-                  fieldValue = DateUtils.format((Date) fieldValue, FORMAT_ISO_8601_WITHOUT_TIME_ZONE);
-                }
+            for (String fieldName : fieldNames) {
+              Object fieldValue = solrDocument.get(fieldName);
+              if (!fieldName.equals(GEOMETRY_COLUMN)) {
+                if (fieldValue != null && !"".equals(fieldValue)) {
 
-                MetacatalogField metafield = MetacatalogField.getField(fieldName);
-                if (metafield != null) {
-                  switch (metafield) {
-                    case WMS:
-                    case ARCHIVE:
-                    case MIME_TYPE:
-                      if (publicServices || (!publicServices && authenticatedUser)) {
-                        propertiesObject.put(fieldName, fieldValue);
-                      }
-                      break;
-                    default:
-                      if (!metafield.isMetacatalogIntern()) {
-                        propertiesObject.put(fieldName, fieldValue);
-                      }
-                      break;
-
+                  if (fieldValue instanceof Date) {
+                    fieldValue = DateUtils.format((Date) fieldValue, FORMAT_ISO_8601_WITHOUT_TIME_ZONE);
                   }
-                }
-                else if (fieldName.startsWith("properties.")) {
-                  String name = fieldName.substring("properties.".length());
-                  propertiesObject.put(name, fieldValue);
+
+                  MetacatalogField metafield = MetacatalogField.getField(fieldName);
+                  if (metafield != null) {
+                    switch (metafield) {
+                      case WMS:
+                      case ARCHIVE:
+                      case MIME_TYPE:
+                        if (publicServices || (!publicServices && authenticatedUser)) {
+                          jGenerator.writeObjectField(fieldName, fieldValue);
+                        }
+                        break;
+                      default:
+                        if (!metafield.isMetacatalogIntern()) {
+                          jGenerator.writeObjectField(fieldName, fieldValue);
+                        }
+                        break;
+
+                    }
+                  }
+                  else if (fieldName.startsWith("properties.")) {
+                    String name = fieldName.substring("properties.".length());
+                    jGenerator.writeObjectField(name, fieldValue);
+                  }
                 }
               }
             }
-          }
-          if (!geometry.isEmpty()) {
-            if (!first) {
-              writer.write(",");
-            }
-            else {
-              first = false;
-            }
-
-            // start feature
-            writer.write("{");
-            writer.write("\"type\":\"Feature\",");
-            // start geometry
-            writer.write("\"geometry\":");
-            writer.write(geometry);
-            // end geometry
-            writer.write(",");
-            // start properties
-            // writer.write("\"properties\":{");
-            // writer.write(properties);
-            // // end properties
-            // writer.write("}");
-
-            writer.write("\"properties\":");
-            writer.write(propertiesObject.toString());
-
+            jGenerator.writeEndObject();
+            // end properties
+            jGenerator.writeEndObject();
             // end feature
-            writer.write("}");
           }
-
         }
-        // end features
-        writer.write("]");
+
       }
       // catch (SitoolsException e) {
       // writer.write("],");
@@ -228,13 +208,15 @@ public class GeoJsonMDEORepresentation extends JsonRepresentation {
       //
       // }
       finally {
-        writer.write("}");
-        if (writer != null) {
-          writer.flush();
-        }
+        jGenerator.writeEndArray();
+        // end features
+        jGenerator.writeEndObject();
+        jGenerator.flush();
+        // end global object
+        writer.flush();
       }
     }
-    catch (JSONException e) {
+    catch (Exception e) {
       throw new ResourceException(Status.SERVER_ERROR_INTERNAL, e);
     }
 
@@ -255,83 +237,101 @@ public class GeoJsonMDEORepresentation extends JsonRepresentation {
     return false;
   }
 
-  private String getFacetPivots() throws JSONException {
+  private void writeFacetPivots(JsonGenerator jGenerator) throws JsonGenerationException, IOException {
 
-    JSONObject pivotFacetsJSON = new JSONObject();
+    jGenerator.writeObjectFieldStart("facet_pivot");
 
     for (Entry<String, List<PivotField>> field : this.pivotFacets) {
-      pivotFacetsJSON.put(field.getKey(), getFacetPivots(field.getValue()));
+      jGenerator.writeFieldName(field.getKey());
+      writeFacetPivots(jGenerator, field.getValue());
     }
-    return pivotFacetsJSON.toString();
+    jGenerator.writeEndObject();
   }
 
-  private JSONArray getFacetPivots(List<PivotField> pivotFields) throws JSONException {
+  private void writeFacetPivots(JsonGenerator jGenerator, List<PivotField> pivotFields) throws JsonGenerationException,
+    IOException {
     if (pivotFields == null) {
-      return null;
+      return;
     }
-    JSONArray array = new JSONArray();
+    jGenerator.writeStartArray();
     for (PivotField field : pivotFields) {
-      JSONObject out = new JSONObject();
-      out.put("field", field.getField());
-      out.put("value", getValue(field.getField(), field.getValue().toString()));
-      out.put("count", field.getCount());
+      jGenerator.writeStartObject();
+      jGenerator.writeStringField("field", field.getField());
+      jGenerator.writeStringField("value", getValue(field.getField(), field.getValue().toString()));
+      jGenerator.writeNumberField("count", field.getCount());
       if (field.getPivot() != null) {
-        out.put("pivot", getFacetPivots(field.getPivot()));
+        jGenerator.writeFieldName("pivot");
+        writeFacetPivots(jGenerator, field.getPivot());
       }
-      array.put(out);
+      jGenerator.writeEndObject();
     }
-    return array;
+    jGenerator.writeEndArray();
   }
 
-  private String getFacetFields() throws JSONException {
-    JSONObject facetsJSON = new JSONObject();
+  private void writeFacetFields(JsonGenerator jGenerator) throws JsonGenerationException, IOException {
+
+    jGenerator.writeObjectFieldStart("facet_fields");
     if (this.facets != null) {
       for (FacetField field : this.facets) {
-        JSONArray array = new JSONArray();
+        jGenerator.writeArrayFieldStart(field.getName());
         for (Count count : field.getValues()) {
-          array.put(getValue(field.getName(), count.getName()));
-          array.put(count.getCount());
+          jGenerator.writeString(getValue(field.getName(), count.getName()));
+          jGenerator.writeNumber(count.getCount());
         }
-        facetsJSON.put(field.getName(), array);
+        jGenerator.writeEndArray();
       }
     }
-
-    return facetsJSON.toString();
+    jGenerator.writeEndObject();
   }
 
-  private String getFacetRanges() throws JSONException {
-    JSONObject facetsJSON = new JSONObject();
+  private void writeFacetRanges(JsonGenerator jGenerator) throws JsonGenerationException, IOException {
+
+    jGenerator.writeObjectFieldStart("facet_ranges");
     if (this.rangesFacets != null) {
       for (RangeFacet facet : this.rangesFacets) {
-        JSONObject facetObject = new JSONObject();
-        JSONArray counts = new JSONArray();
+        jGenerator.writeObjectFieldStart(facet.getName());
+        jGenerator.writeArrayFieldStart("counts");
         if (facet instanceof RangeFacet.Date) {
           RangeFacet.Date facetDate = (RangeFacet.Date) facet;
           for (RangeFacet.Count count : facetDate.getCounts()) {
-            counts.put(count.getValue());
-            counts.put(count.getCount());
+            jGenerator.writeString(count.getValue());
+            jGenerator.writeNumber(count.getCount());
           }
+          jGenerator.writeEndArray();
+          jGenerator.writeStringField("start", formatDate(facetDate.getStart()));
+          jGenerator.writeStringField("end", formatDate(facetDate.getEnd()));
+          jGenerator.writeStringField("gap", facetDate.getGap());
+          writeNumber(jGenerator, "after", facetDate.getAfter());
+          writeNumber(jGenerator, "before", facetDate.getBefore());
+          writeNumber(jGenerator, "between", facetDate.getBetween());
         }
         if (facet instanceof RangeFacet.Numeric) {
-          RangeFacet.Numeric facetDate = (RangeFacet.Numeric) facet;
-          for (RangeFacet.Count count : facetDate.getCounts()) {
-            counts.put(count.getValue());
-            counts.put(count.getCount());
+          RangeFacet.Numeric facetNumeric = (RangeFacet.Numeric) facet;
+          for (RangeFacet.Count count : facetNumeric.getCounts()) {
+            jGenerator.writeString(count.getValue());
+            jGenerator.writeNumber(count.getCount());
           }
+          jGenerator.writeEndArray();
+          writeNumber(jGenerator, "start", facetNumeric.getStart());
+          writeNumber(jGenerator, "end", facetNumeric.getEnd());
+          writeNumber(jGenerator, "gap", facetNumeric.getGap());
+          writeNumber(jGenerator, "after", facetNumeric.getAfter());
+          writeNumber(jGenerator, "before", facetNumeric.getBefore());
+          writeNumber(jGenerator, "between", facetNumeric.getBetween());
         }
-        facetObject.put("counts", counts);
-        facetObject.put("start", facet.getStart());
-        facetObject.put("end", facet.getEnd());
-        facetObject.put("gap", facet.getGap());
-        facetObject.put("after", facet.getAfter());
-        facetObject.put("before", facet.getBefore());
-        facetObject.put("between", facet.getBetween());
 
-        facetsJSON.put(facet.getName(), facetObject);
+        jGenerator.writeEndObject();
       }
     }
+    jGenerator.writeEndObject();
+  }
 
-    return facetsJSON.toString();
+  private void writeNumber(JsonGenerator jGenerator, String fieldName, Number numberValue)
+    throws JsonGenerationException, IOException {
+    if (numberValue != null) {
+      jGenerator.writeFieldName(fieldName);
+      jGenerator.writeNumber(numberValue.toString());
+    }
   }
 
   private String getValue(String name, String value) {
@@ -350,5 +350,9 @@ public class GeoJsonMDEORepresentation extends JsonRepresentation {
       return concept;
     }
     return value;
+  }
+
+  private String formatDate(Date date) {
+    return DateUtils.format(date, FORMAT_ISO_8601_WITHOUT_TIME_ZONE);
   }
 }
