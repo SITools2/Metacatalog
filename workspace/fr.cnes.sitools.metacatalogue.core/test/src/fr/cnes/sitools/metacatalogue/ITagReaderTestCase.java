@@ -25,7 +25,6 @@ import static org.junit.Assert.assertTrue;
 import java.io.IOException;
 import java.util.List;
 
-import org.json.JSONException;
 import org.junit.Test;
 
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
@@ -39,7 +38,7 @@ public class ITagReaderTestCase extends AbstractHarvesterTestCase {
   private String polygon = "POLYGON ((0.63474993908497 43.060580878688, 1.7157488382218 43.060580878688, 1.7157488382218 43.759319204217, 0.63474993908497 43.759319204217, 0.63474993908497 43.060580878688))";
 
   @Test
-  public void testETag() throws ProcessException, JSONException, IOException {
+  public void testETag() throws ProcessException, IOException {
     HarvesterSettings settings = (HarvesterSettings) HarvesterSettings.getInstance();
 
     String itagUrl = "file://" + getTestResourcePath(settings, "itag", "itag.json");

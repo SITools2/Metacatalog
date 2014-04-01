@@ -20,11 +20,10 @@ package fr.cnes.sitools.metacatalogue.utils;
 
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.Map.Entry;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONTokener;
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.restlet.data.MediaType;
 import org.restlet.data.Method;
 import org.restlet.data.Reference;
@@ -100,25 +99,24 @@ public class ITagReader {
       if (clientResource.getStatus().isError()) {
         throw new ProcessException("Cannot read ETAG", clientResource.getStatus().getThrowable());
       }
+      // read the suggest JSON
+      ObjectMapper mapper = new ObjectMapper();
+      // (note: can also use more specific type, like ArrayNode or ObjectNode!)
+      JsonNode object = mapper.readValue(repr.getStream(), JsonNode.class);
 
-      JSONTokener token = new JSONTokener(repr.getReader());
-      JSONObject object = new JSONObject(token);
-      JSONArray features = object.getJSONArray("features");
-      if (features.length() == 1) {
-        JSONObject feature = features.getJSONObject(0);
-        JSONObject properties = feature.getJSONObject("properties");
-        JSONObject political = properties.getJSONObject("political");
-        if (political != null) {
-          JSONObject jsonContinents = political.getJSONObject("continents");
+      JsonNode features = object.get("features");
+      if (features.size() == 1) {
+        JsonNode feature = features.get(0);
+        JsonNode properties = feature.get("properties");
+        JsonNode political = properties.get("political");
+        if (political != null && political.size() > 0) {
+          JsonNode jsonContinents = political.get("continents");
           processContinent(jsonContinents);
         }
       }
       else {
         throw new ProcessException("Invalid JSON response from Etag");
       }
-    }
-    catch (JSONException e) {
-      return;
     }
     finally {
       if (repr != null) {
@@ -128,49 +126,37 @@ public class ITagReader {
 
   }
 
-  private void processContinent(JSONObject continents) {
-
-    Iterator keys = continents.keys();
-    while (keys.hasNext()) {
-      String continentName = keys.next().toString();
+  private void processContinent(JsonNode continents) {
+    Iterator<Entry<String, JsonNode>> continentsFields = continents.getFields();
+    while (continentsFields.hasNext()) {
+      Entry<String, JsonNode> continent = continentsFields.next();
+      String continentName = continent.getKey();
       Localization continentLoc = new Localization(continentName, Localization.Type.CONTINENT);
       itagLoc.getContinents().add(continentLoc);
 
+      processCountries(continent.getValue(), continentLoc);
+    }
+  }
+
+  private void processCountries(JsonNode countriesRoot, Localization continent) {
+
+    JsonNode countries = countriesRoot.get("countries");
+    for (JsonNode country : countries) {
       try {
-        JSONObject continentJsonObject = continents.getJSONObject(continentName);
-        processCountries(continentJsonObject, continentLoc);
+        Localization countriesLoc = new Localization(country.get("name").getTextValue(), Localization.Type.COUNTRY,
+            country.get("pcover").getDoubleValue());
+        continent.getChildren().add(countriesLoc);
+        processRegions(country.get("regions"), countriesLoc);
+        // processCities(country, countriesLoc);
       }
-      catch (JSONException e) {
+      catch (Exception e) {
         continue;
       }
     }
-  }
-
-  private void processCountries(JSONObject countriesRoot, Localization continent) {
-
-    try {
-      JSONArray countries = countriesRoot.getJSONArray("countries");
-      for (int i = 0; i < countries.length(); i++) {
-        try {
-          JSONObject country = countries.getJSONObject(i);
-          Localization countriesLoc = new Localization(country.getString("name"), Localization.Type.COUNTRY,
-              country.getDouble("pcover"));
-          continent.getChildren().add(countriesLoc);
-          processRegions(country.getJSONObject("regions"), countriesLoc);
-          // processCities(country, countriesLoc);
-        }
-        catch (Exception e) {
-          continue;
-        }
-      }
-    }
-    catch (JSONException e) {
-      return;
-    }
 
   }
 
-  // private void processCities(JSONObject citiesRoot, Localization countriesLoc) {
+  // private void processCities(JsonNode citiesRoot, Localization countriesLoc) {
   // try {
   // JSONArray cities = citiesRoot.getJSONArray("cities");
   // }
@@ -179,41 +165,30 @@ public class ITagReader {
   //
   // }
 
-  private void processRegions(JSONObject jsonObject, Localization countriesLoc) {
-    Iterator keys = jsonObject.keys();
-    while (keys.hasNext()) {
-      String regionName = keys.next().toString();
-      Localization regionLoc = new Localization(regionName, Localization.Type.REGION);
+  private void processRegions(JsonNode countries, Localization countriesLoc) {
+    Iterator<Entry<String, JsonNode>> regionsFields = countries.getFields();
+    while (regionsFields.hasNext()) {
+      Entry<String, JsonNode> region = regionsFields.next();
+      Localization regionLoc = new Localization(region.getKey(), Localization.Type.REGION);
       countriesLoc.getChildren().add(regionLoc);
 
-      try {
-        JSONObject regionJSONObject = jsonObject.getJSONObject(regionName);
-        processDepartments(regionJSONObject, regionLoc);
-      }
-      catch (JSONException e) {
-        continue;
-      }
+      processDepartments(region.getValue(), regionLoc);
     }
   }
 
-  private void processDepartments(JSONObject departmentsRoot, Localization regionLoc) {
-    try {
-      JSONArray departments = departmentsRoot.getJSONArray("departements");
-      for (int i = 0; i < departments.length(); i++) {
-        try {
-          JSONObject department = departments.getJSONObject(i);
-          Localization countriesLoc = new Localization(department.getString("name"), Localization.Type.DEPARTMENT,
-              department.getDouble("pcover"));
-          regionLoc.getChildren().add(countriesLoc);
-        }
-        catch (Exception e) {
-          continue;
-        }
-        // processCities(department.getJSONObject("cities"), countriesLoc);
+  private void processDepartments(JsonNode departmentsRoot, Localization regionLoc) {
+    JsonNode departments = departmentsRoot.get("departements");
+    for (JsonNode department : departments) {
+
+      try {
+        Localization countriesLoc = new Localization(department.get("name").getTextValue(),
+            Localization.Type.DEPARTMENT, department.get("pcover").getDoubleValue());
+        regionLoc.getChildren().add(countriesLoc);
       }
-    }
-    catch (JSONException e) {
-      return;
+      catch (Exception e) {
+        continue;
+      }
+      // processCities(department.getJsonNode("cities"), countriesLoc);
     }
   }
 

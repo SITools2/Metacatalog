@@ -36,7 +36,6 @@ import org.restlet.data.MediaType;
 import org.restlet.data.Protocol;
 import org.restlet.engine.Engine;
 import org.restlet.ext.jackson.JacksonRepresentation;
-import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.ext.xstream.XstreamRepresentation;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
@@ -422,7 +421,7 @@ public abstract class AbstractHarvesterModelTestCase extends AbstractHarvesterTe
    */
   public static Representation getRepresentationDTO(HarvesterModel item, MediaType media) {
     if (media.equals(MediaType.APPLICATION_JSON)) {
-      return new JsonRepresentation(item);
+      return new JacksonRepresentation<HarvesterModel>(item);
     }
     else if (media.equals(MediaType.APPLICATION_XML)) {
       XStream xstream = XStreamFactory.getInstance().getXStream(media, false);

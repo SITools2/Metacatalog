@@ -19,7 +19,6 @@
 package fr.cnes.sitools.metacatalogue.representation;
 
 import java.io.IOException;
-import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Collection;
 import java.util.Date;
