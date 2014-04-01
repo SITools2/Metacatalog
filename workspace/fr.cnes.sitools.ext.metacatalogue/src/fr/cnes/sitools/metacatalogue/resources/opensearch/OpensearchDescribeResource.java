@@ -1,4 +1,4 @@
- /*******************************************************************************
+/*******************************************************************************
  * Copyright 2010-2014 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
  *
  * This file is part of SITools2.
@@ -67,9 +67,6 @@ public class OpensearchDescribeResource extends AbstractOpenSearchServiceResourc
   @Override
   public Representation get() {
     Describe describe = createDescribe();
-
-    // JSONObject object = new JSONObject(describe);
-    // JsonRepresentation representation = new JsonRepresentation(object);
     Representation representation = getRepresentation(describe, MediaType.APPLICATION_JSON);
     return representation;
   }

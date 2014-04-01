@@ -27,16 +27,15 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import org.apache.solr.client.solrj.SolrServer;
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.concordion.integration.junit4.ConcordionRunner;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.restlet.Component;
 import org.restlet.Context;
 import org.restlet.data.Protocol;
-import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
 
@@ -153,10 +152,8 @@ public class MetadataAccessFixture extends AbstractSitoolsTestCase {
    * 
    * @throws IOException
    *           if an error occur while reading the response
-   * @throws JSONException
-   *           if an error occur while parsing the JSON
    */
-  public boolean queryMetacatalogue(String query) throws IOException, JSONException {
+  public boolean queryMetacatalogue(String query) throws IOException {
     String url = getServiceUrl() + "?" + query;
     return (sendRequestToSearchService(url) > 0);
   }
@@ -177,18 +174,21 @@ public class MetadataAccessFixture extends AbstractSitoolsTestCase {
    * @throws JSONException
    *           if an error occur while parsing the JSON
    */
-  private int sendRequestToSearchService(String url) throws IOException, JSONException {
+  private int sendRequestToSearchService(String url) throws IOException {
     ClientResource cr = new ClientResource(url);
     Representation result = cr.get(getMediaTest());
     assertNotNull(result);
     assertTrue(cr.getStatus().isSuccess());
 
     try {
-      JsonRepresentation jsonRepr = new JsonRepresentation(result);
-      JSONObject json = jsonRepr.getJsonObject();
-      assertEquals("FeatureCollection", json.get("type"));
-      assertNotNull(json.getJSONArray("features"));
-      return json.getJSONArray("features").length();
+      // read the suggest JSON
+      ObjectMapper mapper = new ObjectMapper();
+      // (note: can also use more specific type, like ArrayNode or ObjectNode!)
+      JsonNode rootNode = mapper.readValue(result.getStream(), JsonNode.class); // src can be a File, URL,
+
+      assertEquals("FeatureCollection", rootNode.get("type").getTextValue());
+      assertNotNull(rootNode.get("features"));
+      return rootNode.get("features").size();
     }
     finally {
       RIAPUtils.exhaust(result);

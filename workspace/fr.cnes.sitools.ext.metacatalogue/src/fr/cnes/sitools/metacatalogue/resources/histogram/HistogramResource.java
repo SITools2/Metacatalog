@@ -1,4 +1,4 @@
- /*******************************************************************************
+/*******************************************************************************
  * Copyright 2010-2014 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
  *
  * This file is part of SITools2.
@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 
-import org.json.JSONException;
 import org.restlet.data.Status;
 import org.restlet.engine.Engine;
 import org.restlet.ext.wadl.MethodInfo;
@@ -64,10 +63,6 @@ public class HistogramResource extends AbstractOpenSearchServiceResource {
       Engine.getLogger(HistogramResource.class.getName()).log(Level.SEVERE, null, ex);
       throw new ResourceException(Status.SERVER_ERROR_INTERNAL, ex.getMessage());
     }
-    catch (JSONException ex) {
-      Engine.getLogger(HistogramResource.class.getName()).log(Level.SEVERE, null, ex);
-      throw new ResourceException(Status.SERVER_ERROR_INTERNAL, ex.getMessage());
-    }
   }
 
   @Get
@@ -88,7 +83,8 @@ public class HistogramResource extends AbstractOpenSearchServiceResource {
     info.setIdentifier("histo");
     addStandardGetRequestInfo(info);
     List<ParameterInfo> parametersInfo = new ArrayList<ParameterInfo>();
-    parametersInfo.add(new ParameterInfo("numbins", true, "Integer", ParameterStyle.TEMPLATE, "Number of bins in the distribution"));
+    parametersInfo.add(new ParameterInfo("numbins", true, "Integer", ParameterStyle.TEMPLATE,
+        "Number of bins in the distribution"));
     info.getRequest().setParameters(parametersInfo);
     addStandardResponseInfo(info);
     addStandardInternalServerErrorInfo(info);

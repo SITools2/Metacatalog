@@ -4,8 +4,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.json.JSONObject;
-import org.json.JSONTokener;
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.restlet.Client;
 import org.restlet.Request;
 import org.restlet.Response;
@@ -106,10 +106,12 @@ public class OAuthVerifier implements Verifier {
       req.setChallengeResponse(challengeResponse);
       Response resp = client.handle(req);
       if (resp.getStatus().isSuccess()) {
-
-        JSONObject object = new JSONObject(new JSONTokener(resp.getEntity().getReader()));
-
-        if (object.has("success") && object.get("success") != null) {
+        // read the suggest JSON 
+        ObjectMapper mapper = new ObjectMapper();
+        // (note: can also use more specific type, like ArrayNode or ObjectNode!)
+        JsonNode rootNode = mapper.readValue(resp.getEntity().getStream(), JsonNode.class); // src can be a File, URL,
+        
+        if (rootNode.has("success") && rootNode.get("success") != null) {
           result = Verifier.RESULT_VALID;
         }
         else {

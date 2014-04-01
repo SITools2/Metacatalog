@@ -1,4 +1,4 @@
- /*******************************************************************************
+/*******************************************************************************
  * Copyright 2010-2014 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
  *
  * This file is part of SITools2.
@@ -25,11 +25,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.restlet.engine.Engine;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
+
+import fr.cnes.sitools.metacatalogue.utils.MetacatalogField;
 
 /**
  * Creates a distribution of records by date with a number of bins.
@@ -37,7 +39,8 @@ import org.restlet.resource.ClientResource;
  * @author Jean-Christophe Malapert <jean-christophe.malapert@cnes.fr>
  */
 public final class Histogram {
-
+  /** The name of the date field to use */
+  private static final String DATE_FIELD = MetacatalogField.START_DATE.getField();
   /**
    * number of bins in the histogram.
    */
@@ -64,9 +67,8 @@ public final class Histogram {
    *          the solr url
    * @throws ParseException
    * @throws IOException
-   * @throws JSONException
    */
-  public Histogram(final int binNumber, final String solr) throws ParseException, IOException, JSONException {
+  public Histogram(final int binNumber, final String solr) throws ParseException, IOException {
     this.binNumber = binNumber;
     this.solr = solr;
     parseStatsDate();
@@ -127,8 +129,8 @@ public final class Histogram {
    */
   public Representation getHistogram() throws ParseException {
     long daysByBin = daysByBin();
-    String query = this.solr + "/select?q=*:*&rows=0&facet=true&facet.date=characterisationAxis.temporalAxis.min&facet.date.start=" + this.startDate
-        + "&facet.date.end=" + this.stopDate + "&facet.date.gap=%2B" + daysByBin + "DAY&wt=json";
+    String query = this.solr + "/select?q=*:*&rows=0&facet=true&facet.date=" + DATE_FIELD + "&facet.date.start="
+        + this.startDate + "&facet.date.end=" + this.stopDate + "&facet.date.gap=%2B" + daysByBin + "DAY&wt=json";
     ClientResource client = new ClientResource(query);
     return client.get();
   }
@@ -137,19 +139,23 @@ public final class Histogram {
    * Parses the stats module from Solr.
    * 
    * @throws IOException
-   * @throws JSONException
    * @throws ParseException
    */
-  private void parseStatsDate() throws IOException, JSONException, ParseException {
-    ClientResource client = new ClientResource(this.solr + "/select?q=*:*&rows=0&stats=true&stats.field=characterisationAxis.temporalAxis.min&wt=json");
+  private void parseStatsDate() throws IOException, ParseException {
+    ClientResource client = new ClientResource(this.solr + "/select?q=*:*&rows=0&stats=true&stats.field=" + DATE_FIELD
+        + "&wt=json");
     Representation rep = client.get();
-    String response = rep.getText();
-    JSONObject json = new JSONObject(response);
-    JSONObject stats = json.getJSONObject("stats");
-    JSONObject statsFields = stats.getJSONObject("stats_fields");
-    JSONObject date = statsFields.getJSONObject("characterisationAxis.temporalAxis.min");
-    this.startDate = date.getString("min");
-    this.stopDate = date.getString("max");
+
+    // read the suggest JSON
+    ObjectMapper mapper = new ObjectMapper();
+    // (note: can also use more specific type, like ArrayNode or ObjectNode!)
+    JsonNode rootNode = mapper.readValue(rep.getStream(), JsonNode.class); // src can be a File, URL,
+
+    JsonNode stats = rootNode.get("stats");
+    JsonNode statsFields = stats.get("stats_fields");
+    JsonNode date = statsFields.get(DATE_FIELD);
+    this.startDate = date.get("min").getTextValue();
+    this.stopDate = date.get("max").getTextValue();
   }
 
   /**
@@ -157,13 +163,10 @@ public final class Histogram {
    */
   public static void main(String[] args) {
     try {
-      Histogram histo = new Histogram(10, "http://localhost:8983/solr/metacatalog");
+      Histogram histo = new Histogram(10, "http://localhost:8983/solr/metacatalogue");
       System.out.println(histo.getHistogram().getText());
     }
     catch (IOException ex) {
-      Engine.getLogger(Histogram.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    catch (JSONException ex) {
       Engine.getLogger(Histogram.class.getName()).log(Level.SEVERE, null, ex);
     }
     catch (ParseException ex) {

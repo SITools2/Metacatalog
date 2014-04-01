@@ -27,15 +27,14 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import org.apache.solr.client.solrj.SolrServer;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.restlet.Component;
 import org.restlet.Context;
 import org.restlet.data.Protocol;
-import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
 
@@ -119,8 +118,6 @@ public class JeoSearchResourceTestCase extends AbstractSitoolsTestCase {
           + "/extensions/metacatalogue/workspace/fr.cnes.sitools.ext.metacatalogue/test/data/solr", "solr.xml",
           "kalideos_mock");
 
-      
-      
       ctx.getAttributes().put(ContextAttributes.APP_ATTACH_REF, getAttachUrl());
       ctx.getAttributes().put("INDEXER_SERVER", server);
 
@@ -144,7 +141,7 @@ public class JeoSearchResourceTestCase extends AbstractSitoolsTestCase {
     super.tearDown();
     server.shutdown();
     this.component.stop();
-    this.component = null;    
+    this.component = null;
   }
 
   /**
@@ -153,11 +150,9 @@ public class JeoSearchResourceTestCase extends AbstractSitoolsTestCase {
    * 
    * @throws IOException
    *           if an error occur while reading the response
-   * @throws JSONException
-   *           if an error occur while parsing the JSON
    */
   @Test
-  public void testEmptyResult() throws IOException, JSONException {
+  public void testEmptyResult() throws IOException {
     String url = getServiceUrl() + "?limit=0&pw=0&start=0";
     sendRequestToSearchService(url, 0);
   }
@@ -167,11 +162,9 @@ public class JeoSearchResourceTestCase extends AbstractSitoolsTestCase {
    * 
    * @throws IOException
    *           if an error occur while reading the response
-   * @throws JSONException
-   *           if an error occur while parsing the JSON
    */
   @Test
-  public void testWithParamStandard() throws IOException, JSONException {
+  public void testWithParamStandard() throws IOException {
     String url = getServiceUrl() + "?limit=1&pw=0&start=0";
     sendRequestToSearchService(url, 1);
 
@@ -183,12 +176,10 @@ public class JeoSearchResourceTestCase extends AbstractSitoolsTestCase {
    * 
    * @throws IOException
    *           if an error occur while reading the response
-   * @throws JSONException
-   *           if an error occur while parsing the JSON
    * 
    */
   @Test
-  public void testWithBoxParam() throws IOException, JSONException {
+  public void testWithBoxParam() throws IOException {
     String boxCoord = "-57.96936,53.77307,-29.84436,63.50815";
 
     String url = getServiceUrl() + "?bbox=" + boxCoord;
@@ -201,12 +192,10 @@ public class JeoSearchResourceTestCase extends AbstractSitoolsTestCase {
    * 
    * @throws IOException
    *           if an error occur while reading the response
-   * @throws JSONException
-   *           if an error occur while parsing the JSON
    * 
    */
   // @Test
-  public void testWithLatLongRadiusParam() throws IOException, JSONException {
+  public void testWithLatLongRadiusParam() throws IOException {
     // distance is 0.8 in order to find only one record
     String distance = "0.8";
     String lat = "1";
@@ -221,12 +210,10 @@ public class JeoSearchResourceTestCase extends AbstractSitoolsTestCase {
    * 
    * @throws IOException
    *           if an error occur while reading the response
-   * @throws JSONException
-   *           if an error occur while parsing the JSON
    * 
    */
   @Test
-  public void testWithDateParam() throws IOException, JSONException {
+  public void testWithDateParam() throws IOException {
     String dtstart = "2007-12-06T00:00:00";
     String dtend = "2007-12-06T00:00:00";
     String url = getServiceUrl() + "?startDate=" + dtstart + "&completionDate=" + dtend;
@@ -239,12 +226,10 @@ public class JeoSearchResourceTestCase extends AbstractSitoolsTestCase {
    * 
    * @throws IOException
    *           if an error occur while reading the response
-   * @throws JSONException
-   *           if an error occur while parsing the JSON
    * 
    */
   @Test
-  public void testWithSearchTermsParam() throws IOException, JSONException {
+  public void testWithSearchTermsParam() throws IOException {
     String searchTerms = "\"Byrd Glacier\"";
     String url = getServiceUrl() + "?q=" + searchTerms;
     sendRequestToSearchService(url, 2);
@@ -255,12 +240,10 @@ public class JeoSearchResourceTestCase extends AbstractSitoolsTestCase {
    * 
    * @throws IOException
    *           if an error occur while reading the response
-   * @throws JSONException
-   *           if an error occur while parsing the JSON
    * 
    */
   @Test
-  public void testWithSearchTermsParamFuzySearch() throws IOException, JSONException {
+  public void testWithSearchTermsParamFuzySearch() throws IOException {
     String searchTerms = "Byrd*";
     String url = getServiceUrl() + "?q=" + searchTerms;
     sendRequestToSearchService(url, 3);
@@ -271,12 +254,10 @@ public class JeoSearchResourceTestCase extends AbstractSitoolsTestCase {
    * 
    * @throws IOException
    *           if an error occur while reading the response
-   * @throws JSONException
-   *           if an error occur while parsing the JSON
    * 
    */
   @Test
-  public void testWithSpecificParamDate() throws IOException, JSONException {
+  public void testWithSpecificParamDate() throws IOException {
     String dateParam = "2010-08-01T00:00:00";
     String url = getServiceUrl() + "?startDate=" + dateParam;
     sendRequestToSearchService(url, 4);
@@ -287,12 +268,10 @@ public class JeoSearchResourceTestCase extends AbstractSitoolsTestCase {
    * 
    * @throws IOException
    *           if an error occur while reading the response
-   * @throws JSONException
-   *           if an error occur while parsing the JSON
    * 
    */
   @Test
-  public void testWithSpecificParamDateInterval() throws IOException, JSONException {
+  public void testWithSpecificParamDateInterval() throws IOException {
     String dateParam = "2009-02-01T00:00:00/2011-03-01T00:00:00";
     String url = getServiceUrl() + "?startDate=" + dateParam;
     sendRequestToSearchService(url, 11);
@@ -304,12 +283,10 @@ public class JeoSearchResourceTestCase extends AbstractSitoolsTestCase {
    * 
    * @throws IOException
    *           if an error occur while reading the response
-   * @throws JSONException
-   *           if an error occur while parsing the JSON
    * 
    */
   // @Test
-  public void testWithSpecificParamEnumeration() throws IOException, JSONException {
+  public void testWithSpecificParamEnumeration() throws IOException {
     String enumParam = "bon|Moyen";
     String url = getServiceUrl() + "?building_state=" + enumParam;
     sendRequestToSearchService(url, 2);
@@ -320,12 +297,10 @@ public class JeoSearchResourceTestCase extends AbstractSitoolsTestCase {
    * 
    * @throws IOException
    *           if an error occur while reading the response
-   * @throws JSONException
-   *           if an error occur while parsing the JSON
    * 
    */
   // @Test
-  public void testWithSpecificParamText() throws IOException, JSONException {
+  public void testWithSpecificParamText() throws IOException {
     String textParam = "texte de la note 465456";
     String url = getServiceUrl() + "?notes=" + textParam;
     sendRequestToSearchService(url, 1);
@@ -336,12 +311,10 @@ public class JeoSearchResourceTestCase extends AbstractSitoolsTestCase {
    * 
    * @throws IOException
    *           if an error occur while reading the response
-   * @throws JSONException
-   *           if an error occur while parsing the JSON
    * 
    */
   // @Test
-  public void testWithSpecificParamNumber() throws IOException, JSONException {
+  public void testWithSpecificParamNumber() throws IOException {
     String numberParam = "172.5";
     String url = getServiceUrl() + "?ele=" + numberParam;
     sendRequestToSearchService(url, 1);
@@ -360,21 +333,23 @@ public class JeoSearchResourceTestCase extends AbstractSitoolsTestCase {
    *          the number of record expected
    * @throws IOException
    *           if an error occur while reading the response
-   * @throws JSONException
-   *           if an error occur while parsing the JSON
    */
-  private void sendRequestToSearchService(String url, int expectedRecord) throws IOException, JSONException {
+  private void sendRequestToSearchService(String url, int expectedRecord) throws IOException {
     ClientResource cr = new ClientResource(url);
     Representation result = cr.get(getMediaTest());
     assertNotNull(result);
     assertTrue(cr.getStatus().isSuccess());
 
     try {
-      JsonRepresentation jsonRepr = new JsonRepresentation(result);
-      JSONObject json = jsonRepr.getJsonObject();
-      assertEquals("FeatureCollection", json.get("type"));
-      assertNotNull(json.getJSONArray("features"));
-      assertEquals(expectedRecord, json.getJSONArray("features").length());
+
+      // read the suggest JSON
+      ObjectMapper mapper = new ObjectMapper();
+      // (note: can also use more specific type, like ArrayNode or ObjectNode!)
+      JsonNode rootNode = mapper.readValue(result.getStream(), JsonNode.class); // src can be a File, URL,
+
+      assertEquals("FeatureCollection", rootNode.get("type").getTextValue());
+      assertNotNull(rootNode.get("features"));
+      assertEquals(expectedRecord, rootNode.get("features").size());
     }
     finally {
       RIAPUtils.exhaust(result);

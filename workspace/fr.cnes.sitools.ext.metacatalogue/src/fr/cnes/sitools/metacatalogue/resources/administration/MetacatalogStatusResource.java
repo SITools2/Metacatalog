@@ -1,4 +1,4 @@
- /*******************************************************************************
+/*******************************************************************************
  * Copyright 2010-2014 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
  *
  * This file is part of SITools2.
@@ -22,8 +22,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.restlet.data.MediaType;
 import org.restlet.data.Method;
 import org.restlet.data.Preference;
@@ -100,7 +100,7 @@ public class MetacatalogStatusResource extends SitoolsResource {
     ClientResource clientResource = clientResourceProxy.getClientResource();
     clientResource.setRetryDelay(500);
     clientResource.setRetryOnError(false);
-    
+
     ArrayList<Preference<MediaType>> objectMediaType = new ArrayList<Preference<MediaType>>();
     objectMediaType.add(new Preference<MediaType>(MediaType.APPLICATION_JSON));
     clientResource.getRequest().getClientInfo().setAcceptedMediaTypes(objectMediaType);
@@ -110,24 +110,25 @@ public class MetacatalogStatusResource extends SitoolsResource {
     if (!clientResource.getStatus().isError()) {
 
       try {
-        JSONObject jsonObject = new JSONObject(representation.getText());
 
-        boolean success = jsonObject.getBoolean("success");
+        // read the suggest JSON
+        ObjectMapper mapper = new ObjectMapper();
+        // (note: can also use more specific type, like ArrayNode or ObjectNode!)
+        JsonNode rootNode = mapper.readValue(representation.getStream(), JsonNode.class); // src can be a File, URL,
+
+        boolean success = rootNode.get("success").getBooleanValue();
         if (success) {
 
-          JSONObject metacatalogStatus = jsonObject.getJSONObject("metacatalogStatus");
-          boolean pendingOperation = metacatalogStatus.getBoolean("pendingOperation");
+          JsonNode metacatalogStatus = rootNode.get("metacatalogStatus");
+          boolean pendingOperation = metacatalogStatus.get("pendingOperation").getBooleanValue();
           appDTO.setPendingOperation(pendingOperation);
           if (pendingOperation) {
-            appDTO.setPendingOperationMessage(metacatalogStatus.getString("pendingOperationMessage"));
+            appDTO.setPendingOperationMessage(metacatalogStatus.get("pendingOperationMessage").getTextValue());
           }
         }
       }
       catch (IOException e) {
         getLogger().log(Level.WARNING, "Error reading the metacatalog status", e);
-      }
-      catch (JSONException e) {
-        getLogger().log(Level.WARNING, "Error parsing the metacatalog status JSON", e);
       }
     }
 
