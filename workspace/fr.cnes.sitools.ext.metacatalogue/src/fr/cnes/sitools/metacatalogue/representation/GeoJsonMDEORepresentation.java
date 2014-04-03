@@ -37,6 +37,7 @@ import org.apache.solr.common.util.NamedList;
 import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.JsonGenerator;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.restlet.data.MediaType;
 import org.restlet.data.Status;
 import org.restlet.engine.util.DateUtils;
@@ -112,7 +113,7 @@ public class GeoJsonMDEORepresentation extends WriterRepresentation {
 
     try {
       jGenerator = jfactory.createJsonGenerator(writer);
-
+      ObjectMapper mapper = new ObjectMapper();
       jGenerator.writeStartObject();
       jGenerator.writeStringField("type", "FeatureCollection");
       jGenerator.writeNumberField("totalResults", listDocuments.getNumFound());
@@ -148,9 +149,8 @@ public class GeoJsonMDEORepresentation extends WriterRepresentation {
             jGenerator.writeStartObject();
             jGenerator.writeStringField("type", "Feature");
             // geometry
-            jGenerator.writeObjectFieldStart("geometry");
-            jGenerator.writeRaw("\"geometry\":" + geometry.toString());
-            jGenerator.writeEndObject();
+            jGenerator.writeFieldName("geometry");
+            jGenerator.writeRawValue(geometry.toString());
             // end geometry
             // properties
             jGenerator.writeObjectFieldStart("properties");
@@ -172,12 +172,14 @@ public class GeoJsonMDEORepresentation extends WriterRepresentation {
                       case ARCHIVE:
                       case MIME_TYPE:
                         if (publicServices || (!publicServices && authenticatedUser)) {
-                          jGenerator.writeObjectField(fieldName, fieldValue);
+                          jGenerator.writeFieldName(fieldName);
+                          mapper.writeValue(jGenerator, fieldValue);
                         }
                         break;
                       default:
                         if (!metafield.isMetacatalogIntern()) {
-                          jGenerator.writeObjectField(fieldName, fieldValue);
+                          jGenerator.writeFieldName(fieldName);
+                          mapper.writeValue(jGenerator, fieldValue);
                         }
                         break;
 
@@ -185,7 +187,8 @@ public class GeoJsonMDEORepresentation extends WriterRepresentation {
                   }
                   else if (fieldName.startsWith("properties.")) {
                     String name = fieldName.substring("properties.".length());
-                    jGenerator.writeObjectField(name, fieldValue);
+                    jGenerator.writeFieldName(name);
+                    mapper.writeValue(jGenerator, fieldValue);
                   }
                 }
               }
@@ -198,14 +201,6 @@ public class GeoJsonMDEORepresentation extends WriterRepresentation {
         }
 
       }
-      // catch (SitoolsException e) {
-      // writer.write("],");
-      // writer.write("\"error\":{");
-      // writer.write("\"code\":");
-      // writer.write("\"message\":" + e.getLocalizedMessage());
-      // writer.write("}");
-      //
-      // }
       finally {
         jGenerator.writeEndArray();
         // end features
@@ -220,13 +215,6 @@ public class GeoJsonMDEORepresentation extends WriterRepresentation {
     }
 
   }
-
-  // private JSONObject parseJSON(String jsonString) throws JSONException {
-  // JSONTokener tokener = new JSONTokener(jsonString);
-  // JSONObject root = new JSONObject(tokener);
-  // return root;
-  //
-  // }
 
   private boolean getPublicServices(SolrDocument solrDocument) {
     Object obj = solrDocument.getFirstValue(MetacatalogField._PUBLIC_SERVICES.getField());
