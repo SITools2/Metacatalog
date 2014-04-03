@@ -21,12 +21,14 @@ package fr.cnes.sitools.metacatalogue.utils;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map.Entry;
+import java.util.logging.Level;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.restlet.data.MediaType;
 import org.restlet.data.Method;
 import org.restlet.data.Reference;
+import org.restlet.engine.Engine;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
 
@@ -35,20 +37,21 @@ import fr.cnes.sitools.metacatalogue.model.itag.ItagLocalization;
 import fr.cnes.sitools.util.ClientResourceProxy;
 
 /**
- * Utility class to Read response from the Itag service
+ * Utility class to Read response from the Itag service.
  * 
  * @author m.gond
- * 
  * @version
- * 
  */
 public class ITagReader {
-  /** The url to query */
+
+  /** The url to query. */
   private String url;
+
+  /** The itag loc. */
   private ItagLocalization itagLoc;
 
   /**
-   * Constructor with etagUrl and geometry as WKT
+   * Constructor with etagUrl and geometry as WKT.
    * 
    * @param etagUrl
    *          the url to query
@@ -62,7 +65,7 @@ public class ITagReader {
   }
 
   /**
-   * Constructor with etagUrl and geometry as WKT
+   * Constructor with etagUrl and geometry as WKT.
    * 
    * @param etagUrl
    *          the url to query
@@ -70,7 +73,6 @@ public class ITagReader {
    *          the geometry to query
    * @param withCities
    *          true to query all cities, false otherwise
-   * 
    */
   public ITagReader(String etagUrl, String geometry, boolean withCities) {
     this(etagUrl, geometry);
@@ -82,7 +84,7 @@ public class ITagReader {
   }
 
   /**
-   * Perform the call and read/parse the result
+   * Perform the call and read/parse the result.
    * 
    * @throws ProcessException
    *           if there is an error during the call to the Etag service
@@ -126,6 +128,12 @@ public class ITagReader {
 
   }
 
+  /**
+   * Process continent.
+   * 
+   * @param continents
+   *          the continents
+   */
   private void processContinent(JsonNode continents) {
     Iterator<Entry<String, JsonNode>> continentsFields = continents.getFields();
     while (continentsFields.hasNext()) {
@@ -138,6 +146,14 @@ public class ITagReader {
     }
   }
 
+  /**
+   * Process countries.
+   * 
+   * @param countriesRoot
+   *          the countries root
+   * @param continent
+   *          the continent
+   */
   private void processCountries(JsonNode countriesRoot, Localization continent) {
 
     JsonNode countries = countriesRoot.get("countries");
@@ -146,25 +162,28 @@ public class ITagReader {
         Localization countriesLoc = new Localization(country.get("name").getTextValue(), Localization.Type.COUNTRY,
             country.get("pcover").getDoubleValue());
         continent.getChildren().add(countriesLoc);
-        processRegions(country.get("regions"), countriesLoc);
-        // processCities(country, countriesLoc);
+        if (countriesLoc.getName().equals("France")) {
+          processRegions(country.get("regions"), countriesLoc);
+        }
+        else {
+          processCities(country.get("cities"), countriesLoc);
+        }
       }
       catch (Exception e) {
+        Engine.getLogger(this.getClass().getName()).log(Level.WARNING, e.getMessage(), e);
         continue;
       }
     }
-
   }
 
-  // private void processCities(JsonNode citiesRoot, Localization countriesLoc) {
-  // try {
-  // JSONArray cities = citiesRoot.getJSONArray("cities");
-  // }
-  // catch (JSONException e) {
-  // }
-  //
-  // }
-
+  /**
+   * Process regions.
+   * 
+   * @param countries
+   *          the countries
+   * @param countriesLoc
+   *          the countries loc
+   */
   private void processRegions(JsonNode countries, Localization countriesLoc) {
     Iterator<Entry<String, JsonNode>> regionsFields = countries.getFields();
     while (regionsFields.hasNext()) {
@@ -176,22 +195,60 @@ public class ITagReader {
     }
   }
 
+  /**
+   * Process departments.
+   * 
+   * @param departmentsRoot
+   *          the departments root
+   * @param regionLoc
+   *          the region loc
+   */
   private void processDepartments(JsonNode departmentsRoot, Localization regionLoc) {
     JsonNode departments = departmentsRoot.get("departements");
     for (JsonNode department : departments) {
 
       try {
-        Localization countriesLoc = new Localization(department.get("name").getTextValue(),
+        Localization departementLoc = new Localization(department.get("name").getTextValue(),
             Localization.Type.DEPARTMENT, department.get("pcover").getDoubleValue());
-        regionLoc.getChildren().add(countriesLoc);
+        regionLoc.getChildren().add(departementLoc);
+        if (department.get("cities") != null) {
+          processCities(department.get("cities"), departementLoc);
+        }
       }
       catch (Exception e) {
+        Engine.getLogger(this.getClass().getName()).log(Level.WARNING, e.getMessage(), e);
         continue;
       }
-      // processCities(department.getJsonNode("cities"), countriesLoc);
     }
   }
 
+  /**
+   * Process cities.
+   * 
+   * @param citiesRoot
+   *          the cities root
+   * @param parentLoc
+   *          the parent loc
+   */
+  private void processCities(JsonNode citiesRoot, Localization parentLoc) {
+    for (JsonNode city : citiesRoot) {
+      try {
+        Localization cityLoc = new Localization(city.getTextValue(), Localization.Type.CITY);
+        parentLoc.getChildren().add(cityLoc);
+      }
+      catch (Exception e) {
+        Engine.getLogger(this.getClass().getName()).log(Level.WARNING, e.getMessage(), e);
+        continue;
+      }
+    }
+
+  }
+
+  /**
+   * Gets the localisation.
+   * 
+   * @return the localisation
+   */
   public ItagLocalization getLocalisation() {
     return itagLoc;
   }

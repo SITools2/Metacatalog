@@ -98,14 +98,14 @@ public class LocalisationExtractor extends HarvesterStep {
               addLocalizationToMetadata(doc, regions.get(0), MetacatalogField.REGION.getField());
               List<Localization> departments = regions.get(0).getChildren();
               if ("HR".equals(resolution)) {
-                // regions
+                // departements
                 addLocalizationsToMetadata(doc, departments, MetacatalogField.DEPARTMENT.getField());
               }
               else {
                 addLocalizationToMetadata(doc, departments.get(0), MetacatalogField.DEPARTMENT.getField());
                 List<Localization> cities = departments.get(0).getChildren();
                 if ("VHR".equals(resolution)) {
-                  // regions
+                  // cities
                   addLocalizationsToMetadata(doc, cities, MetacatalogField.CITY.getField());
                 }
               }

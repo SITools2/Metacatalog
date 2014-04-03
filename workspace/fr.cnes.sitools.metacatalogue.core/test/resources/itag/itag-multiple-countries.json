@@ -1,0 +1,38 @@
+{
+	"type" : "FeatureCollection",
+	"features" : [{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Polygon",
+				"coordinates" : [[[-2, 43.5], [-1.5, 43.5], [-1.5, 43], [-2, 43], [-2, 43.5]]]
+			},
+			"properties" : {
+				"political" : {
+					"continents" : {
+						"Europe" : {
+							"countries" : [{
+									"name" : "Spain",
+									"pcover" : 53.17,
+									"cities" : ["Arano", "Arantza", "Areso", "Astigarraga", "Bera", "Berastegi", "Betelu", "Doneztebe", "Donostia \/ San Sebasti\u00e1n", "Elgorriaga", "Eratsun", "Errenteria", "Etxalar", "Ezkurra", "Goizueta", "Hernani", "Hondarribia", "Igantzi", "Irun", "Ituren", "Lantz", "Leitza", "Lekunberri", "Lesaka", "Lezo", "Oitz", "Pasaia", "Sald\u00edas", "Sunbilla", "Urnieta", "Zubieta", "Zugarramurdi"]
+								}, {
+									"name" : "France",
+									"pcover" : 42.78,
+									"regions" : {
+										"Aquitaine" : {
+											"departements" : [{
+													"name" : "Pyrenees-Atlantiques",
+													"pcover" : 14.71,
+													"cities" : ["Ahetze", "Anglet", "Arbonne", "Arcangues", "Ascain", "Bassussarry", "Biarritz", "Bidart", "Ciboure", "Gu\u00e9thary", "Hendaye", "Saint-Jean-de-Luz", "Saint-P\u00e9e-sur-Nivelle", "Sare", "Urrugne"]
+												}
+											]
+										}
+									}
+								}
+							]
+						}
+					}
+				}
+			}
+		}
+	]
+}

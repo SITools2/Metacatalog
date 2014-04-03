@@ -17,13 +17,16 @@
 										"Midi-Pyrenees" : {
 											"departements" : [{
 													"name" : "Haute-Garonne",
-													"pcover" : 64.04
+													"pcover" : 64.04,
+													"cities" : ["Aucamville", "Aurignac", "Aussonne", "Auterive", "Auzeville-Tolosane", "Auzielle", "Ayguesvives", "Balma", "Bazi\u00e8ge", "Beaumont-sur-L\u00e8ze", "Beaupuy", "Beauzelle", "Belberaud", "B\u00e9rat", "Blagnac", "Boulogne-sur-Gesse", "Brax", "Brugui\u00e8res", "Calmont", "Carbonne", "Castanet-Tolosan", "Castelginest", "Castelmaurou", "Caz\u00e8res", "C\u00e9pet", "Cintegabelle", "Colomiers", "Cornebarrieu", "Cugnaux", "Daux", "Dr\u00e9mil-Lafage", "Eaunes", "Escalquens", "Fenouillet", "Flourens", "Fonbeauzard", "Fonsorbes", "Fontenilles", "Frouzins", "Gagnac-sur-Garonne", "Gaillac-Toulza", "Gardouch", "Garidech", "Gragnague", "Gratentour", "Labarthe-Rivi\u00e8re", "Labarthe-sur-L\u00e8ze", "Labastide-Beauvoir", "Labastide-Saint-Sernin", "Labastidette", "Lab\u00e8ge", "Lacasse", "Lacroix-Falgarde", "Lagardelle-sur-L\u00e8ze", "Lanta", "Lapeyrouse-Fossat", "La Salvetat-Saint-Gilles", "Launac", "Launaguet", "Le Fauga", "Le Fousseret", "L\u00e9guevin", "Lespinasse", "L\u00e9vignac", "Lherm", "Longages", "L'Union", "Marquefave", "Martres-Tolosane", "Merville", "Miremont", "Mondonville", "Mons", "Montaigut-sur-Save", "Montastruc-la-Conseill\u00e8re", "Montberon", "Montesquieu-Volvestre", "Montgiscard", "Montlaur", "Montrab\u00e9", "Muret", "Nailloux", "No\u00e9", "Paulhac", "P\u00e9chabou", "Pechbonnieu", "Pibrac", "Pinsaguel", "Plaisance-du-Touch", "Pompertuzat", "Portet-sur-Garonne", "Ramonville-Saint-Agne", "Rieumes", "Rieux-Volvestre", "Roquettes", "Rouffiac-Tolosan", "Saint-Alban", "Sainte-Foy-de-Peyroli\u00e8res", "Saint-Gaudens", "Saint-Geni\u00e8s-Bellevue", "Saint-Jean", "Saint-Jory", "Saint-Loup-Cammas", "Saint-Lys", "Saint-Orens-de-Gameville", "Saint-Sauveur", "Saint-Sulpice-sur-L\u00e8ze", "Salies-du-Salat", "Saubens", "Seilh", "Seysses", "Toulouse", "Tournefeuille", "Venerque", "Verfeil", "Vernet", "Vieille-Toulouse", "Villeneuve-de-Rivi\u00e8re", "Villeneuve-Tolosane", "Villenouvelle"]
 												}, {
 													"name" : "Gers",
-													"pcover" : 21.64
+													"pcover" : 21.64,
+													"cities" : ["Aubiet", "Gimont", "Lombez", "Pujaudran", "Samatan"]
 												}, {
 													"name" : "Ariege",
-													"pcover" : 13.73
+													"pcover" : 13.73,
+													"cities" : ["La Tour-du-Crieu", "L\u00e9zat-sur-L\u00e8ze", "Maz\u00e8res", "Pamiers", "Saint-Jean-du-Falga", "Saverdun", "Verniolle"]
 												}, {
 													"name" : "Tarn",
 													"pcover" : 0.44
@@ -40,8 +43,7 @@
 												}
 											]
 										}
-									},
-									"cities" : ["Aubiet", "Aucamville", "Aurignac", "Aussonne", "Auterive", "Auzeville-Tolosane", "Auzielle", "Ayguesvives", "Balma", "Bazi\u00e8ge", "Beaumont-sur-L\u00e8ze", "Beaupuy", "Beauzelle", "Belberaud", "B\u00e9rat", "Blagnac", "Boulogne-sur-Gesse", "Brax", "Brugui\u00e8res", "Calmont", "Carbonne", "Castanet-Tolosan", "Castelginest", "Castelmaurou", "Caz\u00e8res", "C\u00e9pet", "Cintegabelle", "Colomiers", "Cornebarrieu", "Cugnaux", "Daux", "Dr\u00e9mil-Lafage", "Eaunes", "Escalquens", "Fenouillet", "Flourens", "Fonbeauzard", "Fonsorbes", "Fontenilles", "Frouzins", "Gagnac-sur-Garonne", "Gaillac-Toulza", "Gardouch", "Garidech", "Gimont", "Gragnague", "Gratentour", "Labarthe-Rivi\u00e8re", "Labarthe-sur-L\u00e8ze", "Labastide-Beauvoir", "Labastide-Saint-Sernin", "Labastidette", "Lab\u00e8ge", "Lacasse", "Lacroix-Falgarde", "Lagardelle-sur-L\u00e8ze", "Lanta", "Lapeyrouse-Fossat", "La Salvetat-Saint-Gilles", "La Tour-du-Crieu", "Launac", "Launaguet", "Le Fauga", "Le Fousseret", "L\u00e9guevin", "Lespinasse", "L\u00e9vignac", "L\u00e9zat-sur-L\u00e8ze", "Lherm", "Lombez", "Longages", "L'Union", "Marquefave", "Martres-Tolosane", "Maz\u00e8res", "Merville", "Miremont", "Mondonville", "Mons", "Montaigut-sur-Save", "Montastruc-la-Conseill\u00e8re", "Montberon", "Montesquieu-Volvestre", "Montgiscard", "Montlaur", "Montrab\u00e9", "Muret", "Nailloux", "No\u00e9", "Pamiers", "Paulhac", "P\u00e9chabou", "Pechbonnieu", "Pibrac", "Pinsaguel", "Plaisance-du-Touch", "Pompertuzat", "Portet-sur-Garonne", "Pujaudran", "Ramonville-Saint-Agne", "Rieumes", "Rieux-Volvestre", "Roquettes", "Rouffiac-Tolosan", "Saint-Alban", "Sainte-Foy-de-Peyroli\u00e8res", "Saint-Gaudens", "Saint-Geni\u00e8s-Bellevue", "Saint-Jean", "Saint-Jean-du-Falga", "Saint-Jory", "Saint-Loup-Cammas", "Saint-Lys", "Saint-Orens-de-Gameville", "Saint-Sauveur", "Saint-Sulpice-sur-L\u00e8ze", "Salies-du-Salat", "Samatan", "Saubens", "Saverdun", "Seilh", "Seysses", "Toulouse", "Tournefeuille", "Venerque", "Verfeil", "Vernet", "Verniolle", "Vieille-Toulouse", "Villeneuve-de-Rivi\u00e8re", "Villeneuve-Tolosane", "Villenouvelle"]
+									}
 								}
 							]
 						}
