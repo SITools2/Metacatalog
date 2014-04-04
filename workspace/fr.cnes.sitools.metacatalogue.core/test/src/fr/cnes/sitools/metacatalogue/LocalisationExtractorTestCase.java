@@ -192,7 +192,8 @@ public class LocalisationExtractorTestCase extends AbstractHarvesterTestCase {
 
       // Assert city
       List<String> cities = localisations.get(MetacatalogField.CITY.getField());
-      assertNull(cities);
+      assertNotNull(cities);
+      assertTrue(cities.contains("Toulouse"));
 
     }
 

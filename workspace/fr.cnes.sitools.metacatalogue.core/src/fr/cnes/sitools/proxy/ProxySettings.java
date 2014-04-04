@@ -1,4 +1,4 @@
- /*******************************************************************************
+/*******************************************************************************
  * Copyright 2010-2014 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
  *
  * This file is part of SITools2.
@@ -100,7 +100,12 @@ public final class ProxySettings {
     proxyPassword = (String) settings.get(HarvesterSettingsAttributes.PROXY_PASSWORD);
     nonProxyHosts = (String) settings.get(HarvesterSettingsAttributes.NONPROXY_HOSTS);
 
-    if ((proxyHost != null) && !proxyHost.equals("") && (proxyPort != null) && !proxyPort.equals("")) {
+    // proprietes par defaut
+    if ("true".equals(settings.getString("WITH_PROXY"))) {
+      ProxySettings.proxySet = true;
+    }
+
+    if (proxySet && ((proxyHost != null) && !proxyHost.equals("") && (proxyPort != null) && !proxyPort.equals(""))) {
       ProxySettings.proxySet = true;
 
       Properties properties = System.getProperties();
