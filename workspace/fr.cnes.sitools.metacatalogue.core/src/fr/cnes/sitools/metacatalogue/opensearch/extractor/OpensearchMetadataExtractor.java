@@ -96,8 +96,11 @@ public class OpensearchMetadataExtractor extends HarvesterStep {
 
       addField(record, "$.properties.wms", jsonString, MetacatalogField.WMS);
 
-      addField(record, "$.properties.services.download.url", jsonString, MetacatalogField.ARCHIVE);
-      addField(record, "$.properties.services.download.mimeType", jsonString, MetacatalogField.MIME_TYPE);
+      if (checkFieldExists("$.properties.services", jsonString)
+          && checkFieldExists("$.properties.services.download", jsonString)) {
+        addField(record, "$.properties.services.download.url", jsonString, MetacatalogField.ARCHIVE);
+        addField(record, "$.properties.services.download.mimeType", jsonString, MetacatalogField.MIME_TYPE);
+      }
 
       // addField(fields, "$.properties.services.metadata.url", jsonString,
       // MetacatalogField.SERVICES_METADATA_URL);
@@ -148,6 +151,16 @@ public class OpensearchMetadataExtractor extends HarvesterStep {
       next.execute(data);
     }
 
+  }
+
+  private boolean checkFieldExists(String path, String jsonString) {
+    try {
+      Object object = JsonPath.read(jsonString, path);
+      return object != null;
+    }
+    catch (InvalidPathException e) {
+      return false;
+    }
   }
 
   private void addCustomAttributes(String json, MetadataRecords fields, List<AttributeCustom> attributes) {

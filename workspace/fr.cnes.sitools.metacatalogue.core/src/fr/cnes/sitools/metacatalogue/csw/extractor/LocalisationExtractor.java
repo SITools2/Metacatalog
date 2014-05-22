@@ -76,7 +76,7 @@ public class LocalisationExtractor extends HarvesterStep {
         }
 
         List<Localization> continents = localisation.getContinents();
-        
+
         if (continents != null && !continents.isEmpty()) {
           // continents
           addLocalizationToMetadata(doc, localisation.getContinents().get(0), MetacatalogField.CONTINENT.getField());
@@ -86,7 +86,7 @@ public class LocalisationExtractor extends HarvesterStep {
             // countries
             addLocalizationsToMetadata(doc, countries, MetacatalogField.COUNTRY.getField());
           }
-          else {
+          else if (countries.size() > 0) {
             addLocalizationToMetadata(doc, countries.get(0), MetacatalogField.COUNTRY.getField());
             List<Localization> regions = countries.get(0).getChildren();
             if ("MR".equals(resolution)) {
@@ -94,19 +94,24 @@ public class LocalisationExtractor extends HarvesterStep {
               addLocalizationsToMetadata(doc, regions, MetacatalogField.REGION.getField());
 
             }
-            else {
+            else if (regions.size() > 0) {
               addLocalizationToMetadata(doc, regions.get(0), MetacatalogField.REGION.getField());
               List<Localization> departments = regions.get(0).getChildren();
               if ("HR".equals(resolution)) {
                 // departements
                 addLocalizationsToMetadata(doc, departments, MetacatalogField.DEPARTMENT.getField());
               }
-              else {
+              else if (departments.size() > 0) {
                 addLocalizationToMetadata(doc, departments.get(0), MetacatalogField.DEPARTMENT.getField());
                 List<Localization> cities = departments.get(0).getChildren();
                 if ("VHR".equals(resolution)) {
                   // cities
                   addLocalizationsToMetadata(doc, cities, MetacatalogField.CITY.getField());
+                  if (cities == null || cities.isEmpty()) {
+                    System.out.println("EMPTY CITY");
+                    doc.add("city", "toto");
+                    doc.add("city", "toto2");
+                  }
                 }
               }
 

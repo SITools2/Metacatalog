@@ -231,14 +231,16 @@ public class ITagReader {
    *          the parent loc
    */
   private void processCities(JsonNode citiesRoot, Localization parentLoc) {
-    for (JsonNode city : citiesRoot) {
-      try {
-        Localization cityLoc = new Localization(city.getTextValue(), Localization.Type.CITY);
-        parentLoc.getChildren().add(cityLoc);
-      }
-      catch (Exception e) {
-        Engine.getLogger(this.getClass().getName()).log(Level.WARNING, e.getMessage(), e);
-        continue;
+    if (citiesRoot != null) {
+      for (JsonNode city : citiesRoot) {
+        try {
+          Localization cityLoc = new Localization(city.getTextValue(), Localization.Type.CITY);
+          parentLoc.getChildren().add(cityLoc);
+        }
+        catch (Exception e) {
+          Engine.getLogger(this.getClass().getName()).log(Level.WARNING, e.getMessage(), e);
+          continue;
+        }
       }
     }
 
