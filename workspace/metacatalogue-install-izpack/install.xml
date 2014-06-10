@@ -21,7 +21,7 @@
 	<jar src="dist/MetacatalogServer-izpack.jar" stage="install"/>
 	<info>
 		<appname>Metacatalogue</appname>
-		<appversion>0.7</appversion>
+		<appversion>0.8</appversion>
 		<authors>
 			<author email="" name="CNES" />
 			<author email="" name="Akka Technologies" />

@@ -50,13 +50,13 @@
 		MAIN Target 
 	+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	<!--	<target name="build" depends="init-git, export-git, javadoc, file-list, tar-gz, checksum" description="Création d'une distribution" />-->
-	<target name="build" depends="init-git, export-git-metacatalogue, javadoc, file-list, tar-gz, checksum" description="Création d'une distribution" />
+	<target name="build" depends="init-git, export-git-metacatalogue, izpack, javadoc, file-list, tar-gz, checksum" description="Création d'une distribution" />
 
 	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		Target for file lists and README.txt 
 	+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	<!--<target name="init-files" description="Copie le jar IzPack">
-		<copy todir="${distribution.dir}" file="${sitools.ROOT_DIRECTORY}/workspace/metacatalogue-install-izpack/SITools2-Metacatalogue-${sitools.project.tag}-install.jar" />
+		<copy todir="${distribution.dir}" file="${sitools.ROOT_DIRECTORY}/workspace/metacatalogue-install-izpack/SITools2-Metacatalogue-${sitools.project.version}-install.jar" />
 		<copy todir="${distribution.dir}" file="${sitools.ROOT_DIRECTORY}/workspace/fr.cnes.sitools.metacatalogue.core/README.txt" />
 	</target>-->
 
@@ -253,6 +253,39 @@
 				<include name="**/*.java" />
 			</fileset>
 		</replaceregexp>
+	</target>
+	
+	<target name="changeVersion" description="Change the version in all the Sitools files">
+		<echo message="Replace ${sitools.project.version.old} with ${sitools.project.version}">
+		</echo>
+		<replace 
+    		dir="../.."
+    		value="${sitools.project.version}"
+    		failOnNoReplacements="true"
+    		includesfile="list_files_for_version.properties"    			
+    		summary="true"
+    		encoding="ISO-8859-1">
+			<!-- exemple : Starter.VERSION=0.9.1RC -->
+			<replacefilter 
+    			token="VERSION=${sitools.project.version.old}"
+    			value="VERSION=${sitools.project.version}"/>
+			<!-- exemple : <property name="project.tag"         value="0.9.1RC" />	-->
+			<replacefilter 
+    			token="&lt;property name=&quot;project.version&quot;         value=&quot;${sitools.project.version.old}&quot;/&gt;"
+    			value="&lt;property name=&quot;project.version&quot;         value=&quot;${sitools.project.version}&quot;/&gt;"/>
+			<!-- exemple : <property name="project.tag" value="0.9.1RC" />	(with only one space)-->
+			<replacefilter 
+	   			token="&lt;property name=&quot;project.version&quot; value=&quot;${sitools.project.version.old}&quot;/&gt;"
+    			value="&lt;property name=&quot;project.version&quot; value=&quot;${sitools.project.version}&quot;/&gt;"/>
+			<!-- exemple : <appversion>0.9.1RC</appversion> -->
+			<replacefilter 
+    			token="&lt;appversion&gt;${sitools.project.version.old}&lt;/appversion&gt;"
+    			value="&lt;appversion&gt;${sitools.project.version}&lt;/appversion&gt;"/>
+			<!-- exemple : sonar.projectVersion=0.9.5 -->
+			<replacefilter 
+    			token="sonar.projectVersion=${sitools.project.version.old}"
+    			value="sonar.projectVersion=${sitools.project.version}"/>
+		</replace>
 	</target>
 
 

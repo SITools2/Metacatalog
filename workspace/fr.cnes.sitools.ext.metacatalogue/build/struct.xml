@@ -41,7 +41,7 @@
 	<!-- Informations generales sur le projet -->
 	<property name="project.name" 	value="fr.cnes.sitools.ext.metacatalogue" />
 	<property name="project.fullname" value="Sitools2 fr.cnes.sitools.ext.metacatalogue" />
-	<property name="project.version"         value="2.1"/>
+	<property name="project.version"         value="0.8"/>
 
 	<!-- Nom de l'application WEB -->
 	<property name="webapps.name" value="sitools" />
@@ -51,7 +51,7 @@
 
 	<!-- Information sur les auteurs du projet -->
 	<property name="author" value="AKKA Technologies" />
-	<property name="year" value="2011, 2012" />
+	<property name="year" value="2010-2014" />
 
 	<!-- Paramètres de compilation -->
 	<property name="debug" value="true" />
