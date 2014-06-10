@@ -3,18 +3,30 @@ ______________
 
 Identification                       : SITools2/Metacatalogue
 Date                                 : 2013-12-10
-Version                              : 0.7
-Developper                           : AKKA Technologies
+Version                              : 0.8
+Owner                                : CNES
+Developer                            : AKKA Technologies
 Type                                 : Prototype
 Repository url                       : https://github.com/SITools2/Metacatalog
 Project page                         : 
-Classification                       : 
-Characteristics                      : 
-Role/Function                        : 
-Reference tag                        : 
+Classification                       : Not Confidential - Opensource GPL V3
+Characteristics                      : Standalone, Java, SolR, Jena
+Role/Function                        :  
+Reference tag                        : (0.7)
 
 2/ Changes
 
+__________
+- 0.8 (12/06/2014)
+	- New feature :
+		-> SSO compatibility (OAuth)
+		-> Full SolR API capability through search interface
+		-> Update thesaurus capability
+		-> Automatic geographic tagging using ITAG
+		
+	- API Changes 
+		- org.json library removed in favor of Jackson
+		- metacatalogue sitools2 extension splited into 2 applications
 __________
 - 0.7 (10/12/2013)
 
