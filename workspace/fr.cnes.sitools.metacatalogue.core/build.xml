@@ -39,7 +39,7 @@
 	         Parametres du projet
 	     =============================================================================== -->
 
-	
+	<echo message="COTS DIR : ${cots.dir}"/>
 
 
 	<property name="conf.dir" value="conf" />

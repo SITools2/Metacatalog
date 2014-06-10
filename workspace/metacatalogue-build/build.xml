@@ -36,53 +36,114 @@
 	<property file="build.properties" prefix="sitools" />
 
 	<!-- Creating distribution folder from tag -->
-	<property name="distribution.dir" value="DISTRIBUTION-${sitools.project.tag}"/>
-	
-	<property name="workspace.dir" value=".."/>
-	<property name="fr.cnes.sitools.metacatalogue.core.dir" value="${workspace.dir}/fr.cnes.sitools.metacatalogue.core"/>
-	<property name="conf.dir" value="${fr.cnes.sitools.metacatalogue.core.dir}/conf"/>
+	<property name="distribution.dir" value="DISTRIBUTION-${sitools.project.version}" />
+	<property name="distribution.sources.dir" value="${distribution.dir}/sources" />
+	<property name="distribution.tmp.dir" value="${distribution.dir}/tmp" />
+
+
+	<property name="workspace.dir" value=".." />
+	<property name="fr.cnes.sitools.metacatalogue.core.dir" value="${workspace.dir}/fr.cnes.sitools.metacatalogue.core" />
+	<property name="conf.dir" value="${fr.cnes.sitools.metacatalogue.core.dir}/conf" />
 
 
 	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		MAIN Target 
 	+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<target name="build" depends="init-files, javadoc, file-list, tar-gz, checksum" description="Création d'une distribution" />
-	
+	<!--	<target name="build" depends="init-git, export-git, javadoc, file-list, tar-gz, checksum" description="Création d'une distribution" />-->
+	<target name="build" depends="init-git, export-git-metacatalogue, javadoc, file-list, tar-gz, checksum" description="Création d'une distribution" />
+
 	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		Target for file lists and README.txt 
 	+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<target name="init-files" description="Copie le jar IzPack">
-
+	<!--<target name="init-files" description="Copie le jar IzPack">
 		<copy todir="${distribution.dir}" file="${sitools.ROOT_DIRECTORY}/workspace/metacatalogue-install-izpack/SITools2-Metacatalogue-${sitools.project.tag}-install.jar" />
-	
-	<copy todir="${distribution.dir}" file="${sitools.ROOT_DIRECTORY}/workspace/fr.cnes.sitools.metacatalogue.core/README.txt" />
+		<copy todir="${distribution.dir}" file="${sitools.ROOT_DIRECTORY}/workspace/fr.cnes.sitools.metacatalogue.core/README.txt" />
+	</target>-->
 
-	</target>
-	
 	<target name="init-git" description="Initiatialisation de la creation de la distribution">
 		<echo message="preparing folders ..." />
 		<delete dir="${distribution.dir}" />
+		<mkdir dir="${distribution.dir}" />
+	</target>
+
+	<target name="export-git-metacatalogue" description="Tache GIT d'export de la version actuelle">
+		<antcall target="export-git">
+			<param name="url" value="${sitools.git.repository.url}" />
+			<param name="dir" value="${distribution.sources.dir}" />
+			<param name="tag" value="${sitools.git.repository.tag}" />
+		</antcall>
+	</target>
+
+	<target name="export-git" description="Tache GIT d'export de la version actuelle">
+		<exec executable="scripts/clone-tag.bat" osfamily="windows" failonerror="true">
+			<arg value="${url}" />
+			<arg value="${dir}" />
+			<arg value="${tag}" />
+		</exec>
+
+		<exec executable="scripts/clone-tag.sh" osfamily="unix" failonerror="true">
+			<arg value="${url}" />
+			<arg value="${dir}" />
+			<arg value="${tag}" />
+		</exec>
+	</target>
+
+
+	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+			Targets for IzPack 
+		+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<target name="izpack" description="Copy IzPack from already generated izpack">
+		<copy 
+			file="../metacatalogue-install-izpack/SITools2qsdqsd-Metacatalogue-${sitools.project.version}-install.jar"
+			todir="${distribution.dir}/"
+			overwrite="true"/>
 	</target>
 
 
 	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		Target for file lists and README.txt 
 	+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<target name="file-list" description="Genere la liste des fichiers, le README et la liste des fichiers A/M/D">
+
+	<target name="file-list-generic" description="Genere la liste des fichiers, le README et la liste des fichiers A/M/D">
+		<exec executable="scripts/diff-files.bat" osfamily="windows" failonerror="true">
+			<arg value="${reference}"/>
+			<arg value="${tag}"/>
+			<arg value="${dir}"/>
+		</exec>
+		
+		<exec executable="scripts/diff-files.sh" osfamily="unix" failonerror="true">
+			<arg value="${reference}"/>
+			<arg value="${tag}"/>
+			<arg value="${dir}"/>
+		</exec>
 
 		<path id="list.files">
-			<fileset dir="${distribution.dir}">
-				<include name="**/*.*" />
+			<fileset dir="${dir}">
+				<include name="**/*.*"/>
+				<exclude name=".git/**"/>
 			</fileset>
 		</path>
-		<property name="files" refid="list.files" />
-	<pathconvert property="list" refid="list.files" pathsep="&#x0A;">
+		<property name="files" refid="list.files"/>
+		<pathconvert property="list" refid="list.files" pathsep="&#x0A;">
 			<mapper>
-				<globmapper from='livraison/*' to="*" handledirsep="true" />
+				<globmapper from='${sitools.ROOT_DIRECTORY}/workspace/metacatalogue/${dir}/*' to="*" handledirsep="true"/>
 			</mapper>
 		</pathconvert>
-		<echo message="Files : &#x0A;${list}" append="true" file="${distribution.dir}/list-file.txt" />
-
+		<echo message="Files : &#x0A;${list}" append="true" file="${dir}/list-file.txt"/>
+	</target>
+	
+	
+	<target name="file-list" description="Genere la liste des fichiers, le README et la liste des fichiers A/M/D">
+		<antcall target="file-list-generic">
+			<param name="reference" value="${sitools.git.repository.tag.ref}" />
+			<param name="tag" value="${sitools.git.repository.tag}" />
+			<param name="dir" value="${distribution.sources.dir}" />
+		</antcall>
+		
+		<move todir="${distribution.dir}">
+		    <fileset dir="${distribution.sources.dir}" includes="*.txt"/>
+		</move>
+		
 	</target>
 
 	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -90,11 +151,10 @@
 	+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	<target name="tar-gz" description="Genere l archive">
 		<!-- Creating archive -->
-		<property name="archive.path" value="${distribution.dir}/${sitools.project.title}-${sitools.project.tag}.tar.gz" />
+		<property name="archive.path" value="${distribution.dir}/${sitools.project.title}-${sitools.project.version}.tar.gz" />
 		<echo message="generating archive ${archive.path}" />
 		<tar destfile="${archive.path}" compression="gzip">
-			<fileset dir="${distribution.dir}">
-				<exclude name="**/documentation/javadoc/**" />
+			<fileset dir="${distribution.sources.dir}">
 			</fileset>
 		</tar>
 	</target>
@@ -110,7 +170,7 @@
 		<echo message="generating MD5 ..." />
 		<checksum forceOverwrite="yes" algorithm="MD5" todir="${distribution.dir}">
 			<fileset dir="${distribution.dir}">
-				<include name="${sitools.project.title}-${sitools.project.tag}.tar.gz" />
+				<include name="${sitools.project.title}-${sitools.project.version}.tar.gz" />
 			</fileset>
 		</checksum>
 
@@ -118,84 +178,82 @@
 		<echo message="verifying MD5 ..." />
 		<checksum algorithm="MD5" todir="${distribution.dir}" verifyProperty="isMD5ok">
 			<fileset dir="${distribution.dir}">
-				<include name="${sitools.project.title}-${sitools.project.tag}.tar.gz" />
+				<include name="${sitools.project.title}-${sitools.project.version}.tar.gz" />
 			</fileset>
 		</checksum>
 	</target>
 
-	<echo message="${distribution.dir}/workspace/fr.cnes.sitools.metacatalogue.core/src"/>
+	<echo message="${distribution.dir}/workspace/fr.cnes.sitools.metacatalogue.core/src" />
 
 	<path id="javadoc">
-		<pathelement location="${distribution.dir}/workspace/fr.cnes.sitools.metacatalogue.core/src" />		
+		<pathelement location="${distribution.sources.dir}/workspace/fr.cnes.sitools.metacatalogue.core/src" />
 	</path>
 
 	<!-- Nom des packages du projet utilises par javadoc -->
 	<property name="project.packagenames" value="fr.cnes.sitools" />
-	<property name="out.javadoc.dir" value="documentation/javadoc" />
+	<property name="out.javadoc.dir" value="${distribution.dir}/documentation/javadoc" />
 
 
 	<!-- Target for Javadoc -->
 	<target name="javadoc" description="Target to create javadoc">
-		<mkdir dir="${distribution.dir}/documentation" />
-		<mkdir dir="${distribution.dir}/documentation/javadoc" />
-
 		<!-- Generation de la javadoc du projet -->
-		<javadoc sourcepathref="javadoc" packagenames="${project.packagenames}.*" destdir="${out.javadoc.dir}" author="true" public="true" version="true" use="true" windowtitle="${project.fullname} ${project.version}" doctitle="${project.fullname} ${project.version}" bottom="Copyright &amp;copy; ${year} ${owner}. All Rights Reserved.">
+		<javadoc sourcepathref="javadoc" 
+			packagenames="${project.packagenames}.*" 
+			destdir="${out.javadoc.dir}" 
+			author="true" public="true"
+			version="true" use="true"
+			windowtitle="${project.fullname} ${project.version}"
+			doctitle="${project.fullname} ${project.version}"
+			bottom="Copyright &amp;copy; ${year} ${owner}. All Rights Reserved.">
 			<classpath>
 				<path>
-					<fileset dir="${distribution.dir}/cots/restlet-jse-2.1.0">
+					<fileset dir="${distribution.sources.dir}/cots/restlet-jse-2.1.0">
 						<include name="**/*.jar" />
 					</fileset>
 				</path>
 				<path>
-					<fileset dir="${distribution.dir}/workspace/fr.cnes.sitools.metacatalogue.libraries">
+					<fileset dir="${distribution.sources.dir}/workspace/fr.cnes.sitools.metacatalogue.libraries">
 						<include name="**/*.jar" />
 					</fileset>
 				</path>
 			</classpath>
 		</javadoc>
 	</target>
-	
+
 	<!-- Supprime le texte de licence au début de chaque fichier -->
 	<target name="change_copyright" description="Change the copyright year values in all the files of the workspace">
-		<echo message="Replace 'Copyright 2010-2014 CNES' with 'Copyright 2010-2014 CNES'"></echo>
-			<replace 
-				value="Copyright 2010-2014 CNES"
-				token="Copyright 2010-2014 CNES"
-	    		failOnNoReplacements="true"
-	    		summary="true"
-	    		encoding="ISO-8859-1">
-				<fileset dir="../..">
-					<include name="**/*.java" />
-					<include name="**/*.js" />
-					<include name="**/*.css" />
-					<include name="**/*.xml" />
-					<include name="**/*.properties" />
-				</fileset>
-			</replace>
+		<echo message="Replace 'Copyright 2010-2014 CNES' with 'Copyright 2010-2014 CNES'">
+		</echo>
+		<replace value="Copyright 2010-2014 CNES" token="Copyright 2010-2014 CNES" failOnNoReplacements="true" summary="true" encoding="ISO-8859-1">
+			<fileset dir="../..">
+				<include name="**/*.java" />
+				<include name="**/*.js" />
+				<include name="**/*.css" />
+				<include name="**/*.xml" />
+				<include name="**/*.properties" />
+			</fileset>
+		</replace>
 	</target>
-	
+
 	<!-- Ajoute le texte de licence au début de chaque fichier -->
-		<target name="replace_headers">
-			<echo message="changing all files header in directory : ${workspace.dir}"/> 
-			<loadfile property="javaheader" srcFile="${conf.dir}/licences/header_GPLv3.txt" />
-			<replaceregexp match="(/\*.*\*/.*)??^package " flags="sm"
-				replace="${javaheader}${line.separator}package ">
-				<fileset dir="${workspace.dir}">
-					<include name="**/*.java" />
-				</fileset>			
-			</replaceregexp>
-		</target>
-		
-		<!-- Supprime le texte de licence au début de chaque fichier -->
-		<target name="remove_headers">
-			<replaceregexp match="(/\*.*\*/.*)??^package " flags="sm"
-				replace="package ">
-				<fileset dir="src">
-					<include name="**/*.java" />
-				</fileset>
-			</replaceregexp>
-		</target>
+	<target name="replace_headers">
+		<echo message="changing all files header in directory : ${workspace.dir}" />
+		<loadfile property="javaheader" srcFile="${conf.dir}/licences/header_GPLv3.txt" />
+		<replaceregexp match="(/\*.*\*/.*)??^package " flags="sm" replace="${javaheader}${line.separator}package ">
+			<fileset dir="${workspace.dir}">
+				<include name="**/*.java" />
+			</fileset>
+		</replaceregexp>
+	</target>
+
+	<!-- Supprime le texte de licence au début de chaque fichier -->
+	<target name="remove_headers">
+		<replaceregexp match="(/\*.*\*/.*)??^package " flags="sm" replace="package ">
+			<fileset dir="src">
+				<include name="**/*.java" />
+			</fileset>
+		</replaceregexp>
+	</target>
 
 
 
