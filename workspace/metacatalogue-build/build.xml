@@ -94,7 +94,7 @@
 		+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	<target name="izpack" description="Copy IzPack from already generated izpack">
 		<copy 
-			file="../metacatalogue-install-izpack/SITools2-Metacatalogue-${sitools.project.version}-install.jar"
+			file="../../build/workspace/metacatalogue-install-izpack/SITools2-Metacatalogue-${sitools.project.version}-install.jar"
 			todir="${distribution.dir}/"
 			overwrite="true"/>
 	</target>
