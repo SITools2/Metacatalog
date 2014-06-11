@@ -126,7 +126,7 @@
 		<property name="files" refid="list.files"/>
 		<pathconvert property="list" refid="list.files" pathsep="&#x0A;">
 			<mapper>
-				<globmapper from='${sitools.ROOT_DIRECTORY}/workspace/${dir}/*' to="*" handledirsep="true"/>
+				<globmapper from='${sitools.ROOT_DIRECTORY}/workspace/metacatalogue-build/${dir}/*' to="*" handledirsep="true"/>
 			</mapper>
 		</pathconvert>
 		<echo message="${list}" append="true" file="${dir}/list-file.txt"/>
