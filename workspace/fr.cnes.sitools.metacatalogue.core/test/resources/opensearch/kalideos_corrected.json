@@ -3,16 +3,16 @@
 	"totalResults" : 10,
 	"features" : [{
 			"type" : "Feature",
+			"id" : "urn:ogc:def:EOP:IGN::Kalideos:1245",
 			"geometry" : {
 				"type" : "Point",
 				"coordinates" : [0.63474993908497, 43.060580878688]
 			},
 			"properties" : {
-				"identifier" : "urn:ogc:def:EOP:IGN::Kalideos:1245",
 				"title" : "OSR_MiPy_2012-02-21_SPOT 5_REFLECTANCE_J_HRV\/HRG 1",
 				"description" : "description",
 				"project" : "kalideos",
-				"product" : "LANDCOVER",
+				"productType" : "LANDCOVER",
 				"platform" : "SPOT5",
 				"instrument" : "HRG",
 				"startDate" : "2012-02-21T00:00:00",
@@ -47,8 +47,7 @@
 				"acquisitionMode" : "J",
 				"incidence" : "00.61L",
 				"processingLevel" : "3",
-				"version" : "1.0",
-				"productType" : "TC"
+				"version" : "1.0"
 			}
 		}, {
 			"type" : "Feature",
@@ -56,12 +55,12 @@
 				"type" : "Point",
 				"coordinates" : [0, 0]
 			},
+			"id" : "urn:ogc:def:EOP:IGN::Kalideos:1244",
 			"properties" : {
-				"identifier" : "urn:ogc:def:EOP:IGN::Kalideos:1244",
 				"title" : "OSR_MiPy_2012-02-21_SPOT 5_REFLECTANCETOA_J_HRV\/HRG 1",
 				"description" : "description",
 				"project" : "kalideos",
-				"product" : "REFLECTANCETOA",
+				"productType" : "REFLECTANCETOA",
 				"platform" : "SPOT5",
 				"instrument" : "HRG",
 				"startDate" : "2012-02-21T00:00:00",
@@ -96,8 +95,7 @@
 				"acquisitionMode" : "J",
 				"incidence" : "00.61L",
 				"processingLevel" : "3",
-				"version" : "1.0",
-				"productType" : "TA"
+				"version" : "1.0"
 			}
 		}, {
 			"type" : "Feature",
@@ -105,12 +103,12 @@
 				"type" : "Polygon",
 				"coordinates" : [[[0.63474993908497, 43.060580878688], [1.7157488382218, 43.060580878688], [1.7157488382218, 43.759319204217], [0.63474993908497, 43.759319204217], [0.63474993908497, 43.060580878688]]]
 			},
+			"id" : "urn:ogc:def:EOP:IGN::Kalideos:1265",
 			"properties" : {
-				"identifier" : "urn:ogc:def:EOP:IGN::Kalideos:1265",
 				"title" : "OSR_MiPy_2012-02-21_SPOT 5_REFLECTANCETOA_J_HRV\/HRG 1",
 				"description" : "description",
 				"project" : "kalideos",
-				"product" : "REFLECTANCETOA",
+				"productType" : "REFLECTANCETOA",
 				"platform" : "SPOT5",
 				"instrument" : "HRG",
 				"startDate" : "2012-02-21T00:00:00",
@@ -145,8 +143,7 @@
 				"acquisitionMode" : "J",
 				"incidence" : "00.61L",
 				"processingLevel" : "3",
-				"version" : "1.0",
-				"productType" : "ORTH"
+				"version" : "1.0"
 			}
 		}, {
 			"type" : "Feature",
@@ -154,12 +151,12 @@
 				"type" : "Polygon",
 				"coordinates" : [[[0.69052315503984, 43.081630626643], [1.5958401869615, 43.081630626643], [1.5958401869615, 43.742058907099], [0.69052315503984, 43.742058907099], [0.69052315503984, 43.081630626643]]]
 			},
+			"id" : "urn:ogc:def:EOP:IGN::Kalideos:1264",
 			"properties" : {
-				"identifier" : "urn:ogc:def:EOP:IGN::Kalideos:1264",
 				"title" : "OSR_MiPy_2012-02-21_SPOT 5_REFLECTANCETOA_J_HRV\/HRG 1",
 				"description" : "description",
 				"project" : "kalideos",
-				"product" : "REFLECTANCETOA",
+				"productType" : "REFLECTANCETOA",
 				"platform" : "SPOT5",
 				"instrument" : "HRG",
 				"startDate" : "2012-02-21T00:00:00",
@@ -193,8 +190,7 @@
 				"K" : "262",
 				"acquisitionMode" : "J",
 				"incidence" : "0.61L",
-				"processingLevel" : "1A",
-				"version" : "1.0"
+				"processingLevel" : "1A"
 			}
 		}, {
 			"type" : "Feature",
@@ -202,12 +198,12 @@
 				"type" : "Polygon",
 				"coordinates" : [[[-1.6209184906809, 44.303887673223], [-0.58153806255024, 44.303887673223], [-0.58153806255024, 44.97045712757], [-1.6209184906809, 44.97045712757], [-1.6209184906809, 44.303887673223]]]
 			},
+			"id" : "urn:ogc:def:EOP:IGN::Kalideos:1255",
 			"properties" : {
-				"identifier" : "urn:ogc:def:EOP:IGN::Kalideos:1255",
 				"title" : "Littoral_2012-02-18_SPOT 4_REFLECTANCETOA_XI_HRV\/HRG 2",
 				"description" : "description",
 				"project" : "kalideos",
-				"product" : "REFLECTANCETOA",
+				"productType" : "REFLECTANCETOA",
 				"platform" : "SPOT4",
 				"instrument" : "HRG",
 				"startDate" : "2012-02-18T00:00:00",
@@ -241,8 +237,7 @@
 				"K" : "260",
 				"acquisitionMode" : "XI",
 				"incidence" : "19.20L",
-				"processingLevel" : "1A",
-				"version" : "1.0"
+				"processingLevel" : "1A"
 			}
 		}, {
 			"type" : "Feature",
@@ -250,12 +245,12 @@
 				"type" : "Polygon",
 				"coordinates" : [[[55.210633871956, -21.39683033396], [55.841674819946, -21.39683033396], [55.841674819946, -20.862875719362], [55.210633871956, -20.862875719362], [55.210633871956, -21.39683033396]]]
 			},
+			"id" : "urn:ogc:def:EOP:IGN::Kalideos:1251",
 			"properties" : {
-				"identifier" : "urn:ogc:def:EOP:IGN::Kalideos:1251",
 				"title" : "ISLE_2012-02-08_SPOT 4_REFLECTANCE_PXI_HRV\/HRG 1",
 				"description" : "Produit fusionn\u00e9 4 canaux (PIR,R,V,MIR)",
 				"project" : "kalideos",
-				"product" : "REFLECTANCE",
+				"productType" : "REFLECTANCE",
 				"platform" : "SPOT4",
 				"instrument" : "HRG",
 				"startDate" : "2012-02-08T00:00:00",
@@ -290,8 +285,7 @@
 				"acquisitionMode" : "PXI",
 				"incidence" : "12.40R",
 				"processingLevel" : "3",
-				"version" : "3.0",
-				"productType" : "TC"
+				"version" : "3.0"
 			}
 		}, {
 			"type" : "Feature",
@@ -299,12 +293,12 @@
 				"type" : "Polygon",
 				"coordinates" : [[[55.210633871956, -21.39683033396], [55.841674819946, -21.39683033396], [55.841674819946, -20.862875719362], [55.210633871956, -20.862875719362], [55.210633871956, -21.39683033396]]]
 			},
+			"id" : "urn:ogc:def:EOP:IGN::Kalideos:1844",
 			"properties" : {
-				"identifier" : "urn:ogc:def:EOP:IGN::Kalideos:1844",
 				"title" : "ISLE_2012-02-08_SPOT 4_REFLECTANCETOA_PXI_HRV\/HRG 1",
 				"description" : "Produit fusionn\u00e9 4 canaux (PIR,R,V,MIR)",
 				"project" : "kalideos",
-				"product" : "REFLECTANCETOA",
+				"productType" : "REFLECTANCETOA",
 				"platform" : "SPOT4",
 				"instrument" : "HRG",
 				"startDate" : "2012-02-08T00:00:00",
@@ -339,8 +333,7 @@
 				"acquisitionMode" : "PXI",
 				"incidence" : "12.40R",
 				"processingLevel" : "3",
-				"version" : "3.0",
-				"productType" : "TA"
+				"version" : "3.0"
 			}
 		}, {
 			"type" : "Feature",
@@ -348,12 +341,12 @@
 				"type" : "Polygon",
 				"coordinates" : [[[55.210633871956, -21.39683033396], [55.841674819946, -21.39683033396], [55.841674819946, -20.862875719362], [55.210633871956, -20.862875719362], [55.210633871956, -21.39683033396]]]
 			},
+			"id" : "urn:ogc:def:EOP:IGN::Kalideos:1236",
 			"properties" : {
-				"identifier" : "urn:ogc:def:EOP:IGN::Kalideos:1236",
 				"title" : "ISLE_2012-02-08_SPOT 4_REFLECTANCETOA_PXI_HRV\/HRG 1",
 				"description" : "Produit fusionn\u00e9 4 canaux (PIR,R,V,MIR)",
 				"project" : "kalideos",
-				"product" : "REFLECTANCETOA",
+				"productType" : "REFLECTANCETOA",
 				"platform" : "SPOT4",
 				"instrument" : "HRG",
 				"startDate" : "2012-02-08T00:00:00",
@@ -388,8 +381,7 @@
 				"acquisitionMode" : "PXI",
 				"incidence" : "12.40R",
 				"processingLevel" : "3",
-				"version" : "3.0",
-				"productType" : "ORTH"
+				"version" : "3.0"
 			}
 		}, {
 			"type" : "Feature",
@@ -397,12 +389,12 @@
 				"type" : "Polygon",
 				"coordinates" : [[[55.125425514171, -21.430301303406], [55.856450821779, -21.430301303406], [55.856450821779, -20.806179168111], [55.125425514171, -20.806179168111], [55.125425514171, -21.430301303406]]]
 			},
+			"id" : "urn:ogc:def:EOP:IGN::Kalideos:1843",
 			"properties" : {
-				"identifier" : "urn:ogc:def:EOP:IGN::Kalideos:1843",
 				"title" : "ISLE_2012-02-08_SPOT 4_REFLECTANCETOA_PXI_HRV\/HRG 1",
 				"description" : "Produit fusionn\u00e9 4 bandes (PIR,R,V,MIR)",
 				"project" : "kalideos",
-				"product" : "REFLECTANCETOA",
+				"productType" : "REFLECTANCETOA",
 				"platform" : "SPOT4",
 				"instrument" : "HRG",
 				"startDate" : "2012-02-08T00:00:00",
@@ -436,8 +428,7 @@
 				"K" : "392",
 				"acquisitionMode" : "PXI",
 				"incidence" : "12.40R",
-				"processingLevel" : "1A",
-				"version" : "1.0"
+				"processingLevel" : "1A"
 			}
 		}, {
 			"type" : "Feature",
@@ -445,12 +436,12 @@
 				"type" : "Polygon",
 				"coordinates" : [[[55.210633871956, -21.39683033396], [55.841674819946, -21.39683033396], [55.841674819946, -20.862875719362], [55.210633871956, -20.862875719362], [55.210633871956, -21.39683033396]]]
 			},
+ 			"id" : "urn:ogc:def:EOP:IGN::Kalideos:1839",
 			"properties" : {
-				"identifier" : "urn:ogc:def:EOP:IGN::Kalideos:1839",
 				"title" : "ISLE_2011-12-30_SPOT 5_REFLECTANCE_J_HRV\/HRG 1",
 				"description" : "description",
 				"project" : "kalideos",
-				"product" : "REFLECTANCE",
+				"productType" : "REFLECTANCE",
 				"platform" : "SPOT5",
 				"instrument" : "HRG",
 				"startDate" : "2011-12-30T00:00:00",
@@ -485,8 +476,7 @@
 				"acquisitionMode" : "J",
 				"incidence" : "04.53R",
 				"processingLevel" : "3",
-				"version" : "3.0",
-				"productType" : "TC"
+				"version" : "3.0"
 			}
 		}
 	]

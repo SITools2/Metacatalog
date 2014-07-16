@@ -73,7 +73,7 @@ public class OpenSearchMetadataIndexerTestCase extends AbstractHarvesterTestCase
     context.getAttributes().put(ContextAttributes.INDEXER_SERVER, server);
 
     String filePath = settings.getRootDirectory() + "/" + settings.getString("Tests.RESOURCES_DIRECTORY")
-        + "/opensearch/kalideos.json";
+        + "/opensearch/kalideos_corrected.json";
     MetadataContainer data = getJsonDataFromFile(filePath);
 
     SolrMetadataIndexer solrIndexer = new SolrMetadataIndexer(context);
