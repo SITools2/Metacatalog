@@ -1,4 +1,4 @@
- /*******************************************************************************
+/*******************************************************************************
  * Copyright 2010-2014 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
  *
  * This file is part of SITools2.
@@ -24,6 +24,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import net.minidev.json.JSONObject;
 
 import org.restlet.Context;
 import org.restlet.data.Form;
@@ -72,22 +74,21 @@ public class OpensearchReader extends HarvesterStep {
     this.source = conf.getSource();
     this.conf = conf;
     this.context = context;
-    
+
   }
 
   @Override
   public void execute(MetadataContainer data) throws ProcessException {
     logger = getLogger(context);
-    Integer totalResults = null;
     Integer totalResultsRead = 0;
     Integer nextPage = 1;
+    Integer nbFeaturesReturned = 0;
+
+    Reference sourceRef = new Reference(source.getUrl());
+    addOpensearchQueryParams(sourceRef, nextPage, pageSize, this.conf.getLastHarvest());
 
     do {
       data = new MetadataContainer();
-
-      Reference sourceRef = new Reference(source.getUrl());
-
-      addOpensearchQueryParams(sourceRef, nextPage, pageSize, this.conf.getLastHarvest());
 
       ClientResourceProxy clientResourceProxy = new ClientResourceProxy(sourceRef, Method.GET);
       ClientResource clientResource = clientResourceProxy.getClientResource();
@@ -101,9 +102,6 @@ public class OpensearchReader extends HarvesterStep {
 
       try {
         String json = repr.getText();
-        if (totalResults == null) {
-          totalResults = JsonPath.read(json, "$.totalResults");
-        }
         List<Object> features = JsonPath.read(json, "$.features");
 
         if (features == null) {
@@ -111,10 +109,21 @@ public class OpensearchReader extends HarvesterStep {
           logger.warning("Cannot find features node, there has been an error :\n");
           break;
         }
-        int nbFeaturesReturned = features.size();
+
+        nbFeaturesReturned = features.size();
         totalResultsRead += nbFeaturesReturned;
 
         data.setJsonData(json);
+
+        if (nbFeaturesReturned != null && nbFeaturesReturned > 0) {
+          String url = extractNextUrl(json);
+          if (url != null) {
+            sourceRef = new Reference(url);
+          }
+          else {
+            throw new ProcessException("Cannot find next url / aborting harvesting");
+          }
+        }
 
         // if (nbRecords == null) {
         // nbRecords = Integer.parseInt(searchResults.getAttributeValue("numberOfRecordsMatched"));
@@ -140,7 +149,7 @@ public class OpensearchReader extends HarvesterStep {
         throw new ProcessException(e);
       }
 
-    } while (totalResultsRead != null && totalResults != null && totalResultsRead < totalResults);
+    } while (totalResultsRead != null && nbFeaturesReturned != null && nbFeaturesReturned != 0);
 
     this.end();
 
@@ -165,10 +174,16 @@ public class OpensearchReader extends HarvesterStep {
   }
 
   /**
+   * Adds the opensearch query params.
    * 
-   * @param request
+   * @param reference
+   *          the reference
    * @param start
+   *          the start
    * @param maxRows
+   *          the max rows
+   * @param lastHarvest
+   *          the last harvest
    */
   private void addOpensearchQueryParams(Reference reference, int start, int maxRows, Date lastHarvest) {
     // reference.addQueryParameter("format", "json");
@@ -203,6 +218,27 @@ public class OpensearchReader extends HarvesterStep {
   private boolean isTemplate(Parameter param) {
     String paramValue = param.getValue();
     return paramValue.startsWith("{") && paramValue.endsWith("}");
+  }
+
+  /**
+   * Extract next url.
+   * 
+   * @param json
+   *          the json
+   * @return the string
+   */
+  private String extractNextUrl(String json) {
+    List<JSONObject> links = JsonPath.read(json, "$.links");
+    if (links == null) {
+      return null;
+    }
+    String url = null;
+    for (JSONObject link : links) {
+      if ("next".equals(link.get("rel"))) {
+        url = (String) link.get("href");
+      }
+    }
+    return url;
   }
 
 }
