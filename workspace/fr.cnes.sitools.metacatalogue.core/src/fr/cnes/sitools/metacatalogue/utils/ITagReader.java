@@ -210,7 +210,7 @@ public class ITagReader {
    *          the region loc
    */
   private void processDepartments(JsonNode departmentsRoot, Localization regionLoc) {
-    JsonNode departments = departmentsRoot.get("departements");
+    JsonNode departments = departmentsRoot.get("states");
     if (departments != null) {
       for (JsonNode department : departments) {
         try {
