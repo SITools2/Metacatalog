@@ -74,12 +74,12 @@ public class OpensearchMetadataExtractor extends HarvesterStep {
 
       String jsonString = jsonObject.toJSONString();
       MetadataRecords record = new MetadataRecords();
-      addField(record, "$.properties.identifier", jsonString, MetacatalogField.IDENTIFIER);
+      addField(record, "$.id", jsonString, MetacatalogField.IDENTIFIER);
       addField(record, "$.properties.title", jsonString, MetacatalogField.TITLE);
       addField(record, "$.properties.description", jsonString, MetacatalogField.DESCRIPTION);
 
       addField(record, "$.properties.project", jsonString, MetacatalogField.PROJECT);
-      addField(record, "$.properties.product", jsonString, MetacatalogField.PRODUCT);
+      addField(record, "$.properties.productType", jsonString, MetacatalogField.PRODUCT);
 
       addField(record, "$.properties.platform", jsonString, MetacatalogField.PLATFORM);
       addField(record, "$.properties.instrument", jsonString, MetacatalogField.INSTRUMENT);
@@ -130,7 +130,8 @@ public class OpensearchMetadataExtractor extends HarvesterStep {
       }
       catch (Exception e) {
         logger.log(Level.WARNING, e.getMessage(), e);
-        throw new ProcessException(e);
+        // throw new ProcessException(e);
+        continue;
       }
 
       // add the custom attributes

@@ -136,13 +136,15 @@ public class ITagReader {
    */
   private void processContinent(JsonNode continents) {
     Iterator<Entry<String, JsonNode>> continentsFields = continents.getFields();
-    while (continentsFields.hasNext()) {
-      Entry<String, JsonNode> continent = continentsFields.next();
-      String continentName = continent.getKey();
-      Localization continentLoc = new Localization(continentName, Localization.Type.CONTINENT);
-      itagLoc.getContinents().add(continentLoc);
+    if (continentsFields != null) {
+      while (continentsFields.hasNext()) {
+        Entry<String, JsonNode> continent = continentsFields.next();
+        String continentName = continent.getKey();
+        Localization continentLoc = new Localization(continentName, Localization.Type.CONTINENT);
+        itagLoc.getContinents().add(continentLoc);
 
-      processCountries(continent.getValue(), continentLoc);
+        processCountries(continent.getValue(), continentLoc);
+      }
     }
   }
 
@@ -157,21 +159,23 @@ public class ITagReader {
   private void processCountries(JsonNode countriesRoot, Localization continent) {
 
     JsonNode countries = countriesRoot.get("countries");
-    for (JsonNode country : countries) {
-      try {
-        Localization countriesLoc = new Localization(country.get("name").getTextValue(), Localization.Type.COUNTRY,
-            country.get("pcover").getDoubleValue());
-        continent.getChildren().add(countriesLoc);
-        if (countriesLoc.getName().equals("France")) {
-          processRegions(country.get("regions"), countriesLoc);
+    if (countries != null) {
+      for (JsonNode country : countries) {
+        try {
+          Localization countriesLoc = new Localization(country.get("name").getTextValue(), Localization.Type.COUNTRY,
+              country.get("pcover").getDoubleValue());
+          continent.getChildren().add(countriesLoc);
+          if (countriesLoc.getName().equals("France")) {
+            processRegions(country.get("regions"), countriesLoc);
+          }
+          else {
+            processCities(country.get("cities"), countriesLoc);
+          }
         }
-        else {
-          processCities(country.get("cities"), countriesLoc);
+        catch (Exception e) {
+          Engine.getLogger(this.getClass().getName()).log(Level.WARNING, e.getMessage(), e);
+          continue;
         }
-      }
-      catch (Exception e) {
-        Engine.getLogger(this.getClass().getName()).log(Level.WARNING, e.getMessage(), e);
-        continue;
       }
     }
   }
@@ -186,12 +190,14 @@ public class ITagReader {
    */
   private void processRegions(JsonNode countries, Localization countriesLoc) {
     Iterator<Entry<String, JsonNode>> regionsFields = countries.getFields();
-    while (regionsFields.hasNext()) {
-      Entry<String, JsonNode> region = regionsFields.next();
-      Localization regionLoc = new Localization(region.getKey(), Localization.Type.REGION);
-      countriesLoc.getChildren().add(regionLoc);
+    if (regionsFields != null) {
+      while (regionsFields.hasNext()) {
+        Entry<String, JsonNode> region = regionsFields.next();
+        Localization regionLoc = new Localization(region.getKey(), Localization.Type.REGION);
+        countriesLoc.getChildren().add(regionLoc);
 
-      processDepartments(region.getValue(), regionLoc);
+        processDepartments(region.getValue(), regionLoc);
+      }
     }
   }
 
@@ -205,19 +211,20 @@ public class ITagReader {
    */
   private void processDepartments(JsonNode departmentsRoot, Localization regionLoc) {
     JsonNode departments = departmentsRoot.get("departements");
-    for (JsonNode department : departments) {
-
-      try {
-        Localization departementLoc = new Localization(department.get("name").getTextValue(),
-            Localization.Type.DEPARTMENT, department.get("pcover").getDoubleValue());
-        regionLoc.getChildren().add(departementLoc);
-        if (department.get("cities") != null) {
-          processCities(department.get("cities"), departementLoc);
+    if (departments != null) {
+      for (JsonNode department : departments) {
+        try {
+          Localization departementLoc = new Localization(department.get("name").getTextValue(),
+              Localization.Type.DEPARTMENT, department.get("pcover").getDoubleValue());
+          regionLoc.getChildren().add(departementLoc);
+          if (department.get("cities") != null) {
+            processCities(department.get("cities"), departementLoc);
+          }
         }
-      }
-      catch (Exception e) {
-        Engine.getLogger(this.getClass().getName()).log(Level.WARNING, e.getMessage(), e);
-        continue;
+        catch (Exception e) {
+          Engine.getLogger(this.getClass().getName()).log(Level.WARNING, e.getMessage(), e);
+          continue;
+        }
       }
     }
   }
