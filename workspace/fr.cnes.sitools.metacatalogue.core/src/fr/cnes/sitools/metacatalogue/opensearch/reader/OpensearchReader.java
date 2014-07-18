@@ -87,7 +87,10 @@ public class OpensearchReader extends HarvesterStep {
     Reference sourceRef = new Reference(source.getUrl());
     addOpensearchQueryParams(sourceRef, nextPage, pageSize, this.conf.getLastHarvest());
 
+    boolean nextLink = true;
+
     do {
+
       data = new MetadataContainer();
 
       ClientResourceProxy clientResourceProxy = new ClientResourceProxy(sourceRef, Method.GET);
@@ -100,10 +103,19 @@ public class OpensearchReader extends HarvesterStep {
 
       Representation repr = clientResource.get(MediaType.APPLICATION_JSON);
 
+      String json;
       try {
-        String json = repr.getText();
-        List<Object> features = JsonPath.read(json, "$.features");
+        json = repr.getText();
 
+        String url = extractNextUrl(json);
+        if (url != null) {
+          sourceRef = new Reference(url);
+        }
+        else {
+          nextLink = false;
+        }
+
+        List<Object> features = JsonPath.read(json, "$.features");
         if (features == null) {
           // if there is an error we log it and exit the loop otherwise it will loop infinitely
           logger.warning("Cannot find features node, there has been an error :\n");
@@ -115,26 +127,6 @@ public class OpensearchReader extends HarvesterStep {
 
         data.setJsonData(json);
 
-        if (nbFeaturesReturned != null && nbFeaturesReturned > 0) {
-          String url = extractNextUrl(json);
-          if (url != null) {
-            sourceRef = new Reference(url);
-          }
-          else {
-            throw new ProcessException("Cannot find next url / aborting harvesting");
-          }
-        }
-
-        // if (nbRecords == null) {
-        // nbRecords = Integer.parseInt(searchResults.getAttributeValue("numberOfRecordsMatched"));
-        // logger.info("Number of records found = " + nbRecords);
-        // HarvesterResult result = (HarvesterResult) context.getAttributes().get(ContextAttributes.RESULT);
-        // result.setNbDocumentsRetrieved(result.getNbDocumentsIndexed() + nbRecords);
-        // }
-        //
-        // nextRecord = Integer.parseInt(searchResults.getAttributeValue("nextRecord"));
-        //
-        // data.setXmlData(searchResults);
         HarvestStatus status = (HarvestStatus) context.getAttributes().get(ContextAttributes.STATUS);
         status.setNbDocumentsRetrieved(status.getNbDocumentsRetrieved() + features.size());
 
@@ -149,7 +141,7 @@ public class OpensearchReader extends HarvesterStep {
         throw new ProcessException(e);
       }
 
-    } while (totalResultsRead != null && nbFeaturesReturned != null && nbFeaturesReturned != 0);
+    } while (nextLink);
 
     this.end();
 
