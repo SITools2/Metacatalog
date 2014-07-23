@@ -30,6 +30,9 @@ public class HarvestStatus {
   /** The Constant RESULT_SUCCESS. */
   public static final String RESULT_SUCCESS = "SUCCESS";
 
+  /** The Constant RESULT_PARTIAL_SUCCESS. */
+  public static final String RESULT_PARTIAL_SUCCESS = "PARTIAL_SUCCESS";
+
   /** The Constant RESULT_STOPPED_USER. */
   public static final String RESULT_STOPPED_USER = "STOPPED_USER";
 

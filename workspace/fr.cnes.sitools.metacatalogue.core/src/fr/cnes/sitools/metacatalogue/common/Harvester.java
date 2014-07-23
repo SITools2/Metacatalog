@@ -83,7 +83,12 @@ public abstract class Harvester implements Runnable {
           HarvesterUtils.merge(application.getStore().getList());
         }
         harvestConf.setLastHarvest(new Date());
-        status.setResult(HarvestStatus.RESULT_SUCCESS);
+        if (status.getNbDocumentsInvalid() == 0) {
+          status.setResult(HarvestStatus.RESULT_SUCCESS);
+        }
+        else {
+          status.setResult(HarvestStatus.RESULT_PARTIAL_SUCCESS);
+        }
         application.getStore().save(harvestConf);
       }
       catch (Exception e) {
