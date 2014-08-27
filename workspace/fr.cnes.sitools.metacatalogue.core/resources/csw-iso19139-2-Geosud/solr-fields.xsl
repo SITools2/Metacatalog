@@ -196,7 +196,7 @@
 		</xsl:for-each>
 
 		
-		<field name="product"><xsl:value-of select="string(gmd:contentInfo/gmd:MD_ImageDescription/gmd:contentType)"/></field>
+		<field name="productType"><xsl:value-of select="string(gmd:contentInfo/gmd:MD_ImageDescription/gmd:contentType)"/></field>
 		
 		<field name="processingLevel"><xsl:value-of select="string(gmd:contentInfo/gmd:MD_ImageDescription/gmd:processingLevelCode/gmd:MD_Identifier/gmd:code/gco:CharacterString)"/></field>
 		

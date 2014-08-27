@@ -53,13 +53,13 @@ public class ITagReader {
   /**
    * Constructor with etagUrl and geometry as WKT.
    * 
-   * @param etagUrl
+   * @param itagUrl
    *          the url to query
    * @param geometry
    *          the geometry to query
    */
-  public ITagReader(String etagUrl, String geometry) {
-    url = etagUrl.replace("{footprint}", geometry);
+  public ITagReader(String itagUrl, String geometry) {
+    url = itagUrl.replace("{footprint}", geometry);
     itagLoc = new ItagLocalization();
 
   }
@@ -67,15 +67,15 @@ public class ITagReader {
   /**
    * Constructor with etagUrl and geometry as WKT.
    * 
-   * @param etagUrl
+   * @param itagUrl
    *          the url to query
    * @param geometry
    *          the geometry to query
    * @param withCities
    *          true to query all cities, false otherwise
    */
-  public ITagReader(String etagUrl, String geometry, boolean withCities) {
-    this(etagUrl, geometry);
+  public ITagReader(String itagUrl, String geometry, boolean withCities) {
+    this(itagUrl, geometry);
     if (withCities) {
       Reference reference = new Reference(url);
       reference.addQueryParameter("cities", "all");
@@ -99,7 +99,7 @@ public class ITagReader {
     try {
       repr = clientResource.get(MediaType.APPLICATION_JSON);
       if (clientResource.getStatus().isError()) {
-        throw new ProcessException("Cannot read ETAG", clientResource.getStatus().getThrowable());
+        throw new ProcessException("Cannot read ITAG", clientResource.getStatus().getThrowable());
       }
       // read the suggest JSON
       ObjectMapper mapper = new ObjectMapper();

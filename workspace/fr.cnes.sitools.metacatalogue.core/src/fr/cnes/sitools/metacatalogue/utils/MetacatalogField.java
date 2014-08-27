@@ -122,7 +122,7 @@ public enum MetacatalogField {
   PROJECT("project"),
 
   /** The product. */
-  PRODUCT("product"),
+  PRODUCT("productType"),
 
   /** CONTINENTS */
   CONTINENT("continent"),
