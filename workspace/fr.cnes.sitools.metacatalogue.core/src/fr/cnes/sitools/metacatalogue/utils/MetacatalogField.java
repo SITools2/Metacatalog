@@ -67,6 +67,9 @@ public enum MetacatalogField {
   /** The identifier. */
   IDENTIFIER("identifier"),
 
+  /** The identifier. */
+  ID("id"),
+  
   /** The language. */
   LANGUAGE("language"),
 

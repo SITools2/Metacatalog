@@ -29,6 +29,12 @@ import java.util.logging.Logger;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 
+import org.apache.solr.client.solrj.SolrQuery;
+import org.apache.solr.client.solrj.SolrServer;
+import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.response.QueryResponse;
+import org.apache.solr.common.SolrDocument;
+import org.apache.solr.common.SolrDocumentList;
 import org.fao.geonet.csw.common.util.Xml;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -99,7 +105,7 @@ public class CswMetadataExtractor extends HarvesterStep {
 
         List<Field> fields = getFields(doc);
         List<Error> errors = getErrors(doc);
-
+        
         CswGeometryExtractor extractor = new CswGeometryExtractor();
 
         MetadataRecords mdRecords = new MetadataRecords(fields, errors);
@@ -117,8 +123,36 @@ public class CswMetadataExtractor extends HarvesterStep {
           // modified
           List<String> frmt = HarvesterSettings.getInstance().getDateFormats();
           String modified = DateUtils.format(status.getStartDate(), frmt);
-
           addField(mdRecords, modified, MetacatalogField.MODIFIED.getField());
+          
+          // created
+          Date creationDate = null;
+          SolrServer server = (SolrServer) context.getAttributes().get("INDEXER_SERVER");
+          SolrQuery solrQuery = new SolrQuery();
+          String identifier = getId(doc);
+          if (identifier != null) {
+            try {
+              solrQuery.setQuery(MetacatalogField.IDENTIFIER.getField() + ":" + String.format("\"%s\"", identifier.toString()));
+              QueryResponse rsp = server.query(solrQuery);
+              SolrDocumentList listDocuments = rsp.getResults();
+              if (!listDocuments.isEmpty()) {
+                SolrDocument solrDocument = listDocuments.get(0);
+                creationDate = (Date) solrDocument.get(MetacatalogField.CREATED.getField());
+              }
+            }
+            catch (SolrServerException e) {
+              e.printStackTrace();
+            }
+          }
+          String created;
+          if (creationDate != null) {
+            created = DateUtils.format(creationDate, frmt);
+          } 
+          else {
+            created = DateUtils.format(status.getStartDate(), frmt);
+          }
+          addField(mdRecords, created, MetacatalogField.CREATED.getField());
+
 
           listMetadataRecords.add(mdRecords);
 
@@ -144,6 +178,22 @@ public class CswMetadataExtractor extends HarvesterStep {
     }
     next.execute(data);
 
+  }
+
+  /**
+   * getId
+   * @param doc the xml document
+   * @return the id
+   */
+  private String getId(Element doc) {
+    String value = null;
+    List<Element> xmlFields = doc.getChildren("field");
+    for (Element elt : xmlFields) {
+      if (elt.getAttributeValue("name").equals(MetacatalogField.IDENTIFIER.getField())){
+        value = elt.getValue();
+      }
+    }
+    return value;
   }
 
   private List<Field> getFields(Element doc) {

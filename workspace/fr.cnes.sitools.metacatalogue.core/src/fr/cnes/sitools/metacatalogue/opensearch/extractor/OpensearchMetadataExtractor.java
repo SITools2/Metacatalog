@@ -26,6 +26,12 @@ import java.util.logging.Logger;
 
 import net.minidev.json.JSONObject;
 
+import org.apache.solr.client.solrj.SolrQuery;
+import org.apache.solr.client.solrj.SolrServer;
+import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.response.QueryResponse;
+import org.apache.solr.common.SolrDocument;
+import org.apache.solr.common.SolrDocumentList;
 import org.restlet.Context;
 import org.restlet.engine.util.DateUtils;
 
@@ -119,11 +125,38 @@ public class OpensearchMetadataExtractor extends HarvesterStep {
       // modified
       List<String> frmt = HarvesterSettings.getInstance().getDateFormats();
       String modified = DateUtils.format(status.getStartDate(), frmt);
-
       addField(record, modified, MetacatalogField.MODIFIED.getField());
 
-      OpensearchGeometryExtractor extractor = new OpensearchGeometryExtractor();
+      // created
+      Date creationDate = null;
+      SolrServer server = (SolrServer) context.getAttributes().get("INDEXER_SERVER");
+      SolrQuery solrQuery = new SolrQuery();
+      Object identifier = jsonObject.get(MetacatalogField.ID.getField());
+      if (identifier != null) {
+        try {
+          solrQuery.setQuery(MetacatalogField.IDENTIFIER.getField() + ":" + String.format("\"%s\"", identifier.toString()));
+          QueryResponse rsp = server.query(solrQuery);
+          SolrDocumentList listDocuments = rsp.getResults();
+          if (!listDocuments.isEmpty()) {
+            SolrDocument solrDocument = listDocuments.get(0);
+            creationDate = (Date) solrDocument.get(MetacatalogField.CREATED.getField());
+          }
+        }
+        catch (SolrServerException e) {
+          e.printStackTrace();
+        }
+      }
+      String created;
+      if (creationDate != null) {
+        created = DateUtils.format(creationDate, frmt);
+      } 
+      else {
+        created = DateUtils.format(status.getStartDate(), frmt);
+      }
+      addField(record, created, MetacatalogField.CREATED.getField());
 
+      
+      OpensearchGeometryExtractor extractor = new OpensearchGeometryExtractor();
       try {
         String geometry = JsonPath.read(jsonString, "$.geometry").toString();
         record = extractor.extractGeometry(geometry, record, context);
