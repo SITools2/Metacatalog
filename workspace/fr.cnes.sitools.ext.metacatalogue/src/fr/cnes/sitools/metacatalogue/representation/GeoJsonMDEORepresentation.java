@@ -150,7 +150,7 @@ public class GeoJsonMDEORepresentation extends WriterRepresentation {
             jGenerator.writeStringField("type", "Feature");
             // id
             jGenerator.writeFieldName("id");
-            mapper.writeValue(jGenerator, solrDocument.get("identifier"));                        
+            mapper.writeValue(jGenerator, solrDocument.get(MetacatalogField.IDENTIFIER.getField()));                        
             // geometry
             jGenerator.writeFieldName("geometry");
             jGenerator.writeRawValue(geometry.toString());
