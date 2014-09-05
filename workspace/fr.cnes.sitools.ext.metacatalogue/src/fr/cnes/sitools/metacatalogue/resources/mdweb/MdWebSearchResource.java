@@ -28,6 +28,7 @@ import org.apache.solr.common.params.SolrParams;
 import org.apache.solr.common.util.NamedList;
 import org.restlet.data.Form;
 import org.restlet.data.Parameter;
+import org.restlet.data.Reference;
 import org.restlet.data.Status;
 import org.restlet.ext.wadl.MethodInfo;
 import org.restlet.representation.Representation;
@@ -98,8 +99,11 @@ public class MdWebSearchResource extends AbstractSearchResource {
       SitoolsSettings settings = getSettings();
       String applicationBaseUrl = settings.getPublicHostDomain() + application.getAttachementRef();
 
+      Reference ref = new Reference(getRequest().getResourceRef().getBaseRef());
+      ref.setQuery(query.getQueryString());
+      
       return new GeoJsonMDEORepresentation(rsp, isAuthenticated, applicationBaseUrl,
-          searcher.getAllConceptsAsMap(getLanguage()), thesaurusFacetFields);
+          ref, 0, "start", "rows", searcher.getAllConceptsAsMap(getLanguage()), thesaurusFacetFields);
     }
     catch (SolrServerException e) {
       throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "Error while querying solr index", e);

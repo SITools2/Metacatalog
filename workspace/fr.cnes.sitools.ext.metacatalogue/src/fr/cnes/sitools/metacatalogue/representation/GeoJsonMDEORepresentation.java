@@ -38,12 +38,16 @@ import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.restlet.data.Form;
 import org.restlet.data.MediaType;
+import org.restlet.data.Parameter;
+import org.restlet.data.Reference;
 import org.restlet.data.Status;
 import org.restlet.engine.util.DateUtils;
 import org.restlet.representation.WriterRepresentation;
 import org.restlet.resource.ResourceException;
 
+import fr.cnes.sitools.metacatalogue.resources.opensearch.OpenSearchQuery;
 import fr.cnes.sitools.metacatalogue.utils.MetacatalogField;
 import fr.cnes.sitools.thesaurus.ThesaurusSearcher;
 
@@ -70,6 +74,14 @@ public class GeoJsonMDEORepresentation extends WriterRepresentation {
   private boolean authenticatedUser;
   /** The application base url */
   private String applicationBaseUrl;
+  /** the base reference */
+  private Reference reference;
+  /** the start index offset (0 for solr, 1 for opensearch) */
+  private long offset;
+  /** the start param name */
+  private String startParamName;
+  /** the limit param name */
+  private String limitParamName;
 
   private List<FacetField> facets;
   private NamedList<List<PivotField>> pivotFacets;
@@ -101,6 +113,40 @@ public class GeoJsonMDEORepresentation extends WriterRepresentation {
     this.rangesFacets = queryResponse.getFacetRanges();
     this.authenticatedUser = authenticatedUser;
     this.applicationBaseUrl = applicationBaseUrl;
+    this.reference = null;
+    this.offset = 0;
+    this.conceptsMap = conceptsMap;
+    this.thesaurusFacetFields = thesaurusFacetFields;
+
+  }
+  
+  /**
+   * GeoJsonMDEORepresentation
+   * 
+   * @param queryResponse
+   * @param authenticatedUser
+   * @param applicationBaseUrl
+   * @param reference
+   * @param offset
+   * @param startParamName
+   * @param limitParamName
+   * @param conceptsMap
+   * @param thesaurusFacetFields
+   */
+  public GeoJsonMDEORepresentation(QueryResponse queryResponse, boolean authenticatedUser, String applicationBaseUrl,
+      Reference reference, long offset, String startParamName, String limitParamName,
+      Map<String, String> conceptsMap, List<String> thesaurusFacetFields) {
+    super(MediaType.APPLICATION_JSON);
+    this.listDocuments = queryResponse.getResults();
+    this.facets = queryResponse.getFacetFields();
+    this.pivotFacets = queryResponse.getFacetPivot();
+    this.rangesFacets = queryResponse.getFacetRanges();
+    this.authenticatedUser = authenticatedUser;
+    this.applicationBaseUrl = applicationBaseUrl;
+    this.reference = reference;
+    this.offset = offset;
+    this.startParamName = startParamName;
+    this.limitParamName = limitParamName;
     this.conceptsMap = conceptsMap;
     this.thesaurusFacetFields = thesaurusFacetFields;
   }
@@ -110,13 +156,76 @@ public class GeoJsonMDEORepresentation extends WriterRepresentation {
 
     JsonFactory jfactory = new JsonFactory();
     JsonGenerator jGenerator = null;
-
+    
+    int limit = listDocuments.size();
+    long startIndex = listDocuments.getStart() + this.offset; // solr index starts at 0 while opensearch index starts at 1
+    
     try {
       jGenerator = jfactory.createJsonGenerator(writer);
       ObjectMapper mapper = new ObjectMapper();
       jGenerator.writeStartObject();
       jGenerator.writeStringField("type", "FeatureCollection");
       jGenerator.writeNumberField("totalResults", listDocuments.getNumFound());
+      jGenerator.writeNumberField("startIndex", startIndex); 
+      jGenerator.writeNumberField("lastIndex", startIndex + limit - 1);
+      
+      // Links
+      jGenerator.writeArrayFieldStart("links");
+      
+      if (reference != null) {
+        
+        String nextReferenceUrl;
+       
+        // first
+        jGenerator.writeStartObject();
+        jGenerator.writeStringField("rel", "first");
+        jGenerator.writeStringField("href", getLinkReference(offset, limit).toString());
+        jGenerator.writeEndObject();
+                    
+        // previous (if needed)
+        if (startIndex != offset) {
+          
+          long previousStart;
+          if (startIndex <= offset) {
+            previousStart = offset;
+          } 
+          else {
+            previousStart = startIndex - limit;
+          }
+          
+          Reference ref = getLinkReference(previousStart, limit);
+          
+          jGenerator.writeStartObject();
+          jGenerator.writeStringField("rel", "previous");
+          jGenerator.writeStringField("href", ref.toString());
+          jGenerator.writeEndObject();
+          
+        }
+        
+        // next (if needed)
+        if (startIndex + limit <= listDocuments.getNumFound() - 1) {
+          
+          long nextStart;
+          if (startIndex + limit > listDocuments.getNumFound() - 1) {
+            nextStart = listDocuments.getNumFound();
+          } 
+          else {
+            nextStart = startIndex + limit;
+          }
+          
+          Reference ref = getLinkReference(nextStart, limit);
+          
+          jGenerator.writeStartObject();
+          jGenerator.writeStringField("rel", "next");
+          jGenerator.writeStringField("href", ref.toString());
+          jGenerator.writeEndObject();
+        }
+        
+      }
+      
+      jGenerator.writeEndArray();
+      
+      
       // Facets
       jGenerator.writeObjectFieldStart("facet_counts");
       if (this.facets != null && !this.facets.isEmpty()) {
@@ -219,6 +328,8 @@ public class GeoJsonMDEORepresentation extends WriterRepresentation {
     }
 
   }
+
+
 
   private boolean getPublicServices(SolrDocument solrDocument) {
     Object obj = solrDocument.getFirstValue(MetacatalogField._PUBLIC_SERVICES.getField());
@@ -346,4 +457,37 @@ public class GeoJsonMDEORepresentation extends WriterRepresentation {
   private String formatDate(Date date) {
     return DateUtils.format(date, FORMAT_ISO_8601_WITHOUT_TIME_ZONE);
   }
+  
+  
+  
+  /**
+   * getLinkReference
+   * @param _start
+   * @param _limit
+   * @return reference
+   */
+  private Reference getLinkReference(long _start, int _limit) {
+    
+    Reference ref = new Reference(reference);
+    
+    Form queryForm = new Form();
+
+    queryForm.add(0, ref.getQueryAsForm().get(0));
+   
+    Parameter startParam = new Parameter();
+    startParam.setFirst(this.startParamName);
+    startParam.setSecond(String.format("%s", _start));
+    queryForm.add(startParam);
+    
+    Parameter limitParam = new Parameter();
+    limitParam.setFirst(this.limitParamName);
+    limitParam.setSecond(String.format("%s", _limit));
+    queryForm.add(limitParam);
+    
+    ref.setQuery(queryForm.getQueryString());
+    
+    return ref;
+  }
+  
+  
 }

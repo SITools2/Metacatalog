@@ -30,6 +30,7 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.restlet.data.Form;
 import org.restlet.data.Parameter;
+import org.restlet.data.Reference;
 import org.restlet.data.Status;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ResourceException;
@@ -93,8 +94,12 @@ public abstract class AbstractOpensearchSearchResource extends AbstractSearchRes
       boolean isAuthenticated = getClientInfo().isAuthenticated();
       SitoolsSettings settings = getSettings();
       String applicationBaseUrl = settings.getPublicHostDomain() + application.getAttachementRef();
-
-      repr = new GeoJsonMDEORepresentation(rsp, isAuthenticated, applicationBaseUrl,
+      
+      Reference ref = new Reference(getRequest().getResourceRef().getBaseRef());
+      ref.setQuery(query.getQueryString());
+          
+      repr = new GeoJsonMDEORepresentation(rsp, isAuthenticated, applicationBaseUrl, 
+          ref, 1, OpenSearchQuery.START_INDEX.getParamName(), OpenSearchQuery.COUNT.getParamName(),
           searcher.getAllConceptsAsMap(getLanguage()), thesaurusFacetFields);
     }
     catch (SolrServerException e) {
