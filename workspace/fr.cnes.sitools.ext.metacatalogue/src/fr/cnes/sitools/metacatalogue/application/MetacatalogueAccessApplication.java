@@ -20,15 +20,25 @@ package fr.cnes.sitools.metacatalogue.application;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.apache.solr.client.solrj.SolrServer;
 import org.restlet.Context;
 import org.restlet.Restlet;
+import org.restlet.data.Form;
+import org.restlet.data.Parameter;
 import org.restlet.data.Status;
+import org.restlet.ext.wadl.ApplicationInfo;
+import org.restlet.ext.wadl.DocumentationInfo;
+import org.restlet.ext.wadl.ExtendedResourceInfo;
+import org.restlet.ext.wadl.ResourceInfo;
 import org.restlet.resource.ResourceException;
+import org.restlet.routing.Extractor;
+import org.restlet.routing.Redirector;
 import org.restlet.routing.Router;
 import org.restlet.security.Authorizer;
 import org.restlet.security.ChallengeAuthenticator;
@@ -53,6 +63,8 @@ import fr.cnes.sitools.metacatalogue.security.SitoolsChallengeScheme;
 import fr.cnes.sitools.plugins.applications.business.AbstractApplicationPlugin;
 import fr.cnes.sitools.plugins.applications.model.ApplicationPluginModel;
 import fr.cnes.sitools.plugins.applications.model.ApplicationPluginParameter;
+import fr.cnes.sitools.proxy.RedirectorProxy;
+import fr.cnes.sitools.server.Consts;
 
 /**
  * Metacatalog application for Opensearch exposition
@@ -166,6 +178,9 @@ public class MetacatalogueAccessApplication extends AbstractApplicationPlugin {
 
     // MDWEB API exposition
     router.attach("/mdweb/search", MdWebSearchResource.class);
+    
+    String urlSolrSearch = getSolrCoreUrl() + "/select?{rq}";
+    router.attach("/select", new Redirector(getContext(), urlSolrSearch, Redirector.MODE_SERVER_OUTBOUND));
 
     router.attach("/histo/{numbins}", HistogramResource.class);
 
@@ -473,5 +488,8 @@ public class MetacatalogueAccessApplication extends AbstractApplicationPlugin {
       }
     };
   }
+  
+  
+  
 
 }
