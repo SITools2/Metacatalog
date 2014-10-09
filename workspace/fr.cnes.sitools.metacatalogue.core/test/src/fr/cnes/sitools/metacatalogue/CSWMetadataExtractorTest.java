@@ -25,6 +25,8 @@ import static org.junit.Assert.assertNotNull;
 import java.io.IOException;
 
 import org.jdom.JDOMException;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.restlet.Context;
 
@@ -32,13 +34,37 @@ import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
 import fr.cnes.sitools.metacatalogue.common.MetadataContainer;
 import fr.cnes.sitools.metacatalogue.csw.extractor.CswMetadataExtractor;
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
+import fr.cnes.sitools.metacatalogue.index.solr.SolRUtils;
 import fr.cnes.sitools.metacatalogue.model.Field;
 import fr.cnes.sitools.metacatalogue.model.MetadataRecords;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
+import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
 import fr.cnes.sitools.model.HarvesterModel;
+import fr.cnes.sitools.server.ContextAttributes;
+
+import org.apache.solr.client.solrj.SolrServer;
 
 public class CSWMetadataExtractorTest extends AbstractHarvesterTestCase {
 
+  private SolrServer server;
+  
+  @Before
+  public void setupTest() throws Exception {
+
+    HarvesterSettings settings = (HarvesterSettings) HarvesterSettings.getInstance();
+    server = SolRUtils.getEmbeddedSolRServer(settings.getStoreDIR("Tests.SOLR_HOME"), "solr.xml", "geosud");
+    server.deleteByQuery("*:*");
+    server.commit();
+
+  }
+
+  @After
+  public void tearDown() {
+    if (server != null) {
+      server.shutdown();
+    }
+  }
+  
   @Test
   public void test() throws IOException, JDOMException, ProcessException {
     String filePath = settings.getRootDirectory() + "/" + settings.getString("Tests.RESOURCES_DIRECTORY")
@@ -47,6 +73,8 @@ public class CSWMetadataExtractorTest extends AbstractHarvesterTestCase {
     MetadataContainer data = getXMLDataFromFile(filePath);
 
     Context context = initContext();
+    
+    context.getAttributes().put(ContextAttributes.INDEXER_SERVER, server);
 
     HarvesterModel conf = createHarvesterModelForTest("geosud_test");
 
