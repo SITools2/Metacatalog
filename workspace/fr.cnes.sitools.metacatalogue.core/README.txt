@@ -2,8 +2,8 @@
 ______________
 
 Identification                       : SITools2/Metacatalogue
-Date                                 : 2013-12-10
-Version                              : 0.8
+Date                                 : 2014-10-13
+Version                              : 1.0
 Owner                                : CNES
 Developer                            : AKKA Technologies
 Type                                 : Prototype
@@ -12,12 +12,23 @@ Project page                         :
 Classification                       : Not Confidential - Opensource GPL V3
 Characteristics                      : Standalone, Java, SolR, Jena
 Role/Function                        :  
-Reference tag                        : (0.7)
+Reference tag                        : (0.8)
 
 2/ Changes
 
 __________
+- 1.0 (13/10/2014) - major version corresponding to security acceptance
+
+	- Enhancement :
+		-> harvest status
+		-> opensearch harvesting
+		-> Update geojson output
+		-> Metadata created date
+		-> proxy solr request
+
+__________
 - 0.8 (12/06/2014)
+
 	- New feature :
 		-> SSO compatibility (OAuth)
 		-> Full SolR API capability through search interface
