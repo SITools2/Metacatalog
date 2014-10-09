@@ -15,7 +15,7 @@
 									"pcover" : 100,
 									"regions" : {
 										"Midi-Pyrenees" : {
-											"departements" : [{
+											"states" : [{
 													"name" : "Haute-Garonne",
 													"pcover" : 64.04,
 													"cities" : ["Aucamville", "Aurignac", "Aussonne", "Auterive", "Auzeville-Tolosane", "Auzielle", "Ayguesvives", "Balma", "Bazi\u00e8ge", "Beaumont-sur-L\u00e8ze", "Beaupuy", "Beauzelle", "Belberaud", "B\u00e9rat", "Blagnac", "Boulogne-sur-Gesse", "Brax", "Brugui\u00e8res", "Calmont", "Carbonne", "Castanet-Tolosan", "Castelginest", "Castelmaurou", "Caz\u00e8res", "C\u00e9pet", "Cintegabelle", "Colomiers", "Cornebarrieu", "Cugnaux", "Daux", "Dr\u00e9mil-Lafage", "Eaunes", "Escalquens", "Fenouillet", "Flourens", "Fonbeauzard", "Fonsorbes", "Fontenilles", "Frouzins", "Gagnac-sur-Garonne", "Gaillac-Toulza", "Gardouch", "Garidech", "Gragnague", "Gratentour", "Labarthe-Rivi\u00e8re", "Labarthe-sur-L\u00e8ze", "Labastide-Beauvoir", "Labastide-Saint-Sernin", "Labastidette", "Lab\u00e8ge", "Lacasse", "Lacroix-Falgarde", "Lagardelle-sur-L\u00e8ze", "Lanta", "Lapeyrouse-Fossat", "La Salvetat-Saint-Gilles", "Launac", "Launaguet", "Le Fauga", "Le Fousseret", "L\u00e9guevin", "Lespinasse", "L\u00e9vignac", "Lherm", "Longages", "L'Union", "Marquefave", "Martres-Tolosane", "Merville", "Miremont", "Mondonville", "Mons", "Montaigut-sur-Save", "Montastruc-la-Conseill\u00e8re", "Montberon", "Montesquieu-Volvestre", "Montgiscard", "Montlaur", "Montrab\u00e9", "Muret", "Nailloux", "No\u00e9", "Paulhac", "P\u00e9chabou", "Pechbonnieu", "Pibrac", "Pinsaguel", "Plaisance-du-Touch", "Pompertuzat", "Portet-sur-Garonne", "Ramonville-Saint-Agne", "Rieumes", "Rieux-Volvestre", "Roquettes", "Rouffiac-Tolosan", "Saint-Alban", "Sainte-Foy-de-Peyroli\u00e8res", "Saint-Gaudens", "Saint-Geni\u00e8s-Bellevue", "Saint-Jean", "Saint-Jory", "Saint-Loup-Cammas", "Saint-Lys", "Saint-Orens-de-Gameville", "Saint-Sauveur", "Saint-Sulpice-sur-L\u00e8ze", "Salies-du-Salat", "Saubens", "Seilh", "Seysses", "Toulouse", "Tournefeuille", "Venerque", "Verfeil", "Vernet", "Vieille-Toulouse", "Villeneuve-de-Rivi\u00e8re", "Villeneuve-Tolosane", "Villenouvelle"]
@@ -37,7 +37,7 @@
 											]
 										},
 										"Languedoc-Roussillon" : {
-											"departements" : [{
+											"states" : [{
 													"name" : "Aude",
 													"pcover" : 0.13
 												}

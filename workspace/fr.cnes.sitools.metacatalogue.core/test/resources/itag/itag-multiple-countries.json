@@ -19,7 +19,7 @@
 									"pcover" : 42.78,
 									"regions" : {
 										"Aquitaine" : {
-											"departements" : [{
+											"states" : [{
 													"name" : "Pyrenees-Atlantiques",
 													"pcover" : 14.71,
 													"cities" : ["Ahetze", "Anglet", "Arbonne", "Arcangues", "Ascain", "Bassussarry", "Biarritz", "Bidart", "Ciboure", "Gu\u00e9thary", "Hendaye", "Saint-Jean-de-Luz", "Saint-P\u00e9e-sur-Nivelle", "Sare", "Urrugne"]
