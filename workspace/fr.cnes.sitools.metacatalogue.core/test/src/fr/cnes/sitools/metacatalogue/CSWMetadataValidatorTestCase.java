@@ -23,8 +23,11 @@ import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
 
+import org.apache.solr.client.solrj.SolrServer;
 import org.jdom.Element;
 import org.jdom.JDOMException;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.restlet.Context;
 
@@ -35,9 +38,12 @@ import fr.cnes.sitools.metacatalogue.csw.extractor.LocalisationExtractor;
 import fr.cnes.sitools.metacatalogue.csw.extractor.ResolutionExtractor;
 import fr.cnes.sitools.metacatalogue.csw.validator.CswMetadataValidator;
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
+import fr.cnes.sitools.metacatalogue.index.solr.SolRUtils;
 import fr.cnes.sitools.metacatalogue.utils.CheckStepsInformation;
+import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
 import fr.cnes.sitools.model.HarvesterModel;
 import fr.cnes.sitools.proxy.ProxySettings;
+import fr.cnes.sitools.server.ContextAttributes;
 
 /**
  * CSWMetadataValidatorTestCase
@@ -49,6 +55,25 @@ import fr.cnes.sitools.proxy.ProxySettings;
 public class CSWMetadataValidatorTestCase extends AbstractHarvesterTestCase {
 
   private int nbFieldsExpected;
+  
+  private SolrServer server;
+  
+  @Before
+  public void setupTest() throws Exception {
+
+    HarvesterSettings settings = (HarvesterSettings) HarvesterSettings.getInstance();
+    server = SolRUtils.getEmbeddedSolRServer(settings.getStoreDIR("Tests.SOLR_HOME"), "solr.xml", "geosud");
+    server.deleteByQuery("*:*");
+    server.commit();
+
+  }
+
+  @After
+  public void tearDown() {
+    if (server != null) {
+      server.shutdown();
+    }
+  }
 
   /**
    * test
@@ -71,6 +96,8 @@ public class CSWMetadataValidatorTestCase extends AbstractHarvesterTestCase {
     nbFieldsExpected = Integer.parseInt(xmldata.getAttributeValue("numberOfRecordsReturned"));
 
     Context context = initContext();
+    
+    context.getAttributes().put(ContextAttributes.INDEXER_SERVER, server);
 
     HarvesterModel conf = createHarvesterModelForTest("geosud_test");
 
