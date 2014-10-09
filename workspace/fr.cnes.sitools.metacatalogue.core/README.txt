@@ -17,7 +17,7 @@ Reference tag                        : (0.8)
 2/ Changes
 
 __________
-- 1.0 (13/10/2014) - major version corresponding to security acceptance
+- 1.0 (13/10/2014) - upgrade version following security acceptance
 
 	- Enhancement :
 		-> harvest status
