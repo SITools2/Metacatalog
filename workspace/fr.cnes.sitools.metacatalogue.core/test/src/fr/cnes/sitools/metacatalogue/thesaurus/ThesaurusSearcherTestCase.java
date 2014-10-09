@@ -67,7 +67,7 @@ public class ThesaurusSearcherTestCase extends AbstractHarvesterTestCase {
     ThesaurusSearcher searcher = new ThesaurusSearcher(THESAURUS_NAME);
     List<Concept> concepts = searcher.searchNarrowersBroader(prefLabel, "fr");
     assertNotNull(concepts);
-    assertEquals(21, concepts.size());
+    assertEquals(23, concepts.size());
     assertConceptExists(concepts, "Albedo de surface");
 
   }
@@ -80,7 +80,7 @@ public class ThesaurusSearcherTestCase extends AbstractHarvesterTestCase {
     ThesaurusSearcher searcher = new ThesaurusSearcher(THESAURUS_NAME);
     List<Concept> concepts = searcher.searchNarrowersBroader(prefLabel, "en");
     assertNotNull(concepts);
-    assertEquals(21, concepts.size());
+    assertEquals(23, concepts.size());
 
     assertConceptExists(concepts, "Albedo");
   }
@@ -114,7 +114,7 @@ public class ThesaurusSearcherTestCase extends AbstractHarvesterTestCase {
     ThesaurusSearcher searcher = new ThesaurusSearcher(THESAURUS_NAME);
     List<Concept> concepts = searcher.getAllConcepts("fr");
     assertNotNull(concepts);
-    assertEquals(169, concepts.size());
+    assertEquals(209, concepts.size());
   }
 
   @Test
@@ -125,7 +125,7 @@ public class ThesaurusSearcherTestCase extends AbstractHarvesterTestCase {
     Map<String, String> map = searcher.getAllConceptsAsMap("fr");
     assertNotNull(map);
     // Il y a des altLabels en double... du coup on a 160 concepts au lieu des 158...
-    assertEquals(160, map.keySet().size());
+    assertEquals(187, map.keySet().size());
   }
   
   @Test

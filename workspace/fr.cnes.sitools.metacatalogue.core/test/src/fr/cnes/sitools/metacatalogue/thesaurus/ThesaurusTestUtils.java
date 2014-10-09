@@ -72,7 +72,7 @@ public class ThesaurusTestUtils {
   }
 
   private void assertConceptInserted(SolrServer server) throws SolrServerException {
-    assertNbRecords(server, 419);
+    assertNbRecords(server, 431);
   }
 
   private void assertNone(SolrServer server) throws SolrServerException {
