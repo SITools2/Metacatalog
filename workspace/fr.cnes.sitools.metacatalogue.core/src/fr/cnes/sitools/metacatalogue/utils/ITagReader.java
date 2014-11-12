@@ -96,8 +96,11 @@ public class ITagReader {
     ClientResourceProxy client = new ClientResourceProxy(ref, Method.GET);
     ClientResource clientResource = client.getClientResource();
     Representation repr = null;
+    
     try {
+      
       repr = clientResource.get(MediaType.APPLICATION_JSON);
+        
       if (clientResource.getStatus().isError()) {
         throw new ProcessException("Cannot read ITAG", clientResource.getStatus().getThrowable());
       }
@@ -117,8 +120,12 @@ public class ITagReader {
         }
       }
       else {
-        throw new ProcessException("Invalid JSON response from Etag");
+        throw new ProcessException("Invalid JSON response from iTag");
       }
+    } 
+    catch (Exception e) {
+      Engine.getLogger(this.getClass().getName()).log(Level.WARNING, e.getMessage(), e);
+      //throw new ProcessException("Invalid JSON response from iTag");
     }
     finally {
       if (repr != null) {
