@@ -23,6 +23,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.restlet.Context;
+import org.restlet.engine.Engine;
 import org.restlet.engine.util.DateUtils;
 
 import fr.cnes.sitools.metacatalogue.common.HarvesterStep;
@@ -69,9 +70,15 @@ public class FacetsInformationExtractor extends HarvesterStep {
       Object dateObj = doc.get(MetacatalogField.START_DATE.getField());
       if (dateObj != null) {
         Date date = DateUtils.parse(dateObj.toString(), frmt);
-        doc.add(MetacatalogField._YEAR.getField(), DateUtils.format(date, "yyyy"));
-        doc.add(MetacatalogField._MONTH.getField(), DateUtils.format(date, "MM"));
-        doc.add(MetacatalogField._DAY.getField(), DateUtils.format(date, "dd"));
+        if (date != null) {
+          doc.add(MetacatalogField._YEAR.getField(), DateUtils.format(date, "yyyy"));
+          doc.add(MetacatalogField._MONTH.getField(), DateUtils.format(date, "MM"));
+          doc.add(MetacatalogField._DAY.getField(), DateUtils.format(date, "dd"));
+        } 
+        else {
+          //throw new ProcessException("Incorrect date format - cannot parse date : " + dateObj.toString());
+          Engine.getLogger(FacetsInformationExtractor.class.getName()).warning("Incorrect date format - cannot parse date : " + dateObj.toString());
+        }
       }
     }
 
