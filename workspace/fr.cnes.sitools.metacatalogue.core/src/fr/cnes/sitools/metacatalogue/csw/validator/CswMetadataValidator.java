@@ -93,17 +93,23 @@ public class CswMetadataValidator extends HarvesterStep {
 
       /* check resolution >= 0 */
       if (MetacatalogField.getField(MetacatalogField.RESOLUTION.getField()) != null) {
-        try {
-          double res = Double.parseDouble(doc.get(MetacatalogField.RESOLUTION.getField()).toString());
-          if (res <= 0) {
-            logger.info(MetacatalogField.RESOLUTION.getField() + " - is < 0 : "
+        if (doc.get(MetacatalogField.RESOLUTION.getField()) != null) {
+          try {
+            double res = Double.parseDouble(doc.get(MetacatalogField.RESOLUTION.getField()).toString());
+            if (res < 0) {
+              logger.info(MetacatalogField.RESOLUTION.getField() + " - is < 0 : "
+                  + doc.get(MetacatalogField.IDENTIFIER.getField()) + " not inserted in the metacatalog");
+              fail = true;
+            }
+          }
+          catch (NumberFormatException ex) {
+            logger.info(MetacatalogField.RESOLUTION.getField() + " is not a double : "
                 + doc.get(MetacatalogField.IDENTIFIER.getField()) + " not inserted in the metacatalog");
             fail = true;
           }
         }
-        catch (NumberFormatException ex) {
-          logger.info(MetacatalogField.RESOLUTION.getField() + " is not a double : "
-              + doc.get(MetacatalogField.IDENTIFIER.getField()) + " not inserted in the metacatalog");
+        else {
+          //logger.info(MetacatalogField.RESOLUTION.getField() + " is not filled in : " + doc.get(MetacatalogField.IDENTIFIER.getField()) + " not inserted in the metacatalog");
           fail = true;
         }
       }
