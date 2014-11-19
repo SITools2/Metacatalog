@@ -23,6 +23,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
 
+import org.restlet.data.MediaType;
+import org.restlet.data.Method;
 import org.restlet.data.Status;
 import org.restlet.representation.Representation;
 import org.restlet.representation.Variant;
@@ -32,7 +34,11 @@ import org.restlet.resource.Put;
 import org.restlet.resource.ResourceException;
 
 import fr.cnes.sitools.common.Response;
+import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
 import fr.cnes.sitools.model.HarvesterModel;
+import fr.cnes.sitools.util.HarvesterSettingsAttributes;
+import fr.cnes.sitools.util.RIAPUtils;
+
 
 /**
  * Resource for managing single HarvesterModel (GET UPDATE DELETE)
@@ -139,6 +145,12 @@ public final class HarvesterResource extends AbstractHarvesterResource {
         response = new Response(false, "Cannot find harvester model with id : " + getHavesterId());
       }
       else {
+        
+        HarvesterSettings settings = (HarvesterSettings)getContext().getAttributes().get(HarvesterSettingsAttributes.SETTINGS);
+
+        String url = settings.getString("HARVESTERS_APP_URL") + "/admin/" + getHavesterId() + "/harvest/clean";
+        Response resp = RIAPUtils.handleParseResponse(url, Method.PUT, MediaType.APPLICATION_JAVA_OBJECT, getContext());
+        
         // Business service
         getStore().delete(harvesterOutput);
         response = new Response(true, "harvester.delete.success");

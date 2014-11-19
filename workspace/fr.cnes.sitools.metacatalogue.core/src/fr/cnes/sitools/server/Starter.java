@@ -138,6 +138,7 @@ public final class Starter {
 
     String url = settings.getString("HARVESTERS_APP_URL");
     host.attach(url, harvesterAdministration);
+    component.getInternalRouter().attach(url, harvesterAdministration);
 
     component.getHosts().add(host);
     component.start();
