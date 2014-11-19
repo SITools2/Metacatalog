@@ -31,6 +31,7 @@ import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
 import fr.cnes.sitools.persistence.HarvesterModelStore;
 import fr.cnes.sitools.server.administration.HarvesterCollectionResource;
 import fr.cnes.sitools.server.administration.HarvesterResource;
+import fr.cnes.sitools.server.administration.RecordResource;
 import fr.cnes.sitools.server.resources.HarvestResource;
 import fr.cnes.sitools.server.resources.HarvestStatusResource;
 import fr.cnes.sitools.server.resources.HarvesterMergeResource;
@@ -89,12 +90,14 @@ public final class HarvestersApplication extends Application implements ILockabl
     router.attach("/admin", HarvesterCollectionResource.class);
     router.attach("/admin/{harvesterId}", HarvesterResource.class);
 
+    router.attach("/admin/{harvesterId}/record/{recordId}", RecordResource.class);
+    
     router.attach("/admin/{harvesterId}/harvest/start", HarvestResource.class);
     router.attach("/admin/{harvesterId}/harvest/cleanAndStart", HarvestResource.class);
     router.attach("/admin/{harvesterId}/harvest/stop", HarvestResource.class);
     router.attach("/admin/{harvesterId}/harvest/clean", HarvestResource.class);
     router.attach("/admin/{harvesterId}/harvest/status", HarvestStatusResource.class);
-
+    
     router.attach("/ihm/catalogsTypes", JsonFileExpositionResource.class);
     router.attach("/ihm/havestersClasses", JsonFileExpositionResource.class);
 
