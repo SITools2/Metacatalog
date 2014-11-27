@@ -148,10 +148,17 @@ public final class HarvesterResource extends AbstractHarvesterResource {
         
         HarvesterSettings settings = (HarvesterSettings)getContext().getAttributes().get(HarvesterSettingsAttributes.SETTINGS);
 
-        String url = settings.getString("HARVESTERS_APP_URL") + "/admin/" + getHavesterId() + "/harvest/clean";
-        Response resp = RIAPUtils.handleParseResponse(url, Method.PUT, MediaType.APPLICATION_JAVA_OBJECT, getContext());
+        // clean data in solr core
+        try {
+          String url = settings.getString("HARVESTERS_APP_URL") + "/admin/" + getHavesterId() + "/harvest/clean";
+          Response resp = RIAPUtils.handleParseResponse(url, Method.PUT, MediaType.APPLICATION_JAVA_OBJECT, getContext());
         
-        // Business service
+        } 
+        catch (Exception e) {
+          getLogger().log(Level.WARNING, "Unable to clean core", e);
+        }
+       
+        // delete harvester from store
         getStore().delete(harvesterOutput);
         response = new Response(true, "harvester.delete.success");
       }
