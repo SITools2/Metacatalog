@@ -19,6 +19,7 @@
 package fr.cnes.sitools.metacatalogue.opensearch.reader;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -27,6 +28,9 @@ import java.util.logging.Logger;
 
 import net.minidev.json.JSONObject;
 
+import org.fao.geonet.csw.common.util.Xml;
+import org.jdom.Element;
+import org.jdom.Namespace;
 import org.restlet.Context;
 import org.restlet.data.Form;
 import org.restlet.data.MediaType;
@@ -71,10 +75,54 @@ public class OpensearchReader extends HarvesterStep {
   private Context context;
 
   public OpensearchReader(HarvesterModel conf, Context context) {
-    this.source = conf.getSource();
+    //this.source = conf.getSource();
+    this.source = getSource(conf);
     this.conf = conf;
     this.context = context;
 
+  }
+
+  /**
+   * getSource
+   * @param conf the harvester model
+   * @return HarvesterSource
+   */
+  private HarvesterSource getSource(HarvesterModel conf) {
+    
+    HarvesterSource returnedSource = new HarvesterSource();
+    
+    String capabilitiesUrl = conf.getSource().getUrl();
+
+    Reference ref = new Reference(capabilitiesUrl);
+    ClientResourceProxy client = new ClientResourceProxy(ref, Method.GET);
+    ClientResource clientResource = client.getClientResource();
+
+    Representation repr = clientResource.get(MediaType.APPLICATION_XML);
+
+    try {
+      InputStream in = repr.getStream();
+      Element root = Xml.loadStream(in);
+      
+      List urlElements = root.getChildren("Url", Namespace.getNamespace("http://a9.com/-/spec/opensearch/1.1/"));
+      for (Iterator iterator = urlElements.iterator(); iterator.hasNext();) {
+        Element urlElement = (Element) iterator.next();
+
+        org.jdom.Attribute type = urlElement.getAttribute("type");
+        if (type.getValue().equals("application/json")) {
+          org.jdom.Attribute template = urlElement.getAttribute("template");  
+          returnedSource.setUrl(template.getValue());
+          returnedSource.setName(conf.getSource().getName());
+          returnedSource.setType(conf.getSource().getType());
+        }
+      }
+    }
+    catch (Exception e) {
+      logger.log(Level.WARNING, "Unable to parse service descriptor opensearch.xml");
+      e.printStackTrace();
+    }
+    
+    return returnedSource;
+    
   }
 
   @Override

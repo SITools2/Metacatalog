@@ -1,4 +1,4 @@
- /*******************************************************************************
+/*******************************************************************************
  * Copyright 2010-2014 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
  *
  * This file is part of SITools2.
@@ -22,10 +22,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.dom4j.tree.ContentListFacade;
 import org.fao.geonet.csw.common.util.Xml;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -80,7 +83,6 @@ public class CswGetReader extends HarvesterStep {
    *          the {@link HarvesterModel} to harvest
    */
   public CswGetReader(HarvesterModel conf, Context context) {
-    this.source = conf.getSource();
     this.schemaName = conf.getCatalogType();
     this.conf = conf;
     this.context = context;
@@ -90,8 +92,11 @@ public class CswGetReader extends HarvesterStep {
   @Override
   public void execute(MetadataContainer data) throws ProcessException {
 
+    // get url to harvest from getcapabilities
+    this.source = getSource(conf);
+
     logger = getLogger(context);
-    
+
     Integer nbRecords = null;
     Integer nextRecord = 1;
 
@@ -117,8 +122,7 @@ public class CswGetReader extends HarvesterStep {
       logger.log(Level.INFO, "Query CSW service : " + clientResource.getRequest().getResourceRef().toString());
 
       Representation repr = clientResource.get(MediaType.APPLICATION_XML);
-      
-      
+
       try {
         InputStream in = repr.getStream();
         Element root = Xml.loadStream(in);
@@ -136,9 +140,9 @@ public class CswGetReader extends HarvesterStep {
         if (nbRecords == null) {
           nbRecords = Integer.parseInt(searchResults.getAttributeValue("numberOfRecordsMatched"));
           logger.info("Number of records found = " + nbRecords);
-          
+
         }
-        
+
         int numberOfRecordsReturned = Integer.parseInt(searchResults.getAttributeValue("numberOfRecordsReturned"));
         HarvestStatus status = (HarvestStatus) context.getAttributes().get(ContextAttributes.STATUS);
         status.setNbDocumentsRetrieved(status.getNbDocumentsRetrieved() + numberOfRecordsReturned);
@@ -161,6 +165,111 @@ public class CswGetReader extends HarvesterStep {
     } while (keepLooping);
 
     this.end();
+  }
+
+  /**
+   * getSource
+   * 
+   * @param conf
+   *          the harvester model
+   * @return HarvesterSource
+   * @throws ProcessException
+   */
+  private HarvesterSource getSource(HarvesterModel conf) throws ProcessException {
+
+    HarvesterSource returnedSource = new HarvesterSource();
+
+    String capabilitiesUrl = conf.getSource().getUrl();
+
+    Reference ref = new Reference(capabilitiesUrl);
+    ClientResourceProxy client = new ClientResourceProxy(ref, Method.GET);
+    ClientResource clientResource = client.getClientResource();
+
+    Representation repr = clientResource.get(MediaType.APPLICATION_XML);
+
+    try {
+
+      InputStream in = repr.getStream();
+      Element root = Xml.loadStream(in);
+
+      Element operationsMetadata = root.getChild("OperationsMetadata",
+          Namespace.getNamespace("http://www.opengis.net/ows"));
+      List operationElementsList = operationsMetadata.getChildren("Operation",
+          Namespace.getNamespace("http://www.opengis.net/ows"));
+
+      Element recordOperationElement = getElementFromValueInList(operationElementsList, "name", "GetRecords");
+      Element dcpElement = recordOperationElement.getChild("DCP", Namespace.getNamespace("http://www.opengis.net/ows"));
+
+      List httpElementsList = dcpElement.getChildren("HTTP", Namespace.getNamespace("http://www.opengis.net/ows"));
+      Element httpGetElement = getChildElementFromList(httpElementsList, "Get",
+          Namespace.getNamespace("http://www.opengis.net/ows"));
+
+      String url = httpGetElement.getAttributeValue("href", Namespace.getNamespace("http://www.w3.org/1999/xlink"));
+
+      // set source parameters
+      returnedSource.setUrl(url);
+      returnedSource.setName(conf.getSource().getName());
+      returnedSource.setType(conf.getSource().getType());
+
+    }
+    catch (Exception e) {
+      e.printStackTrace();
+      throw new ProcessException("Unable to retrieve url to harvest from GetCapabilities");
+    }
+
+    return returnedSource;
+
+  }
+
+  /**
+   * getChildElementFromList
+   * 
+   * @param inputList
+   *          the list to parse
+   * @param childName
+   * @param namespace
+   * @return
+   */
+  private Element getChildElementFromList(List inputList, String childName, Namespace namespace) {
+
+    Element returnedElement = null;
+
+    for (int i = 0; i < inputList.size(); i++) {
+      Object obj = (Object) inputList.get(i);
+      if (obj instanceof Element) {
+        Element element = (Element) obj;
+        Element childElement = element.getChild(childName, namespace);
+        returnedElement = childElement;
+      }
+    }
+
+    return returnedElement;
+  }
+
+  /**
+   * getElementFromValueInList
+   * 
+   * @param inputList
+   * @param attributeName
+   * @param attributeValue
+   * @return
+   */
+  private Element getElementFromValueInList(List inputList, String attributeName, String attributeValue) {
+
+    Element returnedElement = null;
+
+    for (int i = 0; i < inputList.size(); i++) {
+      Object object = (Object) inputList.get(i);
+      if (object instanceof Element) {
+        Element element = (Element) object;
+        if (element.getAttributeValue(attributeName).equals(attributeValue)) {
+          returnedElement = element;
+        }
+      }
+    }
+
+    return returnedElement;
+
   }
 
   @Override
