@@ -4,7 +4,8 @@ Bundle-Name: Core
 Bundle-SymbolicName: fr.cnes.sitools.metacatalogue.core
 Bundle-Version: 1.0.0
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: fr.cnes.sitools.metacatalogue.libraries;bundle-version="1.0.0"
+Require-Bundle: fr.cnes.sitools.metacatalogue.libraries;bundle-version="1.0.0",
+ javax.mail;bundle-version="1.4.0"
 Export-Package: fr.cnes.sitools.common,
  fr.cnes.sitools.metacatalogue,
  fr.cnes.sitools.metacatalogue.common,

@@ -20,15 +20,25 @@ package fr.cnes.sitools.metacatalogue.common;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.restlet.Context;
+import org.restlet.Request;
+import org.restlet.Restlet;
+import org.restlet.data.Method;
+import org.restlet.data.Status;
 import org.restlet.engine.Engine;
 import org.restlet.engine.util.DateUtils;
+import org.restlet.representation.ObjectRepresentation;
+import org.restlet.resource.ResourceException;
 
+import fr.cnes.sitools.mail.model.Mail;
 import fr.cnes.sitools.metacatalogue.exceptions.CheckProcessException;
 import fr.cnes.sitools.metacatalogue.exceptions.ProcessException;
 import fr.cnes.sitools.metacatalogue.model.HarvestStatus;
@@ -36,6 +46,7 @@ import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
 import fr.cnes.sitools.model.HarvesterModel;
 import fr.cnes.sitools.server.ContextAttributes;
 import fr.cnes.sitools.server.HarvestersApplication;
+import fr.cnes.sitools.util.RIAPUtils;
 
 /**
  * Interface for a Harvesting process
@@ -50,6 +61,8 @@ public abstract class Harvester implements Runnable {
   protected HarvesterModel harvestConf;
 
   protected HarvestersApplication application;
+
+  protected String errorMessage = null;
 
   /**
    * Launch a new Harvest process
@@ -85,15 +98,18 @@ public abstract class Harvester implements Runnable {
         harvestConf.setLastHarvest(new Date());
         if (status.getNbDocumentsInvalid() == 0) {
           status.setResult(HarvestStatus.RESULT_SUCCESS);
+          sendStatusMail(harvestConf.getDescription(), HarvestStatus.RESULT_SUCCESS);
         }
         else {
           status.setResult(HarvestStatus.RESULT_PARTIAL_SUCCESS);
+          sendStatusMail(harvestConf.getDescription(), HarvestStatus.RESULT_PARTIAL_SUCCESS);
         }
         application.getStore().save(harvestConf);
       }
       catch (Exception e) {
         status.setErrorCause(e.getMessage());
         status.setResult(HarvestStatus.RESULT_ERROR);
+        sendStatusMail(harvestConf.getDescription(), HarvestStatus.RESULT_ERROR, exceptionAsString(e));
         e.printStackTrace();
       }
     }
@@ -112,6 +128,15 @@ public abstract class Harvester implements Runnable {
 
   }
 
+  /**
+   * initNewLogger
+   * 
+   * @param conf
+   * @param date
+   * @return
+   * @throws SecurityException
+   * @throws IOException
+   */
   private Logger initNewLogger(HarvesterModel conf, Date date) throws SecurityException, IOException {
 
     // create a logger for the Task
@@ -137,6 +162,11 @@ public abstract class Harvester implements Runnable {
     return logger;
   }
 
+  /**
+   * getLoggerDir
+   * 
+   * @return String
+   */
   private String getLoggerDir() {
     String logFolder = HarvesterSettings.getInstance().getString("LOG_FOLDER");
     logFolder = HarvesterSettings.getInstance().getRootDirectory() + logFolder;
@@ -151,6 +181,95 @@ public abstract class Harvester implements Runnable {
 
   }
 
+  /**
+   * sendStatusMail
+   * 
+   * @param description
+   *          the description of the harvester
+   * @param resultError
+   *          the result of the error
+   * @param message
+   *          the message
+   */
+  private void sendStatusMail(String description, String resultError, String message) {
+
+    this.errorMessage = message;
+
+    sendStatusMail(description, resultError);
+
+  }
+
+  /**
+   * sendStatusMail
+   * 
+   * @param description
+   *          the description of the harvesting process
+   * @param resultSuccess
+   *          the status code
+   */
+  private void sendStatusMail(String description, String resultSuccess) {
+
+    Mail input = new Mail();
+
+    String sender = HarvesterSettings.getInstance().getString("mail.send.noreply");
+    String recipient = HarvesterSettings.getInstance().getString("mail.send.admin");
+
+    String[] toList = new String[] { recipient };
+    input.setFrom(sender);
+    input.setToList(Arrays.asList(toList));
+    input.setSubject("[Metacatalogue] : " + description);
+
+    String body = description + " : " + resultSuccess;
+
+    if (errorMessage != null) {
+      body += "<br/><br/>" + this.errorMessage;
+    }
+
+    input.setBody(body);
+
+    org.restlet.Response sendMailResponse = null;
+
+    try {
+
+      // riap request to MailAdministration application
+      Request req = new Request(Method.POST, RIAPUtils.getRiapBase()
+          + HarvesterSettings.getInstance().getString("MAIL_ADMIN_URL") + "/send",
+          new ObjectRepresentation<Mail>(input));
+
+      Restlet dispatcher = context.getClientDispatcher();
+      sendMailResponse = dispatcher.handle(req);
+
+    }
+    catch (Exception e) {
+      application.getLogger().warning("Failed to post message to user");
+      throw new ResourceException(Status.SERVER_ERROR_INTERNAL, e);
+    }
+    if (sendMailResponse.getStatus().isError()) {
+      throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "Server Error sending email to user.");
+    }
+
+  }
+
+  /**
+   * exceptionAsString
+   * 
+   * @param e
+   *          the exception
+   * @return String
+   */
+  public String exceptionAsString(Exception e) {
+
+    StringWriter sw = new StringWriter();
+    PrintWriter pw = new PrintWriter(sw);
+    e.printStackTrace(pw);
+
+    return sw.toString();
+  }
+
+  /**
+   * harvest
+   * @throws Exception the exception
+   */
   public abstract void harvest() throws Exception;
 
 }

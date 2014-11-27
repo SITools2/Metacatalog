@@ -25,6 +25,7 @@ import org.restlet.Context;
 import org.restlet.data.Protocol;
 import org.restlet.routing.VirtualHost;
 
+import fr.cnes.sitools.mail.MailAdministration;
 import fr.cnes.sitools.metacatalogue.utils.HarvesterSettings;
 import fr.cnes.sitools.persistence.HarvesterModelStore;
 import fr.cnes.sitools.persistence.HarvesterModelStoreXmlImpl;
@@ -139,6 +140,15 @@ public final class Starter {
     String url = settings.getString("HARVESTERS_APP_URL");
     host.attach(url, harvesterAdministration);
     component.getInternalRouter().attach(url, harvesterAdministration);
+    
+    
+    /* add mail application */
+    /* we do not use the sitools email to avoid dependency between servers */
+    String mailUrl = settings.getString("MAIL_ADMIN_URL");
+    MailAdministration mailAdministration = new MailAdministration(appContext, component);
+    host.attach(mailUrl, mailAdministration);
+    component.getInternalRouter().attach(settings.getString("MAIL_ADMIN_URL"), mailAdministration);
+
 
     component.getHosts().add(host);
     component.start();
