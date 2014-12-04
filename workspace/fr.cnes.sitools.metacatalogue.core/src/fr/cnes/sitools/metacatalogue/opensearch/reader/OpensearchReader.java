@@ -75,59 +75,17 @@ public class OpensearchReader extends HarvesterStep {
   private Context context;
 
   public OpensearchReader(HarvesterModel conf, Context context) {
-    //this.source = conf.getSource();
-    this.source = getSource(conf);
     this.conf = conf;
     this.context = context;
 
   }
 
-  /**
-   * getSource
-   * @param conf the harvester model
-   * @return HarvesterSource
-   */
-  private HarvesterSource getSource(HarvesterModel conf) {
-    
-    HarvesterSource returnedSource = new HarvesterSource();
-    
-    String capabilitiesUrl = conf.getSource().getUrl();
-
-    Reference ref = new Reference(capabilitiesUrl);
-    ClientResourceProxy client = new ClientResourceProxy(ref, Method.GET);
-    ClientResource clientResource = client.getClientResource();
-
-    Representation repr = clientResource.get(MediaType.APPLICATION_XML);
-
-    try {
-      InputStream in = repr.getStream();
-      Element root = Xml.loadStream(in);
-      
-      List urlElements = root.getChildren("Url", Namespace.getNamespace("http://a9.com/-/spec/opensearch/1.1/"));
-      for (Iterator iterator = urlElements.iterator(); iterator.hasNext();) {
-        Element urlElement = (Element) iterator.next();
-
-        org.jdom.Attribute type = urlElement.getAttribute("type");
-        if (type.getValue().equals("application/json")) {
-          org.jdom.Attribute template = urlElement.getAttribute("template");  
-          returnedSource.setUrl(template.getValue());
-          returnedSource.setName(conf.getSource().getName());
-          returnedSource.setType(conf.getSource().getType());
-        }
-      }
-    }
-    catch (Exception e) {
-      logger.log(Level.WARNING, "Unable to parse service descriptor opensearch.xml");
-      e.printStackTrace();
-    }
-    
-    return returnedSource;
-    
-  }
-
   @Override
   public void execute(MetadataContainer data) throws ProcessException {
+
     logger = getLogger(context);
+    this.source = getSource(conf);
+
     Integer totalResultsRead = 0;
     Integer nextPage = 1;
     Integer nbFeaturesReturned = 0;
@@ -194,6 +152,53 @@ public class OpensearchReader extends HarvesterStep {
     this.end();
 
   }
+  
+  
+
+  /**
+   * getSource
+   * @param conf the harvester model
+   * @return HarvesterSource
+   * @throws ProcessException 
+   */
+  private HarvesterSource getSource(HarvesterModel conf) throws ProcessException {
+    
+    HarvesterSource returnedSource = new HarvesterSource();
+    
+    String capabilitiesUrl = conf.getSource().getUrl();
+
+    Reference ref = new Reference(capabilitiesUrl);
+    ClientResourceProxy client = new ClientResourceProxy(ref, Method.GET);
+    ClientResource clientResource = client.getClientResource();
+
+    Representation repr = clientResource.get(MediaType.APPLICATION_XML);
+
+    try {
+      InputStream in = repr.getStream();
+      Element root = Xml.loadStream(in);
+      
+      List urlElements = root.getChildren("Url", Namespace.getNamespace("http://a9.com/-/spec/opensearch/1.1/"));
+      for (Iterator iterator = urlElements.iterator(); iterator.hasNext();) {
+        Element urlElement = (Element) iterator.next();
+
+        org.jdom.Attribute type = urlElement.getAttribute("type");
+        if (type.getValue().equals("application/json")) {
+          org.jdom.Attribute template = urlElement.getAttribute("template");  
+          returnedSource.setUrl(template.getValue());
+          returnedSource.setName(conf.getSource().getName());
+          returnedSource.setType(conf.getSource().getType());
+        }
+      }
+    }
+    catch (Exception e) {
+      e.printStackTrace();
+      throw new ProcessException("Unable to retrieve url to harvest from opensearch.xml description");
+    }
+    
+    return returnedSource;
+    
+  }
+
 
   @Override
   public void end() throws ProcessException {
