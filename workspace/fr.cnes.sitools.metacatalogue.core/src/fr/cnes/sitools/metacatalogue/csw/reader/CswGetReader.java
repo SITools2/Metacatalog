@@ -22,13 +22,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.dom4j.tree.ContentListFacade;
 import org.fao.geonet.csw.common.util.Xml;
 import org.jdom.Element;
 import org.jdom.JDOMException;
