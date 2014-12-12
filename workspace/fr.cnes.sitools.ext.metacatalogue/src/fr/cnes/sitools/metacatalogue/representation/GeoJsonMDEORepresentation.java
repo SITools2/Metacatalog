@@ -165,6 +165,9 @@ public class GeoJsonMDEORepresentation extends WriterRepresentation {
       ObjectMapper mapper = new ObjectMapper();
       jGenerator.writeStartObject();
       jGenerator.writeStringField("type", "FeatureCollection");
+      
+      jGenerator.writeObjectFieldStart("properties");
+      
       jGenerator.writeNumberField("totalResults", listDocuments.getNumFound());
       jGenerator.writeNumberField("startIndex", startIndex); 
       jGenerator.writeNumberField("lastIndex", startIndex + limit - 1);
@@ -225,7 +228,6 @@ public class GeoJsonMDEORepresentation extends WriterRepresentation {
       
       jGenerator.writeEndArray();
       
-      
       // Facets
       jGenerator.writeObjectFieldStart("facet_counts");
       if (this.facets != null && !this.facets.isEmpty()) {
@@ -239,6 +241,9 @@ public class GeoJsonMDEORepresentation extends WriterRepresentation {
       }
       jGenerator.writeEndObject();
       // End Facets
+      
+      jGenerator.writeEndObject();
+      
       // Features
       jGenerator.writeArrayFieldStart("features");
       try {
