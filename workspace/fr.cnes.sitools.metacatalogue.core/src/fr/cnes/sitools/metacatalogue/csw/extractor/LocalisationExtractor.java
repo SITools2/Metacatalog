@@ -71,7 +71,7 @@ public class LocalisationExtractor extends HarvesterStep {
             cache.put(geometry, localisation);
           }
           catch (IOException e) {
-            getLogger(context).log(Level.WARNING, "CANNOT READ URL FROM ETAG", e);
+            getLogger(context).log(Level.WARNING, "CANNOT READ URL FROM ITAG", e);
           }
         }
 
