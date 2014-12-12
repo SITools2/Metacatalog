@@ -99,7 +99,9 @@ public class MdWebSearchResource extends AbstractSearchResource {
       SitoolsSettings settings = getSettings();
       String applicationBaseUrl = settings.getPublicHostDomain() + application.getAttachementRef();
 
-      Reference ref = new Reference(getRequest().getResourceRef().getBaseRef());
+      //Reference ref = new Reference(getRequest().getResourceRef().getBaseRef());
+      Reference ref = new Reference(applicationBaseUrl + "/" + getReference().getLastSegment());
+      
       ref.setQuery(query.getQueryString());
       
       return new GeoJsonMDEORepresentation(rsp, isAuthenticated, applicationBaseUrl,
