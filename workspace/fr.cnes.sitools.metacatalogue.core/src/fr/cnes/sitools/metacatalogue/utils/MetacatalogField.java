@@ -146,8 +146,18 @@ public enum MetacatalogField {
   CREATED("created", Date.class),
 
   /** The modified. */
-  MODIFIED("modified", Date.class);
+  MODIFIED("modified", Date.class),
 
+  
+  /** ##################### Ajouts en conformité avec spécification #########################. */
+  
+  
+  PRODUCER("producer"),
+  
+  SENSOR_MODE("sensorMode");
+  
+  
+  
   /** The field. */
   private final String field;
 
