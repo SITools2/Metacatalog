@@ -273,10 +273,19 @@ public class OpensearchReader extends HarvesterStep {
    * @return the string
    */
   private String extractNextUrl(String json) {
-    List<JSONObject> links = JsonPath.read(json, "$.links");
-    if (links == null) {
+    
+    JSONObject properties = JsonPath.read(json, "$.properties");
+    if (properties == null){
       return null;
     }
+    Object objLinks = properties.get("links");
+    
+    if (objLinks == null) {
+      return null;
+    }
+    
+    List<JSONObject> links = (List<JSONObject>)objLinks;
+
     String url = null;
     for (JSONObject link : links) {
       if ("next".equals(link.get("rel"))) {
