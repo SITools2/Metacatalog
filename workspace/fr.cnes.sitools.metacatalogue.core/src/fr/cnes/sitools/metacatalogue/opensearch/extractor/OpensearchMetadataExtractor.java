@@ -116,6 +116,10 @@ public class OpensearchMetadataExtractor extends HarvesterStep {
 
       // geometry
       addField(record, "$.geometry", jsonString, MetacatalogField._GEOMETRY_GEOJSON);
+      
+      addField(record, "$.properties.producer", jsonString, MetacatalogField.PRODUCER);
+      
+      addField(record, "$.properties.sensorMode", jsonString, MetacatalogField.SENSOR_MODE);
 
       // public services
       addField(record, String.valueOf(conf.isPublicServices()), MetacatalogField._PUBLIC_SERVICES.getField());
