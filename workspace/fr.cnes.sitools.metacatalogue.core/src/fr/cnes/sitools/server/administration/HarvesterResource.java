@@ -141,7 +141,11 @@ public final class HarvesterResource extends AbstractHarvesterResource {
     try {
       Response response;
       HarvesterModel harvesterOutput = getStore().get(getHavesterId());
-      if (harvesterOutput == null) {
+      
+      if (harvesterOutput.getStatus().equals("ACTIVE")){
+        response = new Response(false, "Cannot delete harvester while there is a pending operation");
+      }    
+      else if (harvesterOutput == null) {
         response = new Response(false, "Cannot find harvester model with id : " + getHavesterId());
       }
       else {
