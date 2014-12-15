@@ -109,6 +109,12 @@ public class CswGetReader extends HarvesterStep {
       clientResource.setRetryDelay(50);
 
       addCswQueryParams(clientResource.getRequest(), nextRecord, pageSize);
+      try {
+        addCswFeatureFilter(clientResource.getRequest());
+      }
+      catch (IOException exception) {
+        exception.printStackTrace();
+      }
       if (this.conf.getLastHarvest() != null) {
         try {
           addCswQueryConstraintParams(clientResource.getRequest(), this.conf.getLastHarvest());
@@ -319,6 +325,28 @@ public class CswGetReader extends HarvesterStep {
     Representation xmlCsw = new TemplateRepresentation(ftlFilter, filterObject, MediaType.APPLICATION_ALL_XML);
 
     reference.addQueryParameter("CONSTRAINT", xmlCsw.getText());
+  }
+
+  /**
+   * addCswFeatureFilter
+   * @param request the request
+   * @throws IOException the exception
+   */
+  private void addCswFeatureFilter(Request request) throws IOException {
+
+    Reference reference = request.getResourceRef();
+    reference.addQueryParameter("CONSTRAINTLANGUAGE", "Filter");
+    reference.addQueryParameter("CONSTRAINT_LANGUAGE_VERSION", "1.1.0");
+
+    Reference ref = LocalReference.createFileReference(HarvesterSettings.getInstance().getResourcePath(schemaName,
+        "xml_feature_filter.ftl"));
+
+    Map<String, Object> filterObject = new HashMap<String, Object>();
+
+    Representation ftlFilter = new ClientResource(ref).get();
+    Representation xmlCsw = new TemplateRepresentation(ftlFilter, filterObject, MediaType.APPLICATION_ALL_XML);
+    reference.addQueryParameter("CONSTRAINT", xmlCsw.getText());
+
   }
 
 }
