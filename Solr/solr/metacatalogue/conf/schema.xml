@@ -98,6 +98,9 @@
 	<field name="archive" type="string" indexed="false" stored="true" multiValued="false"/>
 	<field name="mimeType" type="string" indexed="false" stored="true" multiValued="false"/>
 	<field name="wms" type="string" indexed="false" stored="true" multiValued="false"/>	
+
+	<field name="producer" type="string" indexed="true" stored="true" multiValued="false"/>
+	<field name="sensorMode" type="string" indexed="true" stored="true" multiValued="false"/>	
 	
 	<field name="created" type="date" indexed="true" stored="true" multiValued="false"/>
 	<field name="modified" type="date" indexed="true" stored="true" multiValued="false"/>
