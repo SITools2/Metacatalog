@@ -185,13 +185,13 @@ public class CswGetReader extends HarvesterStep {
 
     String capabilitiesUrl = conf.getSource().getUrl();
 
-    Reference ref = new Reference(capabilitiesUrl);
-    ClientResourceProxy client = new ClientResourceProxy(ref, Method.GET);
-    ClientResource clientResource = client.getClientResource();
-
-    Representation repr = clientResource.get(MediaType.APPLICATION_XML);
-
     try {
+      
+      Reference ref = new Reference(capabilitiesUrl);
+      ClientResourceProxy client = new ClientResourceProxy(ref, Method.GET);
+      ClientResource clientResource = client.getClientResource();
+
+      Representation repr = clientResource.get(MediaType.APPLICATION_XML);
 
       InputStream in = repr.getStream();
       Element root = Xml.loadStream(in);
@@ -329,8 +329,11 @@ public class CswGetReader extends HarvesterStep {
 
   /**
    * addCswFeatureFilter
-   * @param request the request
-   * @throws IOException the exception
+   * 
+   * @param request
+   *          the request
+   * @throws IOException
+   *           the exception
    */
   private void addCswFeatureFilter(Request request) throws IOException {
 

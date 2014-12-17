@@ -1,4 +1,4 @@
- /*******************************************************************************
+/*******************************************************************************
  * Copyright 2010-2014 CNES - CENTRE NATIONAL d'ETUDES SPATIALES
  *
  * This file is part of SITools2.
@@ -82,11 +82,10 @@ public class CswPostReader extends HarvesterStep {
     this.conf = conf;
     this.context = context;
   }
-  
-  
+
   @Override
   public void execute(MetadataContainer data) throws ProcessException {
-    
+
     this.source = getSource(conf);
     logger = getLogger(context);
     Integer nbRecords = null;
@@ -168,7 +167,6 @@ public class CswPostReader extends HarvesterStep {
 
     next.end();
   }
-  
 
   /**
    * getSource
@@ -176,7 +174,7 @@ public class CswPostReader extends HarvesterStep {
    * @param conf
    *          the harvester model
    * @return HarvesterSource
-   * @throws ProcessException 
+   * @throws ProcessException
    */
   private HarvesterSource getSource(HarvesterModel conf) throws ProcessException {
 
@@ -184,13 +182,14 @@ public class CswPostReader extends HarvesterStep {
 
     String capabilitiesUrl = conf.getSource().getUrl();
 
-    Reference ref = new Reference(capabilitiesUrl);
-    ClientResourceProxy client = new ClientResourceProxy(ref, Method.GET);
-    ClientResource clientResource = client.getClientResource();
-
-    Representation repr = clientResource.get(MediaType.APPLICATION_XML);
-
     try {
+
+      Reference ref = new Reference(capabilitiesUrl);
+      ClientResourceProxy client = new ClientResourceProxy(ref, Method.GET);
+      ClientResource clientResource = client.getClientResource();
+
+      Representation repr = clientResource.get(MediaType.APPLICATION_XML);
+
       InputStream in = repr.getStream();
       Element root = Xml.loadStream(in);
 
@@ -206,8 +205,9 @@ public class CswPostReader extends HarvesterStep {
 
       List httpElementsList = dcpElement.getChildren("HTTP", Namespace.getNamespace("http://www.opengis.net/ows"));
 
-      Element httpGetElement = getChildElementFromList(httpElementsList, "Post", Namespace.getNamespace("http://www.opengis.net/ows"));
-      
+      Element httpGetElement = getChildElementFromList(httpElementsList, "Post",
+          Namespace.getNamespace("http://www.opengis.net/ows"));
+
       String url = httpGetElement.getAttributeValue("href", Namespace.getNamespace("http://www.w3.org/1999/xlink"));
 
       // set source parameters
@@ -224,10 +224,11 @@ public class CswPostReader extends HarvesterStep {
     return returnedSource;
 
   }
-  
+
   /**
    * getChildElementFromList
-   * @param inputList 
+   * 
+   * @param inputList
    * @param childName
    * @param namespace
    * @return
@@ -244,12 +245,13 @@ public class CswPostReader extends HarvesterStep {
         returnedElement = childElement;
       }
     }
-    
+
     return returnedElement;
   }
 
   /**
    * getElementFromValueInList
+   * 
    * @param inputList
    * @param attributeName
    * @param attributeValue

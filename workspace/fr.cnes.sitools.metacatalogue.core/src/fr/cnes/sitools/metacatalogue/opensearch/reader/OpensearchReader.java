@@ -152,38 +152,39 @@ public class OpensearchReader extends HarvesterStep {
     this.end();
 
   }
-  
-  
 
   /**
    * getSource
-   * @param conf the harvester model
+   * 
+   * @param conf
+   *          the harvester model
    * @return HarvesterSource
-   * @throws ProcessException 
+   * @throws ProcessException
    */
   private HarvesterSource getSource(HarvesterModel conf) throws ProcessException {
-    
+
     HarvesterSource returnedSource = new HarvesterSource();
-    
+
     String capabilitiesUrl = conf.getSource().getUrl();
 
-    Reference ref = new Reference(capabilitiesUrl);
-    ClientResourceProxy client = new ClientResourceProxy(ref, Method.GET);
-    ClientResource clientResource = client.getClientResource();
-
-    Representation repr = clientResource.get(MediaType.APPLICATION_XML);
-
     try {
+
+      Reference ref = new Reference(capabilitiesUrl);
+      ClientResourceProxy client = new ClientResourceProxy(ref, Method.GET);
+      ClientResource clientResource = client.getClientResource();
+
+      Representation repr = clientResource.get(MediaType.APPLICATION_XML);
+
       InputStream in = repr.getStream();
       Element root = Xml.loadStream(in);
-      
+
       List urlElements = root.getChildren("Url", Namespace.getNamespace("http://a9.com/-/spec/opensearch/1.1/"));
       for (Iterator iterator = urlElements.iterator(); iterator.hasNext();) {
         Element urlElement = (Element) iterator.next();
 
         org.jdom.Attribute type = urlElement.getAttribute("type");
         if (type.getValue().equals("application/json")) {
-          org.jdom.Attribute template = urlElement.getAttribute("template");  
+          org.jdom.Attribute template = urlElement.getAttribute("template");
           returnedSource.setUrl(template.getValue());
           returnedSource.setName(conf.getSource().getName());
           returnedSource.setType(conf.getSource().getType());
@@ -194,11 +195,10 @@ public class OpensearchReader extends HarvesterStep {
       e.printStackTrace();
       throw new ProcessException("Unable to retrieve url to harvest from opensearch.xml description");
     }
-    
-    return returnedSource;
-    
-  }
 
+    return returnedSource;
+
+  }
 
   @Override
   public void end() throws ProcessException {
@@ -273,18 +273,18 @@ public class OpensearchReader extends HarvesterStep {
    * @return the string
    */
   private String extractNextUrl(String json) {
-    
+
     JSONObject properties = JsonPath.read(json, "$.properties");
-    if (properties == null){
+    if (properties == null) {
       return null;
     }
     Object objLinks = properties.get("links");
-    
+
     if (objLinks == null) {
       return null;
     }
-    
-    List<JSONObject> links = (List<JSONObject>)objLinks;
+
+    List<JSONObject> links = (List<JSONObject>) objLinks;
 
     String url = null;
     for (JSONObject link : links) {
