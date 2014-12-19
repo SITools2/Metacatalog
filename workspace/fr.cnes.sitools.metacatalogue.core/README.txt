@@ -2,8 +2,8 @@
 ______________
 
 Identification                       : SITools2/Metacatalogue
-Date                                 : 2014-10-13
-Version                              : 1.0
+Date                                 : 2014-12-19
+Version                              : 1.1
 Owner                                : CNES
 Developer                            : AKKA Technologies
 Type                                 : Prototype
@@ -12,9 +12,23 @@ Project page                         :
 Classification                       : Not Confidential - Opensource GPL V3
 Characteristics                      : Standalone, Java, SolR, Jena
 Role/Function                        :  
-Reference tag                        : (0.8)
+Reference tag                        : (1.0)
 
 2/ Changes
+
+__________
+- 1.1 (19/12/2014) 
+
+    - New feature :
+        -> API to delete a record (only by curl)
+        -> The URL to configure for a catalog is the description service (getCapabilities for CSW), search service is extracted automatically
+        -> Metacatalog administrator is notify by email after any harvesting
+        -> Automated harvesting (cron tab)
+
+    - Enhancement :
+        -> Metacatalog datamodel is compliant with the specification PSC-IF-0-0037
+        -> Upon deletion of a catalog, delete all records
+        -> Output format compliant with GeoJSON standard
 
 __________
 - 1.0 (13/10/2014) - upgrade version following security acceptance
